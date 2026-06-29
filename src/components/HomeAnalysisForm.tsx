@@ -10,14 +10,16 @@ import {
 import { AnalysisLoadingScreen } from "#/components/AnalysisLoadingScreen";
 import { PdfUploadDropzone } from "#/components/PdfUploadDropzone";
 import { readApiError } from "#/lib/api-client";
-import { saveCareerGoal } from "#/lib/career-goal-storage";
 
 const MAX_PDF_SIZE_BYTES = 5 * 1024 * 1024;
 
-const PARSE_MESSAGES = [
+const PIPELINE_MESSAGES = [
+	"Uploading your profile…",
 	"Reading your profile…",
 	"Identifying key strengths…",
 	"Mapping opportunities…",
+	"Analyzing weaknesses and threats…",
+	"Generating recommendations…",
 	"Preparing strategic analysis…",
 ] as const;
 
@@ -29,6 +31,10 @@ type UploadResponse = {
 
 type ParseResponse = {
 	snapshotId: string;
+};
+
+type AnalyzeResponse = {
+	analysisId: string;
 };
 
 type HomeAnalysisFormProps = {
@@ -48,7 +54,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 	const [phase, setPhase] = useState<FormPhase>("idle");
 	const [error, setError] = useState<string | null>(null);
 	const [fileError, setFileError] = useState<string | null>(null);
-	const [statusMessage, setStatusMessage] = useState("Uploading your profile…");
+	const [statusMessage, setStatusMessage] = useState(PIPELINE_MESSAGES[0]);
 	const [progress, setProgress] = useState(0);
 	const messageIndexRef = useRef(0);
 
@@ -73,9 +79,9 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 
 		const intervalId = window.setInterval(() => {
 			messageIndexRef.current =
-				(messageIndexRef.current + 1) % PARSE_MESSAGES.length;
+				(messageIndexRef.current + 1) % PIPELINE_MESSAGES.length;
 			setStatusMessage(
-				PARSE_MESSAGES[messageIndexRef.current] ?? PARSE_MESSAGES[0],
+				PIPELINE_MESSAGES[messageIndexRef.current] ?? PIPELINE_MESSAGES[0],
 			);
 		}, 2800);
 
@@ -88,8 +94,8 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 		async (file: File, goal: string) => {
 			setPhase("loading");
 			setError(null);
-			setStatusMessage("Uploading your profile…");
-			setProgress(15);
+			setStatusMessage(PIPELINE_MESSAGES[0]);
+			setProgress(10);
 			messageIndexRef.current = 0;
 
 			try {
@@ -110,7 +116,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 				}
 
 				const uploadData = (await uploadResponse.json()) as UploadResponse;
-				setProgress(45);
+				setProgress(30);
 				setStatusMessage("Reading your profile…");
 
 				const parseResponse = await fetch("/api/parse", {
@@ -127,15 +133,34 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 					throw new Error(message);
 				}
 
-				const parseData = (await parseResponse.json()) as ParseResponse;
+				(await parseResponse.json()) as ParseResponse;
+				setProgress(55);
+				setStatusMessage("Analyzing strengths and weaknesses…");
+
+				const analyzeResponse = await fetch("/api/analyze", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						snapshotId: uploadData.snapshotId,
+						careerGoal: goal,
+					}),
+				});
+
+				if (!analyzeResponse.ok) {
+					const message = await readApiError(
+						analyzeResponse,
+						"Analysis failed. Please try again.",
+					);
+					throw new Error(message);
+				}
+
+				const analyzeData = (await analyzeResponse.json()) as AnalyzeResponse;
 				setProgress(100);
 				setStatusMessage("Preparing strategic analysis…");
 
-				saveCareerGoal(parseData.snapshotId, goal);
-
 				void navigate({
-					to: "/profile/$snapshotId",
-					params: { snapshotId: parseData.snapshotId },
+					to: "/results/$analysisId",
+					params: { analysisId: analyzeData.analysisId },
 				});
 			} catch (pipelineError) {
 				setPhase("error");
@@ -172,8 +197,13 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 		}
 
 		const trimmedGoal = careerGoal.trim();
-		if (!trimmedGoal) {
-			setError("Please enter your target career goal.");
+		if (trimmedGoal.length < 10) {
+			setError("Please enter a career goal of at least 10 characters.");
+			return;
+		}
+
+		if (trimmedGoal.length > 500) {
+			setError("Career goal must be 500 characters or fewer.");
 			return;
 		}
 
@@ -230,7 +260,8 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 						setError(null);
 					}}
 					rows={4}
-					placeholder="E.g., I want to transition from Software Engineering to Product Management at a fast-growing tech startup..."
+					maxLength={500}
+					placeholder="E.g., I want to transition from Software Engineering to DevOps / SRE roles at a cloud-native company..."
 					className="w-full resize-none rounded-xl border border-border bg-white px-4 py-3 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
 				/>
 			</div>

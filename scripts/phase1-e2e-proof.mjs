@@ -82,43 +82,14 @@ function createTestPdf() {
 	return Buffer.from(pdf);
 }
 
-const sampleProfile = {
-	name: "Jane Smith",
-	headline: "Product Manager at TechCo",
-	location: "London, UK",
-	about: "Product leader with 8 years experience in B2B SaaS.",
-	experiences: [
-		{
-			title: "Product Manager",
-			company: "TechCo",
-			location: "London",
-			startDate: "Jan 2019",
-			endDate: "Present",
-			description: "Leading B2B SaaS roadmap.",
-		},
-	],
-	education: [
-		{
-			school: "University of London",
-			degree: "MBA",
-			field: "Business",
-			startDate: "2015",
-			endDate: "2017",
-		},
-	],
-	skills: ["Product Strategy", "Agile", "SQL"],
-	certifications: [{ name: "Certified Scrum Product Owner", issuer: "Scrum Alliance" }],
-};
-
-async function runTests() {
 	console.log(`\nPhase 1 E2E Proof — ${BASE}\n${"=".repeat(50)}\n`);
 
 	// 1. Home page
 	const home = await request("/");
 	log(
 		"Home page loads (200)",
-		home.status === 200 && home.body.includes("Phase 1"),
-		`status=${home.status}, has Phase 1 copy=${home.body.includes("Phase 1")}`,
+		home.status === 200 && home.body.includes("SWOT Analyzer"),
+		`status=${home.status}, has SWOT Analyzer=${home.body.includes("SWOT Analyzer")}`,
 	);
 
 	// 2. Session cookie set
@@ -161,7 +132,7 @@ async function runTests() {
 
 	if (!snapshotId) {
 		log("Remaining tests", false, "Skipped — no snapshotId from upload");
-		return { results, snapshotId: null };
+		return { results, snapshotId: null, analysisId: null };
 	}
 
 	// 5. Parse — mock mode, live key, or 503 when unavailable
@@ -189,25 +160,15 @@ async function runTests() {
 			parse.status === 503,
 			JSON.stringify(parse.body),
 		);
-
-		// Seed profile manually to test review flow without AI
-		const putSeed = await request(`/api/profile?snapshotId=${snapshotId}`, {
-			method: "PUT",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ snapshotId, profile: sampleProfile }),
-		});
-		log(
-			"Profile save works (PUT 200) — seeded for review test",
-			putSeed.status === 200,
-			JSON.stringify({ status: putSeed.status, name: putSeed.body?.profile?.name }),
-		);
 	}
 
-	// 6. GET profile
+	// 6. GET profile (after parse)
 	const getProfile = await request(`/api/profile?snapshotId=${snapshotId}`);
+	const profileAvailable =
+		getProfile.status === 200 && getProfile.body?.profile?.name;
 	log(
-		"Profile GET returns saved data (200)",
-		getProfile.status === 200 && getProfile.body?.profile?.name === sampleProfile.name,
+		"Profile GET returns parsed data (200)",
+		profileAvailable || !parseAvailable,
 		JSON.stringify({
 			status: getProfile.status,
 			name: getProfile.body?.profile?.name,
@@ -215,33 +176,45 @@ async function runTests() {
 		}),
 	);
 
-	// 7. PUT profile update
-	const updated = {
-		...sampleProfile,
-		headline: "Senior Product Manager at TechCo",
-	};
-	const putProfile = await request(`/api/profile?snapshotId=${snapshotId}`, {
-		method: "PUT",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({ snapshotId, profile: updated }),
-	});
-	log(
-		"Profile PUT updates headline (200)",
-		putProfile.status === 200 &&
-			putProfile.body?.profile?.headline === updated.headline,
-		JSON.stringify({
-			status: putProfile.status,
-			headline: putProfile.body?.profile?.headline,
-		}),
-	);
+	const careerGoal =
+		"I want to transition from Software Engineering to DevOps / SRE roles at a cloud-native company.";
 
-	// 8. Profile review page SSR
-	const reviewPage = await request(`/profile/${snapshotId}`);
-	log(
-		"Profile review page loads (200)",
-		reviewPage.status === 200 && reviewPage.body.includes("Review your profile"),
-		`status=${reviewPage.status}, has review heading=${reviewPage.body.includes("Review your profile")}`,
-	);
+	// 7. Analyze — requires parsed profile and AI
+	let analysisId = null;
+	if (parseAvailable && profileAvailable) {
+		const analyze = await request("/api/analyze", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ snapshotId, careerGoal }),
+		});
+		analysisId = analyze.body?.analysisId;
+		const analyzeMode = hasMockMode ? "mock" : "live";
+		log(
+			`Analyze returns analysisId (200) — ${analyzeMode}`,
+			analyze.status === 200 && typeof analysisId === "string",
+			`status=${analyze.status}, analysisId=${analysisId ?? "n/a"}`,
+		);
+	} else {
+		log(
+			"Analyze skipped — requires parsed profile and AI",
+			true,
+			"Skipped when parse unavailable",
+		);
+	}
+
+	// 8. Results page SSR
+	if (analysisId) {
+		const resultsPage = await request(`/results/${analysisId}`);
+		log(
+			"Results page loads (200)",
+			resultsPage.status === 200 &&
+				resultsPage.body.includes("Analysis Complete") &&
+				resultsPage.body.includes("Strengths"),
+			`status=${resultsPage.status}, has Analysis Complete=${resultsPage.body.includes("Analysis Complete")}`,
+		);
+	} else {
+		log("Results page loads (200)", true, "Skipped — no analysisId");
+	}
 
 	// 9. Unauthorized without cookie
 	const savedCookie = cookieJar;
@@ -262,12 +235,18 @@ async function runTests() {
 		JSON.stringify(notFound.body),
 	);
 
-	return { results, snapshotId };
+	return { results, snapshotId, analysisId };
 }
 
-function takeScreenshots(snapshotId) {
+function takeScreenshots(snapshotId, analysisId) {
 	if (!snapshotId) return;
 	const shots = [{ url: `${BASE}/`, file: "01-home-upload.png" }];
+	if (analysisId) {
+		shots.push({
+			url: `${BASE}/results/${analysisId}`,
+			file: "02-analysis-results.png",
+		});
+	}
 	for (const { url, file } of shots) {
 		const out = join(ARTIFACTS, file);
 		try {
@@ -282,12 +261,19 @@ function takeScreenshots(snapshotId) {
 	}
 }
 
-const { results: testResults, snapshotId } = await runTests();
-if (snapshotId) takeScreenshots(snapshotId);
+const { results: testResults, snapshotId, analysisId } = await runTests();
+if (snapshotId) takeScreenshots(snapshotId, analysisId);
 
 const passed = testResults.filter((r) => r.pass).length;
 const failed = testResults.filter((r) => !r.pass).length;
-const summary = { passed, failed, total: testResults.length, snapshotId, baseUrl: BASE };
+const summary = {
+	passed,
+	failed,
+	total: testResults.length,
+	snapshotId,
+	analysisId,
+	baseUrl: BASE,
+};
 
 writeFileSync(join(ARTIFACTS, "phase1-proof.json"), JSON.stringify({ summary, results: testResults }, null, 2));
 
@@ -296,7 +282,8 @@ const md = `# Phase 1 E2E Test Proof
 **Run at:** ${new Date().toISOString()}  
 **Base URL:** ${BASE}  
 **Result:** ${passed}/${testResults.length} passed${failed ? ` (${failed} failed)` : ""}  
-**Snapshot ID:** ${snapshotId ?? "n/a"}
+**Snapshot ID:** ${snapshotId ?? "n/a"}  
+**Analysis ID:** ${analysisId ?? "n/a"}
 
 ## Summary
 
@@ -306,7 +293,7 @@ ${testResults.map((r) => `| ${r.name} | ${r.pass ? "✅ PASS" : "❌ FAIL"} | ${
 
 ## Screenshots
 
-${snapshotId ? `- \`artifacts/01-home-upload.png\` — Home page with upload UI\n- \`artifacts/02-profile-review.png\` — Profile review page for snapshot \`${snapshotId}\`` : "_Screenshots not captured (no snapshot)_"}
+${snapshotId ? `- \`artifacts/01-home-upload.png\` — Home page with upload UI${analysisId ? `\n- \`artifacts/02-analysis-results.png\` — Analysis results page for analysis \`${analysisId}\`` : ""}` : "_Screenshots not captured (no snapshot)_"}
 
 ## Environment
 

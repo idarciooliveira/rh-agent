@@ -10,19 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProfileSnapshotIdRouteImport } from './routes/profile.$snapshotId'
+import { Route as ResultsAnalysisIdRouteImport } from './routes/results.$analysisId'
 import { Route as ApiUploadRouteImport } from './routes/api/upload'
 import { Route as ApiProfileRouteImport } from './routes/api/profile'
 import { Route as ApiParseRouteImport } from './routes/api/parse'
+import { Route as ApiAnalyzeRouteImport } from './routes/api/analyze'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProfileSnapshotIdRoute = ProfileSnapshotIdRouteImport.update({
-  id: '/profile/$snapshotId',
-  path: '/profile/$snapshotId',
+const ResultsAnalysisIdRoute = ResultsAnalysisIdRouteImport.update({
+  id: '/results/$analysisId',
+  path: '/results/$analysisId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiUploadRoute = ApiUploadRouteImport.update({
@@ -40,51 +41,71 @@ const ApiParseRoute = ApiParseRouteImport.update({
   path: '/api/parse',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAnalyzeRoute = ApiAnalyzeRouteImport.update({
+  id: '/api/analyze',
+  path: '/api/analyze',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/analyze': typeof ApiAnalyzeRoute
   '/api/parse': typeof ApiParseRoute
   '/api/profile': typeof ApiProfileRoute
   '/api/upload': typeof ApiUploadRoute
-  '/profile/$snapshotId': typeof ProfileSnapshotIdRoute
+  '/results/$analysisId': typeof ResultsAnalysisIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/analyze': typeof ApiAnalyzeRoute
   '/api/parse': typeof ApiParseRoute
   '/api/profile': typeof ApiProfileRoute
   '/api/upload': typeof ApiUploadRoute
-  '/profile/$snapshotId': typeof ProfileSnapshotIdRoute
+  '/results/$analysisId': typeof ResultsAnalysisIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/analyze': typeof ApiAnalyzeRoute
   '/api/parse': typeof ApiParseRoute
   '/api/profile': typeof ApiProfileRoute
   '/api/upload': typeof ApiUploadRoute
-  '/profile/$snapshotId': typeof ProfileSnapshotIdRoute
+  '/results/$analysisId': typeof ResultsAnalysisIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/api/parse' | '/api/profile' | '/api/upload' | '/profile/$snapshotId'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    '/' | '/api/parse' | '/api/profile' | '/api/upload' | '/profile/$snapshotId'
-  id:
-    | '__root__'
     | '/'
+    | '/api/analyze'
     | '/api/parse'
     | '/api/profile'
     | '/api/upload'
-    | '/profile/$snapshotId'
+    | '/results/$analysisId'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/api/analyze'
+    | '/api/parse'
+    | '/api/profile'
+    | '/api/upload'
+    | '/results/$analysisId'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/analyze'
+    | '/api/parse'
+    | '/api/profile'
+    | '/api/upload'
+    | '/results/$analysisId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiAnalyzeRoute: typeof ApiAnalyzeRoute
   ApiParseRoute: typeof ApiParseRoute
   ApiProfileRoute: typeof ApiProfileRoute
   ApiUploadRoute: typeof ApiUploadRoute
-  ProfileSnapshotIdRoute: typeof ProfileSnapshotIdRoute
+  ResultsAnalysisIdRoute: typeof ResultsAnalysisIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -96,11 +117,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/profile/$snapshotId': {
-      id: '/profile/$snapshotId'
-      path: '/profile/$snapshotId'
-      fullPath: '/profile/$snapshotId'
-      preLoaderRoute: typeof ProfileSnapshotIdRouteImport
+    '/results/$analysisId': {
+      id: '/results/$analysisId'
+      path: '/results/$analysisId'
+      fullPath: '/results/$analysisId'
+      preLoaderRoute: typeof ResultsAnalysisIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/upload': {
@@ -124,15 +145,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiParseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/analyze': {
+      id: '/api/analyze'
+      path: '/api/analyze'
+      fullPath: '/api/analyze'
+      preLoaderRoute: typeof ApiAnalyzeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiAnalyzeRoute: ApiAnalyzeRoute,
   ApiParseRoute: ApiParseRoute,
   ApiProfileRoute: ApiProfileRoute,
   ApiUploadRoute: ApiUploadRoute,
-  ProfileSnapshotIdRoute: ProfileSnapshotIdRoute,
+  ResultsAnalysisIdRoute: ResultsAnalysisIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
