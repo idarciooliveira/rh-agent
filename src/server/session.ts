@@ -5,13 +5,14 @@ import { eq } from "drizzle-orm";
 
 import { db } from "#/db";
 import { sessions } from "#/db/schema";
-import { env } from "#/env";
 
-export const SESSION_COOKIE_NAME = env.SESSION_COOKIE_NAME;
+export const SESSION_COOKIE_NAME =
+	process.env.SESSION_COOKIE_NAME ?? "linkedin_coach_session";
 
 export const ensureSession = createServerFn({ method: "GET" }).handler(
 	async () => {
-		const existingCookie = getCookie(SESSION_COOKIE_NAME);
+		const cookieName = SESSION_COOKIE_NAME;
+		const existingCookie = getCookie(cookieName);
 
 		if (existingCookie) {
 			const existing = db
@@ -30,7 +31,7 @@ export const ensureSession = createServerFn({ method: "GET" }).handler(
 
 		db.insert(sessions).values({ id: sessionId }).run();
 
-		setCookie(SESSION_COOKIE_NAME, sessionId, {
+		setCookie(cookieName, sessionId, {
 			httpOnly: true,
 			sameSite: "lax",
 			path: "/",

@@ -5,6 +5,11 @@ export const env = createEnv({
 	server: {
 		DATABASE_URL: z.string().default("./data/app.db"),
 		AI_GATEWAY_API_KEY: z.string().optional(),
+		AI_MOCK_MODE: z
+			.enum(["true", "false"])
+			.default("false")
+			.transform((value) => value === "true"),
+		AI_MOCK_DELAY_MS: z.coerce.number().default(1500),
 		MAX_PDF_SIZE_MB: z.coerce.number().default(5),
 		SESSION_COOKIE_NAME: z.string().default("linkedin_coach_session"),
 		SERVER_URL: z.string().url().optional(),
@@ -19,6 +24,8 @@ export const env = createEnv({
 	runtimeEnv: {
 		DATABASE_URL: process.env.DATABASE_URL,
 		AI_GATEWAY_API_KEY: process.env.AI_GATEWAY_API_KEY,
+		AI_MOCK_MODE: process.env.AI_MOCK_MODE,
+		AI_MOCK_DELAY_MS: process.env.AI_MOCK_DELAY_MS,
 		MAX_PDF_SIZE_MB: process.env.MAX_PDF_SIZE_MB,
 		SESSION_COOKIE_NAME: process.env.SESSION_COOKIE_NAME,
 		SERVER_URL: process.env.SERVER_URL,
