@@ -26,6 +26,10 @@ export const sampleProfile: Profile = {
 	],
 	skills: ["Product Strategy", "Agile", "SQL"],
 	certifications: [
-		{ name: "Certified Scrum Product Owner", issuer: "Scrum Alliance" },
+		{
+			name: "Certified Scrum Product Owner",
+			issuer: "Scrum Alliance",
+			date: null,
+		},
 	],
 };

@@ -1,5 +1,5 @@
-import { Clock, ListChecks, Tag } from "lucide-react";
 import type { StrategicSuggestion } from "#/lib/analysis-schema";
+import { ClockIcon, ListChecksIcon, TagIcon } from "#/lib/icons";
 
 type StrategicSuggestionsProps = {
 	suggestions: StrategicSuggestion[];
@@ -29,7 +29,7 @@ export function StrategicSuggestions({
 	return (
 		<div>
 			<div className="mb-5 flex items-center gap-2">
-				<ListChecks className="size-5 text-primary" aria-hidden />
+				<ListChecksIcon className="size-5 text-primary" aria-hidden />
 				<h2 className="text-lg font-bold text-text">Strategic Suggestions</h2>
 			</div>
 			<div className="space-y-4">
@@ -50,11 +50,11 @@ export function StrategicSuggestions({
 							</p>
 							<div className="mt-4 flex flex-wrap gap-2">
 								<span className="inline-flex items-center gap-1 rounded-full border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
-									<Tag className="size-3" aria-hidden />
+									<TagIcon className="size-3" aria-hidden />
 									{suggestion.category}
 								</span>
 								<span className="inline-flex items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700">
-									<Clock className="size-3" aria-hidden />
+									<ClockIcon className="size-3" aria-hidden />
 									{suggestion.timeframe}
 								</span>
 							</div>

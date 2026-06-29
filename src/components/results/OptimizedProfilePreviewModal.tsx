@@ -1,6 +1,12 @@
-import { Check, ChevronDown, Copy, Sparkles, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import type { Recommendations } from "#/lib/analysis-schema";
+import {
+	CheckIcon,
+	ChevronDownIcon,
+	CopyIcon,
+	SparklesIcon,
+	XIcon,
+} from "#/lib/icons";
 import type { Profile } from "#/lib/profile-schema";
 
 type OptimizedProfilePreviewModalProps = {
@@ -33,9 +39,9 @@ function CopyButton({ label, text }: { label: string; text: string }) {
 			className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-white px-3 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface"
 		>
 			{copied ? (
-				<Check className="size-3.5 text-green-600" aria-hidden />
+				<CheckIcon className="size-3.5 text-green-600" aria-hidden />
 			) : (
-				<Copy className="size-3.5" aria-hidden />
+				<CopyIcon className="size-3.5" aria-hidden />
 			)}
 			{copied ? "Copied!" : label}
 		</button>
@@ -45,7 +51,7 @@ function CopyButton({ label, text }: { label: string; text: string }) {
 function AiImprovedBadge() {
 	return (
 		<span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700">
-			<Sparkles className="size-3" aria-hidden />
+			<SparklesIcon className="size-3" aria-hidden />
 			AI improved
 		</span>
 	);
@@ -65,7 +71,7 @@ function ToggleOriginal({
 			className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
 		>
 			{showOriginal ? "See improved" : "See original"}
-			<ChevronDown
+			<ChevronDownIcon
 				className={`size-3.5 transition-transform ${showOriginal ? "rotate-180" : ""}`}
 				aria-hidden
 			/>
@@ -209,7 +215,7 @@ export function OptimizedProfilePreviewModal({
 						className="rounded p-1 hover:bg-teal-700"
 						aria-label="Close preview"
 					>
-						<X className="size-4" aria-hidden />
+						<XIcon className="size-4" aria-hidden />
 					</button>
 				</div>
 
@@ -318,7 +324,7 @@ export function OptimizedProfilePreviewModal({
 										key={skill}
 										className="inline-flex items-center gap-1 rounded-full border border-green-300 bg-green-50 px-3 py-1 text-xs font-medium text-green-700"
 									>
-										<Sparkles className="size-3" aria-hidden />
+										<SparklesIcon className="size-3" aria-hidden />
 										{skill}
 									</span>
 								))}

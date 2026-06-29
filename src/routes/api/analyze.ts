@@ -5,6 +5,7 @@ import { z } from "zod";
 import { db } from "#/db";
 import { analyses, profileSnapshots } from "#/db/schema";
 import { analyzeProfile } from "#/lib/ai/analyze-profile";
+import { formatAiError } from "#/lib/ai/format-ai-error";
 import { mockAnalyzeProfile } from "#/lib/ai/mock-analyze-profile";
 import { resolveAiMode } from "#/lib/ai/resolve-ai-mode";
 import { jsonError, jsonOk } from "#/lib/api-error";
@@ -102,7 +103,7 @@ export const Route = createFileRoute("/api/analyze")({
 
 					if (error instanceof Error) {
 						return jsonError(
-							`Failed to analyze profile: ${error.message}`,
+							`Failed to analyze profile: ${formatAiError(error)}`,
 							500,
 						);
 					}

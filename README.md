@@ -20,7 +20,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### Local development without API key
 
-To test the full upload → parse → review flow without calling the real AI gateway, enable mock mode in `.env.local`:
+To test the full upload → parse → analyze flow without calling the real AI gateway, enable mock mode in `.env.local`:
 
 ```bash
 AI_MOCK_MODE=true
@@ -33,7 +33,7 @@ Or use the convenience script:
 pnpm dev:mock
 ```
 
-Mock mode returns simulated profile data derived from your PDF text. It is disabled in production builds. For live parsing, set `AI_GATEWAY_API_KEY` instead (mock mode takes priority when both are set).
+Mock mode returns simulated profile and analysis data derived from your PDF text. It is disabled in production builds. For live parsing, set `AI_GATEWAY_API_KEY` instead (mock mode takes priority when both are set).
 
 ## Project Docs
 
@@ -42,13 +42,15 @@ Mock mode returns simulated profile data derived from your PDF text. It is disab
 
 ## MVP Phases
 
-| Phase | Scope |
-|-------|--------|
-| 0 | Foundation — scaffold, SQLite, session, docs |
-| 1 | PDF upload + profile parsing + review |
-| 2 | Career goal + SWOT analysis |
-| 3 | LinkedIn-style recommendations preview |
-| 4 | Polish + Vercel deploy |
+| Phase | Scope | Status |
+|-------|--------|--------|
+| 0 | Foundation — scaffold, SQLite, session, docs | ✅ Complete |
+| 1 | PDF upload + profile parsing | ✅ Complete |
+| 2 | Career goal + SWOT analysis + results dashboard | ✅ Complete |
+| 3 | LinkedIn-style recommendations preview (modal) | ✅ Complete |
+| 4 | Polish + Vercel deploy | In progress |
+
+See [Implementation Roadmap](docs/ROADMAP.md) for task details and post-MVP plans.
 
 ## Environment Variables
 
@@ -57,7 +59,7 @@ See [`.env.example`](.env.example):
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `DATABASE_URL` | No | SQLite path (default: `./data/app.db`) |
-| `AI_GATEWAY_API_KEY` | Live parsing | Vercel AI Gateway key for PDF → profile parsing |
+| `AI_GATEWAY_API_KEY` | Live mode | Vercel AI Gateway key for PDF parsing and analysis |
 | `AI_MOCK_MODE` | No | Set to `true` to simulate AI responses without API calls (dev/test) |
 | `AI_MOCK_DELAY_MS` | No | Mock parsing delay in ms (default: 1500) |
 | `MAX_PDF_SIZE_MB` | No | PDF upload limit (default: 5) |
@@ -73,7 +75,8 @@ pnpm db:push      # Push schema to SQLite
 pnpm db:generate  # Generate Drizzle migrations
 pnpm db:studio    # Open Drizzle Studio
 pnpm check        # Biome lint + format
-pnpm test:phase1:mock  # E2E proof with mock AI (requires dev server)
+pnpm test:phase1:mock  # Phase 1 E2E proof with mock AI (requires dev server)
+pnpm capture:mock      # Capture mock-flow screenshots/artifacts (requires dev server)
 ```
 
 ## LinkedIn PDF Export
@@ -82,15 +85,15 @@ On LinkedIn desktop:
 
 1. Go to your **Profile**
 2. Click **More** → **Save to PDF**
-3. Upload the file (Phase 1+)
+3. Upload the file on the homepage
 
 ## Tech Stack
 
 - [TanStack Start](https://tanstack.com/start) + [TanStack Router](https://tanstack.com/router)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Drizzle ORM](https://orm.drizzle.team/) + SQLite
-- [Vercel AI SDK](https://ai-sdk.dev/) (Phases 1–3)
-- [unpdf](https://www.npmjs.com/package/unpdf) (Phase 1)
+- [Vercel AI SDK](https://ai-sdk.dev/) — structured profile parsing and full analysis via `generateObject()`
+- [unpdf](https://www.npmjs.com/package/unpdf) — PDF text extraction
 
 ## License
 

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Eye } from "lucide-react";
+import { ArrowLeftIcon, EyeIcon } from "#/lib/icons";
 
 type AnalysisResultsHeaderProps = {
 	onPreviewClick: () => void;
@@ -25,14 +25,14 @@ export function AnalysisResultsHeader({
 					onClick={onPreviewClick}
 					className="inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-teal-600/25 transition-opacity hover:opacity-95"
 				>
-					<Eye className="size-4" aria-hidden />
+					<EyeIcon className="size-4" aria-hidden />
 					Preview Optimized Profile
 				</button>
 				<Link
 					to="/"
 					className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-4 py-2.5 text-sm font-medium text-text transition-colors hover:bg-surface"
 				>
-					<ArrowLeft className="size-4" aria-hidden />
+					<ArrowLeftIcon className="size-4" aria-hidden />
 					Start Over
 				</Link>
 			</div>

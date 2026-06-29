@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { db } from "#/db";
 import { profileSnapshots } from "#/db/schema";
+import { formatAiError } from "#/lib/ai/format-ai-error";
 import { mockParseProfileFromText } from "#/lib/ai/mock-parse-profile";
 import { parseProfileFromText } from "#/lib/ai/parse-profile";
 import { resolveAiMode } from "#/lib/ai/resolve-ai-mode";
@@ -87,7 +88,10 @@ export const Route = createFileRoute("/api/parse")({
 					}
 
 					if (error instanceof Error) {
-						return jsonError(`Failed to parse profile: ${error.message}`, 500);
+						return jsonError(
+							`Failed to parse profile: ${formatAiError(error)}`,
+							500,
+						);
 					}
 
 					return jsonError("Failed to parse profile", 500);
