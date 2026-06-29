@@ -4,7 +4,7 @@ import { and, eq } from "drizzle-orm";
 import { db } from "#/db";
 import { profileSnapshots } from "#/db/schema";
 import { jsonError, jsonOk } from "#/lib/api-error";
-import { profileSchema } from "#/lib/profile-schema";
+import { parseStoredProfile } from "#/lib/profile-schema";
 import { getRequiredSessionId } from "#/server/session-utils";
 
 function getSnapshotForSession(snapshotId: string, sessionId: string) {
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/api/profile")({
 					}
 
 					const profile = snapshot.normalizedProfileJson
-						? profileSchema.parse(JSON.parse(snapshot.normalizedProfileJson))
+						? parseStoredProfile(snapshot.normalizedProfileJson)
 						: null;
 
 					return jsonOk({

@@ -34,6 +34,90 @@ export const profileSchema = z.object({
 	certifications: z.array(certificationEntrySchema),
 });
 
+function toNullableString(value: unknown): string | null {
+	if (value === undefined || value === null) {
+		return null;
+	}
+
+	return String(value);
+}
+
+function normalizeExperienceEntry(raw: unknown): unknown {
+	if (typeof raw !== "object" || raw === null) {
+		return raw;
+	}
+
+	const entry = raw as Record<string, unknown>;
+
+	return {
+		title: entry.title ?? "",
+		company: entry.company ?? "",
+		location: toNullableString(entry.location),
+		startDate: toNullableString(entry.startDate),
+		endDate: toNullableString(entry.endDate),
+		description: toNullableString(entry.description),
+	};
+}
+
+function normalizeEducationEntry(raw: unknown): unknown {
+	if (typeof raw !== "object" || raw === null) {
+		return raw;
+	}
+
+	const entry = raw as Record<string, unknown>;
+
+	return {
+		school: entry.school ?? "",
+		degree: toNullableString(entry.degree),
+		field: toNullableString(entry.field),
+		startDate: toNullableString(entry.startDate),
+		endDate: toNullableString(entry.endDate),
+	};
+}
+
+function normalizeCertificationEntry(raw: unknown): unknown {
+	if (typeof raw !== "object" || raw === null) {
+		return raw;
+	}
+
+	const entry = raw as Record<string, unknown>;
+
+	return {
+		name: entry.name ?? "",
+		issuer: toNullableString(entry.issuer),
+		date: toNullableString(entry.date),
+	};
+}
+
+/** Backfill keys missing from profiles saved before nullable-field migration. */
+export function normalizeStoredProfile(raw: unknown): unknown {
+	if (typeof raw !== "object" || raw === null) {
+		return raw;
+	}
+
+	const profile = raw as Record<string, unknown>;
+
+	return {
+		...profile,
+		location: toNullableString(profile.location),
+		experiences: Array.isArray(profile.experiences)
+			? profile.experiences.map(normalizeExperienceEntry)
+			: profile.experiences,
+		education: Array.isArray(profile.education)
+			? profile.education.map(normalizeEducationEntry)
+			: profile.education,
+		skills: profile.skills ?? [],
+		certifications: Array.isArray(profile.certifications)
+			? profile.certifications.map(normalizeCertificationEntry)
+			: [],
+	};
+}
+
+export function parseStoredProfile(json: string | unknown): Profile {
+	const raw = typeof json === "string" ? JSON.parse(json) : json;
+	return profileSchema.parse(normalizeStoredProfile(raw));
+}
+
 export type Profile = z.infer<typeof profileSchema>;
 export type ExperienceEntry = z.infer<typeof experienceEntrySchema>;
 export type EducationEntry = z.infer<typeof educationEntrySchema>;
