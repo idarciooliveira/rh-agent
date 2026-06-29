@@ -5,7 +5,7 @@
 | Phase | Name | Status | Deliverable |
 |-------|------|--------|-------------|
 | **0** | Foundation | ✅ Complete | App scaffold, SQLite, session cookie, PRD/ROADMAP |
-| **1** | Profile Ingestion | Planned | PDF upload → parse → profile review |
+| **1** | Profile Ingestion | ✅ Complete | PDF upload → parse → profile review |
 | **2** | SWOT Analysis | Planned | Career goal + coach agent + results page |
 | **3** | Recommendations | Planned | LinkedIn-style preview + diff UI |
 | **4** | Polish & Deploy | Planned | Errors, loading states, Vercel production deploy |
@@ -39,16 +39,16 @@
 
 ### Tasks
 
-- PDF upload dropzone + LinkedIn export guide
-- `unpdf` text extraction
-- Profile parser agent (`generateObject`)
-- `/api/upload`, `/api/parse`, `/api/profile`
-- Editable profile review page
+- [x] PDF upload dropzone + LinkedIn export guide
+- [x] `unpdf` text extraction
+- [x] Profile parser agent (`generateObject`)
+- [x] `/api/upload`, `/api/parse`, `/api/profile`
+- [x] Editable profile review page
 
 ### Exit criteria
 
-- Valid LinkedIn PDF parses to structured profile
-- User can edit and save snapshot
+- [x] Valid LinkedIn PDF parses to structured profile
+- [x] User can edit and save snapshot
 
 ---
 

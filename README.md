@@ -11,7 +11,7 @@ An AI career coach that analyzes your LinkedIn profile (via PDF export) against 
 
 ```bash
 pnpm install
-cp .env.example .env.local   # add AI_GATEWAY_API_KEY when running Phase 2+
+cp .env.example .env.local   # add AI_GATEWAY_API_KEY for profile parsing (Phase 1+)
 pnpm db:push                 # create SQLite tables
 pnpm dev
 ```
@@ -40,7 +40,7 @@ See [`.env.example`](.env.example):
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `DATABASE_URL` | No | SQLite path (default: `./data/app.db`) |
-| `AI_GATEWAY_API_KEY` | Phase 2+ | Vercel AI Gateway or provider key |
+| `AI_GATEWAY_API_KEY` | Phase 1+ | Vercel AI Gateway key (required for PDF → profile parsing) |
 | `MAX_PDF_SIZE_MB` | No | PDF upload limit (default: 5) |
 | `SESSION_COOKIE_NAME` | No | Anonymous session cookie name |
 
@@ -68,7 +68,7 @@ On LinkedIn desktop:
 - [TanStack Start](https://tanstack.com/start) + [TanStack Router](https://tanstack.com/router)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Drizzle ORM](https://orm.drizzle.team/) + SQLite
-- [Vercel AI SDK](https://ai-sdk.dev/) (Phases 2–3)
+- [Vercel AI SDK](https://ai-sdk.dev/) (Phases 1–3)
 - [unpdf](https://www.npmjs.com/package/unpdf) (Phase 1)
 
 ## License

@@ -1,0 +1,77 @@
+{
+  "summary": {
+    "passed": 11,
+    "failed": 0,
+    "total": 11,
+    "snapshotId": "81f09d74-df0f-4512-9ae2-dd1f8996f473",
+    "baseUrl": "http://localhost:3000"
+  },
+  "results": [
+    {
+      "name": "Home page loads (200)",
+      "pass": true,
+      "detail": "status=200, has Phase 1 copy=true",
+      "at": "2026-06-29T18:30:30.387Z"
+    },
+    {
+      "name": "Anonymous session cookie issued",
+      "pass": true,
+      "detail": "linkedin_coach_session=437e9b57-9e0f-404d-a13b-c79f67f47974",
+      "at": "2026-06-29T18:30:30.387Z"
+    },
+    {
+      "name": "Upload rejects non-PDF (400)",
+      "pass": true,
+      "detail": "{\"error\":\"Only application/pdf files are accepted\"}",
+      "at": "2026-06-29T18:30:30.395Z"
+    },
+    {
+      "name": "Upload accepts valid PDF (200)",
+      "pass": true,
+      "detail": "{\"snapshotId\":\"81f09d74-df0f-4512-9ae2-dd1f8996f473\",\"totalPages\":1,\"textLength\":567}",
+      "at": "2026-06-29T18:30:30.404Z"
+    },
+    {
+      "name": "Parse returns 503 without AI_GATEWAY_API_KEY",
+      "pass": true,
+      "detail": "{\"error\":\"AI parsing is unavailable: set AI_GATEWAY_API_KEY in your environment to enable profile parsing.\"}",
+      "at": "2026-06-29T18:30:30.407Z"
+    },
+    {
+      "name": "Profile save works (PUT 200) — seeded for review test",
+      "pass": true,
+      "detail": "{\"status\":200,\"name\":\"Jane Smith\"}",
+      "at": "2026-06-29T18:30:30.410Z"
+    },
+    {
+      "name": "Profile GET returns saved data (200)",
+      "pass": true,
+      "detail": "{\"status\":200,\"name\":\"Jane Smith\",\"experienceCount\":1}",
+      "at": "2026-06-29T18:30:30.414Z"
+    },
+    {
+      "name": "Profile PUT updates headline (200)",
+      "pass": true,
+      "detail": "{\"status\":200,\"headline\":\"Senior Product Manager at TechCo\"}",
+      "at": "2026-06-29T18:30:30.417Z"
+    },
+    {
+      "name": "Profile review page loads (200)",
+      "pass": true,
+      "detail": "status=200, has review heading=true",
+      "at": "2026-06-29T18:30:30.429Z"
+    },
+    {
+      "name": "Profile GET without session returns 401",
+      "pass": true,
+      "detail": "{\"error\":\"Unauthorized: session cookie missing\"}",
+      "at": "2026-06-29T18:30:30.432Z"
+    },
+    {
+      "name": "Unknown snapshot returns 404",
+      "pass": true,
+      "detail": "{\"error\":\"Profile snapshot not found\"}",
+      "at": "2026-06-29T18:30:30.435Z"
+    }
+  ]
+}

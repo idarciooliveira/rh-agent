@@ -18,16 +18,17 @@ export const ensureSession = createServerFn({ method: "GET" }).handler(
 				.select()
 				.from(sessions)
 				.where(eq(sessions.id, existingCookie))
-				.limit(1);
+				.limit(1)
+				.get();
 
-			if (existing.length > 0) {
+			if (existing) {
 				return { sessionId: existingCookie };
 			}
 		}
 
 		const sessionId = randomUUID();
 
-		db.insert(sessions).values({ id: sessionId });
+		db.insert(sessions).values({ id: sessionId }).run();
 
 		setCookie(SESSION_COOKIE_NAME, sessionId, {
 			httpOnly: true,
