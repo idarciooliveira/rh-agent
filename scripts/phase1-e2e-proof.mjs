@@ -82,6 +82,7 @@ function createTestPdf() {
 	return Buffer.from(pdf);
 }
 
+async function runTests() {
 	console.log(`\nPhase 1 E2E Proof — ${BASE}\n${"=".repeat(50)}\n`);
 
 	// 1. Home page

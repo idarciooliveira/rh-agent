@@ -1,20 +1,28 @@
 {
-  "capturedAt": "2026-06-29T18:55:51.323Z",
+  "capturedAt": "2026-06-29T21:03:03.306Z",
   "baseUrl": "http://localhost:3000",
-  "snapshotId": "4540c7cb-84cf-40b2-bd6b-3b15ee58a950",
-  "profileUrl": "http://localhost:3000/profile/4540c7cb-84cf-40b2-bd6b-3b15ee58a950",
+  "analysisId": "196288d4-e2d2-4553-ac1e-652aa5df9904",
+  "resultsUrl": "http://localhost:3000/results/196288d4-e2d2-4553-ac1e-652aa5df9904",
   "screenshots": [
     {
       "file": "mock-flow-01-home.png",
-      "label": "Home page with AI mock banner"
+      "label": "Homepage — light theme with form"
     },
     {
-      "file": "mock-flow-02-parsing.png",
-      "label": "Parsing profile (mock AI delay)"
+      "file": "mock-flow-02-form-filled.png",
+      "label": "Form filled with PDF and career goal"
     },
     {
-      "file": "mock-flow-03-profile-review.png",
-      "label": "Profile review with parsed data"
+      "file": "mock-flow-03-loading.png",
+      "label": "Full-page analysis loading screen"
+    },
+    {
+      "file": "mock-flow-04-analysis-results.png",
+      "label": "Analysis results with SWOT breakdown"
+    },
+    {
+      "file": "mock-flow-05-profile-preview.png",
+      "label": "Optimized profile preview modal"
     }
   ],
   "video": "mock-flow-demo.webm"

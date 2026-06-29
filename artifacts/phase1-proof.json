@@ -3,8 +3,8 @@
     "passed": 10,
     "failed": 0,
     "total": 10,
-    "snapshotId": "1fac7831-09f0-46dd-a8b2-615f79308b5b",
-    "analysisId": "cec35707-dd23-48db-b0a3-7543d7a80e54",
+    "snapshotId": "9c71cc93-540c-4542-89d8-7cc1fef872fa",
+    "analysisId": "7680dee2-9eb5-4957-a25e-bfabeafd148b",
     "baseUrl": "http://localhost:3000"
   },
   "results": [
@@ -12,61 +12,61 @@
       "name": "Home page loads (200)",
       "pass": true,
       "detail": "status=200, has SWOT Analyzer=true",
-      "at": "2026-06-29T20:57:50.659Z"
+      "at": "2026-06-29T21:02:57.677Z"
     },
     {
       "name": "Anonymous session cookie issued",
       "pass": true,
-      "detail": "linkedin_coach_session=37cf8d72-ed79-4878-91fb-068c5c6187a1",
-      "at": "2026-06-29T20:57:50.659Z"
+      "detail": "linkedin_coach_session=9f80837b-e083-431e-941f-81a078d5c4d8",
+      "at": "2026-06-29T21:02:57.678Z"
     },
     {
       "name": "Upload rejects non-PDF (400)",
       "pass": true,
       "detail": "{\"error\":\"Only application/pdf files are accepted\"}",
-      "at": "2026-06-29T20:57:50.671Z"
+      "at": "2026-06-29T21:02:57.687Z"
     },
     {
       "name": "Upload accepts valid PDF (200)",
       "pass": true,
-      "detail": "{\"snapshotId\":\"1fac7831-09f0-46dd-a8b2-615f79308b5b\",\"totalPages\":1,\"textLength\":567}",
-      "at": "2026-06-29T20:57:50.754Z"
+      "detail": "{\"snapshotId\":\"9c71cc93-540c-4542-89d8-7cc1fef872fa\",\"totalPages\":1,\"textLength\":567}",
+      "at": "2026-06-29T21:02:57.707Z"
     },
     {
       "name": "Parse returns structured profile (200) — mock",
       "pass": true,
       "detail": "status=200, name=Jane Smith, experiences=1",
-      "at": "2026-06-29T20:57:50.760Z"
+      "at": "2026-06-29T21:02:57.713Z"
     },
     {
       "name": "Profile GET returns parsed data (200)",
       "pass": "Jane Smith",
       "detail": "{\"status\":200,\"name\":\"Jane Smith\",\"experienceCount\":1}",
-      "at": "2026-06-29T20:57:50.771Z"
+      "at": "2026-06-29T21:02:57.719Z"
     },
     {
       "name": "Analyze returns analysisId (200) — mock",
       "pass": true,
-      "detail": "status=200, analysisId=cec35707-dd23-48db-b0a3-7543d7a80e54",
-      "at": "2026-06-29T20:57:50.776Z"
+      "detail": "status=200, analysisId=7680dee2-9eb5-4957-a25e-bfabeafd148b",
+      "at": "2026-06-29T21:02:57.726Z"
     },
     {
       "name": "Results page loads (200)",
       "pass": true,
       "detail": "status=200, has Analysis Complete=true",
-      "at": "2026-06-29T20:57:50.970Z"
+      "at": "2026-06-29T21:02:57.867Z"
     },
     {
       "name": "Profile GET without session returns 401",
       "pass": true,
       "detail": "{\"error\":\"Unauthorized: session cookie missing\"}",
-      "at": "2026-06-29T20:57:50.974Z"
+      "at": "2026-06-29T21:02:57.872Z"
     },
     {
       "name": "Unknown snapshot returns 404",
       "pass": true,
       "detail": "{\"error\":\"Profile snapshot not found\"}",
-      "at": "2026-06-29T20:57:50.979Z"
+      "at": "2026-06-29T21:02:57.877Z"
     }
   ]
 }
