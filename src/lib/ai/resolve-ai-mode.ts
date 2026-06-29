@@ -17,7 +17,3 @@ export function resolveAiMode(): AiMode {
 
 	return "unavailable";
 }
-
-export function getAiModeForClient(): AiMode {
-	return resolveAiMode();
-}

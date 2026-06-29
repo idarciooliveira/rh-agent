@@ -1,0 +1,21 @@
+{
+  "capturedAt": "2026-06-29T18:55:51.323Z",
+  "baseUrl": "http://localhost:3000",
+  "snapshotId": "4540c7cb-84cf-40b2-bd6b-3b15ee58a950",
+  "profileUrl": "http://localhost:3000/profile/4540c7cb-84cf-40b2-bd6b-3b15ee58a950",
+  "screenshots": [
+    {
+      "file": "mock-flow-01-home.png",
+      "label": "Home page with AI mock banner"
+    },
+    {
+      "file": "mock-flow-02-parsing.png",
+      "label": "Parsing profile (mock AI delay)"
+    },
+    {
+      "file": "mock-flow-03-profile-review.png",
+      "label": "Profile review with parsed data"
+    }
+  ],
+  "video": "mock-flow-demo.webm"
+}

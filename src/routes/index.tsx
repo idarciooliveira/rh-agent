@@ -1,11 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { LinkedInExportGuide } from "#/components/LinkedInExportGuide";
 import { PdfUploadDropzone } from "#/components/PdfUploadDropzone";
-import { getAiModeForClient } from "#/lib/ai/resolve-ai-mode";
+import { getAiMode } from "#/server/ai-mode";
 
 export const Route = createFileRoute("/")({
-	loader: () => ({
-		aiMode: getAiModeForClient(),
+	loader: async () => ({
+		aiMode: await getAiMode(),
 	}),
 	component: Home,
 });
