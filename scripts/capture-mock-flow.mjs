@@ -137,18 +137,31 @@ async function captureFlow() {
 		});
 	}
 
-	console.log("4. Waiting for profile review page...");
-	await page.waitForSelector("text=Review your profile", { timeout: 45000 });
+	console.log("4. Waiting for analysis results page...");
+	await page.waitForSelector("text=Analysis Complete", { timeout: 60000 });
 	await page.waitForTimeout(800);
-	const reviewShot = join(ARTIFACTS, "mock-flow-04-profile-review.png");
-	await page.screenshot({ path: reviewShot, fullPage: true });
+	const resultsShot = join(ARTIFACTS, "mock-flow-04-analysis-results.png");
+	await page.screenshot({ path: resultsShot, fullPage: true });
 	shots.push({
-		file: "mock-flow-04-profile-review.png",
-		label: "Profile review with career goal banner",
+		file: "mock-flow-04-analysis-results.png",
+		label: "Analysis results with SWOT breakdown",
 	});
 
-	const profileUrl = page.url();
-	const snapshotId = profileUrl.split("/profile/")[1]?.split("?")[0] ?? "unknown";
+	console.log("5. Opening optimized profile preview...");
+	await page.getByRole("button", { name: /Preview Optimized Profile/ }).click();
+	await page.waitForSelector("text=This is your optimized profile preview", {
+		timeout: 10000,
+	});
+	await page.waitForTimeout(800);
+	const previewShot = join(ARTIFACTS, "mock-flow-05-profile-preview.png");
+	await page.screenshot({ path: previewShot, fullPage: true });
+	shots.push({
+		file: "mock-flow-05-profile-preview.png",
+		label: "Optimized profile preview modal",
+	});
+
+	const resultsUrl = page.url();
+	const analysisId = resultsUrl.split("/results/")[1]?.split("?")[0] ?? "unknown";
 
 	await context.close();
 	await browser.close();
@@ -167,8 +180,8 @@ async function captureFlow() {
 	const summary = {
 		capturedAt: new Date().toISOString(),
 		baseUrl: BASE,
-		snapshotId,
-		profileUrl,
+		analysisId,
+		resultsUrl,
 		screenshots: shots,
 		video: "mock-flow-demo.webm",
 	};
@@ -183,7 +196,7 @@ async function captureFlow() {
 	for (const shot of shots) {
 		console.log(`  Image:  artifacts/${shot.file} — ${shot.label}`);
 	}
-	console.log(`  Profile: ${profileUrl}`);
+	console.log(`  Results: ${resultsUrl}`);
 
 	return summary;
 }
