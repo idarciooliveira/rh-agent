@@ -11,12 +11,29 @@ An AI career coach that analyzes your LinkedIn profile (via PDF export) against 
 
 ```bash
 pnpm install
-cp .env.example .env.local   # add AI_GATEWAY_API_KEY for profile parsing (Phase 1+)
+cp .env.example .env.local
 pnpm db:push                 # create SQLite tables
 pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+### Local development without API key
+
+To test the full upload → parse → review flow without calling the real AI gateway, enable mock mode in `.env.local`:
+
+```bash
+AI_MOCK_MODE=true
+AI_MOCK_DELAY_MS=1500   # optional — simulates parsing latency for UI testing
+```
+
+Or use the convenience script:
+
+```bash
+pnpm dev:mock
+```
+
+Mock mode returns simulated profile data derived from your PDF text. It is disabled in production builds. For live parsing, set `AI_GATEWAY_API_KEY` instead (mock mode takes priority when both are set).
 
 ## Project Docs
 
@@ -40,7 +57,9 @@ See [`.env.example`](.env.example):
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `DATABASE_URL` | No | SQLite path (default: `./data/app.db`) |
-| `AI_GATEWAY_API_KEY` | Phase 1+ | Vercel AI Gateway key (required for PDF → profile parsing) |
+| `AI_GATEWAY_API_KEY` | Live parsing | Vercel AI Gateway key for PDF → profile parsing |
+| `AI_MOCK_MODE` | No | Set to `true` to simulate AI responses without API calls (dev/test) |
+| `AI_MOCK_DELAY_MS` | No | Mock parsing delay in ms (default: 1500) |
 | `MAX_PDF_SIZE_MB` | No | PDF upload limit (default: 5) |
 | `SESSION_COOKIE_NAME` | No | Anonymous session cookie name |
 
@@ -48,11 +67,13 @@ See [`.env.example`](.env.example):
 
 ```bash
 pnpm dev          # Start dev server (port 3000)
+pnpm dev:mock     # Dev server with AI mock mode enabled
 pnpm build        # Production build
 pnpm db:push      # Push schema to SQLite
 pnpm db:generate  # Generate Drizzle migrations
 pnpm db:studio    # Open Drizzle Studio
 pnpm check        # Biome lint + format
+pnpm test:phase1:mock  # E2E proof with mock AI (requires dev server)
 ```
 
 ## LinkedIn PDF Export

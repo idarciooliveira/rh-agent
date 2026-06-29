@@ -1,13 +1,18 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { LinkedInExportGuide } from "#/components/LinkedInExportGuide";
 import { PdfUploadDropzone } from "#/components/PdfUploadDropzone";
+import { getAiModeForClient } from "#/lib/ai/resolve-ai-mode";
 
 export const Route = createFileRoute("/")({
+	loader: () => ({
+		aiMode: getAiModeForClient(),
+	}),
 	component: Home,
 });
 
 function Home() {
 	const navigate = useNavigate();
+	const { aiMode } = Route.useLoaderData();
 
 	return (
 		<div className="mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-16">
@@ -23,6 +28,12 @@ function Home() {
 					analysis with actionable profile recommendations powered by AI.
 				</p>
 			</header>
+
+			{aiMode === "mock" ? (
+				<div className="mb-8 rounded-xl border border-amber-800/60 bg-amber-950/30 px-4 py-3 text-sm text-amber-200">
+					AI mock mode — responses are simulated. No real API calls are made.
+				</div>
+			) : null}
 
 			<div className="space-y-8">
 				<LinkedInExportGuide />

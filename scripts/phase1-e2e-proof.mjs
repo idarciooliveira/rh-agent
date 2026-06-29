@@ -164,22 +164,28 @@ async function runTests() {
 		return { results, snapshotId: null };
 	}
 
-	// 5. Parse without API key (503 expected) OR success if key present
+	// 5. Parse — mock mode, live key, or 503 when unavailable
 	const parse = await request("/api/parse", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({ snapshotId }),
 	});
+	const hasMockMode = process.env.AI_MOCK_MODE === "true";
 	const hasAiKey = !!process.env.AI_GATEWAY_API_KEY;
-	if (hasAiKey) {
+	const parseAvailable = hasMockMode || hasAiKey;
+
+	if (parseAvailable) {
+		const parseMode = hasMockMode ? "mock" : "live";
 		log(
-			"Parse returns structured profile (200)",
-			parse.status === 200 && parse.body?.profile?.name,
-			`status=${parse.status}, name=${parse.body?.profile?.name ?? "n/a"}`,
+			`Parse returns structured profile (200) — ${parseMode}`,
+			parse.status === 200 &&
+				parse.body?.profile?.name &&
+				Array.isArray(parse.body?.profile?.experiences),
+			`status=${parse.status}, name=${parse.body?.profile?.name ?? "n/a"}, experiences=${parse.body?.profile?.experiences?.length ?? 0}`,
 		);
 	} else {
 		log(
-			"Parse returns 503 without AI_GATEWAY_API_KEY",
+			"Parse returns 503 without AI_GATEWAY_API_KEY or AI_MOCK_MODE",
 			parse.status === 503,
 			JSON.stringify(parse.body),
 		);
@@ -304,7 +310,9 @@ ${snapshotId ? `- \`artifacts/01-home-upload.png\` — Home page with upload UI\
 
 ## Environment
 
-- \`AI_GATEWAY_API_KEY\`: ${process.env.AI_GATEWAY_API_KEY ? "set (live parse tested)" : "not set (parse 503 expected; profile flow seeded via PUT)"}
+- \`AI_MOCK_MODE\`: ${process.env.AI_MOCK_MODE === "true" ? "true (mock parse tested)" : "not set"}
+- \`AI_MOCK_DELAY_MS\`: ${process.env.AI_MOCK_DELAY_MS ?? "1500 (default)"}
+- \`AI_GATEWAY_API_KEY\`: ${process.env.AI_GATEWAY_API_KEY ? "set (live parse available)" : "not set"}
 - Node: ${process.version}
 
 ## Raw JSON
