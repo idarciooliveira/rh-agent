@@ -1,5 +1,4 @@
 import { useNavigate } from "@tanstack/react-router";
-import { AlertCircle } from "lucide-react";
 import {
 	type FormEvent,
 	useCallback,
@@ -10,6 +9,7 @@ import {
 import { AnalysisLoadingScreen } from "#/components/AnalysisLoadingScreen";
 import { PdfUploadDropzone } from "#/components/PdfUploadDropzone";
 import { readApiError } from "#/lib/api-client";
+import { AlertCircleIcon } from "#/lib/icons";
 
 const MAX_PDF_SIZE_BYTES = 5 * 1024 * 1024;
 
@@ -268,7 +268,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 
 			{phase === "error" && error ? (
 				<div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
-					<AlertCircle
+					<AlertCircleIcon
 						className="mt-0.5 size-4 shrink-0 text-red-500"
 						aria-hidden
 					/>

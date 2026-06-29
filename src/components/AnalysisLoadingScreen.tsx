@@ -1,4 +1,4 @@
-import { Sparkles } from "lucide-react";
+import { SparklesIcon } from "#/lib/icons";
 
 type AnalysisLoadingScreenProps = {
 	statusMessage: string;
@@ -23,6 +23,7 @@ export function AnalysisLoadingScreen({
 						viewBox="0 0 40 40"
 						fill="none"
 						aria-hidden
+						suppressHydrationWarning
 					>
 						<title>Loading</title>
 						<circle
@@ -54,7 +55,7 @@ export function AnalysisLoadingScreen({
 				</div>
 
 				<p className="mt-6 flex items-center gap-2 text-sm text-text-muted">
-					<Sparkles className="size-4 shrink-0 text-primary" aria-hidden />
+					<SparklesIcon className="size-4 shrink-0 text-primary" aria-hidden />
 					AI is analysing your profile — this takes about 15–30 seconds
 				</p>
 			</div>

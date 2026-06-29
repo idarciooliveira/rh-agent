@@ -14,7 +14,7 @@ export const swotQuadrantsSchema = z.object({
 
 export const goalAlignmentSchema = z.object({
 	score: z.number().min(0).max(10),
-	maxScore: z.number().default(10),
+	maxScore: z.number(),
 	summary: z.string(),
 });
 

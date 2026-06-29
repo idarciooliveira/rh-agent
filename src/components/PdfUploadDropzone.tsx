@@ -1,5 +1,5 @@
-import { CloudUpload } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
+import { CloudUploadIcon } from "#/lib/icons";
 
 type PdfUploadDropzoneProps = {
 	file: File | null;
@@ -63,7 +63,7 @@ export function PdfUploadDropzone({
 				}}
 			>
 				<div className="flex flex-col items-center text-center">
-					<CloudUpload className="size-10 text-primary/70" aria-hidden />
+					<CloudUploadIcon className="size-10 text-primary/70" aria-hidden />
 
 					<p className="mt-4 text-sm text-text">
 						Drop your PDF here, or{" "}

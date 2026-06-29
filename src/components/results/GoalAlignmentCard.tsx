@@ -1,5 +1,5 @@
-import { Bookmark } from "lucide-react";
 import type { GoalAlignment } from "#/lib/analysis-schema";
+import { BookmarkIcon } from "#/lib/icons";
 
 type GoalAlignmentCardProps = {
 	goalAlignment: GoalAlignment;
@@ -10,7 +10,7 @@ export function GoalAlignmentCard({ goalAlignment }: GoalAlignmentCardProps) {
 
 	return (
 		<div className="relative rounded-2xl border border-border bg-card p-6 shadow-sm">
-			<Bookmark
+			<BookmarkIcon
 				className="absolute right-5 top-5 size-5 text-primary"
 				aria-hidden
 			/>

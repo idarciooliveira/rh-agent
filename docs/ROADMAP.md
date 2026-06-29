@@ -5,10 +5,25 @@
 | Phase | Name | Status | Deliverable |
 |-------|------|--------|-------------|
 | **0** | Foundation | ✅ Complete | App scaffold, SQLite, session cookie, PRD/ROADMAP |
-| **1** | Profile Ingestion | ✅ Complete | PDF upload → parse → profile review |
-| **2** | SWOT Analysis | Planned | Career goal + coach agent + results page |
-| **3** | Recommendations | Planned | LinkedIn-style preview + diff UI |
-| **4** | Polish & Deploy | Planned | Errors, loading states, Vercel production deploy |
+| **1** | Profile Ingestion | ✅ Complete | PDF upload → parse → structured snapshot |
+| **2** | SWOT Analysis | ✅ Complete | Career goal + analysis agent + results dashboard |
+| **3** | Recommendations | ✅ Complete | LinkedIn-style preview modal with original/improved toggle |
+| **4** | Polish & Deploy | **In progress** | Errors, rate limiting, Vercel production deploy |
+
+**Current focus:** Phase 4 — production polish and deployment.
+
+---
+
+## Implementation notes (vs original plan)
+
+The shipped MVP streamlined a few early design choices:
+
+| Original plan | Shipped |
+|---------------|---------|
+| Separate profile review/edit page before analysis | Single-page flow: upload PDF + career goal → analyze |
+| `ToolLoopAgent` for SWOT + recommendations | Single `generateObject()` call produces full analysis |
+| Dedicated `/recommendations/:analysisId` route | Recommendations in `OptimizedProfilePreviewModal` on results page |
+| Editable profile review (US-04) | Deferred — `/api/profile` exists; no review UI |
 
 ---
 
@@ -35,7 +50,7 @@
 
 ## Phase 1 — Profile Ingestion
 
-**Goal:** User uploads LinkedIn PDF and reviews a structured profile.
+**Goal:** User uploads LinkedIn PDF; app extracts and structures profile data.
 
 ### Tasks
 
@@ -43,12 +58,14 @@
 - [x] `unpdf` text extraction
 - [x] Profile parser agent (`generateObject`)
 - [x] `/api/upload`, `/api/parse`, `/api/profile`
-- [x] Editable profile review page
+- [x] AI mock mode for local dev (`AI_MOCK_MODE`, `pnpm dev:mock`)
+- [x] Phase 1 E2E proof script (`pnpm test:phase1:mock`)
+- [ ] ~~Editable profile review page~~ — deferred (see implementation notes)
 
 ### Exit criteria
 
 - [x] Valid LinkedIn PDF parses to structured profile
-- [x] User can edit and save snapshot
+- [x] Parsed snapshot persisted and available to analysis pipeline
 
 ---
 
@@ -58,15 +75,17 @@
 
 ### Tasks
 
-- Career goal form
-- SWOT coach agent (`ToolLoopAgent`)
-- `/api/analyze`
-- SWOT results page (4 quadrants)
+- [x] Career goal form (homepage, combined with upload)
+- [x] Analysis agent (`generateObject` with `fullAnalysisSchema`)
+- [x] `/api/analyze`
+- [x] Results page at `/results/:analysisId` — profile score, goal alignment, SWOT quadrants, strategic suggestions, quick wins
+- [x] Analysis loading screen with progress messaging
+- [x] Mock analysis path for local testing
 
 ### Exit criteria
 
-- Full flow: review → goal → analyze → SWOT results
-- Results shareable via `/results/:analysisId`
+- [x] Full flow: upload → goal → analyze → SWOT results
+- [x] Results shareable via `/results/:analysisId`
 
 ---
 
@@ -76,14 +95,15 @@
 
 ### Tasks
 
-- LinkedIn profile preview component
-- Current vs recommended diff highlighting
-- `/recommendations/:analysisId`
-- "Show me recommendations" CTA on SWOT page
+- [x] LinkedIn profile preview component (`OptimizedProfilePreviewModal`)
+- [x] Current vs recommended toggle per section (headline, about, experience, skills)
+- [x] Copy-to-clipboard for improved text
+- [x] "Preview Optimized Profile" CTA on results page
+- [ ] ~~Dedicated `/recommendations/:analysisId` route~~ — not needed; modal covers MVP scope
 
 ### Exit criteria
 
-- Full E2E: upload → review → goal → SWOT → recommendations
+- [x] Full E2E: upload → goal → SWOT → recommendations preview
 
 ---
 
@@ -93,16 +113,19 @@
 
 ### Tasks
 
-- Error boundaries and empty states
-- Responsive layout pass
-- Basic rate limiting on API routes
-- Vercel deployment (Node.js runtime for `unpdf`)
-- Manual QA with real LinkedIn PDFs
+- [ ] Error boundaries on route tree
+- [x] Empty/not-found states (e.g. invalid `analysisId`)
+- [x] Loading states (analysis pipeline UI)
+- [x] Responsive layout pass (homepage + results)
+- [ ] Basic rate limiting on API routes
+- [ ] Vercel deployment (Node.js runtime for `unpdf`)
+- [ ] Manual QA with real LinkedIn PDFs
+- [ ] Full-flow E2E proof script (Phase 2/3)
 
 ### Exit criteria
 
-- Deployed to Vercel
-- All P0 user stories pass QA
+- [ ] Deployed to Vercel
+- [ ] All P0 user stories pass QA
 
 ---
 
@@ -110,6 +133,7 @@
 
 | Version | Theme | Features |
 |---------|-------|----------|
+| **v1.0.1** | Input quality | Restore editable profile review step (US-04) |
 | **v1.1** | Retention | Email magic link; analysis history; re-run with new goal |
 | **v1.2** | Quality | Parse confidence scores; export SWOT as PDF |
 | **v1.3** | Input | LinkedIn data export ZIP; manual paste fallback |
@@ -129,7 +153,8 @@
 | Profile input | LinkedIn PDF upload |
 | PDF extraction | `unpdf` |
 | Profile structuring | AI SDK `generateObject()` |
-| SWOT + recommendations | AI SDK `ToolLoopAgent` + `Output.object()` |
+| SWOT + recommendations | AI SDK `generateObject()` (single structured output) |
 | Validation | `zod` |
 | Persistence | SQLite + Drizzle |
 | Session | HTTP-only cookie |
+| Local dev / testing | AI mock mode (`AI_MOCK_MODE`) |

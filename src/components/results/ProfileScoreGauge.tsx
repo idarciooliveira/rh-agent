@@ -16,6 +16,7 @@ export function ProfileScoreGauge({ score }: ProfileScoreGaugeProps) {
 					viewBox="0 0 120 120"
 					role="img"
 					aria-label={`Profile score ${score} out of 100`}
+					suppressHydrationWarning
 				>
 					<circle
 						cx="60"

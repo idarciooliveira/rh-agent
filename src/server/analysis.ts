@@ -8,7 +8,7 @@ import {
 	recommendationsSchema,
 	swotAnalysisSchema,
 } from "#/lib/analysis-schema";
-import { profileSchema } from "#/lib/profile-schema";
+import { parseStoredProfile } from "#/lib/profile-schema";
 import { getRequiredSessionId } from "#/server/session-utils";
 
 const analysisIdSchema = z.object({
@@ -45,9 +45,7 @@ export const getAnalysis = createServerFn({ method: "GET" })
 			throw new Error("Profile snapshot not found");
 		}
 
-		const profile = profileSchema.parse(
-			JSON.parse(snapshot.normalizedProfileJson),
-		);
+		const profile = parseStoredProfile(snapshot.normalizedProfileJson);
 		const swotAnalysis = swotAnalysisSchema.parse(
 			JSON.parse(analysis.swotJson),
 		);

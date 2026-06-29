@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Target } from "lucide-react";
 import { HomeAnalysisForm } from "#/components/HomeAnalysisForm";
+import { TargetIcon } from "#/lib/icons";
 import { getAiMode } from "#/server/ai-mode";
 
 export const Route = createFileRoute("/")({
@@ -18,7 +18,7 @@ function Home() {
 			<div className="w-full max-w-xl rounded-3xl bg-card p-8 shadow-xl shadow-primary/5 sm:p-10">
 				<header className="mb-8 text-center">
 					<div className="mx-auto mb-5 flex size-12 items-center justify-center rounded-xl bg-white shadow-md">
-						<Target className="size-6 text-primary" aria-hidden />
+						<TargetIcon className="size-6 text-primary" aria-hidden />
 					</div>
 					<h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
 						<span className="text-text">LinkedIn </span>

@@ -1,10 +1,11 @@
-import {
-	AlertTriangle,
-	Lightbulb,
-	TrendingDown,
-	TrendingUp,
-} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type { SwotItem } from "#/lib/analysis-schema";
+import {
+	AlertTriangleIcon,
+	LightbulbIcon,
+	TrendingDownIcon,
+	TrendingUpIcon,
+} from "#/lib/icons";
 
 type SwotVariant = "strengths" | "weaknesses" | "opportunities" | "threats";
 
@@ -17,7 +18,7 @@ const variantConfig: Record<
 	SwotVariant,
 	{
 		title: string;
-		icon: typeof TrendingUp;
+		icon: LucideIcon;
 		borderColor: string;
 		titleColor: string;
 		iconColor: string;
@@ -25,28 +26,28 @@ const variantConfig: Record<
 > = {
 	strengths: {
 		title: "Strengths",
-		icon: TrendingUp,
+		icon: TrendingUpIcon,
 		borderColor: "border-t-green-500",
 		titleColor: "text-green-600",
 		iconColor: "text-green-500",
 	},
 	weaknesses: {
 		title: "Weaknesses",
-		icon: TrendingDown,
+		icon: TrendingDownIcon,
 		borderColor: "border-t-red-500",
 		titleColor: "text-red-600",
 		iconColor: "text-red-500",
 	},
 	opportunities: {
 		title: "Opportunities",
-		icon: Lightbulb,
+		icon: LightbulbIcon,
 		borderColor: "border-t-blue-500",
 		titleColor: "text-blue-600",
 		iconColor: "text-blue-500",
 	},
 	threats: {
 		title: "Threats",
-		icon: AlertTriangle,
+		icon: AlertTriangleIcon,
 		borderColor: "border-t-orange-500",
 		titleColor: "text-orange-600",
 		iconColor: "text-orange-500",

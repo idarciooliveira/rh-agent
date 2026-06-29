@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { db } from "#/db";
 import { profileSnapshots } from "#/db/schema";
-import { profileSchema } from "#/lib/profile-schema";
+import { parseStoredProfile } from "#/lib/profile-schema";
 
 import { getRequiredSessionId } from "./session-utils";
 
@@ -40,9 +40,7 @@ export const getProfileSnapshot = createServerFn({ method: "GET" })
 			throw new Error("Profile has not been parsed yet.");
 		}
 
-		const profile = profileSchema.parse(
-			JSON.parse(snapshot.normalizedProfileJson),
-		);
+		const profile = parseStoredProfile(snapshot.normalizedProfileJson);
 
 		return {
 			snapshotId: data.snapshotId,

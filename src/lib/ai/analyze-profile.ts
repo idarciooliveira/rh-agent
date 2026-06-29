@@ -1,5 +1,4 @@
-import { gateway, generateObject } from "ai";
-
+import { generateStructuredObject } from "#/lib/ai/generate-structured";
 import { type FullAnalysis, fullAnalysisSchema } from "#/lib/analysis-schema";
 import type { Profile } from "#/lib/profile-schema";
 
@@ -7,7 +6,7 @@ const ANALYZE_PROMPT_PREFIX = `You are an expert LinkedIn career coach. Analyze 
 
 Produce a comprehensive strategic analysis including:
 1. profileScore (0-100): overall profile quality for the target goal
-2. goalAlignment: score out of 10 with a summary paragraph
+2. goalAlignment: score out of 10, maxScore always 10, with a summary paragraph
 3. swot: strengths, weaknesses, opportunities, threats (2-5 items each with title + detail)
 4. strategicSuggestions: 3-5 high-impact recommendations with priority (high/medium/low), category (Headline/Summary/Experience/Skills), and timeframe
 5. quickWins: 4-6 short actionable items the user can do immediately
@@ -27,14 +26,14 @@ export async function analyzeProfile(
 	profile: Profile,
 	careerGoal: string,
 ): Promise<FullAnalysis> {
-	const { object: analysis } = await generateObject({
-		model: gateway("anthropic/claude-sonnet-4.5"),
+	return generateStructuredObject({
 		schema: fullAnalysisSchema,
+		schemaName: "LinkedInCareerAnalysis",
+		schemaDescription:
+			"SWOT analysis, profile score, and LinkedIn rewrite recommendations for a career goal",
 		prompt: `${ANALYZE_PROMPT_PREFIX}${careerGoal}
 
 Profile JSON:
 ${JSON.stringify(profile, null, 2)}`,
 	});
-
-	return analysis;
 }
