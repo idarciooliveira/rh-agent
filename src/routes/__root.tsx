@@ -16,13 +16,26 @@ export const Route = createRootRoute({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "LinkedIn Coach Agent",
+				title: "LinkedIn SWOT Analyzer",
 			},
 		],
 		links: [
 			{
 				rel: "stylesheet",
 				href: appCss,
+			},
+			{
+				rel: "preconnect",
+				href: "https://fonts.googleapis.com",
+			},
+			{
+				rel: "preconnect",
+				href: "https://fonts.gstatic.com",
+				crossOrigin: "anonymous",
+			},
+			{
+				rel: "stylesheet",
+				href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
 			},
 		],
 	}),
@@ -35,7 +48,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<head>
 				<HeadContent />
 			</head>
-			<body className="min-h-screen bg-slate-950 text-slate-100 antialiased">
+			<body className="min-h-screen bg-white text-text antialiased">
 				{children}
 				<TanStackDevtools
 					config={{

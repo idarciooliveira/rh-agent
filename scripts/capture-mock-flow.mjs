@@ -83,50 +83,68 @@ async function captureFlow() {
 	console.log("1. Home page with mock banner...");
 	await page.goto(BASE, { waitUntil: "domcontentloaded" });
 	await page.waitForSelector("text=AI mock mode");
+	await page.waitForSelector("text=SWOT Analyzer");
 	await page.waitForTimeout(1000);
 	const homeShot = join(ARTIFACTS, "mock-flow-01-home.png");
 	await page.screenshot({ path: homeShot, fullPage: true });
-	shots.push({ file: "mock-flow-01-home.png", label: "Home page with AI mock banner" });
+	shots.push({
+		file: "mock-flow-01-home.png",
+		label: "Homepage — light theme with form",
+	});
 
-	console.log("2. Uploading PDF via file chooser...");
-	const [fileChooser] = await Promise.all([
-		page.waitForEvent("filechooser"),
-		page.getByText("Choose PDF file").click(),
-	]);
-	await fileChooser.setFiles(pdfPath);
+	console.log("2. Uploading PDF and entering career goal...");
+	const fileInput = page.locator("#pdf-upload-input");
+	await fileInput.setInputFiles(pdfPath);
+	await page
+		.locator("#career-goal")
+		.fill(
+			"I want to transition from Software Engineering to Product Management at a fast-growing tech startup.",
+		);
+	await page.waitForTimeout(500);
+	const formFilledShot = join(ARTIFACTS, "mock-flow-02-form-filled.png");
+	await page.screenshot({ path: formFilledShot, fullPage: true });
+	shots.push({
+		file: "mock-flow-02-form-filled.png",
+		label: "Form filled with PDF and career goal",
+	});
 
-	console.log("3. Waiting for parsing or success state...");
-	let parsingCaptured = false;
+	console.log("3. Submitting and capturing loading screen...");
+	await page.getByRole("button", { name: /Generate Strategic Analysis/ }).click();
+
+	let loadingCaptured = false;
 	try {
-		await page.waitForSelector("text=/Parsing profile/", { timeout: 8000 });
-		const parsingShot = join(ARTIFACTS, "mock-flow-02-parsing.png");
-		await page.screenshot({ path: parsingShot, fullPage: true });
-		shots.push({
-			file: "mock-flow-02-parsing.png",
-			label: "Parsing profile (mock AI delay)",
+		await page.waitForSelector("text=AI is analysing your profile", {
+			timeout: 8000,
 		});
-		parsingCaptured = true;
+		await page.waitForTimeout(600);
+		const loadingShot = join(ARTIFACTS, "mock-flow-03-loading.png");
+		await page.screenshot({ path: loadingShot, fullPage: true });
+		shots.push({
+			file: "mock-flow-03-loading.png",
+			label: "Full-page analysis loading screen",
+		});
+		loadingCaptured = true;
 	} catch {
-		console.warn("Parsing state was too fast to capture — continuing...");
+		console.warn("Loading screen was too fast to capture — continuing...");
 	}
 
-	if (!parsingCaptured) {
-		const busyShot = join(ARTIFACTS, "mock-flow-02-uploading.png");
+	if (!loadingCaptured) {
+		const busyShot = join(ARTIFACTS, "mock-flow-03-loading.png");
 		await page.screenshot({ path: busyShot, fullPage: true });
 		shots.push({
-			file: "mock-flow-02-uploading.png",
-			label: "Upload/parse in progress",
+			file: "mock-flow-03-loading.png",
+			label: "Analysis in progress",
 		});
 	}
 
 	console.log("4. Waiting for profile review page...");
 	await page.waitForSelector("text=Review your profile", { timeout: 45000 });
-	await page.waitForTimeout(500);
-	const reviewShot = join(ARTIFACTS, "mock-flow-03-profile-review.png");
+	await page.waitForTimeout(800);
+	const reviewShot = join(ARTIFACTS, "mock-flow-04-profile-review.png");
 	await page.screenshot({ path: reviewShot, fullPage: true });
 	shots.push({
-		file: "mock-flow-03-profile-review.png",
-		label: "Profile review with parsed data",
+		file: "mock-flow-04-profile-review.png",
+		label: "Profile review with career goal banner",
 	});
 
 	const profileUrl = page.url();
@@ -140,9 +158,11 @@ async function captureFlow() {
 		.split("\n")
 		.filter(Boolean);
 	const latestVideo = videoFiles[0];
-	const videoSrc = join(VIDEO_DIR, latestVideo);
-	const videoDest = join(ARTIFACTS, "mock-flow-demo.webm");
-	execSync(`cp "${videoSrc}" "${videoDest}"`);
+	if (latestVideo) {
+		const videoSrc = join(VIDEO_DIR, latestVideo);
+		const videoDest = join(ARTIFACTS, "mock-flow-demo.webm");
+		execSync(`cp "${videoSrc}" "${videoDest}"`);
+	}
 
 	const summary = {
 		capturedAt: new Date().toISOString(),
@@ -159,7 +179,7 @@ async function captureFlow() {
 	);
 
 	console.log("\nCapture complete:");
-	console.log(`  Video:  artifacts/mock-flow-demo.webm`);
+	console.log("  Video:  artifacts/mock-flow-demo.webm");
 	for (const shot of shots) {
 		console.log(`  Image:  artifacts/${shot.file} — ${shot.label}`);
 	}

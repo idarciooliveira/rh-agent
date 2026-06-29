@@ -19,9 +19,9 @@ type ProfileReviewFormProps = {
 type SaveState = "idle" | "saving" | "success" | "error";
 
 const inputClassName =
-	"w-full rounded-lg border border-slate-700 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-400 focus:outline-none focus:ring-1 focus:ring-sky-400";
+	"w-full rounded-lg border border-border bg-white px-3 py-2 text-sm text-text placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20";
 
-const labelClassName = "mb-1.5 block text-sm font-medium text-slate-300";
+const labelClassName = "mb-1.5 block text-sm font-medium text-text";
 
 function FieldGroup({
 	label,
@@ -64,15 +64,15 @@ function ExperienceFields({
 	const fieldId = useId();
 
 	return (
-		<div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
+		<div className="rounded-xl border border-border bg-surface/50 p-4">
 			<div className="mb-4 flex items-center justify-between gap-3">
-				<h3 className="text-sm font-semibold text-white">
+				<h3 className="text-sm font-semibold text-text">
 					Experience {index + 1}
 				</h3>
 				<button
 					type="button"
 					onClick={() => onRemove(index)}
-					className="inline-flex items-center gap-1 text-sm text-red-400 hover:text-red-300"
+					className="inline-flex items-center gap-1 text-sm text-red-600 hover:text-red-500"
 				>
 					<Trash2 className="size-4" aria-hidden />
 					Remove
@@ -170,15 +170,15 @@ function EducationFields({
 	onRemove: (index: number) => void;
 }) {
 	return (
-		<div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
+		<div className="rounded-xl border border-border bg-surface/50 p-4">
 			<div className="mb-4 flex items-center justify-between gap-3">
-				<h3 className="text-sm font-semibold text-white">
+				<h3 className="text-sm font-semibold text-text">
 					Education {index + 1}
 				</h3>
 				<button
 					type="button"
 					onClick={() => onRemove(index)}
-					className="inline-flex items-center gap-1 text-sm text-red-400 hover:text-red-300"
+					className="inline-flex items-center gap-1 text-sm text-red-600 hover:text-red-500"
 				>
 					<Trash2 className="size-4" aria-hidden />
 					Remove
@@ -253,15 +253,15 @@ function CertificationFields({
 	onRemove: (index: number) => void;
 }) {
 	return (
-		<div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
+		<div className="rounded-xl border border-border bg-surface/50 p-4">
 			<div className="mb-4 flex items-center justify-between gap-3">
-				<h3 className="text-sm font-semibold text-white">
+				<h3 className="text-sm font-semibold text-text">
 					Certification {index + 1}
 				</h3>
 				<button
 					type="button"
 					onClick={() => onRemove(index)}
-					className="inline-flex items-center gap-1 text-sm text-red-400 hover:text-red-300"
+					className="inline-flex items-center gap-1 text-sm text-red-600 hover:text-red-500"
 				>
 					<Trash2 className="size-4" aria-hidden />
 					Remove
@@ -378,8 +378,8 @@ export function ProfileReviewForm({
 				void handleSave();
 			}}
 		>
-			<section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
-				<h2 className="text-lg font-semibold text-white">Basic info</h2>
+			<section className="rounded-2xl border border-border bg-card p-8 shadow-sm">
+				<h2 className="text-lg font-semibold text-text">Basic info</h2>
 				<div className="mt-6 grid gap-4 sm:grid-cols-2">
 					<FieldGroup label="Name" htmlFor={`${basicInfoId}-name`}>
 						<input
@@ -424,9 +424,9 @@ export function ProfileReviewForm({
 				</div>
 			</section>
 
-			<section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
+			<section className="rounded-2xl border border-border bg-card p-8 shadow-sm">
 				<div className="flex items-center justify-between gap-4">
-					<h2 className="text-lg font-semibold text-white">Experience</h2>
+					<h2 className="text-lg font-semibold text-text">Experience</h2>
 					<button
 						type="button"
 						onClick={() => {
@@ -435,7 +435,7 @@ export function ProfileReviewForm({
 								experiences: [...profile.experiences, emptyExperience()],
 							});
 						}}
-						className="inline-flex items-center gap-1 text-sm font-medium text-sky-400 hover:text-sky-300"
+						className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-dark"
 					>
 						<Plus className="size-4" aria-hidden />
 						Add experience
@@ -443,7 +443,9 @@ export function ProfileReviewForm({
 				</div>
 				<div className="mt-6 space-y-4">
 					{profile.experiences.length === 0 ? (
-						<p className="text-sm text-slate-400">No experience entries yet.</p>
+						<p className="text-sm text-text-muted">
+							No experience entries yet.
+						</p>
 					) : (
 						profile.experiences.map((experience, index) => (
 							<ExperienceFields
@@ -473,9 +475,9 @@ export function ProfileReviewForm({
 				</div>
 			</section>
 
-			<section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
+			<section className="rounded-2xl border border-border bg-card p-8 shadow-sm">
 				<div className="flex items-center justify-between gap-4">
-					<h2 className="text-lg font-semibold text-white">Education</h2>
+					<h2 className="text-lg font-semibold text-text">Education</h2>
 					<button
 						type="button"
 						onClick={() => {
@@ -484,7 +486,7 @@ export function ProfileReviewForm({
 								education: [...profile.education, emptyEducation()],
 							});
 						}}
-						className="inline-flex items-center gap-1 text-sm font-medium text-sky-400 hover:text-sky-300"
+						className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-dark"
 					>
 						<Plus className="size-4" aria-hidden />
 						Add education
@@ -492,7 +494,7 @@ export function ProfileReviewForm({
 				</div>
 				<div className="mt-6 space-y-4">
 					{profile.education.length === 0 ? (
-						<p className="text-sm text-slate-400">No education entries yet.</p>
+						<p className="text-sm text-text-muted">No education entries yet.</p>
 					) : (
 						profile.education.map((education, index) => (
 							<EducationFields
@@ -522,9 +524,9 @@ export function ProfileReviewForm({
 				</div>
 			</section>
 
-			<section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
-				<h2 className="text-lg font-semibold text-white">Skills</h2>
-				<p className="mt-1 text-sm text-slate-400">
+			<section className="rounded-2xl border border-border bg-card p-8 shadow-sm">
+				<h2 className="text-lg font-semibold text-text">Skills</h2>
+				<p className="mt-1 text-sm text-text-muted">
 					Enter skills separated by commas.
 				</p>
 				<div className="mt-4">
@@ -541,11 +543,11 @@ export function ProfileReviewForm({
 				</div>
 			</section>
 
-			<section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8">
+			<section className="rounded-2xl border border-border bg-card p-8 shadow-sm">
 				<div className="flex items-center justify-between gap-4">
 					<div>
-						<h2 className="text-lg font-semibold text-white">Certifications</h2>
-						<p className="mt-1 text-sm text-slate-400">Optional</p>
+						<h2 className="text-lg font-semibold text-text">Certifications</h2>
+						<p className="mt-1 text-sm text-text-muted">Optional</p>
 					</div>
 					<button
 						type="button"
@@ -555,7 +557,7 @@ export function ProfileReviewForm({
 								certifications: [...certifications, emptyCertification()],
 							});
 						}}
-						className="inline-flex items-center gap-1 text-sm font-medium text-sky-400 hover:text-sky-300"
+						className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-dark"
 					>
 						<Plus className="size-4" aria-hidden />
 						Add certification
@@ -563,7 +565,7 @@ export function ProfileReviewForm({
 				</div>
 				<div className="mt-6 space-y-4">
 					{certifications.length === 0 ? (
-						<p className="text-sm text-slate-400">No certifications added.</p>
+						<p className="text-sm text-text-muted">No certifications added.</p>
 					) : (
 						certifications.map((certification, index) => (
 							<CertificationFields
@@ -598,7 +600,7 @@ export function ProfileReviewForm({
 					<button
 						type="submit"
 						disabled={saveState === "saving"}
-						className="inline-flex items-center gap-2 rounded-lg bg-sky-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-60"
+						className="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
 					>
 						{saveState === "saving" ? (
 							<Loader2 className="size-4 animate-spin" aria-hidden />
@@ -607,14 +609,14 @@ export function ProfileReviewForm({
 					</button>
 
 					{saveState === "success" ? (
-						<p className="flex items-center gap-2 text-sm text-emerald-400">
+						<p className="flex items-center gap-2 text-sm text-emerald-600">
 							<CheckCircle2 className="size-4" aria-hidden />
 							Profile saved successfully.
 						</p>
 					) : null}
 
 					{saveState === "error" && saveError ? (
-						<p className="flex items-center gap-2 text-sm text-red-400">
+						<p className="flex items-center gap-2 text-sm text-red-600">
 							<AlertCircle className="size-4" aria-hidden />
 							{saveError}
 						</p>
@@ -625,9 +627,9 @@ export function ProfileReviewForm({
 					type="button"
 					disabled
 					title="Coming in Phase 2"
-					className="rounded-lg border border-slate-700 px-5 py-2.5 text-sm font-medium text-slate-500"
+					className="rounded-full border border-border px-5 py-2.5 text-sm font-medium text-text-muted"
 				>
-					Continue to career goal — Coming in Phase 2
+					Run SWOT analysis — Coming in Phase 2
 				</button>
 			</div>
 		</form>

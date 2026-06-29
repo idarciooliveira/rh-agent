@@ -1,17 +1,53 @@
-
 @import "tailwindcss";
 
+@theme {
+	--color-surface: #f0f6ff;
+	--color-card: #ffffff;
+	--color-primary: #2d5bff;
+	--color-primary-dark: #1e40af;
+	--color-text: #1e293b;
+	--color-text-muted: #6b7280;
+	--color-border: #e5e7eb;
+	--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html,
 body,
 #app {
-  min-height: 100%;
+	min-height: 100%;
 }
 
 body {
-  margin: 0;
+	margin: 0;
+	font-family: var(--font-sans);
 }
 
+.page-gradient {
+	background: radial-gradient(
+		ellipse 120% 80% at 50% 0%,
+		var(--color-surface) 0%,
+		#ffffff 65%
+	);
+}
+
+.btn-primary {
+	background: linear-gradient(
+		180deg,
+		var(--color-primary) 0%,
+		var(--color-primary-dark) 100%
+	);
+}
+
+@keyframes spin-arc {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.spinner-arc {
+	animation: spin-arc 1s linear infinite;
+}
