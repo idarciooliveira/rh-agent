@@ -10,6 +10,7 @@
     "dev:mock": "AI_MOCK_MODE=true AI_MOCK_DELAY_MS=1500 vite dev --port 3000",
     "generate-routes": "tsr generate",
     "build": "vite build",
+    "start": "node .output/server/index.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:phase1": "node scripts/phase1-e2e-proof.mjs",
@@ -17,6 +18,7 @@
     "capture:mock": "node scripts/capture-mock-flow.mjs",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
+    "db:deploy": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:pull": "drizzle-kit pull",
     "db:studio": "drizzle-kit studio",
@@ -38,6 +40,7 @@
     "better-sqlite3": "^12.11.1",
     "drizzle-kit": "^0.31.9",
     "drizzle-orm": "^0.45.1",
+    "nitro": "latest",
     "lucide-react": "^0.545.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -65,11 +68,7 @@
     "vite": "^8.0.0",
     "vitest": "^4.1.5"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "better-sqlite3",
-      "esbuild",
-      "lightningcss"
-    ]
+  "engines": {
+    "node": ">=22.12.0"
   }
 }

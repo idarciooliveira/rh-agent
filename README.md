@@ -48,7 +48,7 @@ Mock mode returns simulated profile and analysis data derived from your PDF text
 | 1 | PDF upload + profile parsing | ✅ Complete |
 | 2 | Career goal + SWOT analysis + results dashboard | ✅ Complete |
 | 3 | LinkedIn-style recommendations preview (modal) | ✅ Complete |
-| 4 | Polish + Vercel deploy | In progress |
+| 4 | Polish + Railway Docker deploy | In progress |
 
 See [Implementation Roadmap](docs/ROADMAP.md) for task details and post-MVP plans.
 
@@ -71,6 +71,7 @@ See [`.env.example`](.env.example):
 pnpm dev          # Start dev server (port 3000)
 pnpm dev:mock     # Dev server with AI mock mode enabled
 pnpm build        # Production build
+pnpm start        # Run Nitro production server (after build)
 pnpm db:push      # Push schema to SQLite
 pnpm db:generate  # Generate Drizzle migrations
 pnpm db:studio    # Open Drizzle Studio
@@ -78,6 +79,39 @@ pnpm check        # Biome lint + format
 pnpm test:phase1:mock  # Phase 1 E2E proof with mock AI (requires dev server)
 pnpm capture:mock      # Capture mock-flow screenshots/artifacts (requires dev server)
 ```
+
+## Production (Docker / Railway)
+
+The app ships with a multi-stage [Dockerfile](Dockerfile) and [docker-compose.yml](docker-compose.yml) for local production smoke tests.
+
+### Local Docker smoke test
+
+```bash
+pnpm build
+docker compose build
+AI_GATEWAY_API_KEY=your-key docker compose up
+```
+
+Open [http://localhost:3000](http://localhost:3000). SQLite persists in the `app-data` Docker volume across restarts.
+
+### Railway deployment
+
+1. Push the repo to GitHub and connect it in [Railway](https://railway.com).
+2. Railway auto-detects the Dockerfile (see [railway.toml](railway.toml)).
+3. Add a **persistent volume** mounted at `/app/data` (dashboard or `railway volume add --mount-path /app/data`).
+4. Set environment variables:
+
+| Variable | Value |
+|----------|-------|
+| `DATABASE_URL` | `/app/data/app.db` |
+| `AI_GATEWAY_API_KEY` | Your Vercel AI Gateway key (required) |
+
+`PORT` and `NODE_ENV` are set by Railway automatically. Mock AI (`AI_MOCK_MODE`) is disabled in production.
+
+**Notes:**
+- SQLite requires a single replica — do not scale horizontally with a volume attached.
+- If you hit volume permission errors, set `RAILWAY_RUN_UID=0` on the service.
+- Container startup runs `pnpm db:deploy` (Drizzle migrations) before the Nitro server starts.
 
 ## LinkedIn PDF Export
 

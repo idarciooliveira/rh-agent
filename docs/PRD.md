@@ -105,7 +105,7 @@
 | PDF parse latency | < 15s (incl. LLM) |
 | SWOT generation latency | < 30s |
 | Privacy | Do not store raw PDF file; store extracted text + structured JSON only |
-| Deployment | Vercel, Node.js runtime |
+| Deployment | Railway (Docker), Node.js runtime |
 | Browser support | Latest Chrome, Firefox, Safari, Edge |
 
 ## 7. Success Metrics (MVP)

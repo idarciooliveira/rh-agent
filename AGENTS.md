@@ -4,7 +4,7 @@ AI career coach: upload LinkedIn PDF → parse profile → SWOT analysis + recom
 
 **Stack:** TanStack Start, Tailwind v4, Drizzle + SQLite, Vercel AI SDK (`generateObject`), unpdf, Zod, Biome.
 
-**Status:** Phases 0–3 done. **Phase 4 in progress** — polish + Vercel deploy. See `docs/ROADMAP.md`.
+**Status:** Phases 0–3 done. **Phase 4 in progress** — polish + Railway Docker deploy. See `docs/ROADMAP.md`.
 
 ---
 
@@ -91,7 +91,7 @@ Env: copy `.env.example` → `.env.local`. Never commit secrets.
 
 - [ ] Rate limit `/api/upload`, `/api/parse`, `/api/analyze`
 - [ ] Route-level error boundaries
-- [ ] Vercel deploy (Node runtime for unpdf)
+- [ ] Railway Docker deploy (Node runtime for unpdf + SQLite volume)
 - [ ] Full-flow E2E script
 - [ ] QA with real LinkedIn PDFs
 

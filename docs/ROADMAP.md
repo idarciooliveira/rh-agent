@@ -109,7 +109,7 @@ The shipped MVP streamlined a few early design choices:
 
 ## Phase 4 — Polish & Deploy
 
-**Goal:** Production-ready MVP on Vercel.
+**Goal:** Production-ready MVP on Railway (Docker).
 
 ### Tasks
 
@@ -118,13 +118,13 @@ The shipped MVP streamlined a few early design choices:
 - [x] Loading states (analysis pipeline UI)
 - [x] Responsive layout pass (homepage + results)
 - [ ] Basic rate limiting on API routes
-- [ ] Vercel deployment (Node.js runtime for `unpdf`)
+- [ ] Railway Docker deployment (Node.js runtime for `unpdf`, SQLite volume at `/app/data`)
 - [ ] Manual QA with real LinkedIn PDFs
 - [ ] Full-flow E2E proof script (Phase 2/3)
 
 ### Exit criteria
 
-- [ ] Deployed to Vercel
+- [ ] Deployed to Railway via Docker
 - [ ] All P0 user stories pass QA
 
 ---
