@@ -20,7 +20,10 @@ describe("parseLinkedInUsername", () => {
 		"ab",
 		"jane doe",
 		"https://example.com/in/janedoe",
+		"https://example.com/?next=linkedin.com/in/janedoe",
+		"https://linkedin.com.evil.com/in/janedoe",
 		"linkedin.com/company/acme",
+		"linkedin.com/in/janedoe/extra",
 	])("rejects %j", (input) => {
 		expect(parseLinkedInUsername(input)).toBeNull();
 	});

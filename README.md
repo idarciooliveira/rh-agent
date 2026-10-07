@@ -108,6 +108,7 @@ Open [http://localhost:3000](http://localhost:3000). SQLite persists in the `app
 |----------|-------|
 | `DATABASE_URL` | `/app/data/app.db` |
 | `AI_GATEWAY_API_KEY` | Your Vercel AI Gateway key (required) |
+| `APIFY_TOKEN` | Your Apify token, used to fetch LinkedIn profiles by username (required for lookups) |
 
 `PORT` and `NODE_ENV` are set by Railway automatically. Mock AI (`AI_MOCK_MODE`) is disabled in production.
 

@@ -12,7 +12,7 @@ import { LinkedInFetchError } from "#/lib/apify/linkedin-error";
 import { mapApifyProfile } from "#/lib/apify/map-linkedin-profile";
 import { mockFetchLinkedInProfile } from "#/lib/apify/mock-fetch-linkedin-profile";
 import { linkedInUsernameSchema } from "#/lib/linkedin-username";
-import { isRateLimited } from "#/lib/rate-limit";
+import { consumeRateLimit } from "#/lib/rate-limit";
 import { getRequiredSessionId } from "#/server/session-utils";
 
 const RATE_LIMIT = 5;
@@ -66,10 +66,13 @@ export const Route = createFileRoute("/api/fetch-profile")({
 						.get("x-forwarded-for")
 						?.split(",")[0]
 						?.trim();
-					if (
-						isRateLimited(`session:${sessionId}`, RATE_LIMIT, RATE_WINDOW_MS) ||
-						(ip && isRateLimited(`ip:${ip}`, RATE_LIMIT * 4, RATE_WINDOW_MS))
-					) {
+					const rateLimitRules = [
+						{ key: `session:${sessionId}`, limit: RATE_LIMIT },
+					];
+					if (ip) {
+						rateLimitRules.push({ key: `ip:${ip}`, limit: RATE_LIMIT * 4 });
+					}
+					if (consumeRateLimit(rateLimitRules, RATE_WINDOW_MS)) {
 						return jsonError(
 							"Too many profile lookups. Please try again in an hour.",
 							429,
