@@ -1,3 +1,3 @@
-export const AI_MODEL = "openai/gpt-5.4-mini";
+export const AI_MODEL = "google/gemini-2.5-flash-lite";
 
-// Structured output goes through generateStructuredObject() (tool mode).
+// Structured output goes through generateStructuredObject() (JSON mode, schema in the prompt).

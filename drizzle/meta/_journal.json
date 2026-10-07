@@ -8,6 +8,13 @@
       "when": 1782756538153,
       "tag": "0000_previous_cobalt_man",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1791383101911,
+      "tag": "0001_optimal_maddog",
+      "breakpoints": true
     }
   ]
 }

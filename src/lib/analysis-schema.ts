@@ -6,10 +6,10 @@ export const swotItemSchema = z.object({
 });
 
 export const swotQuadrantsSchema = z.object({
-	strengths: z.array(swotItemSchema).min(2).max(5),
-	weaknesses: z.array(swotItemSchema).min(2).max(5),
-	opportunities: z.array(swotItemSchema).min(2).max(5),
-	threats: z.array(swotItemSchema).min(2).max(5),
+	strengths: z.array(swotItemSchema).min(1).max(5),
+	weaknesses: z.array(swotItemSchema).min(1).max(5),
+	opportunities: z.array(swotItemSchema).min(1).max(5),
+	threats: z.array(swotItemSchema).min(1).max(5),
 });
 
 export const goalAlignmentSchema = z.object({

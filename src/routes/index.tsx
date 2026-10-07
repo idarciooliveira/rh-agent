@@ -25,7 +25,7 @@ function Home() {
 						<span className="text-primary">SWOT Analyzer</span>
 					</h1>
 					<p className="mt-3 text-sm leading-relaxed text-text-muted sm:text-base">
-						Upload your LinkedIn profile PDF and get an AI-powered strategic
+						Enter your LinkedIn username and get an AI-powered strategic
 						breakdown tailored to your career goals.
 					</p>
 				</header>

@@ -7,14 +7,12 @@ import {
 	useState,
 } from "react";
 import { AnalysisLoadingScreen } from "#/components/AnalysisLoadingScreen";
-import { PdfUploadDropzone } from "#/components/PdfUploadDropzone";
 import { readApiError } from "#/lib/api-client";
 import { AlertCircleIcon } from "#/lib/icons";
-
-const MAX_PDF_SIZE_BYTES = 5 * 1024 * 1024;
+import { parseLinkedInUsername } from "#/lib/linkedin-username";
 
 const PIPELINE_MESSAGES = [
-	"Uploading your profile…",
+	"Fetching your LinkedIn profile…",
 	"Reading your profile…",
 	"Identifying key strengths…",
 	"Mapping opportunities…",
@@ -25,11 +23,7 @@ const PIPELINE_MESSAGES = [
 
 type FormPhase = "idle" | "loading" | "error";
 
-type UploadResponse = {
-	snapshotId: string;
-};
-
-type ParseResponse = {
+type FetchProfileResponse = {
 	snapshotId: string;
 };
 
@@ -41,20 +35,16 @@ type HomeAnalysisFormProps = {
 	aiMode: string;
 };
 
-function isPdf(file: File): boolean {
-	return (
-		file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")
-	);
-}
-
 export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 	const navigate = useNavigate();
-	const [selectedFile, setSelectedFile] = useState<File | null>(null);
+	const [username, setUsername] = useState("");
 	const [careerGoal, setCareerGoal] = useState("");
 	const [phase, setPhase] = useState<FormPhase>("idle");
 	const [error, setError] = useState<string | null>(null);
-	const [fileError, setFileError] = useState<string | null>(null);
-	const [statusMessage, setStatusMessage] = useState(PIPELINE_MESSAGES[0]);
+	const [usernameError, setUsernameError] = useState<string | null>(null);
+	const [statusMessage, setStatusMessage] = useState<string>(
+		PIPELINE_MESSAGES[0],
+	);
 	const [progress, setProgress] = useState(0);
 	const messageIndexRef = useRef(0);
 
@@ -91,7 +81,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 	}, [phase]);
 
 	const runPipeline = useCallback(
-		async (file: File, goal: string) => {
+		async (linkedinUsername: string, goal: string) => {
 			setPhase("loading");
 			setError(null);
 			setStatusMessage(PIPELINE_MESSAGES[0]);
@@ -99,41 +89,22 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 			messageIndexRef.current = 0;
 
 			try {
-				const formData = new FormData();
-				formData.append("file", file);
-
-				const uploadResponse = await fetch("/api/upload", {
-					method: "POST",
-					body: formData,
-				});
-
-				if (!uploadResponse.ok) {
-					const message = await readApiError(
-						uploadResponse,
-						"Upload failed. Please try again.",
-					);
-					throw new Error(message);
-				}
-
-				const uploadData = (await uploadResponse.json()) as UploadResponse;
-				setProgress(30);
-				setStatusMessage("Reading your profile…");
-
-				const parseResponse = await fetch("/api/parse", {
+				const profileResponse = await fetch("/api/fetch-profile", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ snapshotId: uploadData.snapshotId }),
+					body: JSON.stringify({ username: linkedinUsername }),
 				});
 
-				if (!parseResponse.ok) {
+				if (!profileResponse.ok) {
 					const message = await readApiError(
-						parseResponse,
-						"Could not parse your PDF. Make sure it is a LinkedIn profile export.",
+						profileResponse,
+						"Could not fetch your LinkedIn profile. Please try again.",
 					);
 					throw new Error(message);
 				}
 
-				(await parseResponse.json()) as ParseResponse;
+				const profileData =
+					(await profileResponse.json()) as FetchProfileResponse;
 				setProgress(55);
 				setStatusMessage("Analyzing strengths and weaknesses…");
 
@@ -141,7 +112,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
-						snapshotId: uploadData.snapshotId,
+						snapshotId: profileData.snapshotId,
 						careerGoal: goal,
 					}),
 				});
@@ -176,23 +147,14 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		setFileError(null);
+		setUsernameError(null);
 		setError(null);
 
-		if (!selectedFile) {
-			setFileError("Please upload your LinkedIn profile PDF.");
-			return;
-		}
-
-		if (!isPdf(selectedFile)) {
-			setFileError(
-				"Only PDF files are accepted. Export your profile from LinkedIn as a PDF.",
+		const linkedinUsername = parseLinkedInUsername(username);
+		if (!linkedinUsername) {
+			setUsernameError(
+				"Enter your LinkedIn username or profile URL, like linkedin.com/in/janedoe",
 			);
-			return;
-		}
-
-		if (selectedFile.size > MAX_PDF_SIZE_BYTES) {
-			setFileError("File is too large. Maximum size is 5 MB.");
 			return;
 		}
 
@@ -207,7 +169,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 			return;
 		}
 
-		void runPipeline(selectedFile, trimmedGoal);
+		void runPipeline(linkedinUsername, trimmedGoal);
 	};
 
 	if (phase === "loading") {
@@ -229,20 +191,34 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 
 			<div>
 				<label
-					htmlFor="pdf-upload-input"
+					htmlFor="linkedin-username"
 					className="mb-2 block text-sm font-semibold text-text"
 				>
-					LinkedIn Profile PDF <span className="text-primary">*</span>
+					LinkedIn Username <span className="text-primary">*</span>
 				</label>
-				<PdfUploadDropzone
-					file={selectedFile}
-					onFileChange={(file) => {
-						setSelectedFile(file);
-						setFileError(null);
-					}}
-					disabled={false}
-					error={fileError}
-				/>
+				<div className="flex items-center rounded-xl border border-border bg-white focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
+					<span className="pl-4 text-sm text-text-muted">linkedin.com/in/</span>
+					<input
+						id="linkedin-username"
+						type="text"
+						value={username}
+						onChange={(event) => {
+							setUsername(event.target.value);
+							setUsernameError(null);
+						}}
+						autoComplete="off"
+						autoCapitalize="none"
+						spellCheck={false}
+						placeholder="janedoe"
+						className="w-full bg-transparent px-1 py-3 pr-4 text-sm text-text placeholder:text-text-muted focus:outline-none"
+					/>
+				</div>
+				<p className="mt-2 text-xs text-text-muted">
+					Your profile must be public so we can read it.
+				</p>
+				{usernameError ? (
+					<p className="mt-2 text-sm text-red-700">{usernameError}</p>
+				) : null}
 			</div>
 
 			<div>

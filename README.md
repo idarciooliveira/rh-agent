@@ -59,7 +59,10 @@ See [`.env.example`](.env.example):
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `DATABASE_URL` | No | SQLite path (default: `./data/app.db`) |
-| `AI_GATEWAY_API_KEY` | Live mode | Vercel AI Gateway key for PDF parsing and analysis |
+| `AI_GATEWAY_API_KEY` | Live mode | Vercel AI Gateway key for analysis |
+| `APIFY_TOKEN` | Live mode | Apify token used to fetch LinkedIn profiles by username |
+| `APIFY_LINKEDIN_ACTOR_ID` | No | Apify actor to use (default: `harvestapi/linkedin-profile-scraper`) |
+| `APIFY_MAX_COST_USD` | No | Spend cap per profile fetch (default: 0.05, real cost is about 0.004) |
 | `AI_MOCK_MODE` | No | Set to `true` to simulate AI responses without API calls (dev/test) |
 | `AI_MOCK_DELAY_MS` | No | Mock parsing delay in ms (default: 1500) |
 | `MAX_PDF_SIZE_MB` | No | PDF upload limit (default: 5) |
@@ -113,13 +116,9 @@ Open [http://localhost:3000](http://localhost:3000). SQLite persists in the `app
 - If you hit volume permission errors, set `RAILWAY_RUN_UID=0` on the service.
 - Container startup runs `pnpm db:deploy` (Drizzle migrations) before the Nitro server starts.
 
-## LinkedIn PDF Export
+## LinkedIn username
 
-On LinkedIn desktop:
-
-1. Go to your **Profile**
-2. Click **More** → **Save to PDF**
-3. Upload the file on the homepage
+Enter your LinkedIn username (or profile URL) on the homepage. The profile has to be public. The app reads it through Apify, so each lookup costs about $0.004 and is limited to 5 per hour per session.
 
 ## Tech Stack
 

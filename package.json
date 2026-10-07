@@ -14,6 +14,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:phase1": "node scripts/phase1-e2e-proof.mjs",
+    "test:username:mock": "AI_MOCK_MODE=true AI_MOCK_DELAY_MS=0 node scripts/username-flow-e2e.mjs",
     "test:phase1:mock": "AI_MOCK_MODE=true AI_MOCK_DELAY_MS=0 node scripts/phase1-e2e-proof.mjs",
     "capture:mock": "node scripts/capture-mock-flow.mjs",
     "db:generate": "drizzle-kit generate",
