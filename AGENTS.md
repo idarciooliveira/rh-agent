@@ -1,6 +1,6 @@
 # LinkedIn Coach Agent — agent guide
 
-AI career coach: upload LinkedIn PDF → parse profile → SWOT analysis + recommendations.
+AI career coach: LinkedIn username → Apify profile fetch → SWOT analysis + recommendations.
 
 **Stack:** TanStack Start, Tailwind v4, Drizzle + SQLite, Vercel AI SDK (`generateObject`), unpdf, Zod, Biome.
 
@@ -23,9 +23,9 @@ AI career coach: upload LinkedIn PDF → parse profile → SWOT analysis + recom
 ```
 src/
   routes/           # pages + API (file-based)
-    index.tsx       # upload + career goal form
+    index.tsx       # username + career goal form
     results.$analysisId.tsx
-    api/upload|parse|analyze|profile.ts
+    api/fetch-profile|analyze|profile.ts (upload|parse are legacy PDF routes)
   components/       # UI (results/* for dashboard)
   lib/
     ai/             # parse-profile, analyze-profile, mock-* , fixtures/
@@ -44,8 +44,7 @@ Import alias: `#/*` → `./src/*`.
 ## User flow (don't break)
 
 ```
-POST /api/upload  → snapshotId
-POST /api/parse   → structured profile saved
+POST /api/fetch-profile → Apify fetch + map, structured profile saved, snapshotId
 POST /api/analyze → analysisId
 GET  /results/:analysisId → SWOT dashboard + recommendations modal
 ```
@@ -89,7 +88,8 @@ Env: copy `.env.example` → `.env.local`. Never commit secrets.
 
 ## Phase 4 backlog (quick wins first)
 
-- [ ] Rate limit `/api/upload`, `/api/parse`, `/api/analyze`
+- [x] Rate limit `/api/fetch-profile` (in-memory, 5/hour per session)
+- [ ] Rate limit `/api/analyze`
 - [ ] Route-level error boundaries
 - [ ] Railway Docker deploy (Node runtime for unpdf + SQLite volume)
 - [ ] Full-flow E2E script

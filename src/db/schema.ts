@@ -13,6 +13,8 @@ export const profileSnapshots = sqliteTable("profile_snapshots", {
 		.notNull()
 		.references(() => sessions.id),
 	rawPdfText: text("raw_pdf_text"),
+	linkedinUsername: text("linkedin_username"),
+	rawSourceJson: text("raw_source_json"),
 	normalizedProfileJson: text("normalized_profile_json"),
 	updatedAt: integer("updated_at", { mode: "timestamp" })
 		.notNull()

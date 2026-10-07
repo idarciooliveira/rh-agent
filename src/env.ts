@@ -5,6 +5,11 @@ export const env = createEnv({
 	server: {
 		DATABASE_URL: z.string().default("./data/app.db"),
 		AI_GATEWAY_API_KEY: z.string().optional(),
+		APIFY_TOKEN: z.string().optional(),
+		APIFY_LINKEDIN_ACTOR_ID: z
+			.string()
+			.default("harvestapi/linkedin-profile-scraper"),
+		APIFY_MAX_COST_USD: z.coerce.number().positive().default(0.05),
 		AI_MOCK_MODE: z
 			.enum(["true", "false"])
 			.default("false")
@@ -24,6 +29,9 @@ export const env = createEnv({
 	runtimeEnv: {
 		DATABASE_URL: process.env.DATABASE_URL,
 		AI_GATEWAY_API_KEY: process.env.AI_GATEWAY_API_KEY,
+		APIFY_TOKEN: process.env.APIFY_TOKEN,
+		APIFY_LINKEDIN_ACTOR_ID: process.env.APIFY_LINKEDIN_ACTOR_ID,
+		APIFY_MAX_COST_USD: process.env.APIFY_MAX_COST_USD,
 		AI_MOCK_MODE: process.env.AI_MOCK_MODE,
 		AI_MOCK_DELAY_MS: process.env.AI_MOCK_DELAY_MS,
 		MAX_PDF_SIZE_MB: process.env.MAX_PDF_SIZE_MB,

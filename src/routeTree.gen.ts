@@ -14,6 +14,7 @@ import { Route as ResultsAnalysisIdRouteImport } from './routes/results.$analysi
 import { Route as ApiUploadRouteImport } from './routes/api/upload'
 import { Route as ApiProfileRouteImport } from './routes/api/profile'
 import { Route as ApiParseRouteImport } from './routes/api/parse'
+import { Route as ApiFetchProfileRouteImport } from './routes/api/fetch-profile'
 import { Route as ApiAnalyzeRouteImport } from './routes/api/analyze'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +42,11 @@ const ApiParseRoute = ApiParseRouteImport.update({
   path: '/api/parse',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiFetchProfileRoute = ApiFetchProfileRouteImport.update({
+  id: '/api/fetch-profile',
+  path: '/api/fetch-profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAnalyzeRoute = ApiAnalyzeRouteImport.update({
   id: '/api/analyze',
   path: '/api/analyze',
@@ -50,6 +56,7 @@ const ApiAnalyzeRoute = ApiAnalyzeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/analyze': typeof ApiAnalyzeRoute
+  '/api/fetch-profile': typeof ApiFetchProfileRoute
   '/api/parse': typeof ApiParseRoute
   '/api/profile': typeof ApiProfileRoute
   '/api/upload': typeof ApiUploadRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/analyze': typeof ApiAnalyzeRoute
+  '/api/fetch-profile': typeof ApiFetchProfileRoute
   '/api/parse': typeof ApiParseRoute
   '/api/profile': typeof ApiProfileRoute
   '/api/upload': typeof ApiUploadRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/analyze': typeof ApiAnalyzeRoute
+  '/api/fetch-profile': typeof ApiFetchProfileRoute
   '/api/parse': typeof ApiParseRoute
   '/api/profile': typeof ApiProfileRoute
   '/api/upload': typeof ApiUploadRoute
@@ -77,6 +86,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/api/analyze'
+    | '/api/fetch-profile'
     | '/api/parse'
     | '/api/profile'
     | '/api/upload'
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/api/analyze'
+    | '/api/fetch-profile'
     | '/api/parse'
     | '/api/profile'
     | '/api/upload'
@@ -93,6 +104,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/api/analyze'
+    | '/api/fetch-profile'
     | '/api/parse'
     | '/api/profile'
     | '/api/upload'
@@ -102,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiAnalyzeRoute: typeof ApiAnalyzeRoute
+  ApiFetchProfileRoute: typeof ApiFetchProfileRoute
   ApiParseRoute: typeof ApiParseRoute
   ApiProfileRoute: typeof ApiProfileRoute
   ApiUploadRoute: typeof ApiUploadRoute
@@ -145,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiParseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/fetch-profile': {
+      id: '/api/fetch-profile'
+      path: '/api/fetch-profile'
+      fullPath: '/api/fetch-profile'
+      preLoaderRoute: typeof ApiFetchProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/analyze': {
       id: '/api/analyze'
       path: '/api/analyze'
@@ -158,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiAnalyzeRoute: ApiAnalyzeRoute,
+  ApiFetchProfileRoute: ApiFetchProfileRoute,
   ApiParseRoute: ApiParseRoute,
   ApiProfileRoute: ApiProfileRoute,
   ApiUploadRoute: ApiUploadRoute,

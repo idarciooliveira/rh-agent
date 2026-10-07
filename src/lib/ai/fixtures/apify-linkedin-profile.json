@@ -1,0 +1,901 @@
+{
+	"id": "ACoAACtjyCEB3FJJp1CvFnxuMJnOzptKD93LVWM",
+	"publicIdentifier": "idarciooliveira",
+	"linkedinUrl": "https://www.linkedin.com/in/idarciooliveira",
+	"firstName": "Idárcio",
+	"lastName": "Oliveira",
+	"headline": "Software Engineer @ Bulir | Backend & Mobile Developer | Mentorship | Cloud | AWS | Design System | AI & Automation",
+	"openToWork": false,
+	"hiring": false,
+	"premium": false,
+	"influencer": false,
+	"memorialized": false,
+	"creator": true,
+	"location": {
+		"linkedinText": "Luanda, Luanda Province, Angola",
+		"countryCode": "AO",
+		"parsed": {
+			"text": "Luanda, Angola",
+			"countryCode": "AO",
+			"regionCode": null,
+			"country": "Angola",
+			"countryFull": "Angola",
+			"state": "Luanda Province",
+			"city": "Luanda"
+		}
+	},
+	"objectUrn": "727959585",
+	"registeredAt": "2019-04-10T21:29:21.633Z",
+	"topSkills": [
+		"React Native",
+		"Amazon Web Services",
+		"React.js",
+		"Node.js",
+		".NET Framework"
+	],
+	"connectionsCount": 1302,
+	"followerCount": 1397,
+	"verified": true,
+	"about": "I am a Software Engineer with experience building and shipping production applications across healthcare, e-commerce and IT. Currently, I’m helping build Bulir.com with the mission of establishing it as the leading service marketplace in Angola.\n\nMy strength is backend engineering: designing APIs, integrating services, and delivering reliable features end-to-end—from requirements and implementation to deployment and monitoring. I work comfortably across cloud infrastructure on AWS (EC2, IAM, CloudFormation) and I care about production quality, observability, and maintainability.\n\nCore themes in my work: pragmatic system design, clean and testable code, continuous delivery, and using data/monitoring to improve reliability and performance.",
+	"industry": {
+		"id": 4,
+		"name": "Software Development"
+	},
+	"currentPosition": [
+		{
+			"position": "Software Engineer",
+			"location": "Luanda, Luanda Province, Angola",
+			"employmentType": null,
+			"workplaceType": "On-site",
+			"companyName": "Bulir Technology",
+			"companyUniversalName": "bulir-tecnology",
+			"companyLinkedinUrl": "https://www.linkedin.com/company/bulir-tecnology/",
+			"companyId": "102431174",
+			"duration": "1 yr 11 mos",
+			"description": "- As Tech Lead, i managed technical execution, delivery, code quality, and engineering practices for the development team behind Bulir.com, a service marketplace (10K+ users in 2 month).\n- Developed and maintained core backend services with a focus on reliability, maintainability, security and rapid product iteration.\n- Built APIs and integrations for onboarding providers, service discovery, bookings, payments, in-app audio calls, wallets and third-party payment providers.\n- Implemented real-time chat and notification systems to facilitate communication between clients and service providers.\n- Improved production readiness with monitoring, logging, metrics and tracing for easier diagnosis and recovery from incidents.",
+			"skills": null,
+			"startDate": {
+				"month": "Dec",
+				"year": 2024,
+				"text": "Dec 2024"
+			},
+			"endDate": {
+				"text": "Present"
+			}
+		}
+	],
+	"profileTopEducation": [
+		{
+			"schoolName": "Instituto Superior Politécnico Independente",
+			"description": null,
+			"insights": "Administração de redes, Redes de computadores and +2 skills",
+			"skills": null,
+			"schoolLinkedinUrl": "https://www.linkedin.com/search/results/all/?keywords=Instituto+Superior+Polit%C3%A9cnico+Independente",
+			"schoolId": null,
+			"degree": "Licenciatura",
+			"fieldOfStudy": "Computer Engineering",
+			"period": "2018 - 2024",
+			"startDate": {
+				"year": 2018,
+				"text": "2018"
+			},
+			"endDate": {
+				"year": 2024,
+				"text": "2024"
+			}
+		}
+	],
+	"profileActions": [],
+	"profileLocales": [
+		{
+			"country": "BR",
+			"language": "pt"
+		}
+	],
+	"primaryLocale": {
+		"country": "BR",
+		"language": "pt"
+	},
+	"multiLocaleHeadline": [
+		{
+			"headline": "Software Engineer @ Bulir | Backend & Mobile Developer | Mentorship | Cloud | AWS | Design System | AI & Automation",
+			"locale": "pt_BR"
+		}
+	],
+	"services": {
+		"description": null,
+		"media": [],
+		"servicesList": [
+			"Web Development",
+			"Mobile Application Development",
+			"Android Development",
+			"Web Design",
+			"Software Testing",
+			"IT Consulting",
+			"Custom Software Development",
+			"iOS Development",
+			"SaaS Development"
+		],
+		"rating": null,
+		"requestUrl": "https://www.linkedin.com/in/idarciooliveira/opportunities/services/request-proposal?servicePageVanityName=8568733337144695a9"
+	},
+	"experience": [
+		{
+			"position": "Software Engineer",
+			"location": "Luanda, Luanda Province, Angola",
+			"employmentType": null,
+			"workplaceType": "On-site",
+			"companyName": "Bulir Technology",
+			"companyUniversalName": "bulir-tecnology",
+			"companyLinkedinUrl": "https://www.linkedin.com/company/bulir-tecnology/",
+			"companyId": "102431174",
+			"duration": "1 yr 11 mos",
+			"description": "- As Tech Lead, i managed technical execution, delivery, code quality, and engineering practices for the development team behind Bulir.com, a service marketplace (10K+ users in 2 month).\n- Developed and maintained core backend services with a focus on reliability, maintainability, security and rapid product iteration.\n- Built APIs and integrations for onboarding providers, service discovery, bookings, payments, in-app audio calls, wallets and third-party payment providers.\n- Implemented real-time chat and notification systems to facilitate communication between clients and service providers.\n- Improved production readiness with monitoring, logging, metrics and tracing for easier diagnosis and recovery from incidents.",
+			"skills": null,
+			"startDate": {
+				"month": "Dec",
+				"year": 2024,
+				"text": "Dec 2024"
+			},
+			"endDate": {
+				"text": "Present"
+			}
+		},
+		{
+			"position": "Software Enginner & IT Officer  ",
+			"location": "Lubango, Huíla Province, Angola",
+			"employmentType": "Full-time",
+			"workplaceType": "Hybrid",
+			"companyName": "People in Need",
+			"companyUniversalName": "people-in-need",
+			"companyLinkedinUrl": "https://www.linkedin.com/company/people-in-need/",
+			"companyId": "337762",
+			"duration": "2 yrs 3 mos",
+			"description": "- Support internal systems and IT operations, improving service continuity and reducing operational bottlenecks through automation and better tooling.\n- Build and maintain business applications and workflows to support program delivery.\n- Partner with non-technical stakeholders to translate needs into secure, maintainable solutions.\n- Strengthen basic security and access practices (permissions, account management) and document repeatable processes for the organization.",
+			"skills": null,
+			"startDate": {
+				"month": "Aug",
+				"year": 2024,
+				"text": "Aug 2024"
+			},
+			"endDate": {
+				"text": "Present"
+			}
+		},
+		{
+			"position": "Backend Developer",
+			"location": null,
+			"employmentType": null,
+			"workplaceType": null,
+			"companyName": "Njila Yetu",
+			"companyUniversalName": "njila-yetu",
+			"companyLinkedinUrl": "https://www.linkedin.com/company/njila-yetu/",
+			"companyId": "82664113",
+			"duration": "2 yrs 6 mos",
+			"description": "- Developed backend features and APIs for customer-facing products, focusing on correctness, performance, scalability, and clean integration contracts. \n- Contributed to routing, mapping, and location-tracking capabilities, supporting route calculation, map-based experiences, real-time location updates, and operational visibility. \n- Collaborated with cross-functional teammates to deliver new capabilities from technical design and development through testing, release, and post-launch support. \n - Improved maintainability by refactoring legacy modules and standardizing common patterns for validation, error handling, logging, and API consistency.",
+			"skills": null,
+			"startDate": {
+				"month": "Mar",
+				"year": 2022,
+				"text": "Mar 2022"
+			},
+			"endDate": {
+				"month": "Aug",
+				"year": 2024,
+				"text": "Aug 2024"
+			}
+		},
+		{
+			"position": "Software Engineer",
+			"location": "Lubango, Huíla Province, Angola",
+			"employmentType": "Full-time",
+			"workplaceType": "On-site",
+			"companyName": "TecnoBase",
+			"companyUniversalName": null,
+			"companyLinkedinUrl": "https://www.linkedin.com/search/results/all/?keywords=TecnoBase+",
+			"companyId": null,
+			"duration": "1 yr 6 mos",
+			"description": "- Delivered application features across the stack, partnering with teammates to ship against deadlines while maintaining code quality.\n- Implemented reusable components and improved developer efficiency by standardizing project structure and development workflows.\n- Participated in requirements discussions and translated them into implementable technical tasks.\n- Supported releases and post-release fixes to keep applications stable for users.",
+			"skills": null,
+			"startDate": {
+				"month": "Mar",
+				"year": 2020,
+				"text": "Mar 2020"
+			},
+			"endDate": {
+				"month": "Aug",
+				"year": 2021,
+				"text": "Aug 2021"
+			}
+		},
+		{
+			"position": "Junior Software Developer",
+			"location": "Lubango, Huíla Province, Angola",
+			"employmentType": "Full-time",
+			"workplaceType": "On-site",
+			"companyName": "TecnoBase",
+			"companyUniversalName": null,
+			"companyLinkedinUrl": "https://www.linkedin.com/search/results/all/?keywords=TecnoBase",
+			"companyId": null,
+			"duration": "6 mos",
+			"description": "- Built and maintained features under senior guidance, learning production engineering practices and team delivery workflows.\n- Fixed bugs, improved UI/UX issues, and contributed to small enhancements to meet user needs.\n- Documented changes and collaborated through code reviews to improve quality and consistency.",
+			"skills": null,
+			"startDate": {
+				"month": "Feb",
+				"year": 2020,
+				"text": "Feb 2020"
+			},
+			"endDate": {
+				"month": "Jul",
+				"year": 2020,
+				"text": "Jul 2020"
+			}
+		}
+	],
+	"education": [
+		{
+			"schoolName": "Instituto Superior Politécnico Independente",
+			"description": null,
+			"insights": "Administração de redes, Redes de computadores and +2 skills",
+			"skills": null,
+			"schoolLinkedinUrl": "https://www.linkedin.com/search/results/all/?keywords=Instituto+Superior+Polit%C3%A9cnico+Independente",
+			"schoolId": null,
+			"degree": "Licenciatura",
+			"fieldOfStudy": "Computer Engineering",
+			"period": "2018 - 2024",
+			"startDate": {
+				"year": 2018,
+				"text": "2018"
+			},
+			"endDate": {
+				"year": 2024,
+				"text": "2024"
+			}
+		},
+		{
+			"schoolName": "Colégio Dom Domingos Franque",
+			"description": null,
+			"insights": null,
+			"skills": null,
+			"schoolLinkedinUrl": "https://www.linkedin.com/search/results/all/?keywords=Col%C3%A9gio+Dom+Domingos+Franque",
+			"schoolId": null,
+			"degree": "Técnico Médio de Informática",
+			"fieldOfStudy": "Informática",
+			"period": "2015 - 2017",
+			"startDate": {
+				"year": 2015,
+				"text": "2015"
+			},
+			"endDate": {
+				"year": 2017,
+				"text": "2017"
+			}
+		}
+	],
+	"certifications": [
+		{
+			"title": "Foundations of Project Management",
+			"issuedBy": "Google",
+			"issuedAt": "Aug 2026",
+			"link": "https://www.coursera.org/account/accomplishments/records/7SC393KQDS32",
+			"credentialId": "7SC393KQDS32",
+			"issuedByLink": "https://www.linkedin.com/company/1441/"
+		},
+		{
+			"title": "Project Initiation: Starting a Successful Project",
+			"issuedBy": "Google",
+			"issuedAt": "Aug 2026",
+			"link": "https://www.coursera.org/account/accomplishments/records/5NNKWENH3VF0",
+			"credentialId": "5NNKWENH3VF0",
+			"issuedByLink": "https://www.linkedin.com/company/1441/"
+		},
+		{
+			"title": "Project Planning: Putting It All Together",
+			"issuedBy": "Google",
+			"issuedAt": "May 2026",
+			"link": "https://www.coursera.org/account/accomplishments/records/8NETP95OL97U",
+			"credentialId": "8NETP95OL97U",
+			"issuedByLink": "https://www.linkedin.com/company/1441/"
+		},
+		{
+			"title": "AWS Cloud Practitioner Essentials",
+			"issuedBy": "Amazon Web Services (AWS)",
+			"issuedAt": "Mar 2026",
+			"link": null,
+			"credentialId": null,
+			"issuedByLink": "https://www.linkedin.com/company/2382910/"
+		},
+		{
+			"title": "New Relic Fundamentals",
+			"issuedBy": "Pluralsight",
+			"issuedAt": "Feb 2026",
+			"link": "https://app.pluralsight.com/achievements/share/c88df477-af2f-4379-a68e-bbcb678f82d0",
+			"credentialId": "c88df477-af2f-4379-a68e-bbcb678f82d0",
+			"issuedByLink": "https://www.linkedin.com/company/84180/"
+		},
+		{
+			"title": "Google AI Essentials",
+			"issuedBy": "Google",
+			"issuedAt": "Dec 2024",
+			"link": "https://www.credly.com/badges/da5ef1f2-5a52-4a7e-93ce-7d9fb6af8e6a/linked_in_profile",
+			"credentialId": null,
+			"issuedByLink": "https://www.linkedin.com/company/1441/"
+		}
+	],
+	"projects": [],
+	"volunteering": [],
+	"skills": [
+		{
+			"name": "Integração e entrega contínuas (CI/CD)",
+			"positions": [
+				"5 experiences across Bulir Technology and 4 other companies",
+				"New Relic Fundamentals",
+				"AWS Cloud Practitioner Essentials"
+			]
+		},
+		{
+			"name": "REST API Design",
+			"positions": [
+				"5 experiences across Bulir Technology and 4 other companies"
+			]
+		},
+		{
+			"name": "DevOps",
+			"positions": [
+				"3 experiences across Bulir Technology and 2 other companies",
+				"New Relic Fundamentals",
+				"AWS Cloud Practitioner Essentials"
+			]
+		},
+		{
+			"name": "Amazon EC2",
+			"positions": ["AWS Cloud Practitioner Essentials"]
+		},
+		{
+			"name": "AWS CloudFormation",
+			"positions": ["AWS Cloud Practitioner Essentials"]
+		},
+		{
+			"name": "AWS Identity and Access Management (AWS IAM)",
+			"positions": ["AWS Cloud Practitioner Essentials"]
+		},
+		{
+			"name": "Amazon RDS",
+			"positions": ["AWS Cloud Practitioner Essentials"]
+		},
+		{
+			"name": "IA Prompting",
+			"positions": ["Google AI Essentials"]
+		},
+		{
+			"name": "Inteligência artificial",
+			"positions": ["Google AI Essentials"]
+		},
+		{
+			"name": "IA generativa",
+			"positions": ["Google AI Essentials"]
+		},
+		{
+			"name": "Monitoração de sistemas",
+			"positions": ["New Relic Fundamentals"]
+		},
+		{
+			"name": "Ferramentas de DevOps",
+			"positions": ["New Relic Fundamentals"]
+		},
+		{
+			"name": "New Relic",
+			"positions": ["New Relic Fundamentals"]
+		},
+		{
+			"name": "Observabilidade de software",
+			"positions": ["New Relic Fundamentals"]
+		},
+		{
+			"name": ".NET Framework"
+		},
+		{
+			"name": "Desenvolvimento de aplicativos móveis",
+			"positions": ["Software Engineer at Bulir Technology"]
+		},
+		{
+			"name": "React Native",
+			"positions": ["Software Engineer at Bulir Technology"]
+		},
+		{
+			"name": "Desenvolvimento de front-end",
+			"positions": ["Software Engineer at Bulir Technology"]
+		},
+		{
+			"name": "AWS Lambda",
+			"positions": ["Software Engineer at Bulir Technology"]
+		},
+		{
+			"name": "Redis",
+			"positions": ["Software Engineer at Bulir Technology"]
+		},
+		{
+			"name": "Liderança de equipe",
+			"positions": ["Software Engineer at Bulir Technology"]
+		},
+		{
+			"name": "Cibersegurança",
+			"positions": ["3 experiences across People in Need and 2 other companies"]
+		},
+		{
+			"name": "Segurança",
+			"positions": ["Software Enginner & IT Officer at People in Need"]
+		},
+		{
+			"name": "Office 365",
+			"positions": ["4 experiences across People in Need and 3 other companies"]
+		},
+		{
+			"name": "Administração de redes",
+			"positions": ["Instituto Superior Politécnico Independente"]
+		},
+		{
+			"name": "Redes de computadores",
+			"positions": ["Instituto Superior Politécnico Independente"]
+		},
+		{
+			"name": "Banco de dados",
+			"positions": [
+				"Software Engineer at Bulir Technology",
+				"Instituto Superior Politécnico Independente"
+			]
+		},
+		{
+			"name": "Desenvolvimento web",
+			"positions": ["Instituto Superior Politécnico Independente"]
+		},
+		{
+			"name": "Next.js",
+			"positions": ["3 experiences across People in Need and 2 other companies"]
+		},
+		{
+			"name": "Java",
+			"positions": ["Junior Software Developer at TecnoBase"]
+		},
+		{
+			"name": "MongoDB",
+			"positions": ["Junior Software Developer at TecnoBase"]
+		},
+		{
+			"name": "Gestão de projetos",
+			"positions": [
+				"2 experiences across Bulir Technology and 1 other company",
+				"Foundations of Project Management"
+			]
+		},
+		{
+			"name": "Rede de computadores",
+			"positions": ["Software Enginner & IT Officer at People in Need"]
+		},
+		{
+			"name": "Serviços de TI",
+			"positions": ["Software Enginner & IT Officer at People in Need"]
+		},
+		{
+			"name": "Infraestrutura de tecnologia da informação",
+			"positions": ["Software Enginner & IT Officer at People in Need"]
+		},
+		{
+			"name": "Sistemas de informação computacionais",
+			"positions": ["2 experiences across Bulir Technology and 1 other company"]
+		},
+		{
+			"name": "Suporte técnico",
+			"positions": ["2 experiences across People in Need and 1 other company"],
+			"endorsements": "1 endorsement"
+		},
+		{
+			"name": "Solução de problemas técnicos",
+			"positions": ["Software Engineer at TecnoBase "],
+			"endorsements": "1 endorsement"
+		},
+		{
+			"name": "Sistemas operacionais",
+			"positions": ["2 experiences across Njila Yetu and 1 other company"]
+		},
+		{
+			"name": "Gerenciamento de serviços de TI",
+			"positions": ["Software Engineer at TecnoBase "]
+		},
+		{
+			"name": "Comunicação",
+			"positions": ["3 experiences across Njila Yetu and 2 other companies"]
+		},
+		{
+			"name": "Administração de sistemas",
+			"positions": ["2 experiences across People in Need and 1 other company"]
+		},
+		{
+			"name": "Trabalho em equipe",
+			"positions": ["3 experiences across Njila Yetu and 2 other companies"]
+		},
+		{
+			"name": "Aplicativos móveis",
+			"positions": ["3 experiences across Njila Yetu and 2 other companies"]
+		},
+		{
+			"name": "Node.js",
+			"positions": ["Backend Developer at Njila Yetu"],
+			"endorsements": "1 endorsement"
+		},
+		{
+			"name": "React.js",
+			"positions": [
+				"2 experiences across Bulir Technology and 1 other company"
+			],
+			"endorsements": "1 endorsement"
+		},
+		{
+			"name": "TypeScript",
+			"positions": ["Backend Developer at Njila Yetu"],
+			"endorsements": "1 endorsement"
+		},
+		{
+			"name": "Amazon Web Services",
+			"positions": [
+				"2 experiences across Njila Yetu and 1 other company",
+				"AWS Cloud Practitioner Essentials"
+			],
+			"endorsements": "1 endorsement"
+		},
+		{
+			"name": "Docker",
+			"positions": ["Backend Developer at Njila Yetu"],
+			"endorsements": "1 endorsement"
+		},
+		{
+			"name": "NestJS",
+			"positions": [
+				"2 experiences across Bulir Technology and 1 other company"
+			],
+			"endorsements": "1 endorsement"
+		}
+	],
+	"publications": [],
+	"courses": [],
+	"patents": [],
+	"honorsAndAwards": [],
+	"languages": [],
+	"organizations": [],
+	"causes": [],
+	"featured": {
+		"images": [],
+		"link": null,
+		"title": null,
+		"subtitle": null,
+		"slides": [
+			{
+				"title": null,
+				"subtitle": null,
+				"description": null,
+				"url": "https://www.linkedin.com/feed/update/urn:li:activity:7460352594876583937?updateEntityUrn=urn%3Ali%3Afs_feedUpdate%3A%28V2%2Curn%3Ali%3Aactivity%3A7460352594876583937%29",
+				"image": {
+					"url": "https://media.licdn.com/dms/image/v2/D4D22AQHUqGzBoAn92Q/feedshare-shrink_1280/B4DZ4h8pVnJsAM-/0/1778686007545?e=1793232000&v=beta&t=NAIZgay2qDy5WL4r9XEDrPr2plJYBE2udV7nuWdng-Q"
+				}
+			},
+			{
+				"title": null,
+				"subtitle": null,
+				"description": null,
+				"url": "https://www.linkedin.com/feed/update/urn:li:activity:7449388353764024320?updateEntityUrn=urn%3Ali%3Afs_feedUpdate%3A%28V2%2Curn%3Ali%3Aactivity%3A7449388353764024320%29",
+				"image": {
+					"url": "https://media.licdn.com/dms/image/v2/D4D05AQHs3T_VF2Jh2w/feedshare-thumbnail_720_1280/B4DZ2GLNJlHMA4-/0/1776072578616?e=1791990000&v=beta&t=AJXf2JGax31O_Pww9_rKd7Rxrm5JDypMjpM0cCAzyKw"
+				}
+			},
+			{
+				"title": null,
+				"subtitle": null,
+				"description": null,
+				"url": "https://www.linkedin.com/feed/update/urn:li:activity:7406318226885881856?updateEntityUrn=urn%3Ali%3Afs_feedUpdate%3A%28V2%2Curn%3Ali%3Aactivity%3A7406318226885881856%29",
+				"image": {
+					"url": "https://media.licdn.com/dms/image/v2/D4D22AQHq95tC86CqlQ/feedshare-shrink_1280/B4DZsiHIZtKwA0-/0/1765803861864?e=1793232000&v=beta&t=7de-z_Vv7B_8h8IwaOTFAoIoS9OjtcxWAIjuOm23AmQ"
+				}
+			},
+			{
+				"title": "20190830_210744.jpg",
+				"subtitle": null,
+				"description": null,
+				"url": "https://www.linkedin.com/in/idarciooliveira/overlay/1592264474954/single-media-viewer?type=IMAGE&profileId=ACoAACtjyCEB3FJJp1CvFnxuMJnOzptKD93LVWM",
+				"image": {
+					"url": "https://media.licdn.com/dms/image/v2/C562DAQHUvrq6oEkttQ/profile-treasury-image-shrink_8192_8192/profile-treasury-image-shrink_8192_8192/0/1602387317042?e=1791990000&v=beta&t=WZYPN3oOcljl3VE8LUw2P3RfmhaG1UtrlBYy6xzjonY"
+				}
+			},
+			{
+				"title": "Programar vs. Gerir: O Dilema do Desenvolvedor que se Torna Líder",
+				"subtitle": "Idárcio Oliveira on LinkedIn • 2 min read",
+				"description": null,
+				"url": "https://www.linkedin.com/feed/update/urn:li:activity:7353340559740100609?updateEntityUrn=urn%3Ali%3Afs_feedUpdate%3A%28V2%2Curn%3Ali%3Aactivity%3A7353340559740100609%29",
+				"image": {
+					"url": "https://media.licdn.com/dms/image/v2/D4D12AQH19Sphqimocg/article-cover_image-shrink_720_1280/B4DZguKr7lHAAQ-/0/1753121210949?e=1793232000&v=beta&t=T7N0cHEo97CDh2d-axHtosHaUnbrKe3WELZfRedAtwA"
+				}
+			}
+		]
+	},
+	"composeOptionType": "PREMIUM_INMAIL",
+	"moreProfiles": [
+		{
+			"id": "ACoAAEb1TSIBg8Xuii0HuAbPu7fdADsHcwlFCUc",
+			"firstName": "Justino",
+			"lastName": "Soares",
+			"position": "Software Engineer |  Software Architecture | Clean Code | DDD | Java Spring Boot | Python |   Typescript | NodeJs | NestJs | NextJs  42Luanda | React Native | OutSystem",
+			"publicIdentifier": "justino-soares-a56833292",
+			"linkedinUrl": "https://www.linkedin.com/in/justino-soares-a56833292"
+		},
+		{
+			"id": "ACoAAEm1IqkBtMLPRj_VOwwZxeB7c5ZdY2TzPLw",
+			"firstName": "Mário",
+			"lastName": "Salembe",
+			"position": "Software Engineer | UX/UI Design | Front-end Development | React & React Native",
+			"publicIdentifier": "mariosalembe",
+			"linkedinUrl": "https://www.linkedin.com/in/mariosalembe"
+		},
+		{
+			"id": "ACoAACrziZ0B4RyNUbIyixRMQWbuet-wVe3AP_A",
+			"firstName": "Joel Sebastião",
+			"lastName": "Mbengui",
+			"position": "Software Engineer | Banking & Payments Integration",
+			"publicIdentifier": "joel-sebastião-mbengui",
+			"linkedinUrl": "https://www.linkedin.com/in/joel-sebastião-mbengui"
+		},
+		{
+			"id": "ACoAAD6Bjz4BPbM-5NR0365L-6iZGQc4sDrvmjM",
+			"firstName": "Abraão ",
+			"lastName": "Daniel",
+			"position": "​Software Engineer | Node.js, React & Mobile | Automating Delivery with DevOps & CI/CD.",
+			"publicIdentifier": "abraão-daniel-b66249253",
+			"linkedinUrl": "https://www.linkedin.com/in/abraão-daniel-b66249253"
+		},
+		{
+			"id": "ACoAAESpiS8B2-eNuu5eE_vDKl8DhZJfWkmRMsI",
+			"firstName": "Lando",
+			"lastName": "Nunes Faria",
+			"position": "UI Design • UX Design •  Digital Innovation Analyst • Robotics",
+			"publicIdentifier": "lando-nunes-faria",
+			"linkedinUrl": "https://www.linkedin.com/in/lando-nunes-faria"
+		},
+		{
+			"id": "ACoAAEegskUBVbe17lTTDVraCP9MWJ5mqu34iSM",
+			"firstName": "Domingos Germano",
+			"lastName": "Franco",
+			"position": "Backend Engineer | Cloud & DevOps | NestJS • Java • AWS",
+			"publicIdentifier": "domingos-germano-franco-231550296",
+			"linkedinUrl": "https://www.linkedin.com/in/domingos-germano-franco-231550296"
+		},
+		{
+			"id": "ACoAAFVEX28BP9G5U3L0h_-4EWV9pZBxPYFZNvg",
+			"firstName": "Nadioreth",
+			"lastName": "António",
+			"position": "Assistente Administrativa",
+			"publicIdentifier": "nadioreth-antónio-2bb10533b",
+			"linkedinUrl": "https://www.linkedin.com/in/nadioreth-antónio-2bb10533b"
+		},
+		{
+			"id": "ACoAAB3ZFJoBM4xBi52zwWP5qywVFv-cHJNtsCM",
+			"firstName": "• Adilson",
+			"lastName": "Camacho",
+			"position": "LinkedIn Top Voice | Project Management | Business Intelligence | Business Administration",
+			"publicIdentifier": "adilsoncamacho",
+			"linkedinUrl": "https://www.linkedin.com/in/adilsoncamacho"
+		},
+		{
+			"id": "ACoAAC6_xUoBjtvLloL7oGDdxwipSELkW7sQWrM",
+			"firstName": "Alice",
+			"lastName": "Simões",
+			"position": "Profissional de Recursos Humanos | Técnica de RH | Fundadora da Conexão RH ",
+			"publicIdentifier": "alice-simões",
+			"linkedinUrl": "https://www.linkedin.com/in/alice-simões"
+		},
+		{
+			"id": "ACoAAEd4QjsB0CjyhgNiCMpo4BdApXy2v5c_gOU",
+			"firstName": "Freudy",
+			"lastName": "Batubenga III",
+			"position": "Software Engineer in Test (SDET) | Quality & Performance Focus  | CI/CD | E2E & UI Automation (Cypress, Playwright)",
+			"publicIdentifier": "freudy-batubenga-iii-677692295",
+			"linkedinUrl": "https://www.linkedin.com/in/freudy-batubenga-iii-677692295"
+		},
+		{
+			"id": "ACoAADUzvLQBq4zdUFDtAKIT4JvGaqmZGCueI2Q",
+			"firstName": "Carmo",
+			"lastName": "Da Gama",
+			"position": "Full-Stack Developer | NestJS · Next.js · React Native · C#/.NET | System & payment integrations | 42 Luanda",
+			"publicIdentifier": "carmodagama",
+			"linkedinUrl": "https://www.linkedin.com/in/carmodagama"
+		},
+		{
+			"id": "ACoAADUJHxgBnYS5DB-WShF4M2uASLKm4lEoaBA",
+			"firstName": "Gilson",
+			"lastName": "Bravo Fernando Chipombo",
+			"position": "Software Engineer |  Backend Developer | AWS | Docker | Test Automation",
+			"publicIdentifier": "gilson-bravo-fernando-chipombo-aa0ba4209",
+			"linkedinUrl": "https://www.linkedin.com/in/gilson-bravo-fernando-chipombo-aa0ba4209"
+		},
+		{
+			"id": "ACoAAEegskUBVbe17lTTDVraCP9MWJ5mqu34iSM",
+			"firstName": "Domingos",
+			"lastName": "Germano Franco",
+			"position": "Backend Engineer | Cloud & DevOps | NestJS • Java • AWS",
+			"publicIdentifier": "domingos-germano-franco-231550296",
+			"linkedinUrl": "https://www.linkedin.com/in/domingos-germano-franco-231550296"
+		},
+		{
+			"id": "ACoAAEm1IqkBtMLPRj_VOwwZxeB7c5ZdY2TzPLw",
+			"firstName": "Mário",
+			"lastName": "Salembe",
+			"position": "Software Engineer | UX/UI Design | Front-end Development | React & React Native",
+			"publicIdentifier": "mariosalembe",
+			"linkedinUrl": "https://www.linkedin.com/in/mariosalembe"
+		},
+		{
+			"id": "ACoAAESpiS8B2-eNuu5eE_vDKl8DhZJfWkmRMsI",
+			"firstName": "Lando",
+			"lastName": "Nunes Faria",
+			"position": "UI Design • UX Design •  Digital Innovation Analyst • Robotics",
+			"publicIdentifier": "lando-nunes-faria",
+			"linkedinUrl": "https://www.linkedin.com/in/lando-nunes-faria"
+		},
+		{
+			"id": "ACoAADM0D8ABFndRBFbNdiqu3oHRAzN4mS2z8G8",
+			"firstName": "Nadine",
+			"lastName": "Quipungo",
+			"position": "Marketing Estratégico · Gestão de Projetos · Planeamento de Campanhas · Marketing Digital · SEO · Comunicação · Liderança · Análise de Dados · Gestão de Equipas",
+			"publicIdentifier": "nadine-quipungo-45483b1bb",
+			"linkedinUrl": "https://www.linkedin.com/in/nadine-quipungo-45483b1bb"
+		},
+		{
+			"id": "ACoAAEb1TSIBg8Xuii0HuAbPu7fdADsHcwlFCUc",
+			"firstName": "Justino",
+			"lastName": "Soares",
+			"position": "Software Engineer |  Software Architecture | Clean Code | DDD | Java Spring Boot | Python |   Typescript | NodeJs | NestJs | NextJs  42Luanda | React Native | OutSystem",
+			"publicIdentifier": "justino-soares-a56833292",
+			"linkedinUrl": "https://www.linkedin.com/in/justino-soares-a56833292"
+		},
+		{
+			"id": "ACoAADcufL4B8f_mdGK1HQKJId1scCRTYYy4oro",
+			"firstName": "João",
+			"lastName": "Miguel",
+			"position": "Motion Designer | Branding Motion",
+			"publicIdentifier": "jo%C3%A3omiguel13",
+			"linkedinUrl": "https://www.linkedin.com/in/jo%C3%A3omiguel13"
+		}
+	],
+	"sectionTotals": {
+		"experience": 5,
+		"education": 2,
+		"certifications": 6,
+		"skills": 60,
+		"courses": 0,
+		"languages": 0,
+		"projects": 0,
+		"volunteering": 0,
+		"publications": 0,
+		"patents": 0,
+		"organizations": 0,
+		"honorsAndAwards": 0,
+		"causes": 0
+	},
+	"interests": [
+		{
+			"interestName": "Top Voices",
+			"elements": [
+				{
+					"title": "Joel Jota",
+					"subtitle": "Empresário | Investidor | Escritor Best-Seller | Podcaster TOP1 Negócios pelo Spotify",
+					"link": "https://www.linkedin.com/in/joeljota",
+					"caption": "1,077,456 followers",
+					"image": {
+						"url": "https://media.licdn.com/dms/image/v2/D4D03AQHC4cG0Kb5Y2A/profile-displayphoto-shrink_800_800/B4DZRBOBoAGkAc-/0/1736260983860?e=1793232000&v=beta&t=rN6PIZipoZr0pTFubLYpxliWC7qqy8jg8wz7jUkQrQc"
+					}
+				},
+				{
+					"title": "Carolina Bessa",
+					"subtitle": "UX Designer | LinkedIn Top Voice | Sócia e Líder de Design na Lab Culture",
+					"link": "https://www.linkedin.com/in/carolinaabessa",
+					"caption": "30,416 followers",
+					"image": {
+						"url": "https://media.licdn.com/dms/image/v2/D4D03AQGGa_Fp1WmIzw/profile-displayphoto-crop_800_800/B4DZuPx3f6I4AQ-/0/1767643774749?e=1793232000&v=beta&t=FgpcoiLraq3wpzM9R0Th9wql1PPqSAJx_XzZcSdJt2E"
+					}
+				}
+			]
+		},
+		{
+			"interestName": "Companies",
+			"elements": [
+				{
+					"title": "McKinsey & Company",
+					"subtitle": null,
+					"link": "https://www.linkedin.com/company/1371/",
+					"caption": "7,421,745 followers",
+					"image": {
+						"url": "https://media.licdn.com/dms/image/v2/D4E0BAQHUYDHTOOXs9w/company-logo_400_400/B4EZ8eP9xVIkAU-/0/1782918929734/mckinsey_logo?e=1793232000&v=beta&t=MNUDwpouc7Dv5c_HcUcYoRPONp3nbdvcrpYKVQEvoQA"
+					}
+				},
+				{
+					"title": "Fujitsu",
+					"subtitle": null,
+					"link": "https://www.linkedin.com/company/1374/",
+					"caption": "1,276,955 followers",
+					"image": {
+						"url": "https://media.licdn.com/dms/image/v2/D4E0BAQEMhlSlTj8Ppg/company-logo_400_400/B4EZ0ATkcpI8Ac-/0/1773826623728/fujitsu_logo?e=1793232000&v=beta&t=1dx5qr2gc7I-E8WZ7txSiCX7oGFCOC4-NF4uKemcM4o"
+					}
+				}
+			]
+		},
+		{
+			"interestName": "Groups",
+			"elements": [
+				{
+					"title": "React Native",
+					"subtitle": null,
+					"link": "https://www.linkedin.com/groups/8364861",
+					"caption": "379,141 members",
+					"image": {
+						"url": "https://media.licdn.com/dms/image/v2/C5607AQFo8RMsVd3z-w/group-logo_image-shrink_92x92/group-logo_image-shrink_92x92/0/1631439406123?e=1791990000&v=beta&t=SZj-XZPpz_3ZFdHJ74rlALSbgEpxAv6IOzOCOVG-W8M"
+					}
+				},
+				{
+					"title": "Vagas de TI",
+					"subtitle": null,
+					"link": "https://www.linkedin.com/groups/2213309",
+					"caption": "495,030 members",
+					"image": {
+						"url": "https://media.licdn.com/dms/image/v2/D4D07AQEWOvE5PPRPiQ/group-logo_image-shrink_400x400/B4DZ5a3SwHGcAM-/0/1779640905108?e=1791990000&v=beta&t=9T_rARyt2RrBmCt7iBbpGA8pX9O5NJ6pJ7htIPPi_-A"
+					}
+				}
+			]
+		},
+		{
+			"interestName": "Newsletters",
+			"elements": [
+				{
+					"title": "O Cabeçudo",
+					"subtitle": "Newsletter para quem não dorme com uma boa ideia na cabeça. Trazemos conversas reais, ideias ousadas e insights práticos",
+					"link": "https://www.linkedin.com/newsletters/7342623360490598400",
+					"caption": "Published weekly",
+					"image": {
+						"url": "https://media.licdn.com/dms/image/v2/D4D12AQHj_t2bD1tvEA/series-logo_image-shrink_300_300/B4DZeZFih1GUAQ-/0/1750620060918?e=1793232000&v=beta&t=IaD0-2okqT6xgjJGEKEhh-3i_0mx5KhQxwT-iO6U8kI"
+					}
+				},
+				{
+					"title": "Angolan Tech Insider",
+					"subtitle": "DevOps |  Desenvolvimento Web Pleno (Full Stack) | Administração de Servidores |  Multimedia",
+					"link": "https://www.linkedin.com/newsletters/7280607802815922176",
+					"caption": "Published daily",
+					"image": {
+						"url": "https://media.licdn.com/dms/image/v2/D4D12AQEM3whxZ1zLlg/series-logo_image-shrink_300_300/series-logo_image-shrink_300_300/0/1739132548640?e=1793232000&v=beta&t=ZjCYOvyQEck8WQXnhlCxWqlEAg7WX1yduZiVMowQx6Q"
+					}
+				}
+			]
+		},
+		{
+			"interestName": "Schools",
+			"elements": [
+				{
+					"title": "freeCodeCamp",
+					"subtitle": null,
+					"link": "https://www.linkedin.com/school/4831032/",
+					"caption": "2,336,232 followers",
+					"image": {
+						"url": "https://media.licdn.com/dms/image/v2/C4E0BAQGLKj3JHcof0w/company-logo_400_400/company-logo_400_400/0/1630639684997/free_code_camp_logo?e=1793232000&v=beta&t=OMuG1ewihtHVEn99l0eg8Y7MyV0HEGULlHO2PaI29dQ"
+					}
+				},
+				{
+					"title": "DevSuperior",
+					"subtitle": null,
+					"link": "https://www.linkedin.com/school/68800586/",
+					"caption": "35,152 followers",
+					"image": {
+						"url": "https://media.licdn.com/dms/image/v2/C4D0BAQFP3CbpgFW-Lg/company-logo_400_400/company-logo_400_400/0/1630539235131/devsuperior_logo?e=1793232000&v=beta&t=nD1GQVEjvL9TOkyl8UpNZ_PV8UU6Ku3LcVS4wU8gxlk"
+					}
+				}
+			]
+		}
+	],
+	"originalQuery": {
+		"publicIdentifier": "idarciooliveira"
+	}
+}
