@@ -110,8 +110,8 @@ export function HowItWorksSection() {
 							className="reveal relative rounded-lg border border-border bg-surface p-6 shadow-card"
 						>
 							<div className="mb-6 flex items-center justify-between">
-								<span className="flex size-11 items-center justify-center rounded-md border-[1.5px] border-ink bg-accent">
-									<Icon className="size-5 text-ink" aria-hidden />
+								<span className="flex size-11 items-center justify-center rounded-full bg-accent">
+									<Icon className="size-5 text-primary" aria-hidden />
 								</span>
 								<span className="font-mono text-sm text-muted">
 									0{index + 1}
@@ -233,7 +233,7 @@ export function ValueStackSection() {
 					<ValueList label="The diagnosis" items={DIAGNOSIS} />
 					<ValueList label="The rewrites" items={REWRITES} />
 				</div>
-				<div className="reveal mt-10 flex flex-col items-start gap-5 rounded-lg border-[1.5px] border-ink bg-surface p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+				<div className="reveal mt-10 flex flex-col items-start gap-5 rounded-lg border border-primary/30 bg-surface-2 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
 					<p className="max-w-xl text-lg text-ink">
 						Career coaches and resume writers charge for this kind of review.
 						Here it costs nothing and takes about 30 seconds.
@@ -268,7 +268,7 @@ export function ExampleSection() {
 		<section id="example" className="bg-night text-background">
 			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
 				<div className="reveal mb-12 max-w-2xl">
-					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase">
+					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-[#71b7fb] uppercase">
 						Example. Maya is a fictional profile.
 					</p>
 					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance sm:text-5xl">
@@ -458,22 +458,22 @@ export function FaqSection() {
 export function FinalCtaSection() {
 	return (
 		<section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-			<div className="reveal relative overflow-hidden rounded-xl border-[1.5px] border-ink bg-primary px-6 py-14 text-center shadow-[6px_6px_0_var(--color-ink)] sm:px-12 md:py-20">
-				<h2 className="mx-auto max-w-3xl font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-6xl">
+			<div className="reveal relative overflow-hidden rounded-xl bg-primary px-6 py-14 text-center text-white shadow-lift sm:px-12 md:py-20">
+				<h2 className="mx-auto max-w-3xl font-display text-4xl leading-[1.05] font-semibold text-balance text-white sm:text-6xl">
 					See your profile the way the next recruiter will
 				</h2>
-				<p className="mx-auto mt-5 max-w-xl text-lg text-ink/80">
+				<p className="mx-auto mt-5 max-w-xl text-lg text-white/85">
 					One username, one goal, about 30 seconds. Worst case, you spent half a
 					minute and got a free second opinion.
 				</p>
 				<a
 					href="#review"
-					className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-md border-[1.5px] border-ink bg-ink px-7 py-4 text-base font-semibold text-background shadow-[3px_3px_0_var(--color-background)] transition-transform active:translate-x-[3px] active:translate-y-[3px] active:shadow-none sm:w-auto"
+					className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-base font-semibold text-primary transition-colors hover:bg-accent sm:w-auto"
 				>
 					Review my profile
 					<ArrowRightIcon className="size-4" aria-hidden />
 				</a>
-				<p className="mt-4 flex items-center justify-center gap-2 text-sm text-ink/75">
+				<p className="mt-4 flex items-center justify-center gap-2 text-sm text-white/80">
 					<CheckCircle2Icon className="size-4" aria-hidden />
 					Free. No signup. Public profile only.
 				</p>
@@ -487,7 +487,7 @@ export function SiteFooter() {
 		<footer className="border-t border-border">
 			<div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
 				<p className="font-display text-base font-semibold text-ink">
-					Red<span className="text-primary-ink">line</span>
+					Red<span className="text-primary">line</span>
 				</p>
 				<p className="max-w-xl sm:text-right">
 					Redline reviews public LinkedIn profiles against your career goal. Not

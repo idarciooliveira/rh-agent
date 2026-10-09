@@ -285,7 +285,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 								setCareerGoal(example);
 								setGoalError(null);
 							}}
-							className="rounded-full border border-border bg-surface-2 px-3 py-1.5 text-left text-xs font-medium text-muted transition-colors hover:border-ink hover:text-ink"
+							className="rounded-full border border-border bg-surface-2 px-3 py-1.5 text-left text-xs font-medium text-muted transition-colors hover:border-primary hover:text-primary"
 						>
 							{example}
 						</button>

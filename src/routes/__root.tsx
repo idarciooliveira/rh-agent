@@ -26,26 +26,13 @@ export const Route = createRootRoute({
 			},
 			{
 				name: "theme-color",
-				content: "#faf7f2",
+				content: "#f4f2ee",
 			},
 		],
 		links: [
 			{
 				rel: "stylesheet",
 				href: appCss,
-			},
-			{
-				rel: "preconnect",
-				href: "https://fonts.googleapis.com",
-			},
-			{
-				rel: "preconnect",
-				href: "https://fonts.gstatic.com",
-				crossOrigin: "anonymous",
-			},
-			{
-				rel: "stylesheet",
-				href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..700&family=Geist+Mono:wght@500&family=Geist:wght@400..700&display=swap",
 			},
 		],
 	}),

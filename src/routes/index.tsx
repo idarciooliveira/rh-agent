@@ -12,6 +12,7 @@ import {
 	ValueStackSection,
 } from "#/components/home/LandingSections";
 import { SiteHeader } from "#/components/home/SiteHeader";
+import { TestimonialsSection } from "#/components/home/TestimonialsSection";
 import { getAiMode } from "#/server/ai-mode";
 
 export const Route = createFileRoute("/")({
@@ -82,6 +83,7 @@ function Home() {
 				<HowItWorksSection />
 				<ValueStackSection />
 				<ExampleSection />
+				<TestimonialsSection />
 				<PersonasSection />
 				<FaqSection />
 				<FinalCtaSection />

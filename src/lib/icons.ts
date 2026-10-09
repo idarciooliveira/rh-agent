@@ -15,18 +15,24 @@ import {
 	Crosshair,
 	Eye,
 	Gauge,
+	Globe,
 	GraduationCap,
 	Lightbulb,
 	ListChecks,
+	MessageSquare,
 	PenLine,
 	Plus,
+	Quote,
+	Repeat2,
 	RotateCcw,
 	ScanSearch,
+	Send,
 	ShieldCheck,
 	Shuffle,
 	Sparkles,
 	Tag,
 	Target,
+	ThumbsUp,
 	Timer,
 	TrendingDown,
 	TrendingUp,
@@ -44,8 +50,8 @@ export const ArrowRightIcon = safeIcon(ArrowRight);
 export const AwardIcon = safeIcon(Award);
 export const BookmarkIcon = safeIcon(Bookmark);
 export const BriefcaseIcon = safeIcon(Briefcase);
-export const CheckIcon = safeIcon(Check);
 export const CheckCircle2Icon = safeIcon(CheckCircle2);
+export const CheckIcon = safeIcon(Check);
 export const ChevronDownIcon = safeIcon(ChevronDown);
 export const ClockIcon = safeIcon(Clock);
 export const CloudUploadIcon = safeIcon(CloudUpload);
@@ -53,18 +59,24 @@ export const CopyIcon = safeIcon(Copy);
 export const CrosshairIcon = safeIcon(Crosshair);
 export const EyeIcon = safeIcon(Eye);
 export const GaugeIcon = safeIcon(Gauge);
+export const GlobeIcon = safeIcon(Globe);
 export const GraduationCapIcon = safeIcon(GraduationCap);
 export const LightbulbIcon = safeIcon(Lightbulb);
 export const ListChecksIcon = safeIcon(ListChecks);
+export const MessageSquareIcon = safeIcon(MessageSquare);
 export const PenLineIcon = safeIcon(PenLine);
 export const PlusIcon = safeIcon(Plus);
+export const QuoteIcon = safeIcon(Quote);
+export const Repeat2Icon = safeIcon(Repeat2);
 export const RotateCcwIcon = safeIcon(RotateCcw);
 export const ScanSearchIcon = safeIcon(ScanSearch);
+export const SendIcon = safeIcon(Send);
 export const ShieldCheckIcon = safeIcon(ShieldCheck);
 export const ShuffleIcon = safeIcon(Shuffle);
 export const SparklesIcon = safeIcon(Sparkles);
 export const TagIcon = safeIcon(Tag);
 export const TargetIcon = safeIcon(Target);
+export const ThumbsUpIcon = safeIcon(ThumbsUp);
 export const TimerIcon = safeIcon(Timer);
 export const TrendingDownIcon = safeIcon(TrendingDown);
 export const TrendingUpIcon = safeIcon(TrendingUp);

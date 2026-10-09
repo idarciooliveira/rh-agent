@@ -51,7 +51,7 @@ export function AnalysisLoadingScreen({
 						style={{ "--scan-distance": "190px" } as React.CSSProperties}
 						aria-hidden
 					>
-						<div className="h-0.5 flex-1 bg-primary shadow-[0_0_12px_rgb(255_90_54/0.6)]" />
+						<div className="h-0.5 flex-1 bg-primary shadow-[0_0_12px_rgb(10_102_194/0.6)]" />
 						<PenLineIcon className="mr-2 size-4 text-primary-ink" />
 					</div>
 				</div>

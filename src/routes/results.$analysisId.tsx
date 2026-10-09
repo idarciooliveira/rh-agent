@@ -91,7 +91,7 @@ function AnalysisResultsPage() {
 					</p>
 					<Link
 						to="/"
-						className="btn-primary inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold text-ink sm:w-auto"
+						className="btn-primary inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
 					>
 						Try another goal
 						<ArrowRightIcon className="size-4" aria-hidden />
@@ -126,7 +126,7 @@ function AnalysisNotFound() {
 					</p>
 					<Link
 						to="/"
-						className="btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold text-ink sm:w-auto"
+						className="btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
 					>
 						Start a new review
 						<ArrowRightIcon className="size-4" aria-hidden />
