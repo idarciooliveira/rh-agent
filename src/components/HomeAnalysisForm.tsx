@@ -8,25 +8,9 @@ import {
 } from "react";
 import { AnalysisLoadingScreen } from "#/components/AnalysisLoadingScreen";
 import { readApiError } from "#/lib/api-client";
+import { useLanguage } from "#/lib/i18n";
 import { AlertCircleIcon, ArrowRightIcon } from "#/lib/icons";
 import { parseLinkedInUsername } from "#/lib/linkedin-username";
-
-const PIPELINE_MESSAGES = [
-	"Finding your public profile…",
-	"Reading your headline and About section…",
-	"Going through your experience, one role at a time…",
-	"Checking it against the job you want…",
-	"Sorting strengths from gaps…",
-	"Rewriting your headline. This is the fun part.",
-	"Almost there. Putting the plan in order…",
-] as const;
-
-const GOAL_EXAMPLES = [
-	"Move from backend engineering into DevOps",
-	"First data analyst role after graduating",
-	"Engineering manager at a Series B startup",
-	"Switch from teaching into instructional design",
-] as const;
 
 const GOAL_MAX_LENGTH = 500;
 
@@ -46,6 +30,8 @@ type HomeAnalysisFormProps = {
 
 export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 	const navigate = useNavigate();
+	const { copy } = useLanguage();
+	const pipelineMessages = copy.form.pipeline;
 	const [username, setUsername] = useState("");
 	const [careerGoal, setCareerGoal] = useState("");
 	const [phase, setPhase] = useState<FormPhase>("idle");
@@ -53,7 +39,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 	const [usernameError, setUsernameError] = useState<string | null>(null);
 	const [goalError, setGoalError] = useState<string | null>(null);
 	const [statusMessage, setStatusMessage] = useState<string>(
-		PIPELINE_MESSAGES[0],
+		pipelineMessages[0],
 	);
 	const [progress, setProgress] = useState(0);
 	const messageIndexRef = useRef(0);
@@ -80,23 +66,23 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 		const intervalId = window.setInterval(() => {
 			messageIndexRef.current = Math.min(
 				messageIndexRef.current + 1,
-				PIPELINE_MESSAGES.length - 1,
+				pipelineMessages.length - 1,
 			);
 			setStatusMessage(
-				PIPELINE_MESSAGES[messageIndexRef.current] ?? PIPELINE_MESSAGES[0],
+				pipelineMessages[messageIndexRef.current] ?? pipelineMessages[0],
 			);
 		}, 4000);
 
 		return () => {
 			window.clearInterval(intervalId);
 		};
-	}, [phase]);
+	}, [phase, pipelineMessages]);
 
 	const runPipeline = useCallback(
 		async (linkedinUsername: string, goal: string) => {
 			setPhase("loading");
 			setError(null);
-			setStatusMessage(PIPELINE_MESSAGES[0]);
+			setStatusMessage(pipelineMessages[0]);
 			setProgress(10);
 			messageIndexRef.current = 0;
 
@@ -110,7 +96,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 				if (!profileResponse.ok) {
 					const message = await readApiError(
 						profileResponse,
-						"We couldn't find that profile. Check the username and make sure your profile is public.",
+						copy.form.profileNotFound,
 					);
 					throw new Error(message);
 				}
@@ -119,7 +105,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 					(await profileResponse.json()) as FetchProfileResponse;
 				setProgress(55);
 				messageIndexRef.current = 3;
-				setStatusMessage(PIPELINE_MESSAGES[3]);
+				setStatusMessage(pipelineMessages[3]);
 
 				const analyzeResponse = await fetch("/api/analyze", {
 					method: "POST",
@@ -133,14 +119,14 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 				if (!analyzeResponse.ok) {
 					const message = await readApiError(
 						analyzeResponse,
-						"Something broke on our end. Your profile is fine, the review didn't finish. Try again in a few seconds.",
+						copy.form.analyzeFailed,
 					);
 					throw new Error(message);
 				}
 
 				const analyzeData = (await analyzeResponse.json()) as AnalyzeResponse;
 				setProgress(100);
-				setStatusMessage(PIPELINE_MESSAGES[PIPELINE_MESSAGES.length - 1]);
+				setStatusMessage(pipelineMessages[pipelineMessages.length - 1]);
 
 				void navigate({
 					to: "/results/$analysisId",
@@ -151,11 +137,11 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 				setError(
 					pipelineError instanceof Error
 						? pipelineError.message
-						: "Something broke on our end. Try again in a few seconds.",
+						: copy.form.genericError,
 				);
 			}
 		},
-		[navigate],
+		[navigate, copy, pipelineMessages],
 	);
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -166,20 +152,18 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 
 		const linkedinUsername = parseLinkedInUsername(username);
 		if (!linkedinUsername) {
-			setUsernameError(
-				"That doesn't look like a LinkedIn username. It's the part after /in/ in your profile link, like janedoe.",
-			);
+			setUsernameError(copy.form.usernameError);
 			return;
 		}
 
 		const trimmedGoal = careerGoal.trim();
 		if (trimmedGoal.length < 10) {
-			setGoalError("Add a bit more. Give us a role, an industry or a level.");
+			setGoalError(copy.form.goalTooShort);
 			return;
 		}
 
 		if (trimmedGoal.length > 500) {
-			setGoalError("Keep your goal under 500 characters.");
+			setGoalError(copy.form.goalTooLong);
 			return;
 		}
 
@@ -199,7 +183,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 		<form className="space-y-5" onSubmit={handleSubmit} noValidate>
 			{aiMode === "mock" ? (
 				<div className="rounded-md border border-weakness-border bg-weakness-tint px-4 py-2.5 text-sm text-weakness">
-					AI mock mode. Responses are simulated and no real API calls are made.
+					{copy.form.mockBanner}
 				</div>
 			) : null}
 
@@ -208,12 +192,12 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 					htmlFor="linkedin-username"
 					className="mb-2 block text-sm font-semibold text-ink"
 				>
-					Your LinkedIn username or profile URL
+					{copy.form.usernameLabel}
 				</label>
 				<div
-					className={`group flex items-center rounded-md border bg-surface transition-colors focus-within:border-primary focus-within:ring-4 focus-within:ring-primary/15 ${usernameError ? "border-threat" : "border-border-strong"}`}
+					className={`flex items-center rounded-md border bg-surface transition-colors focus-within:border-primary ${usernameError ? "border-threat" : "border-border-strong hover:border-muted"}`}
 				>
-					<span className="select-none pl-4 font-mono text-sm text-muted transition-colors group-focus-within:text-primary-ink">
+					<span className="select-none pl-4 font-mono text-sm text-muted">
 						linkedin.com/in/
 					</span>
 					<input
@@ -230,15 +214,14 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 						placeholder="janedoe"
 						aria-invalid={usernameError ? true : undefined}
 						aria-describedby="linkedin-username-help"
-						className="min-w-0 flex-1 bg-transparent py-3.5 pr-4 pl-0.5 text-base text-ink placeholder:text-muted/60 focus:outline-none"
+						className="min-w-0 flex-1 bg-transparent py-3.5 pr-4 pl-0.5 text-base text-ink placeholder:text-muted/60 focus:outline-none focus-visible:outline-none"
 					/>
 				</div>
 				<p
 					id="linkedin-username-help"
 					className={`mt-2 text-sm ${usernameError ? "text-threat" : "text-muted"}`}
 				>
-					{usernameError ??
-						"It's the part after /in/ in your profile link. Your profile has to be public."}
+					{usernameError ?? copy.form.usernameHelp}
 				</p>
 			</div>
 
@@ -248,7 +231,7 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 						htmlFor="career-goal"
 						className="block text-sm font-semibold text-ink"
 					>
-						What job do you want next?
+						{copy.form.goalLabel}
 					</label>
 					<span className="font-mono text-xs text-muted" aria-hidden>
 						{careerGoal.length}/{GOAL_MAX_LENGTH}
@@ -264,20 +247,19 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 					}}
 					rows={3}
 					maxLength={GOAL_MAX_LENGTH}
-					placeholder="Senior product manager at a B2B SaaS company, ideally remote"
+					placeholder={copy.form.goalPlaceholder}
 					aria-invalid={goalError ? true : undefined}
 					aria-describedby="career-goal-help"
-					className={`w-full resize-none rounded-md border bg-surface px-4 py-3 text-base text-ink placeholder:text-muted/60 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15 ${goalError ? "border-threat" : "border-border-strong"}`}
+					className={`w-full resize-none rounded-md border bg-surface px-4 py-3 text-base text-ink placeholder:text-muted/60 transition-colors focus:border-primary focus:outline-none focus-visible:outline-none ${goalError ? "border-threat" : "border-border-strong hover:border-muted"}`}
 				/>
 				<p
 					id="career-goal-help"
 					className={`mt-1.5 text-sm ${goalError ? "text-threat" : "text-muted"}`}
 				>
-					{goalError ??
-						'Be specific. "Move from backend engineering into DevOps" beats "a better job".'}
+					{goalError ?? copy.form.goalHelp}
 				</p>
 				<div className="mt-3 flex flex-wrap gap-2">
-					{GOAL_EXAMPLES.map((example) => (
+					{copy.form.goalExamples.map((example) => (
 						<button
 							key={example}
 							type="button"
@@ -311,19 +293,19 @@ export function HomeAnalysisForm({ aiMode }: HomeAnalysisFormProps) {
 					type="submit"
 					className="btn-primary flex w-full items-center justify-center gap-2 rounded-md px-6 py-4 text-base font-semibold"
 				>
-					Review my profile
+					{copy.form.submit}
 					<ArrowRightIcon className="size-4" aria-hidden />
 				</button>
 				<p className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-muted">
-					<span>Free</span>
+					<span>{copy.form.trustFree}</span>
 					<span aria-hidden className="text-border-strong">
 						/
 					</span>
-					<span>No signup</span>
+					<span>{copy.form.trustNoSignup}</span>
 					<span aria-hidden className="text-border-strong">
 						/
 					</span>
-					<span className="font-mono text-xs">~30 seconds</span>
+					<span className="font-mono text-xs">{copy.form.trustTime}</span>
 				</p>
 			</div>
 		</form>

@@ -12,7 +12,9 @@ import {
 	ValueStackSection,
 } from "#/components/home/LandingSections";
 import { SiteHeader } from "#/components/home/SiteHeader";
+import { StatsBand } from "#/components/home/StatsBand";
 import { TestimonialsSection } from "#/components/home/TestimonialsSection";
+import { useLanguage } from "#/lib/i18n";
 import { getAiMode } from "#/server/ai-mode";
 
 export const Route = createFileRoute("/")({
@@ -24,6 +26,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
 	const { aiMode } = Route.useLoaderData();
+	const { copy } = useLanguage();
 
 	return (
 		<div className="min-h-screen overflow-x-clip">
@@ -41,24 +44,22 @@ function Home() {
 									className="size-1.5 rounded-full bg-primary"
 									aria-hidden
 								/>
-								Free LinkedIn profile review
+								{copy.hero.eyebrow}
 							</p>
 							<h1
 								className="animate-rise font-display text-[2.5rem] leading-[1.02] font-semibold text-balance text-ink sm:text-6xl lg:text-[3.9rem]"
 								style={{ "--i": 1 } as React.CSSProperties}
 							>
-								Fix your profile for the job you{" "}
+								{copy.hero.titlePre}
 								<span className="highlight highlight-animate italic">
-									actually want
+									{copy.hero.titleHighlight}
 								</span>
 							</h1>
 							<p
 								className="animate-rise mt-5 max-w-xl text-lg leading-relaxed text-muted sm:text-xl"
 								style={{ "--i": 2 } as React.CSSProperties}
 							>
-								Enter your LinkedIn username and the role you're after. In about
-								30 seconds you get a score, a SWOT built around that goal, and
-								rewrites you can paste in.
+								{copy.hero.subtitle}
 							</p>
 
 							<div
@@ -79,6 +80,7 @@ function Home() {
 					</div>
 				</section>
 
+				<StatsBand />
 				<ProblemSection />
 				<HowItWorksSection />
 				<ValueStackSection />

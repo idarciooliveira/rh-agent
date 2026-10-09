@@ -1,3 +1,4 @@
+import { useLanguage } from "#/lib/i18n";
 import { QuoteIcon } from "#/lib/icons";
 import { TESTIMONIALS, type Testimonial } from "#/lib/testimonials";
 
@@ -53,7 +54,10 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 }
 
 export function TestimonialsSection() {
-	if (TESTIMONIALS.length === 0) {
+	const { lang, copy } = useLanguage();
+	const testimonials = TESTIMONIALS[lang];
+
+	if (testimonials.length === 0) {
 		return null;
 	}
 
@@ -65,14 +69,14 @@ export function TestimonialsSection() {
 			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
 				<div className="reveal mb-12 max-w-2xl">
 					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
-						From people who ran it
+						{copy.testimonials.eyebrow}
 					</p>
 					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
-						What changed after the review
+						{copy.testimonials.title}
 					</h2>
 				</div>
 				<ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-					{TESTIMONIALS.map((testimonial) => (
+					{testimonials.map((testimonial) => (
 						<TestimonialCard
 							key={`${testimonial.name}-${testimonial.date}`}
 							testimonial={testimonial}

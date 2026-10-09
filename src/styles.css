@@ -84,9 +84,12 @@ body {
 	color: var(--color-ink);
 }
 
-:focus-visible {
-	outline: 2px solid var(--color-primary);
-	outline-offset: 2px;
+/* Base layer so Tailwind utilities (e.g. focus:outline-none) can opt out. */
+@layer base {
+	:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 2px;
+	}
 }
 
 .font-display {

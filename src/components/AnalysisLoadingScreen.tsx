@@ -1,4 +1,5 @@
 import { createPortal } from "react-dom";
+import { useLanguage } from "#/lib/i18n";
 import { PenLineIcon } from "#/lib/icons";
 
 type AnalysisLoadingScreenProps = {
@@ -12,6 +13,7 @@ export function AnalysisLoadingScreen({
 	statusMessage,
 	progress,
 }: AnalysisLoadingScreenProps) {
+	const { copy } = useLanguage();
 	const clampedProgress = Math.min(100, Math.max(0, progress));
 
 	// Portal to <body> so animated (transformed) ancestors can't trap the fixed overlay.
@@ -68,8 +70,9 @@ export function AnalysisLoadingScreen({
 				</div>
 
 				<p className="mt-5 text-sm text-muted">
-					This takes about <span className="font-mono">15–30s</span>. Keep this
-					tab open.
+					{copy.form.loadingNotePre}
+					<span className="font-mono">{copy.form.loadingNoteTime}</span>
+					{copy.form.loadingNotePost}
 				</p>
 			</div>
 		</output>,
