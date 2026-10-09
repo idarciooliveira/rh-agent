@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 type ProfileScoreGaugeProps = {
 	score: number;
 };
@@ -5,17 +7,17 @@ type ProfileScoreGaugeProps = {
 export function ProfileScoreGauge({ score }: ProfileScoreGaugeProps) {
 	const radius = 54;
 	const circumference = 2 * Math.PI * radius;
-	const progress = (score / 100) * circumference;
-	const offset = circumference - progress;
+	const clamped = Math.max(0, Math.min(100, Math.round(score)));
+	const offset = circumference - (clamped / 100) * circumference;
 
 	return (
-		<div className="flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 shadow-sm">
-			<div className="relative size-36">
+		<section className="flex items-center gap-5 rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6 md:flex-col md:items-start">
+			<div className="relative size-28 shrink-0 sm:size-32">
 				<svg
 					className="size-full -rotate-90"
 					viewBox="0 0 120 120"
 					role="img"
-					aria-label={`Profile score ${score} out of 100`}
+					aria-label={`Profile score ${clamped} out of 100`}
 					suppressHydrationWarning
 				>
 					<circle
@@ -23,7 +25,7 @@ export function ProfileScoreGauge({ score }: ProfileScoreGaugeProps) {
 						cy="60"
 						r={radius}
 						fill="none"
-						stroke="#e5e7eb"
+						className="stroke-surface-2"
 						strokeWidth="10"
 					/>
 					<circle
@@ -31,20 +33,33 @@ export function ProfileScoreGauge({ score }: ProfileScoreGaugeProps) {
 						cy="60"
 						r={radius}
 						fill="none"
-						stroke="#f97316"
+						className="ring-animate stroke-primary"
 						strokeWidth="10"
 						strokeLinecap="round"
 						strokeDasharray={circumference}
 						strokeDashoffset={offset}
+						style={{ "--ring-length": circumference } as CSSProperties}
 					/>
 				</svg>
-				<div className="absolute inset-0 flex items-center justify-center">
-					<span className="text-4xl font-bold text-text">{score}</span>
+				<div className="absolute inset-0 flex flex-col items-center justify-center">
+					<span
+						className="count-up font-mono text-4xl font-medium text-ink"
+						style={{ "--target": clamped } as CSSProperties}
+						aria-hidden
+					/>
+					<span className="font-mono text-xs text-muted" aria-hidden>
+						/100
+					</span>
 				</div>
 			</div>
-			<p className="mt-4 text-xs font-semibold uppercase tracking-wider text-text-muted">
-				Profile Score
-			</p>
-		</div>
+			<div className="min-w-0">
+				<h2 className="font-display text-xl font-semibold text-ink">
+					Profile score
+				</h2>
+				<p className="mt-1 text-sm leading-relaxed text-muted">
+					How strong your profile is for this goal, out of 100.
+				</p>
+			</div>
+		</section>
 	);
 }

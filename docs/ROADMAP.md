@@ -117,6 +117,7 @@ The shipped MVP streamlined a few early design choices:
 - [x] Empty/not-found states (e.g. invalid `analysisId`)
 - [x] Loading states (analysis pipeline UI)
 - [x] Responsive layout pass (homepage + results)
+- [x] Rebrand to Redline: marketing homepage, new palette/type, results restyle (see `docs/brand/`)
 - [ ] Basic rate limiting on API routes
 - [ ] Railway Docker deployment (Node.js runtime for `unpdf`, SQLite volume at `/app/data`)
 - [ ] Manual QA with real LinkedIn PDFs

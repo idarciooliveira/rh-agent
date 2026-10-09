@@ -209,9 +209,9 @@ async function runTests() {
 		log(
 			"Results page loads (200)",
 			resultsPage.status === 200 &&
-				resultsPage.body.includes("Analysis Complete") &&
+				resultsPage.body.includes("Graded against your goal") &&
 				resultsPage.body.includes("Strengths"),
-			`status=${resultsPage.status}, has Analysis Complete=${resultsPage.body.includes("Analysis Complete")}`,
+			`status=${resultsPage.status}, has review header=${resultsPage.body.includes("Graded against your goal")}`,
 		);
 	} else {
 		log("Results page loads (200)", true, "Skipped — no analysisId");

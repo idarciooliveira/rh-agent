@@ -6,25 +6,29 @@ type QuickWinsPanelProps = {
 
 export function QuickWinsPanel({ quickWins }: QuickWinsPanelProps) {
 	return (
-		<div className="rounded-2xl bg-amber-50/80 p-5">
-			<div className="mb-5 flex items-center gap-2">
-				<ZapIcon className="size-5 text-orange-500" aria-hidden />
-				<h2 className="text-lg font-bold text-text">Quick Wins</h2>
+		<section className="rounded-xl bg-night p-5 text-background shadow-lift sm:p-6 lg:sticky lg:top-6">
+			<div className="mb-5">
+				<div className="flex items-center gap-2">
+					<ZapIcon className="size-5 text-accent" aria-hidden />
+					<h2 className="font-display text-2xl font-semibold text-background">
+						Quick wins
+					</h2>
+				</div>
+				<p className="mt-1 text-sm leading-relaxed text-night-muted">
+					Small fixes you can make today.
+				</p>
 			</div>
-			<div className="space-y-3">
+			<ul className="divide-y divide-white/10">
 				{quickWins.map((win) => (
-					<div
-						key={win}
-						className="flex items-start gap-3 rounded-xl border border-amber-100 bg-white p-4 shadow-sm"
-					>
+					<li key={win} className="flex items-start gap-3 py-3 first:pt-0">
 						<CheckCircle2Icon
-							className="mt-0.5 size-5 shrink-0 text-orange-500"
+							className="mt-0.5 size-5 shrink-0 text-accent"
 							aria-hidden
 						/>
-						<p className="text-sm leading-relaxed text-text">{win}</p>
-					</div>
+						<p className="text-[15px] leading-relaxed text-background">{win}</p>
+					</li>
 				))}
-			</div>
-		</div>
+			</ul>
+		</section>
 	);
 }

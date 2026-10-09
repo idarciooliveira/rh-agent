@@ -1,18 +1,69 @@
 @import "tailwindcss";
 
+/* Redline tokens, aligned with LinkedIn's palette so the product reads as "for LinkedIn".
+   See docs/brand/DESIGN_REFERENCES.md */
 @theme {
-	--color-surface: #f0f6ff;
+	--color-background: #f4f2ee;
+	--color-surface: #ffffff;
+	--color-surface-2: #eef3f8;
+	--color-ink: #191919;
+	--color-muted: #666666;
+	--color-border: #e0dfdc;
+	--color-border-strong: #b5b5b5;
+	--color-primary: #0a66c2;
+	--color-primary-foreground: #ffffff;
+	--color-primary-ink: #004182;
+	--color-accent: #dbe7f6;
+	--color-pen: #cc1016;
+	--color-open: #057642;
+	--color-night: #1b1f23;
+	--color-night-2: #293138;
+	--color-night-muted: #b0b7bf;
+
+	--color-strength: #057642;
+	--color-strength-tint: #e6f4ec;
+	--color-strength-border: #b4dcc4;
+	--color-weakness: #8f5b00;
+	--color-weakness-tint: #fcf2df;
+	--color-weakness-border: #f0d69e;
+	--color-opportunity: #0a66c2;
+	--color-opportunity-tint: #e8f1fb;
+	--color-opportunity-border: #b8d3ef;
+	--color-threat: #b24020;
+	--color-threat-tint: #fcebe5;
+	--color-threat-border: #f2c6b6;
+
+	/* Legacy aliases kept for older components (PdfUploadDropzone). */
+	--color-text: #191919;
+	--color-text-muted: #666666;
 	--color-card: #ffffff;
-	--color-primary: #2d5bff;
-	--color-primary-dark: #1e40af;
-	--color-text: #1e293b;
-	--color-text-muted: #6b7280;
-	--color-border: #e5e7eb;
-	--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+	/* LinkedIn uses the platform UI font. Matching it keeps the preview honest. */
+	--font-display:
+		-apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans",
+		Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial,
+		sans-serif;
+	--font-sans: var(--font-display);
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-lg: 8px;
+	--radius-xl: 12px;
+
+	--shadow-card: 0 0 0 1px rgb(140 140 140 / 0.2), 0 2px 3px rgb(0 0 0 / 0.04);
+	--shadow-lift: 0 0 0 1px rgb(140 140 140 / 0.2), 0 12px 32px -8px rgb(0 0 0 / 0.18);
+	--shadow-stamp: none;
 }
 
 * {
 	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 5rem;
 }
 
 html,
@@ -24,22 +75,216 @@ body,
 body {
 	margin: 0;
 	font-family: var(--font-sans);
+	background: var(--color-background);
+	color: var(--color-ink);
 }
 
-.page-gradient {
-	background: radial-gradient(
-		ellipse 120% 80% at 50% 0%,
-		var(--color-surface) 0%,
-		#ffffff 65%
-	);
+::selection {
+	background: var(--color-accent);
+	color: var(--color-ink);
 }
 
+/* Base layer so Tailwind utilities (e.g. focus:outline-none) can opt out. */
+@layer base {
+	:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 2px;
+	}
+}
+
+.font-display {
+	font-family: var(--font-display);
+	letter-spacing: -0.015em;
+}
+
+/* Soft blue wash for hero and loading screens. */
+.paper-grid {
+	background-color: var(--color-background);
+	background-image:
+		radial-gradient(60rem 30rem at 85% -10%, rgb(10 102 194 / 0.12), transparent 70%),
+		radial-gradient(40rem 24rem at -10% 10%, rgb(10 102 194 / 0.06), transparent 70%);
+}
+
+/* LinkedIn's default profile banner. */
+.li-banner {
+	background-color: #a0b4b7;
+	background-image:
+		radial-gradient(circle at 80% 20%, rgb(255 255 255 / 0.25), transparent 45%),
+		linear-gradient(135deg, #9db3c8 0%, #a0b4b7 55%, #c4cfd4 100%);
+}
+
+/* Primary CTA: LinkedIn-style blue pill. */
 .btn-primary {
-	background: linear-gradient(
-		180deg,
-		var(--color-primary) 0%,
-		var(--color-primary-dark) 100%
-	);
+	background: var(--color-primary);
+	color: var(--color-primary-foreground);
+	border-radius: 9999px;
+	transition:
+		background-color 150ms ease-out,
+		transform 80ms ease-out;
+}
+
+.btn-primary:hover {
+	background: var(--color-primary-ink);
+}
+
+.btn-primary:active {
+	transform: scale(0.98);
+}
+
+/* Secondary pill: blue outline, as on LinkedIn's "Message" / "More" buttons. */
+.btn-secondary {
+	color: var(--color-primary);
+	border: 1px solid var(--color-primary);
+	border-radius: 9999px;
+	transition:
+		background-color 150ms ease-out,
+		box-shadow 150ms ease-out;
+}
+
+.btn-secondary:hover {
+	background: var(--color-accent);
+	box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+/* Highlighter behind a word. Static by default, swiped in when motion is allowed. */
+.highlight {
+	position: relative;
+	z-index: 0;
+	white-space: nowrap;
+}
+
+.highlight::after {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	left: -0.08em;
+	right: -0.08em;
+	bottom: 0.08em;
+	height: 0.42em;
+	background: var(--color-accent);
+	border-radius: 2px;
+	transform: skewX(-8deg);
+	transform-origin: left center;
+}
+
+/* Red-pen strikethrough over replaced text. */
+.strike {
+	position: relative;
+	color: var(--color-muted);
+}
+
+.strike::before {
+	content: "";
+	position: absolute;
+	left: -2px;
+	right: -2px;
+	top: 52%;
+	height: 2px;
+	background: var(--color-pen);
+	border-radius: 2px;
+	transform: rotate(-1.5deg);
+	transform-origin: left center;
+}
+
+/* Score counter. Shows the final value by default, counts up when motion is allowed. */
+@property --num {
+	syntax: "<integer>";
+	initial-value: 0;
+	inherits: false;
+}
+
+.count-up {
+	--num: var(--target);
+	counter-reset: num var(--num);
+}
+
+.count-up::after {
+	content: counter(num);
+}
+
+/* Details/summary FAQ marker. */
+.faq-item summary {
+	list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+	display: none;
+}
+
+.faq-item[open] .faq-icon {
+	transform: rotate(45deg);
+}
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes swipe {
+	from {
+		transform: skewX(-8deg) scaleX(0);
+	}
+	to {
+		transform: skewX(-8deg) scaleX(1);
+	}
+}
+
+@keyframes strike {
+	from {
+		transform: rotate(-1.5deg) scaleX(0);
+	}
+	to {
+		transform: rotate(-1.5deg) scaleX(1);
+	}
+}
+
+@keyframes count {
+	from {
+		--num: 0;
+	}
+	to {
+		--num: var(--target);
+	}
+}
+
+@keyframes ring-fill {
+	from {
+		stroke-dashoffset: var(--ring-length);
+	}
+}
+
+@keyframes bar-fill {
+	from {
+		transform: scaleX(0);
+	}
+}
+
+@keyframes pen-scan {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(var(--scan-distance, 220px));
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: rotate(-1.5deg) translateY(0);
+	}
+	50% {
+		transform: rotate(-1.5deg) translateY(-6px);
+	}
 }
 
 @keyframes spin-arc {
@@ -48,6 +293,52 @@ body {
 	}
 }
 
-.spinner-arc {
-	animation: spin-arc 1s linear infinite;
+@media (prefers-reduced-motion: no-preference) {
+	.animate-rise {
+		animation: rise 500ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+		animation-delay: calc(var(--i, 0) * 80ms);
+	}
+
+	.highlight-animate::after {
+		animation: swipe 600ms cubic-bezier(0.2, 0.7, 0.2, 1) 400ms both;
+	}
+
+	.strike-animate::before {
+		animation: strike 500ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+		animation-delay: var(--strike-delay, 900ms);
+	}
+
+	.count-up {
+		animation: count 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	.ring-animate {
+		animation: ring-fill 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	.bar-animate {
+		transform-origin: left center;
+		animation: bar-fill 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	.pen-scan {
+		animation: pen-scan 2.4s ease-in-out infinite;
+	}
+
+	.float-card {
+		animation: float 6s ease-in-out infinite;
+	}
+
+	.spinner-arc {
+		animation: spin-arc 1s linear infinite;
+	}
+
+	/* Sections fade up as they scroll in, where scroll timelines are supported. */
+	@supports (animation-timeline: view()) {
+		.reveal {
+			animation: rise linear both;
+			animation-timeline: view();
+			animation-range: entry 0% entry 40%;
+		}
+	}
 }

@@ -10,36 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ResultsAnalysisIdRouteImport } from './routes/results.$analysisId'
-import { Route as ApiUploadRouteImport } from './routes/api/upload'
-import { Route as ApiProfileRouteImport } from './routes/api/profile'
-import { Route as ApiParseRouteImport } from './routes/api/parse'
-import { Route as ApiFetchProfileRouteImport } from './routes/api/fetch-profile'
 import { Route as ApiAnalyzeRouteImport } from './routes/api/analyze'
+import { Route as ApiFetchProfileRouteImport } from './routes/api/fetch-profile'
+import { Route as ApiParseRouteImport } from './routes/api/parse'
+import { Route as ApiProfileRouteImport } from './routes/api/profile'
+import { Route as ApiUploadRouteImport } from './routes/api/upload'
+import { Route as ResultsAnalysisIdRouteImport } from './routes/results.$analysisId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResultsAnalysisIdRoute = ResultsAnalysisIdRouteImport.update({
-  id: '/results/$analysisId',
-  path: '/results/$analysisId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiUploadRoute = ApiUploadRouteImport.update({
-  id: '/api/upload',
-  path: '/api/upload',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiProfileRoute = ApiProfileRouteImport.update({
-  id: '/api/profile',
-  path: '/api/profile',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiParseRoute = ApiParseRouteImport.update({
-  id: '/api/parse',
-  path: '/api/parse',
+const ApiAnalyzeRoute = ApiAnalyzeRouteImport.update({
+  id: '/api/analyze',
+  path: '/api/analyze',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiFetchProfileRoute = ApiFetchProfileRouteImport.update({
@@ -47,9 +32,24 @@ const ApiFetchProfileRoute = ApiFetchProfileRouteImport.update({
   path: '/api/fetch-profile',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAnalyzeRoute = ApiAnalyzeRouteImport.update({
-  id: '/api/analyze',
-  path: '/api/analyze',
+const ApiParseRoute = ApiParseRouteImport.update({
+  id: '/api/parse',
+  path: '/api/parse',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiProfileRoute = ApiProfileRouteImport.update({
+  id: '/api/profile',
+  path: '/api/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiUploadRoute = ApiUploadRouteImport.update({
+  id: '/api/upload',
+  path: '/api/upload',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResultsAnalysisIdRoute = ResultsAnalysisIdRouteImport.update({
+  id: '/results/$analysisId',
+  path: '/results/$analysisId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -130,32 +130,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/results/$analysisId': {
-      id: '/results/$analysisId'
-      path: '/results/$analysisId'
-      fullPath: '/results/$analysisId'
-      preLoaderRoute: typeof ResultsAnalysisIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/upload': {
-      id: '/api/upload'
-      path: '/api/upload'
-      fullPath: '/api/upload'
-      preLoaderRoute: typeof ApiUploadRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/profile': {
-      id: '/api/profile'
-      path: '/api/profile'
-      fullPath: '/api/profile'
-      preLoaderRoute: typeof ApiProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/parse': {
-      id: '/api/parse'
-      path: '/api/parse'
-      fullPath: '/api/parse'
-      preLoaderRoute: typeof ApiParseRouteImport
+    '/api/analyze': {
+      id: '/api/analyze'
+      path: '/api/analyze'
+      fullPath: '/api/analyze'
+      preLoaderRoute: typeof ApiAnalyzeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/fetch-profile': {
@@ -165,11 +144,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiFetchProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/analyze': {
-      id: '/api/analyze'
-      path: '/api/analyze'
-      fullPath: '/api/analyze'
-      preLoaderRoute: typeof ApiAnalyzeRouteImport
+    '/api/parse': {
+      id: '/api/parse'
+      path: '/api/parse'
+      fullPath: '/api/parse'
+      preLoaderRoute: typeof ApiParseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/profile': {
+      id: '/api/profile'
+      path: '/api/profile'
+      fullPath: '/api/profile'
+      preLoaderRoute: typeof ApiProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/upload': {
+      id: '/api/upload'
+      path: '/api/upload'
+      fullPath: '/api/upload'
+      preLoaderRoute: typeof ApiUploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/results/$analysisId': {
+      id: '/results/$analysisId'
+      path: '/results/$analysisId'
+      fullPath: '/results/$analysisId'
+      preLoaderRoute: typeof ResultsAnalysisIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
