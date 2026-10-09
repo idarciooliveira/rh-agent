@@ -1,9 +1,12 @@
-import { SparklesIcon } from "#/lib/icons";
+import { createPortal } from "react-dom";
+import { PenLineIcon } from "#/lib/icons";
 
 type AnalysisLoadingScreenProps = {
 	statusMessage: string;
 	progress: number;
 };
+
+const SKELETON_LINES = ["w-11/12", "w-4/5", "w-full", "w-3/5", "w-5/6"];
 
 export function AnalysisLoadingScreen({
 	statusMessage,
@@ -11,54 +14,65 @@ export function AnalysisLoadingScreen({
 }: AnalysisLoadingScreenProps) {
 	const clampedProgress = Math.min(100, Math.max(0, progress));
 
-	return (
+	// Portal to <body> so animated (transformed) ancestors can't trap the fixed overlay.
+	return createPortal(
 		<output
-			className="page-gradient fixed inset-0 z-50 flex flex-col items-center justify-center px-6"
+			className="paper-grid fixed inset-0 z-50 flex flex-col items-center justify-center overflow-y-auto px-5 py-10"
 			aria-live="polite"
 		>
 			<div className="flex w-full max-w-md flex-col items-center text-center">
-				<div className="flex size-20 items-center justify-center rounded-full bg-card shadow-lg shadow-primary/10">
-					<svg
-						className="spinner-arc size-10"
-						viewBox="0 0 40 40"
-						fill="none"
+				<p className="font-display text-2xl font-semibold text-ink">
+					Red<span className="text-primary-ink">line</span>
+				</p>
+
+				<div className="relative mt-8 w-full overflow-hidden rounded-lg border border-border bg-surface p-5 text-left shadow-lift">
+					<div className="flex items-center gap-3">
+						<div className="size-12 shrink-0 rounded-full bg-surface-2" />
+						<div className="flex-1 space-y-2">
+							<div className="h-3 w-2/5 rounded-full bg-surface-2" />
+							<div className="h-2.5 w-3/4 rounded-full bg-surface-2" />
+						</div>
+					</div>
+					<div className="mt-6 space-y-3">
+						{SKELETON_LINES.map((width) => (
+							<div
+								key={width}
+								className={`h-2.5 rounded-full bg-surface-2 ${width}`}
+							/>
+						))}
+					</div>
+					<div className="mt-6 flex gap-2">
+						<div className="h-6 w-16 rounded-full bg-strength-tint" />
+						<div className="h-6 w-20 rounded-full bg-weakness-tint" />
+						<div className="h-6 w-14 rounded-full bg-opportunity-tint" />
+					</div>
+					<div
+						className="pen-scan pointer-events-none absolute inset-x-0 top-4 flex items-center"
+						style={{ "--scan-distance": "190px" } as React.CSSProperties}
 						aria-hidden
-						suppressHydrationWarning
 					>
-						<title>Loading</title>
-						<circle
-							cx="20"
-							cy="20"
-							r="16"
-							stroke="var(--color-border)"
-							strokeWidth="3"
-						/>
-						<circle
-							cx="20"
-							cy="20"
-							r="16"
-							stroke="var(--color-primary)"
-							strokeWidth="3"
-							strokeLinecap="round"
-							strokeDasharray="50 100"
-						/>
-					</svg>
+						<div className="h-0.5 flex-1 bg-primary shadow-[0_0_12px_rgb(255_90_54/0.6)]" />
+						<PenLineIcon className="mr-2 size-4 text-primary-ink" />
+					</div>
 				</div>
 
-				<p className="mt-8 text-xl font-semibold text-text">{statusMessage}</p>
+				<p className="mt-8 min-h-14 text-lg font-semibold text-balance text-ink sm:text-xl">
+					{statusMessage}
+				</p>
 
-				<div className="mt-6 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-border">
+				<div className="mt-4 h-1.5 w-full max-w-xs overflow-hidden rounded-full bg-border">
 					<div
 						className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
 						style={{ width: `${clampedProgress}%` }}
 					/>
 				</div>
 
-				<p className="mt-6 flex items-center gap-2 text-sm text-text-muted">
-					<SparklesIcon className="size-4 shrink-0 text-primary" aria-hidden />
-					AI is analysing your profile — this takes about 15–30 seconds
+				<p className="mt-5 text-sm text-muted">
+					This takes about <span className="font-mono">15–30s</span>. Keep this
+					tab open.
 				</p>
 			</div>
-		</output>
+		</output>,
+		document.body,
 	);
 }

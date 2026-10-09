@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useId, useState } from "react";
 import type { Recommendations } from "#/lib/analysis-schema";
 import {
 	CheckIcon,
 	ChevronDownIcon,
 	CopyIcon,
-	SparklesIcon,
+	GraduationCapIcon,
+	PenLineIcon,
+	PlusIcon,
 	XIcon,
 } from "#/lib/icons";
 import type { Profile } from "#/lib/profile-schema";
@@ -36,23 +38,24 @@ function CopyButton({ label, text }: { label: string; text: string }) {
 		<button
 			type="button"
 			onClick={() => void handleCopy()}
-			className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-white px-3 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface"
+			aria-label={copied ? `Copied ${label}` : `Copy ${label}`}
+			className="inline-flex items-center gap-1.5 rounded-sm border border-border-strong bg-surface px-3 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-surface-2"
 		>
 			{copied ? (
-				<CheckIcon className="size-3.5 text-green-600" aria-hidden />
+				<CheckIcon className="size-3.5 text-strength" aria-hidden />
 			) : (
 				<CopyIcon className="size-3.5" aria-hidden />
 			)}
-			{copied ? "Copied!" : label}
+			<span aria-live="polite">{copied ? "Copied" : "Copy"}</span>
 		</button>
 	);
 }
 
-function AiImprovedBadge() {
+function RedlineEditBadge() {
 	return (
-		<span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700">
-			<SparklesIcon className="size-3" aria-hidden />
-			AI improved
+		<span className="inline-flex items-center gap-1 rounded-sm border border-ink/15 bg-accent/60 px-2 py-0.5 text-xs font-semibold text-ink">
+			<PenLineIcon className="size-3" aria-hidden />
+			Redline edit
 		</span>
 	);
 }
@@ -68,9 +71,10 @@ function ToggleOriginal({
 		<button
 			type="button"
 			onClick={onToggle}
-			className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+			aria-pressed={showOriginal}
+			className="inline-flex items-center gap-1 py-1.5 text-sm font-medium text-primary-ink hover:underline"
 		>
-			{showOriginal ? "See improved" : "See original"}
+			{showOriginal ? "See edit" : "See original"}
 			<ChevronDownIcon
 				className={`size-3.5 transition-transform ${showOriginal ? "rotate-180" : ""}`}
 				aria-hidden
@@ -78,6 +82,19 @@ function ToggleOriginal({
 		</button>
 	);
 }
+
+function SectionLabel({ children }: { children: ReactNode }) {
+	return (
+		<h3 className="mb-3 font-display text-lg font-semibold text-ink">
+			{children}
+		</h3>
+	);
+}
+
+const improvedBoxClass =
+	"rounded-md border border-accent bg-accent/25 p-4 text-[15px] leading-relaxed text-ink";
+const originalBoxClass =
+	"rounded-md border border-border bg-surface-2 p-4 text-[15px] leading-relaxed text-muted";
 
 function ImprovedTextBlock({
 	improved,
@@ -89,12 +106,17 @@ function ImprovedTextBlock({
 	copyLabel: string;
 }) {
 	const [showOriginal, setShowOriginal] = useState(false);
-	const displayText = showOriginal ? original : improved;
 
 	return (
 		<div>
 			<div className="mb-2 flex flex-wrap items-center gap-2">
-				<AiImprovedBadge />
+				{showOriginal ? (
+					<span className="text-xs font-semibold uppercase tracking-wide text-muted">
+						Original
+					</span>
+				) : (
+					<RedlineEditBadge />
+				)}
 				{!showOriginal ? (
 					<CopyButton label={copyLabel} text={improved} />
 				) : null}
@@ -104,9 +126,9 @@ function ImprovedTextBlock({
 				/>
 			</div>
 			<div
-				className={`rounded-lg p-4 text-sm leading-relaxed text-text ${showOriginal ? "bg-gray-50" : "bg-amber-50"}`}
+				className={`whitespace-pre-line ${showOriginal ? originalBoxClass : improvedBoxClass}`}
 			>
-				{displayText}
+				{showOriginal ? original || "Nothing here yet." : improved}
 			</div>
 		</div>
 	);
@@ -123,34 +145,34 @@ function ExperienceEntry({
 	const originalDesc = exp.description ?? "No description provided.";
 
 	return (
-		<div className="border-b border-border pb-6 last:border-0">
+		<div className="border-b border-border pb-6 last:border-0 last:pb-0">
 			<div className="flex items-start justify-between gap-3">
-				<div className="flex gap-3">
-					<div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xs font-bold text-text-muted">
+				<div className="flex min-w-0 gap-3">
+					<div className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-surface-2 font-mono text-xs font-medium text-muted">
 						{exp.company.slice(0, 2).toUpperCase()}
 					</div>
-					<div>
-						<p className="font-semibold text-text">{exp.title}</p>
-						<p className="text-sm text-text-muted">{exp.company}</p>
-						<p className="text-xs text-text-muted">
+					<div className="min-w-0">
+						<p className="font-semibold text-ink">{exp.title}</p>
+						<p className="text-sm text-muted">{exp.company}</p>
+						<p className="font-mono text-xs text-muted">
 							{[exp.startDate, exp.endDate].filter(Boolean).join(" – ")}
 						</p>
 					</div>
 				</div>
-				{improvedBullets.length > 0 ? <AiImprovedBadge /> : null}
+				{improvedBullets.length > 0 && !showOriginal ? (
+					<span className="shrink-0">
+						<RedlineEditBadge />
+					</span>
+				) : null}
 			</div>
 
 			{improvedBullets.length > 0 ? (
 				<div className="mt-3">
-					<div
-						className={`rounded-lg p-4 ${showOriginal ? "bg-gray-50" : "bg-amber-50"}`}
-					>
+					<div className={showOriginal ? originalBoxClass : improvedBoxClass}>
 						{showOriginal ? (
-							<p className="text-sm leading-relaxed text-text">
-								{originalDesc}
-							</p>
+							<p className="whitespace-pre-line">{originalDesc}</p>
 						) : (
-							<ul className="list-disc space-y-1 pl-4 text-sm leading-relaxed text-text">
+							<ul className="list-disc space-y-1 pl-4">
 								{improvedBullets.map((bullet) => (
 									<li key={bullet}>{bullet}</li>
 								))}
@@ -160,7 +182,7 @@ function ExperienceEntry({
 					<div className="mt-2 flex flex-wrap items-center gap-2">
 						{!showOriginal ? (
 							<CopyButton
-								label="Copy description"
+								label={`${exp.title} description`}
 								text={improvedBullets.map((b) => `• ${b}`).join("\n")}
 							/>
 						) : null}
@@ -171,7 +193,9 @@ function ExperienceEntry({
 					</div>
 				</div>
 			) : (
-				<p className="mt-3 text-sm text-text-muted">{originalDesc}</p>
+				<p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-muted">
+					{originalDesc}
+				</p>
 			)}
 		</div>
 	);
@@ -182,6 +206,9 @@ export function OptimizedProfilePreviewModal({
 	recommendations,
 	onClose,
 }: OptimizedProfilePreviewModalProps) {
+	const titleId = useId();
+	const descriptionId = useId();
+
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
 			if (event.key === "Escape") {
@@ -201,73 +228,90 @@ export function OptimizedProfilePreviewModal({
 	const experienceRecMap = new Map(
 		recommendations.experiences.map((rec) => [rec.index, rec]),
 	);
+	const initials = getInitials(profile.name);
 
 	return (
-		<div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/50 p-4 sm:p-8">
-			<div className="relative my-4 w-full max-w-2xl rounded-2xl bg-white shadow-2xl">
-				<div className="flex items-center justify-between rounded-t-2xl bg-teal-600 px-5 py-3 text-sm font-medium text-white">
-					<span>
-						✨ This is your optimized profile preview — changes are highlighted
-					</span>
+		<div className="fixed inset-0 z-50 flex items-end bg-ink/60 pt-4 sm:items-start sm:justify-center sm:overflow-y-auto sm:p-8">
+			<div
+				role="dialog"
+				aria-modal="true"
+				aria-labelledby={titleId}
+				aria-describedby={descriptionId}
+				className="relative flex h-full w-full flex-col overflow-hidden rounded-t-xl bg-surface shadow-lift sm:my-4 sm:h-auto sm:max-w-2xl sm:rounded-xl"
+			>
+				<div className="flex shrink-0 items-start justify-between gap-3 border-b border-border bg-background px-5 py-4">
+					<div className="min-w-0">
+						<h2
+							id={titleId}
+							className="flex items-center gap-2 font-display text-xl font-semibold text-ink"
+						>
+							<PenLineIcon className="size-5 text-primary-ink" aria-hidden />
+							Your rewritten profile
+						</h2>
+						<p
+							id={descriptionId}
+							className="mt-1 text-sm leading-relaxed text-muted"
+						>
+							Copy each section into LinkedIn. Read it first and change anything
+							that isn't true or doesn't sound like you.
+						</p>
+					</div>
 					<button
 						type="button"
 						onClick={onClose}
-						className="rounded p-1 hover:bg-teal-700"
-						aria-label="Close preview"
+						className="-mr-1 shrink-0 rounded-sm p-2 text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+						aria-label="Close"
 					>
-						<XIcon className="size-4" aria-hidden />
+						<XIcon className="size-5" aria-hidden />
 					</button>
 				</div>
 
-				<div className="p-0">
-					<div className="relative h-28 bg-gradient-to-r from-blue-600 to-purple-600" />
-					<div className="relative px-6 pb-6">
-						<div className="-mt-12 mb-4 flex size-20 items-center justify-center rounded-full border-4 border-white bg-blue-600 text-2xl font-bold text-white">
-							{getInitials(profile.name)}
+				<div className="min-h-0 flex-1 overflow-y-auto sm:overflow-visible">
+					<div
+						className="paper-grid relative h-24 border-b border-border sm:h-28"
+						aria-hidden
+					>
+						<div className="absolute inset-x-0 bottom-0 h-1.5 bg-primary" />
+					</div>
+					<div className="relative px-5 pb-6 sm:px-6">
+						<div className="-mt-10 mb-4 flex size-20 items-center justify-center rounded-full border-4 border-surface bg-ink font-display text-2xl font-semibold text-background">
+							{initials}
 						</div>
 
-						<h2 className="flex items-center gap-2 text-xl font-bold text-text">
+						<p className="font-display text-2xl font-semibold text-ink">
 							{profile.name}
-							<span className="text-primary" aria-hidden>
-								✓
-							</span>
-						</h2>
+						</p>
+						{profile.location ? (
+							<p className="mt-1 text-sm text-muted">{profile.location}</p>
+						) : null}
+						{profile.experiences[0] || profile.education[0] ? (
+							<p className="mt-1 text-sm text-muted">
+								{[profile.experiences[0]?.company, profile.education[0]?.school]
+									.filter(Boolean)
+									.join(" · ")}
+							</p>
+						) : null}
 
-						<div className="mt-4">
+						<section className="mt-6">
+							<SectionLabel>Headline</SectionLabel>
 							<ImprovedTextBlock
 								improved={recommendations.headline.improved}
 								original={profile.headline}
-								copyLabel="Copy improved headline"
-							/>
-						</div>
-
-						{profile.location ? (
-							<p className="mt-4 text-sm text-text-muted">{profile.location}</p>
-						) : null}
-
-						{profile.experiences[0] ? (
-							<p className="mt-1 text-sm text-text-muted">
-								{profile.experiences[0].company}
-							</p>
-						) : null}
-
-						{profile.education[0] ? (
-							<p className="mt-1 text-sm text-text-muted">
-								{profile.education[0].school}
-							</p>
-						) : null}
-
-						<section className="mt-8">
-							<h3 className="mb-4 text-base font-bold text-text">About</h3>
-							<ImprovedTextBlock
-								improved={recommendations.about.improved}
-								original={profile.about}
-								copyLabel="Copy improved about"
+								copyLabel="headline"
 							/>
 						</section>
 
 						<section className="mt-8">
-							<h3 className="mb-4 text-base font-bold text-text">Experience</h3>
+							<SectionLabel>About</SectionLabel>
+							<ImprovedTextBlock
+								improved={recommendations.about.improved}
+								original={profile.about}
+								copyLabel="About section"
+							/>
+						</section>
+
+						<section className="mt-8">
+							<SectionLabel>Experience</SectionLabel>
 							<div className="space-y-6">
 								{profile.experiences.map((exp, index) => {
 									const rec = experienceRecMap.get(index);
@@ -284,101 +328,105 @@ export function OptimizedProfilePreviewModal({
 							</div>
 						</section>
 
-						<section className="mt-8">
-							<h3 className="mb-4 text-base font-bold text-text">Education</h3>
-							<div className="space-y-4">
-								{profile.education.map((edu) => (
-									<div key={edu.school} className="flex gap-3">
-										<div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-blue-50 text-primary">
-											🎓
+						{profile.education.length > 0 ? (
+							<section className="mt-8">
+								<SectionLabel>Education</SectionLabel>
+								<div className="space-y-4">
+									{profile.education.map((edu) => (
+										<div key={edu.school} className="flex gap-3">
+											<div className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-surface-2 text-muted">
+												<GraduationCapIcon className="size-5" aria-hidden />
+											</div>
+											<div className="min-w-0">
+												<p className="font-semibold text-ink">{edu.school}</p>
+												<p className="text-sm text-muted">
+													{[edu.degree, edu.field].filter(Boolean).join(", ")}
+												</p>
+												<p className="font-mono text-xs text-muted">
+													{[edu.startDate, edu.endDate]
+														.filter(Boolean)
+														.join(" – ")}
+												</p>
+											</div>
 										</div>
-										<div>
-											<p className="font-semibold text-text">{edu.school}</p>
-											<p className="text-sm text-text-muted">
-												{[edu.degree, edu.field].filter(Boolean).join(", ")}
-											</p>
-											<p className="text-xs text-text-muted">
-												{[edu.startDate, edu.endDate]
-													.filter(Boolean)
-													.join(" – ")}
-											</p>
-										</div>
-									</div>
-								))}
-							</div>
-						</section>
+									))}
+								</div>
+							</section>
+						) : null}
 
 						<section className="mt-8">
-							<h3 className="mb-4 text-base font-bold text-text">Skills</h3>
-							<div className="flex flex-wrap gap-2">
-								{profile.skills.map((skill) => (
-									<span
-										key={skill}
-										className="rounded-full border border-border bg-white px-3 py-1 text-xs font-medium text-text"
-									>
-										{skill}
-									</span>
-								))}
-								{recommendations.skills.suggested.map((skill) => (
-									<span
-										key={skill}
-										className="inline-flex items-center gap-1 rounded-full border border-green-300 bg-green-50 px-3 py-1 text-xs font-medium text-green-700"
-									>
-										<SparklesIcon className="size-3" aria-hidden />
-										{skill}
-									</span>
-								))}
-							</div>
+							<SectionLabel>Skills to add</SectionLabel>
 							{recommendations.skills.suggested.length > 0 ? (
-								<p className="mt-3 text-xs text-text-muted">
-									Green skills are AI-suggested additions for your career goal.
+								<div className="flex flex-wrap gap-2">
+									{recommendations.skills.suggested.map((skill) => (
+										<span
+											key={skill}
+											className="inline-flex items-center gap-1 rounded-sm border border-strength-border bg-strength-tint px-2.5 py-1 text-sm font-medium text-strength"
+										>
+											<PlusIcon className="size-3.5" aria-hidden />
+											{skill}
+										</span>
+									))}
+								</div>
+							) : (
+								<p className="text-sm text-muted">
+									No new skills to add for this goal.
 								</p>
+							)}
+							{profile.skills.length > 0 ? (
+								<>
+									<p className="mt-4 mb-2 text-xs font-semibold uppercase tracking-wide text-muted">
+										Already on your profile
+									</p>
+									<div className="flex flex-wrap gap-2">
+										{profile.skills.map((skill) => (
+											<span
+												key={skill}
+												className="rounded-sm border border-border bg-surface-2 px-2.5 py-1 text-sm text-muted"
+											>
+												{skill}
+											</span>
+										))}
+									</div>
+								</>
 							) : null}
 						</section>
 
 						<section className="mt-8">
-							<h3 className="mb-4 text-base font-bold text-text">
-								Suggested Activity Post
-							</h3>
-							<div className="rounded-xl border border-blue-100 bg-blue-50/50 p-4">
+							<SectionLabel>Post to publish</SectionLabel>
+							<div className="rounded-lg border border-border bg-background p-4">
 								<div className="mb-3 flex items-center gap-2">
-									<div className="flex size-8 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
-										{getInitials(profile.name)}
+									<div className="flex size-8 items-center justify-center rounded-full bg-ink text-xs font-semibold text-background">
+										{initials}
 									</div>
-									<div>
-										<p className="text-sm font-semibold text-text">
+									<div className="min-w-0">
+										<p className="text-sm font-semibold text-ink">
 											{profile.name}
 										</p>
-										<p className="text-xs text-text-muted">
-											Post · Suggested for your goal
-										</p>
+										<p className="text-xs text-muted">Draft post</p>
 									</div>
 								</div>
-								<p className="whitespace-pre-line text-sm leading-relaxed text-text">
+								<p className="whitespace-pre-line text-[15px] leading-relaxed text-ink">
 									{recommendations.suggestedActivityPost}
 								</p>
 								<div className="mt-3">
 									<CopyButton
-										label="Copy post"
+										label="post"
 										text={recommendations.suggestedActivityPost}
 									/>
 								</div>
 							</div>
-							<p className="mt-2 text-xs text-text-muted">
-								Publishing content like this regularly signals your expertise to
-								your target audience.
-							</p>
 						</section>
 					</div>
 				</div>
 
-				<div className="border-t border-border p-4">
+				<div className="shrink-0 border-t border-border bg-surface p-4">
 					<button
 						type="button"
 						onClick={onClose}
-						className="w-full rounded-full border border-border bg-white py-3 text-sm font-medium text-text transition-colors hover:bg-surface"
+						className="w-full rounded-md border border-border-strong bg-surface py-3 text-sm font-medium text-ink transition-colors hover:bg-surface-2"
 					>
-						Close Preview
+						Close
 					</button>
 				</div>
 			</div>

@@ -1,18 +1,61 @@
 @import "tailwindcss";
 
+/* Redline brand tokens. See docs/brand/DESIGN_REFERENCES.md */
 @theme {
-	--color-surface: #f0f6ff;
+	--color-background: #faf7f2;
+	--color-surface: #ffffff;
+	--color-surface-2: #f2ede4;
+	--color-ink: #1b1a17;
+	--color-muted: #5f5a52;
+	--color-border: #e4ddd0;
+	--color-border-strong: #cfc6b6;
+	--color-primary: #ff5a36;
+	--color-primary-foreground: #1b1a17;
+	--color-primary-ink: #b83a1a;
+	--color-accent: #ffe14d;
+	--color-night: #14130f;
+	--color-night-2: #22201b;
+	--color-night-muted: #a8a196;
+
+	--color-strength: #17663f;
+	--color-strength-tint: #e5f3ea;
+	--color-strength-border: #b9dec6;
+	--color-weakness: #8a5200;
+	--color-weakness-tint: #fbefd6;
+	--color-weakness-border: #f0d49a;
+	--color-opportunity: #0b5c6b;
+	--color-opportunity-tint: #e0f1f3;
+	--color-opportunity-border: #b3dce2;
+	--color-threat: #a3341a;
+	--color-threat-tint: #fce9e2;
+	--color-threat-border: #f2c3b4;
+
+	/* Legacy aliases kept for older components (PdfUploadDropzone). */
+	--color-text: #1b1a17;
+	--color-text-muted: #5f5a52;
 	--color-card: #ffffff;
-	--color-primary: #2d5bff;
-	--color-primary-dark: #1e40af;
-	--color-text: #1e293b;
-	--color-text-muted: #6b7280;
-	--color-border: #e5e7eb;
-	--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+	--font-display: "Fraunces", ui-serif, Georgia, serif;
+	--font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+	--font-mono: "Geist Mono", ui-monospace, monospace;
+
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 16px;
+	--radius-xl: 24px;
+
+	--shadow-card: 0 1px 0 #e4ddd0, 0 12px 32px -16px rgb(27 26 23 / 0.18);
+	--shadow-lift: 0 1px 0 #cfc6b6, 0 24px 48px -20px rgb(27 26 23 / 0.28);
+	--shadow-stamp: 3px 3px 0 #1b1a17;
 }
 
 * {
 	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 5rem;
 }
 
 html,
@@ -24,22 +67,196 @@ body,
 body {
 	margin: 0;
 	font-family: var(--font-sans);
+	background: var(--color-background);
+	color: var(--color-ink);
 }
 
-.page-gradient {
-	background: radial-gradient(
-		ellipse 120% 80% at 50% 0%,
-		var(--color-surface) 0%,
-		#ffffff 65%
-	);
+::selection {
+	background: var(--color-accent);
+	color: var(--color-ink);
 }
 
+:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
+}
+
+.font-display {
+	font-family: var(--font-display);
+	font-optical-sizing: auto;
+	font-variation-settings: "SOFT" 30;
+	letter-spacing: -0.02em;
+}
+
+/* Subtle ruled-paper texture for hero and loading screens. */
+.paper-grid {
+	background-color: var(--color-background);
+	background-image:
+		linear-gradient(to right, rgb(27 26 23 / 0.04) 1px, transparent 1px),
+		linear-gradient(to bottom, rgb(27 26 23 / 0.04) 1px, transparent 1px);
+	background-size: 32px 32px;
+}
+
+/* Primary CTA: coral fill, ink text, hard offset "stamp" shadow. */
 .btn-primary {
-	background: linear-gradient(
-		180deg,
-		var(--color-primary) 0%,
-		var(--color-primary-dark) 100%
-	);
+	background: var(--color-primary);
+	color: var(--color-primary-foreground);
+	border: 1.5px solid var(--color-ink);
+	box-shadow: var(--shadow-stamp);
+	transition:
+		transform 80ms ease-out,
+		box-shadow 80ms ease-out,
+		background-color 150ms ease-out;
+}
+
+.btn-primary:hover {
+	background: #ff6e4f;
+}
+
+.btn-primary:active {
+	transform: translate(3px, 3px);
+	box-shadow: 0 0 0 var(--color-ink);
+}
+
+/* Highlighter behind a word. Static by default, swiped in when motion is allowed. */
+.highlight {
+	position: relative;
+	z-index: 0;
+	white-space: nowrap;
+}
+
+.highlight::after {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	left: -0.08em;
+	right: -0.08em;
+	bottom: 0.08em;
+	height: 0.42em;
+	background: var(--color-accent);
+	border-radius: 2px;
+	transform: skewX(-8deg);
+	transform-origin: left center;
+}
+
+/* Red-pen strikethrough over replaced text. */
+.strike {
+	position: relative;
+	color: var(--color-muted);
+}
+
+.strike::before {
+	content: "";
+	position: absolute;
+	left: -2px;
+	right: -2px;
+	top: 52%;
+	height: 2px;
+	background: var(--color-primary);
+	border-radius: 2px;
+	transform: rotate(-1.5deg);
+	transform-origin: left center;
+}
+
+/* Score counter. Shows the final value by default, counts up when motion is allowed. */
+@property --num {
+	syntax: "<integer>";
+	initial-value: 0;
+	inherits: false;
+}
+
+.count-up {
+	--num: var(--target);
+	counter-reset: num var(--num);
+}
+
+.count-up::after {
+	content: counter(num);
+}
+
+/* Details/summary FAQ marker. */
+.faq-item summary {
+	list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+	display: none;
+}
+
+.faq-item[open] .faq-icon {
+	transform: rotate(45deg);
+}
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes swipe {
+	from {
+		transform: skewX(-8deg) scaleX(0);
+	}
+	to {
+		transform: skewX(-8deg) scaleX(1);
+	}
+}
+
+@keyframes strike {
+	from {
+		transform: rotate(-1.5deg) scaleX(0);
+	}
+	to {
+		transform: rotate(-1.5deg) scaleX(1);
+	}
+}
+
+@keyframes count {
+	from {
+		--num: 0;
+	}
+	to {
+		--num: var(--target);
+	}
+}
+
+@keyframes ring-fill {
+	from {
+		stroke-dashoffset: var(--ring-length);
+	}
+}
+
+@keyframes bar-fill {
+	from {
+		transform: scaleX(0);
+	}
+}
+
+@keyframes pen-scan {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(var(--scan-distance, 220px));
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: rotate(-1.5deg) translateY(0);
+	}
+	50% {
+		transform: rotate(-1.5deg) translateY(-6px);
+	}
 }
 
 @keyframes spin-arc {
@@ -48,6 +265,52 @@ body {
 	}
 }
 
-.spinner-arc {
-	animation: spin-arc 1s linear infinite;
+@media (prefers-reduced-motion: no-preference) {
+	.animate-rise {
+		animation: rise 500ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+		animation-delay: calc(var(--i, 0) * 80ms);
+	}
+
+	.highlight-animate::after {
+		animation: swipe 600ms cubic-bezier(0.2, 0.7, 0.2, 1) 400ms both;
+	}
+
+	.strike-animate::before {
+		animation: strike 500ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+		animation-delay: var(--strike-delay, 900ms);
+	}
+
+	.count-up {
+		animation: count 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	.ring-animate {
+		animation: ring-fill 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	.bar-animate {
+		transform-origin: left center;
+		animation: bar-fill 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	.pen-scan {
+		animation: pen-scan 2.4s ease-in-out infinite;
+	}
+
+	.float-card {
+		animation: float 6s ease-in-out infinite;
+	}
+
+	.spinner-arc {
+		animation: spin-arc 1s linear infinite;
+	}
+
+	/* Sections fade up as they scroll in, where scroll timelines are supported. */
+	@supports (animation-timeline: view()) {
+		.reveal {
+			animation: rise linear both;
+			animation-timeline: view();
+			animation-range: entry 0% entry 40%;
+		}
+	}
 }

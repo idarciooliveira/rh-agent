@@ -17,7 +17,16 @@ export const Route = createRootRoute({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "LinkedIn SWOT Analyzer",
+				title: "Redline: free LinkedIn profile review for your next job",
+			},
+			{
+				name: "description",
+				content:
+					"Enter your LinkedIn username and the role you want. Get a score, a goal-specific SWOT and rewritten headline, About and bullets in about 30 seconds. Free, no signup.",
+			},
+			{
+				name: "theme-color",
+				content: "#faf7f2",
 			},
 		],
 		links: [
@@ -36,7 +45,7 @@ export const Route = createRootRoute({
 			},
 			{
 				rel: "stylesheet",
-				href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
+				href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..700&family=Geist+Mono:wght@500&family=Geist:wght@400..700&display=swap",
 			},
 		],
 	}),
@@ -50,7 +59,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body
-				className="min-h-screen bg-white text-text antialiased"
+				className="min-h-screen bg-background text-ink antialiased"
 				suppressHydrationWarning
 			>
 				{children}

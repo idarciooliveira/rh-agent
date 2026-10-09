@@ -1,12 +1,16 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { AnalysisResultsHeader } from "#/components/results/AnalysisResultsHeader";
+import {
+	AnalysisResultsHeader,
+	ResultsTopBar,
+} from "#/components/results/AnalysisResultsHeader";
 import { GoalAlignmentCard } from "#/components/results/GoalAlignmentCard";
 import { OptimizedProfilePreviewModal } from "#/components/results/OptimizedProfilePreviewModal";
 import { ProfileScoreGauge } from "#/components/results/ProfileScoreGauge";
 import { QuickWinsPanel } from "#/components/results/QuickWinsPanel";
 import { StrategicSuggestions } from "#/components/results/StrategicSuggestions";
 import { SwotCard } from "#/components/results/SwotCard";
+import { ArrowRightIcon } from "#/lib/icons";
 import { getAnalysis } from "#/server/analysis";
 
 export const Route = createFileRoute("/results/$analysisId")({
@@ -24,54 +28,76 @@ export const Route = createFileRoute("/results/$analysisId")({
 		}
 	},
 	head: () => ({
-		meta: [{ title: "Analysis Complete — LinkedIn SWOT Analyzer" }],
+		meta: [
+			{ title: "Your profile review | Redline" },
+			{
+				name: "description",
+				content:
+					"Your profile score, goal alignment, SWOT and rewritten profile sections from Redline.",
+			},
+			{ name: "robots", content: "noindex" },
+		],
 	}),
 	component: AnalysisResultsPage,
 	notFoundComponent: AnalysisNotFound,
 });
 
+function getFirstName(name: string): string | null {
+	const first = name.trim().split(/\s+/)[0];
+	return first ? first : null;
+}
+
 function AnalysisResultsPage() {
 	const data = Route.useLoaderData();
 	const [previewOpen, setPreviewOpen] = useState(false);
+	const { swot } = data.swotAnalysis;
 
 	return (
-		<div className="page-gradient mx-auto min-h-screen max-w-6xl px-6 py-12 sm:py-16">
-			<AnalysisResultsHeader onPreviewClick={() => setPreviewOpen(true)} />
+		<div className="min-h-screen bg-background">
+			<ResultsTopBar />
 
-			<div className="mb-8 grid gap-6 md:grid-cols-[auto_1fr]">
-				<ProfileScoreGauge score={data.swotAnalysis.profileScore} />
-				<GoalAlignmentCard goalAlignment={data.swotAnalysis.goalAlignment} />
-			</div>
-
-			<div className="mb-8 grid gap-6 md:grid-cols-2">
-				<SwotCard
-					variant="strengths"
-					items={data.swotAnalysis.swot.strengths}
+			<main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+				<AnalysisResultsHeader
+					firstName={getFirstName(data.profile.name)}
+					careerGoal={data.careerGoal}
+					onPreviewClick={() => setPreviewOpen(true)}
 				/>
-				<SwotCard
-					variant="weaknesses"
-					items={data.swotAnalysis.swot.weaknesses}
-				/>
-			</div>
 
-			<div className="mb-10 grid gap-6 md:grid-cols-2">
-				<SwotCard
-					variant="opportunities"
-					items={data.swotAnalysis.swot.opportunities}
-				/>
-				<SwotCard variant="threats" items={data.swotAnalysis.swot.threats} />
-			</div>
-
-			<div className="grid gap-8 lg:grid-cols-3">
-				<div className="lg:col-span-2">
-					<StrategicSuggestions
-						suggestions={data.swotAnalysis.strategicSuggestions}
-					/>
+				<div className="mb-8 grid gap-4 sm:gap-6 md:grid-cols-[minmax(0,18rem)_1fr]">
+					<ProfileScoreGauge score={data.swotAnalysis.profileScore} />
+					<GoalAlignmentCard goalAlignment={data.swotAnalysis.goalAlignment} />
 				</div>
-				<div>
+
+				<div className="mb-12 grid gap-4 sm:gap-6 md:grid-cols-2">
+					<SwotCard variant="strengths" items={swot.strengths} />
+					<SwotCard variant="weaknesses" items={swot.weaknesses} />
+					<SwotCard variant="opportunities" items={swot.opportunities} />
+					<SwotCard variant="threats" items={swot.threats} />
+				</div>
+
+				<div className="grid items-start gap-8 lg:grid-cols-3">
+					<div className="lg:col-span-2">
+						<StrategicSuggestions
+							suggestions={data.swotAnalysis.strategicSuggestions}
+						/>
+					</div>
 					<QuickWinsPanel quickWins={data.swotAnalysis.quickWins} />
 				</div>
-			</div>
+
+				<section className="reveal mt-12 flex flex-col gap-5 rounded-xl border border-border bg-surface-2 p-6 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+					<p className="max-w-xl font-display text-xl font-semibold leading-snug text-ink sm:text-2xl">
+						Not sure this is the right direction? Start over with a different
+						goal and compare the two reviews.
+					</p>
+					<Link
+						to="/"
+						className="btn-primary inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold text-ink sm:w-auto"
+					>
+						Try another goal
+						<ArrowRightIcon className="size-4" aria-hidden />
+					</Link>
+				</section>
+			</main>
 
 			{previewOpen ? (
 				<OptimizedProfilePreviewModal
@@ -85,26 +111,28 @@ function AnalysisResultsPage() {
 }
 
 function AnalysisNotFound() {
-	const { analysisId } = Route.useParams();
-
 	return (
-		<div className="page-gradient mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-16">
-			<section className="rounded-2xl border border-border bg-card p-8 shadow-sm">
-				<h1 className="text-2xl font-semibold text-text">Analysis not found</h1>
-				<p className="mt-3 text-text-muted">
-					No analysis exists for ID{" "}
-					<code className="rounded bg-surface px-1.5 py-0.5 text-sm text-text">
-						{analysisId}
-					</code>
-					.
-				</p>
-				<Link
-					to="/"
-					className="btn-primary mt-6 inline-flex rounded-full px-5 py-2.5 text-sm font-medium text-white"
-				>
-					Analyze another profile
-				</Link>
-			</section>
+		<div className="min-h-screen bg-background">
+			<ResultsTopBar />
+			<main className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-20">
+				<section className="mx-auto max-w-xl rounded-lg border border-border bg-surface p-6 shadow-card sm:p-8">
+					<h1 className="font-display text-3xl font-semibold text-ink">
+						This review isn't here
+					</h1>
+					<p className="mt-3 text-base leading-relaxed text-muted">
+						Reviews open only in the browser that created them. If you cleared
+						cookies or switched devices, run a new one. It takes about 30
+						seconds.
+					</p>
+					<Link
+						to="/"
+						className="btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold text-ink sm:w-auto"
+					>
+						Start a new review
+						<ArrowRightIcon className="size-4" aria-hidden />
+					</Link>
+				</section>
+			</main>
 		</div>
 	);
 }
