@@ -78,11 +78,12 @@ function ScoreCard() {
 				{SWOT.map((item) => (
 					<li
 						key={item.letter}
-						className={`flex flex-col items-center rounded-sm py-1 ${item.className}`}
+						className={`flex min-w-0 items-baseline justify-center gap-1 rounded-sm py-1.5 ${item.className}`}
 					>
 						<span className="text-sm font-bold">{item.letter}</span>
-						<span className="text-[10px] font-medium">
-							{item.count} {copy.preview.swotFound}
+						<span className="text-xs font-semibold tabular-nums">
+							{item.count}
+							<span className="sr-only"> {copy.preview.swotFound}</span>
 						</span>
 					</li>
 				))}
