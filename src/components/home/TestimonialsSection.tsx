@@ -1,5 +1,5 @@
 import { useLanguage } from "#/lib/i18n";
-import { QuoteIcon } from "#/lib/icons";
+import { QuoteIcon, StarIcon, TrendingUpIcon } from "#/lib/icons";
 import { TESTIMONIALS, type Testimonial } from "#/lib/testimonials";
 
 function getInitials(name: string): string {
@@ -11,7 +11,13 @@ function getInitials(name: string): string {
 }
 
 /** Styled like a LinkedIn recommendation card. */
-function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+function TestimonialCard({
+	testimonial,
+	ratingLabel,
+}: {
+	testimonial: Testimonial;
+	ratingLabel: string;
+}) {
 	const nameNode = testimonial.linkedinUrl ? (
 		<a
 			href={testimonial.linkedinUrl}
@@ -27,10 +33,30 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 
 	return (
 		<li className="reveal flex flex-col rounded-lg bg-surface p-5 shadow-card">
+			<div className="mb-4 flex gap-0.5" role="img" aria-label={ratingLabel}>
+				{[1, 2, 3, 4, 5].map((star) => (
+					<StarIcon
+						key={star}
+						className="size-4 fill-[#f5a623] text-[#f5a623]"
+						aria-hidden
+					/>
+				))}
+			</div>
 			<div className="flex gap-3">
-				<div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#6c8ea8] text-sm font-semibold text-white">
-					{getInitials(testimonial.name)}
-				</div>
+				{testimonial.avatar ? (
+					<img
+						src={testimonial.avatar}
+						alt=""
+						width={48}
+						height={48}
+						loading="lazy"
+						className="size-12 shrink-0 rounded-full object-cover"
+					/>
+				) : (
+					<div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#6c8ea8] text-sm font-semibold text-white">
+						{getInitials(testimonial.name)}
+					</div>
+				)}
 				<div className="min-w-0">
 					<p className="font-semibold text-ink">{nameNode}</p>
 					<p className="text-sm leading-snug text-muted">{testimonial.role}</p>
@@ -45,8 +71,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 				<p className="pl-5">{testimonial.quote}</p>
 			</blockquote>
 			{testimonial.result ? (
-				<p className="mt-4 rounded-sm bg-strength-tint px-3 py-2 text-sm font-semibold text-strength">
-					{testimonial.result}
+				<p className="mt-5 flex items-start gap-2.5 border-t border-border pt-4 text-sm leading-snug font-medium text-ink">
+					<span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-strength-tint">
+						<TrendingUpIcon className="size-3.5 text-strength" aria-hidden />
+					</span>
+					<span className="pt-0.5">{testimonial.result}</span>
 				</p>
 			) : null}
 		</li>
@@ -75,11 +104,12 @@ export function TestimonialsSection() {
 						{copy.testimonials.title}
 					</h2>
 				</div>
-				<ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+				<ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
 					{testimonials.map((testimonial) => (
 						<TestimonialCard
 							key={`${testimonial.name}-${testimonial.date}`}
 							testimonial={testimonial}
+							ratingLabel={copy.testimonials.ratingLabel}
 						/>
 					))}
 				</ul>

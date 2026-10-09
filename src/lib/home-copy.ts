@@ -26,16 +26,16 @@ const en = {
 			"That doesn't look like a LinkedIn username. It's the part after /in/ in your profile link, like janedoe.",
 		goalLabel: "What job do you want next?",
 		goalPlaceholder:
-			"Senior product manager at a B2B SaaS company, ideally remote",
+			"Senior financial analyst at an oil and gas operator in Luanda",
 		goalHelp:
-			'Be specific. "Move from backend engineering into DevOps" beats "a better job".',
+			'Be specific. "Move from bank accounting into FP&A in oil and gas" beats "a better job".',
 		goalTooShort: "Add a bit more. Give us a role, an industry or a level.",
 		goalTooLong: "Keep your goal under 500 characters.",
 		goalExamples: [
-			"Move from backend engineering into DevOps",
-			"First data analyst role after graduating",
-			"Engineering manager at a Series B startup",
-			"Switch from teaching into instructional design",
+			"Move from bank accounting into FP&A in oil and gas",
+			"HSE coordinator at an offshore operator",
+			"First audit role after graduating",
+			"Branch manager at a commercial bank",
 		],
 		submit: "Review my profile",
 		trustFree: "Free",
@@ -61,33 +61,33 @@ const en = {
 	},
 	preview: {
 		figcaption:
-			"Example review of a fictional profile, Maya Okafor, aiming for an associate product manager role.",
+			"Example review of a fictional profile, Ana Domingos, aiming for a financial analyst role in oil and gas.",
 		exampleBadge: "Example",
-		oldHeadline: "Operations Coordinator at Brightline Logistics",
+		oldHeadline: "Senior Accountant at Banco Kianda",
 		newHeadline:
-			"Operations coordinator moving into product | Built the dispatch tracker 40 drivers use daily",
-		location: "Chicago, Illinois",
+			"Senior accountant moving into FP&A for oil and gas | Built the cost forecast behind a $40M budget",
+		location: "Luanda, Angola",
 		contactInfo: "Contact info",
 		openTo: "Open to",
 		addSection: "Add section",
 		about: "About",
 		editTag: "Redline edit",
-		aboutPre: "I turn messy operations into tools people use. At Brightline I ",
-		aboutHighlight: "interviewed 40 drivers",
+		aboutPre: "I turn month-end numbers into decisions. At Banco Kianda I ",
+		aboutHighlight: "cut the monthly close from 9 days to 5",
 		aboutPost:
-			", mapped where dispatch broke down, and shipped the tracker that cut missed pickups by a third.",
+			" and built the cost forecast the board now uses for the annual budget.",
 		experience: "Experience",
-		role: "Operations Coordinator",
-		companyDate: "Brightline Logistics · 2022 - Present",
+		role: "Senior Accountant",
+		companyDate: "Banco Kianda · 2020 - Present",
 		experienceBullet:
-			"• Scoped and launched a dispatch tracker now used by 40 drivers daily",
+			"• Built the cost forecast model behind a $40M annual budget",
 		profileScore: "Profile score",
 		goalAlignment: "Goal alignment",
 		swotFound: "found",
 		quickWinLabel: "Quick win, 10 min.",
-		quickWinBody: "Rename the dispatch tracker as a product you shipped.",
+		quickWinBody: "Move the forecast model to the top of your experience.",
 		skillsTitle: "Skills to add",
-		skills: ["Product discovery", "Roadmapping", "User research"],
+		skills: ["Financial modeling", "CAPEX/OPEX analysis", "Budgeting"],
 	},
 	stats: {
 		items: [
@@ -179,29 +179,29 @@ const en = {
 		cta: "Review my profile",
 	},
 	example: {
-		eyebrow: "Example. Maya is a fictional profile.",
+		eyebrow: "Example. Ana is a fictional profile.",
 		title: "What a review looks like",
 		intro:
-			'Maya Okafor is an operations coordinator at a logistics company. Her goal: "Move into an associate product manager role at a logistics or supply chain software company."',
+			'Ana Domingos is a senior accountant at a commercial bank. Her goal: "Move into a financial planning and analysis (FP&A) role at an oil and gas operator."',
 		before: "Before",
 		after: "After",
-		beforeText: "Operations Coordinator at Brightline Logistics",
+		beforeText: "Senior Accountant at Banco Kianda",
 		afterText:
-			"Operations coordinator moving into product | Built the dispatch tracking sheet 40 drivers use daily | Process design, SQL, user interviews",
+			"Senior accountant moving into FP&A for oil and gas | Built the cost forecast behind a $40M budget | IFRS, financial modeling, Power BI",
 		explanation:
-			"Same person, same experience. The rewrite pulls the dispatch project and the SQL work out of her experience section and puts them where a product recruiter looks first.",
+			"Same person, same experience. The rewrite pulls the forecast model and the faster close out of her experience section and puts them where an oil and gas finance recruiter looks first.",
 		cards: [
 			{
 				label: "Goal alignment",
-				text: '5/10. Strong process and tooling work, but nothing on the profile says "product" yet.',
+				text: "5/10. Solid accounting record, but nothing on the profile says forecasting, budgeting or energy yet.",
 			},
 			{
 				label: "Weakness",
-				text: "No product language. Her bullets describe tasks, not the users she built for or the problems she solved.",
+				text: "Her bullets describe bookkeeping tasks, not the decisions her numbers drove or the money they moved.",
 			},
 			{
 				label: "Quick win",
-				text: "Rename her dispatch tracking project as a product she shipped, with who uses it and how often.",
+				text: "Put the forecast model first, with the budget size and who uses it.",
 			},
 		],
 		cta: "Run yours",
@@ -209,6 +209,7 @@ const en = {
 	testimonials: {
 		eyebrow: "From people who ran it",
 		title: "What changed after the review",
+		ratingLabel: "Rated 5 out of 5",
 	},
 	personas: {
 		eyebrow: "Who it's for",
@@ -281,6 +282,8 @@ const en = {
 	footer: {
 		tagline:
 			"Redline reviews public LinkedIn profiles against your career goal. Not affiliated with or endorsed by LinkedIn.",
+		photoCreditPre: "Example banner photo: ",
+		photoCreditPost: ", cropped.",
 	},
 };
 
@@ -310,16 +313,16 @@ const pt: HomeCopy = {
 			"Isto não parece um nome de utilizador do LinkedIn. É a parte depois de /in/ no link do perfil, como janedoe.",
 		goalLabel: "Qual é o próximo emprego que quer?",
 		goalPlaceholder:
-			"Gestor de produto sénior numa empresa de SaaS B2B, de preferência remoto",
+			"Analista financeiro sénior numa operadora de petróleo e gás em Luanda",
 		goalHelp:
-			"Seja específico. «Passar de engenharia backend para DevOps» vale mais do que «um emprego melhor».",
+			"Seja específico. «Passar da contabilidade num banco para FP&A em petróleo e gás» vale mais do que «um emprego melhor».",
 		goalTooShort: "Diga um pouco mais. Indique um cargo, uma área ou um nível.",
 		goalTooLong: "Mantenha o objetivo abaixo de 500 caracteres.",
 		goalExamples: [
-			"Passar de engenharia backend para DevOps",
-			"Primeiro emprego como analista de dados depois do curso",
-			"Gestor de engenharia numa startup Série B",
-			"Mudar de professor para designer instrucional",
+			"Passar da contabilidade num banco para FP&A em petróleo e gás",
+			"Coordenador de HSE numa operadora offshore",
+			"Primeiro emprego em auditoria depois do curso",
+			"Gerente de agência num banco comercial",
 		],
 		submit: "Analisar o meu perfil",
 		trustFree: "Grátis",
@@ -346,39 +349,33 @@ const pt: HomeCopy = {
 	},
 	preview: {
 		figcaption:
-			"Exemplo de análise de um perfil fictício, Maya Okafor, com o objetivo de ser gestora de produto júnior.",
+			"Exemplo de análise de um perfil fictício, Ana Domingos, com o objetivo de ser analista financeira em petróleo e gás.",
 		exampleBadge: "Exemplo",
-		oldHeadline: "Coordenadora de Operações na Brightline Logistics",
+		oldHeadline: "Contabilista Sénior no Banco Kianda",
 		newHeadline:
-			"Coordenadora de operações a caminho de produto | Criei a ferramenta de despacho que 40 motoristas usam por dia",
-		location: "Chicago, Illinois",
+			"Contabilista sénior a caminho de FP&A em petróleo e gás | Criei a previsão de custos de um orçamento de 40 M USD",
+		location: "Luanda, Angola",
 		contactInfo: "Informações de contacto",
 		openTo: "Disponível",
 		addSection: "Adicionar secção",
 		about: "Sobre",
 		editTag: "Edição Redline",
-		aboutPre:
-			"Transformo operações confusas em ferramentas que as pessoas usam. Na Brightline ",
-		aboutHighlight: "entrevistei 40 motoristas",
+		aboutPre: "Transformo os números do fecho em decisões. No Banco Kianda ",
+		aboutHighlight: "reduzi o fecho mensal de 9 para 5 dias",
 		aboutPost:
-			", mapeei onde o despacho falhava e lancei a ferramenta que reduziu as recolhas falhadas em um terço.",
+			" e criei a previsão de custos que a administração usa no orçamento anual.",
 		experience: "Experiência",
-		role: "Coordenadora de Operações",
-		companyDate: "Brightline Logistics · 2022 - Presente",
+		role: "Contabilista Sénior",
+		companyDate: "Banco Kianda · 2020 - Presente",
 		experienceBullet:
-			"• Desenhei e lancei uma ferramenta de despacho usada por 40 motoristas por dia",
+			"• Criei o modelo de previsão de custos de um orçamento anual de 40 M USD",
 		profileScore: "Pontuação do perfil",
 		goalAlignment: "Alinhamento com o objetivo",
 		swotFound: "encontrados",
 		quickWinLabel: "Vitória rápida, 10 min.",
-		quickWinBody:
-			"Apresente a ferramenta de despacho como um produto que lançou.",
+		quickWinBody: "Ponha o modelo de previsão no topo da experiência.",
 		skillsTitle: "Competências a adicionar",
-		skills: [
-			"Descoberta de produto",
-			"Planeamento de roadmap",
-			"Pesquisa com utilizadores",
-		],
+		skills: ["Modelação financeira", "Análise de CAPEX/OPEX", "Orçamentação"],
 	},
 	stats: {
 		items: [
@@ -473,29 +470,29 @@ const pt: HomeCopy = {
 		cta: "Analisar o meu perfil",
 	},
 	example: {
-		eyebrow: "Exemplo. A Maya é um perfil fictício.",
+		eyebrow: "Exemplo. A Ana é um perfil fictício.",
 		title: "Como é uma análise",
 		intro:
-			"A Maya Okafor é coordenadora de operações numa empresa de logística. O objetivo dela: «Passar para gestora de produto júnior numa empresa de software de logística ou cadeia de abastecimento.»",
+			"A Ana Domingos é contabilista sénior num banco comercial. O objetivo dela: «Passar para uma função de planeamento e análise financeira (FP&A) numa operadora de petróleo e gás.»",
 		before: "Antes",
 		after: "Depois",
-		beforeText: "Coordenadora de Operações na Brightline Logistics",
+		beforeText: "Contabilista Sénior no Banco Kianda",
 		afterText:
-			"Coordenadora de operações a caminho de produto | Criei a folha de despacho que 40 motoristas usam por dia | Desenho de processos, SQL, entrevistas a utilizadores",
+			"Contabilista sénior a caminho de FP&A em petróleo e gás | Criei a previsão de custos de um orçamento de 40 M USD | IFRS, modelação financeira, Power BI",
 		explanation:
-			"A mesma pessoa, a mesma experiência. A nova versão tira o projeto de despacho e o trabalho em SQL da secção de experiência e coloca-os onde um recrutador de produto olha primeiro.",
+			"A mesma pessoa, a mesma experiência. A nova versão tira o modelo de previsão e o fecho mais rápido da secção de experiência e coloca-os onde um recrutador de finanças do setor petrolífero olha primeiro.",
 		cards: [
 			{
 				label: "Alinhamento com o objetivo",
-				text: "5/10. Bom trabalho de processos e ferramentas, mas nada no perfil diz «produto» ainda.",
+				text: "5/10. Bom percurso em contabilidade, mas nada no perfil fala ainda de previsão, orçamento ou energia.",
 			},
 			{
 				label: "Ponto fraco",
-				text: "Sem linguagem de produto. Os pontos descrevem tarefas, não os utilizadores para quem construiu nem os problemas que resolveu.",
+				text: "Os pontos descrevem tarefas de contabilidade, não as decisões que os números dela apoiaram nem o dinheiro que movimentaram.",
 			},
 			{
 				label: "Vitória rápida",
-				text: "Apresentar o projeto de despacho como um produto que lançou, com quem o usa e com que frequência.",
+				text: "Pôr o modelo de previsão em primeiro lugar, com o valor do orçamento e quem o usa.",
 			},
 		],
 		cta: "Analisar o meu perfil",
@@ -503,6 +500,7 @@ const pt: HomeCopy = {
 	testimonials: {
 		eyebrow: "De quem já experimentou",
 		title: "O que mudou depois da análise",
+		ratingLabel: "Avaliação de 5 em 5",
 	},
 	personas: {
 		eyebrow: "Para quem é",
@@ -575,6 +573,8 @@ const pt: HomeCopy = {
 	footer: {
 		tagline:
 			"O Redline analisa perfis públicos do LinkedIn face ao seu objetivo de carreira. Não é afiliado nem apoiado pelo LinkedIn.",
+		photoCreditPre: "Foto do banner de exemplo: ",
+		photoCreditPost: ", recortada.",
 	},
 };
 

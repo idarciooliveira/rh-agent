@@ -381,7 +381,30 @@ export function SiteFooter() {
 				<p className="font-display text-base font-semibold text-ink">
 					Red<span className="text-primary">line</span>
 				</p>
-				<p className="max-w-xl sm:text-right">{copy.footer.tagline}</p>
+				<div className="max-w-xl space-y-1 sm:text-right">
+					<p>{copy.footer.tagline}</p>
+					<p className="text-xs">
+						{copy.footer.photoCreditPre}
+						<a
+							href="https://commons.wikimedia.org/wiki/File:Luanda_Skyline_-_Angola_2015_(cropped).jpg"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="underline hover:text-ink"
+						>
+							Luanda Skyline
+						</a>
+						, David Stanley,{" "}
+						<a
+							href="https://creativecommons.org/licenses/by/2.0/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="underline hover:text-ink"
+						>
+							CC BY 2.0
+						</a>
+						{copy.footer.photoCreditPost}
+					</p>
+				</div>
 			</div>
 		</footer>
 	);

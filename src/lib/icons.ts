@@ -30,6 +30,7 @@ import {
 	ShieldCheck,
 	Shuffle,
 	Sparkles,
+	Star,
 	Tag,
 	Target,
 	ThumbsUp,
@@ -74,6 +75,7 @@ export const SendIcon = safeIcon(Send);
 export const ShieldCheckIcon = safeIcon(ShieldCheck);
 export const ShuffleIcon = safeIcon(Shuffle);
 export const SparklesIcon = safeIcon(Sparkles);
+export const StarIcon = safeIcon(Star);
 export const TagIcon = safeIcon(Tag);
 export const TargetIcon = safeIcon(Target);
 export const ThumbsUpIcon = safeIcon(ThumbsUp);

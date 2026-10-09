@@ -130,17 +130,26 @@ export function HeroPreviewCard() {
 			<figure className="overflow-hidden rounded-lg bg-surface shadow-lift">
 				<figcaption className="sr-only">{copy.preview.figcaption}</figcaption>
 				<div className="li-banner relative h-20 sm:h-24" aria-hidden>
+					<img
+						src="/banners/luanda-skyline.jpg"
+						alt=""
+						className="absolute inset-0 size-full object-cover"
+					/>
 					<span className="absolute top-3 left-3 rounded-full bg-black/55 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white uppercase">
 						{copy.preview.exampleBadge}
 					</span>
 				</div>
 
 				<div className="px-4 pb-4 sm:px-5">
-					<div className="relative -mt-10 mb-2 flex size-20 items-center justify-center rounded-full border-4 border-surface bg-[#6c8ea8] text-2xl font-semibold text-white shadow-[0_0_0_3px_var(--color-open)_inset]">
-						MO
-					</div>
+					<img
+						src="/avatars/ana-domingos.jpg"
+						alt=""
+						width={80}
+						height={80}
+						className="relative -mt-10 mb-2 size-20 rounded-full border-4 border-surface object-cover outline-3 -outline-offset-7 outline-open"
+					/>
 					<p className="text-lg leading-tight font-semibold text-ink">
-						Maya Okafor
+						Ana Domingos
 					</p>
 
 					<div className="mt-1 space-y-1">
@@ -197,9 +206,13 @@ export function HeroPreviewCard() {
 						<EditTag label={copy.preview.editTag} />
 					</div>
 					<div className="flex gap-2.5">
-						<span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-surface-2 text-[10px] font-semibold text-muted">
-							BL
-						</span>
+						<img
+							src="/logos/banco-kianda.svg"
+							alt=""
+							width={36}
+							height={36}
+							className="size-9 shrink-0 rounded-sm"
+						/>
 						<div className="min-w-0 text-xs">
 							<p className="font-semibold text-ink">{copy.preview.role}</p>
 							<p className="text-muted">{copy.preview.companyDate}</p>
