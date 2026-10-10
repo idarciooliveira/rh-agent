@@ -10,6 +10,7 @@ import { ProfileScoreGauge } from "#/components/results/ProfileScoreGauge";
 import { QuickWinsPanel } from "#/components/results/QuickWinsPanel";
 import { StrategicSuggestions } from "#/components/results/StrategicSuggestions";
 import { SwotCard } from "#/components/results/SwotCard";
+import { UnlockForm } from "#/components/results/UnlockForm";
 import { ArrowRightIcon } from "#/lib/icons";
 import { getAnalysis } from "#/server/analysis";
 
@@ -61,7 +62,31 @@ function AnalysisResultsPage() {
 					firstName={getFirstName(data.profile.name)}
 					careerGoal={data.careerGoal}
 					onPreviewClick={() => setPreviewOpen(true)}
+					unlocked={data.unlocked}
 				/>
+
+				{data.unlocked ? null : (
+					<section
+						id="unlock"
+						className="mb-8 rounded-xl border border-border bg-surface p-6 shadow-card sm:p-8"
+					>
+						<p className="font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
+							{data.teaser.rewriteCount} rewrites ready
+						</p>
+						<p className="mt-3 font-display text-xl font-semibold text-ink">
+							Your new headline: "{data.teaser.headline}"
+						</p>
+						<p className="mt-2 text-muted">
+							Leave your email to see the rest: About, experience bullets,
+							skills and a post to announce your move.
+						</p>
+						<UnlockForm
+							analysisId={data.analysisId}
+							submitLabel={`Unlock my ${data.teaser.rewriteCount} rewrites`}
+							className="mt-5 max-w-xl"
+						/>
+					</section>
+				)}
 
 				<div className="mb-8 grid gap-4 sm:gap-6 md:grid-cols-[minmax(0,18rem)_1fr]">
 					<ProfileScoreGauge score={data.swotAnalysis.profileScore} />
@@ -99,7 +124,7 @@ function AnalysisResultsPage() {
 				</section>
 			</main>
 
-			{previewOpen ? (
+			{previewOpen && data.recommendations ? (
 				<OptimizedProfilePreviewModal
 					profile={data.profile}
 					recommendations={data.recommendations}

@@ -15,6 +15,7 @@ import { SiteHeader } from "#/components/home/SiteHeader";
 import { StatsBand } from "#/components/home/StatsBand";
 import { TestimonialsSection } from "#/components/home/TestimonialsSection";
 import { useLanguage } from "#/lib/i18n";
+import { TESTIMONIALS_ARE_SAMPLES } from "#/lib/testimonials";
 import { getAiMode } from "#/server/ai-mode";
 
 export const Route = createFileRoute("/")({
@@ -85,7 +86,7 @@ function Home() {
 				<HowItWorksSection />
 				<ValueStackSection />
 				<ExampleSection />
-				<TestimonialsSection />
+				{TESTIMONIALS_ARE_SAMPLES ? null : <TestimonialsSection />}
 				<PersonasSection />
 				<FaqSection />
 				<FinalCtaSection />

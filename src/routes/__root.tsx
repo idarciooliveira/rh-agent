@@ -19,12 +19,12 @@ export const Route = createRootRoute({
 			},
 			{
 				title:
-					"Redline: análise gratuita de perfil do LinkedIn para o seu próximo emprego",
+					"Redline: pontuação grátis do seu LinkedIn para o próximo emprego",
 			},
 			{
 				name: "description",
 				content:
-					"Introduza o seu nome de utilizador do LinkedIn e o cargo que quer. Receba uma pontuação, uma SWOT feita para esse objetivo e um novo título, Sobre e pontos de experiência em cerca de 30 segundos. Grátis, sem registo.",
+					"Introduza o seu nome de utilizador do LinkedIn e o cargo que quer. Receba uma pontuação, uma SWOT feita para esse objetivo e um novo título, Sobre e pontos de experiência em cerca de 30 segundos. Pontuação grátis, sem palavra-passe.",
 			},
 			{
 				name: "theme-color",

@@ -19,6 +19,8 @@ import {
 	GraduationCap,
 	Lightbulb,
 	ListChecks,
+	Lock,
+	Mail,
 	MessageSquare,
 	PenLine,
 	Plus,
@@ -64,6 +66,8 @@ export const GlobeIcon = safeIcon(Globe);
 export const GraduationCapIcon = safeIcon(GraduationCap);
 export const LightbulbIcon = safeIcon(Lightbulb);
 export const ListChecksIcon = safeIcon(ListChecks);
+export const LockIcon = safeIcon(Lock);
+export const MailIcon = safeIcon(Mail);
 export const MessageSquareIcon = safeIcon(MessageSquare);
 export const PenLineIcon = safeIcon(PenLine);
 export const PlusIcon = safeIcon(Plus);

@@ -10,11 +10,11 @@ const en = {
 		languageLabel: "Language",
 	},
 	hero: {
-		eyebrow: "Free LinkedIn profile review",
+		eyebrow: "Free LinkedIn score in 30 seconds",
 		titlePre: "Fix your profile for the job you ",
 		titleHighlight: "actually want",
 		subtitle:
-			"Enter your LinkedIn username and the role you're after. In about 30 seconds you get a score, a SWOT built around that goal, and rewrites you can paste in.",
+			"Tell us the job you want. In 30 seconds you'll see why recruiters for that job skip your profile, and get the exact text to fix it.",
 	},
 	form: {
 		mockBanner:
@@ -38,8 +38,8 @@ const en = {
 			"Branch manager at a commercial bank",
 		],
 		submit: "Review my profile",
-		trustFree: "Free",
-		trustNoSignup: "No signup",
+		trustFree: "Free score",
+		trustNoSignup: "No password",
 		trustTime: "~30 seconds",
 		profileNotFound:
 			"We couldn't find that profile. Check the username and make sure your profile is public.",
@@ -91,9 +91,9 @@ const en = {
 	},
 	stats: {
 		items: [
-			{ value: "4×", label: "more likely to land a first interview" },
-			{ value: "30s", label: "from username to results" },
-			{ value: "5/hr", label: "free reviews, no signup" },
+			{ value: "30s", label: "from username to your score" },
+			{ value: "1 goal", label: "every line is written for the job you name" },
+			{ value: "$0", label: "to see your score and SWOT" },
 		],
 	},
 	problem: {
@@ -175,7 +175,7 @@ const en = {
 			},
 		],
 		banner:
-			"Career coaches and resume writers charge for this kind of review. Here it costs nothing and takes about 30 seconds.",
+			"A CV writer takes a week and charges a lot more. Your score and SWOT are free. The full rewrite unlocks with your email.",
 		cta: "Review my profile",
 	},
 	example: {
@@ -241,7 +241,7 @@ const en = {
 		items: [
 			{
 				q: "Is it really free?",
-				a: "Yes. No trial, no card, no account. You can run 5 reviews an hour.",
+				a: "The score, goal alignment and SWOT are free, with no card and no account. To see every rewrite, leave your email and we send you the full report. Paid packages with a CV and job-ad matching are coming soon.",
 			},
 			{
 				q: "What do you read, and what do you keep?",
@@ -275,9 +275,69 @@ const en = {
 	},
 	finalCta: {
 		title: "See your profile the way the next recruiter will",
-		body: "One username, one goal, about 30 seconds. Worst case, you spent half a minute and got a free second opinion.",
+		body: "The next recruiter who searches for your target role will see your profile either way. Decide what they read.",
 		cta: "Review my profile",
-		footnote: "Free. No signup. Public profile only.",
+		footnote: "Free score. No password. Public profile only.",
+	},
+	pricing: {
+		eyebrow: "Packages",
+		title: "Start free. Pay only for what gets you hired.",
+		subtitle:
+			"The score tells you where you stand. The packages give you the text, the CV and the job matches to close the gap.",
+		soonLabel: "Coming soon",
+		popularLabel: "Most pick this",
+		note: "One-off payments. No subscription.",
+		tiers: [
+			{
+				name: "Free scan",
+				price: "$0",
+				period: "",
+				description: "See where you stand.",
+				features: [
+					"Profile score 0 to 100",
+					"Goal alignment out of 10",
+					"Full SWOT for your goal",
+					"Every rewrite, unlocked with your email",
+				],
+				cta: "Review my profile",
+				highlight: false,
+				available: true,
+			},
+			{
+				name: "Profile Pass",
+				price: "$19",
+				period: "30 days",
+				description: "Fix the profile once, properly.",
+				features: [
+					"3 headline options and tones",
+					"Your profile in Portuguese and English",
+					"Unlimited re-scans",
+					"Shareable score card",
+				],
+				cta: "Coming soon",
+				highlight: false,
+				available: false,
+			},
+			{
+				name: "Job Hunt Pass",
+				price: "$39",
+				period: "90 days",
+				description: "For an active search.",
+				features: [
+					"Everything in Profile Pass",
+					"Match your profile to real job ads",
+					"ATS-ready CV and cover letters",
+					"Likely interview questions for the role",
+				],
+				cta: "Coming soon",
+				highlight: true,
+				available: false,
+			},
+		],
+	},
+	guarantee: {
+		title: "More search appearances in 14 days, or your money back.",
+		body: "Apply the new headline and About within 48 hours and send us LinkedIn's search-appearance numbers before and on day 14. If they didn't go up, we refund the package.",
 	},
 	footer: {
 		tagline:
@@ -297,11 +357,11 @@ const pt: HomeCopy = {
 		languageLabel: "Idioma",
 	},
 	hero: {
-		eyebrow: "Análise gratuita de perfil do LinkedIn",
+		eyebrow: "Pontuação do seu LinkedIn em 30 segundos",
 		titlePre: "Corrija o seu perfil para o emprego que ",
 		titleHighlight: "realmente quer",
 		subtitle:
-			"Introduza o seu nome de utilizador do LinkedIn e o cargo que procura. Em cerca de 30 segundos recebe uma pontuação, uma análise SWOT feita para esse objetivo e textos prontos a copiar.",
+			"Diga-nos o emprego que quer. Em 30 segundos vê porque é que os recrutadores dessa área passam à frente do seu perfil, e recebe o texto exato para corrigir.",
 	},
 	form: {
 		mockBanner:
@@ -325,8 +385,8 @@ const pt: HomeCopy = {
 			"Gerente de agência num banco comercial",
 		],
 		submit: "Analisar o meu perfil",
-		trustFree: "Grátis",
-		trustNoSignup: "Sem registo",
+		trustFree: "Pontuação grátis",
+		trustNoSignup: "Sem palavra-passe",
 		trustTime: "~30 segundos",
 		profileNotFound:
 			"Não encontrámos esse perfil. Confirme o nome de utilizador e verifique se o perfil é público.",
@@ -379,12 +439,12 @@ const pt: HomeCopy = {
 	},
 	stats: {
 		items: [
+			{ value: "30s", label: "do nome de utilizador à sua pontuação" },
 			{
-				value: "4×",
-				label: "mais hipóteses de conseguir uma primeira entrevista",
+				value: "1 objetivo",
+				label: "cada linha é escrita para o emprego que indicar",
 			},
-			{ value: "30s", label: "do nome de utilizador aos resultados" },
-			{ value: "5/h", label: "análises grátis, sem registo" },
+			{ value: "0 Kz", label: "para ver a pontuação e a SWOT" },
 		],
 	},
 	problem: {
@@ -466,7 +526,7 @@ const pt: HomeCopy = {
 			},
 		],
 		banner:
-			"Coaches de carreira e redatores de CV cobram por este tipo de análise. Aqui não custa nada e demora cerca de 30 segundos.",
+			"Um redator de CV demora uma semana e cobra muito mais. A pontuação e a SWOT são grátis. Os textos completos desbloqueiam com o seu e-mail.",
 		cta: "Analisar o meu perfil",
 	},
 	example: {
@@ -532,7 +592,7 @@ const pt: HomeCopy = {
 		items: [
 			{
 				q: "É mesmo grátis?",
-				a: "Sim. Sem período experimental, sem cartão, sem conta. Pode fazer 5 análises por hora.",
+				a: "A pontuação, o alinhamento com o objetivo e a SWOT são grátis, sem cartão e sem conta. Para ver todos os textos novos, deixe o seu e-mail e enviamos o relatório completo. Os pacotes pagos com CV e comparação com anúncios de emprego chegam em breve.",
 			},
 			{
 				q: "O que leem e o que guardam?",
@@ -566,9 +626,69 @@ const pt: HomeCopy = {
 	},
 	finalCta: {
 		title: "Veja o seu perfil como o próximo recrutador o vai ver",
-		body: "Um nome de utilizador, um objetivo, cerca de 30 segundos. No pior dos casos, perdeu meio minuto e ganhou uma segunda opinião grátis.",
+		body: "O próximo recrutador que pesquisar a sua função vai ver o seu perfil de qualquer forma. Decida o que ele lê.",
 		cta: "Analisar o meu perfil",
-		footnote: "Grátis. Sem registo. Apenas perfis públicos.",
+		footnote: "Pontuação grátis. Sem palavra-passe. Apenas perfis públicos.",
+	},
+	pricing: {
+		eyebrow: "Pacotes",
+		title: "Comece grátis. Pague só pelo que o ajuda a ser contratado.",
+		subtitle:
+			"A pontuação mostra onde está. Os pacotes dão-lhe o texto, o CV e a comparação com vagas reais para fechar a distância.",
+		soonLabel: "Em breve",
+		popularLabel: "O mais escolhido",
+		note: "Pagamento único por Multicaixa Express. Sem subscrição.",
+		tiers: [
+			{
+				name: "Raio-X",
+				price: "Grátis",
+				period: "",
+				description: "Veja onde está.",
+				features: [
+					"Pontuação do perfil de 0 a 100",
+					"Alinhamento com o objetivo, de 0 a 10",
+					"SWOT completa para o seu objetivo",
+					"Todos os textos novos, com o seu e-mail",
+				],
+				cta: "Analisar o meu perfil",
+				highlight: false,
+				available: true,
+			},
+			{
+				name: "Perfil Pronto",
+				price: "7.500 Kz",
+				period: "30 dias",
+				description: "Para corrigir o perfil esta semana.",
+				features: [
+					"3 opções de título e de tom",
+					"O seu perfil em português e inglês",
+					"Novas análises ilimitadas",
+					"Cartão de pontuação para partilhar",
+				],
+				cta: "Em breve",
+				highlight: false,
+				available: false,
+			},
+			{
+				name: "Candidatura Completa",
+				price: "14.900 Kz",
+				period: "60 dias",
+				description: "Para quem está a candidatar-se agora.",
+				features: [
+					"Tudo do Perfil Pronto",
+					"Comparação com 10 anúncios de emprego",
+					"CV pronto para ATS, em PT e EN",
+					"Perguntas prováveis de entrevista para o cargo",
+				],
+				cta: "Em breve",
+				highlight: true,
+				available: false,
+			},
+		],
+	},
+	guarantee: {
+		title: "Mais aparições em pesquisas em 14 dias, ou devolvemos o dinheiro.",
+		body: "Aplique o novo título e a secção Sobre em 48 horas e envie-nos os números de aparições em pesquisas do LinkedIn, antes e no dia 14. Se não subirem, devolvemos o valor do pacote.",
 	},
 	footer: {
 		tagline:

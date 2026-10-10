@@ -22,6 +22,9 @@ export type Testimonial = {
  * permission, before promoting the site — invented testimonials erode trust and can
  * break advertising rules (FTC and equivalent).
  */
+/** Keeps the section off the page until the entries below are real. */
+export const TESTIMONIALS_ARE_SAMPLES = true;
+
 export const TESTIMONIALS: Record<Language, Testimonial[]> = {
 	pt: [
 		{

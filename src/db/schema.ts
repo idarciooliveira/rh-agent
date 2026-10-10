@@ -32,6 +32,22 @@ export const analyses = sqliteTable("analyses", {
 		.references(() => profileSnapshots.id),
 	swotJson: text("swot_json").notNull(),
 	recommendationsJson: text("recommendations_json").notNull(),
+	/** Set when the visitor leaves an email. Rewrites stay hidden until then. */
+	unlockedAt: integer("unlocked_at", { mode: "timestamp" }),
+	createdAt: integer("created_at", { mode: "timestamp" })
+		.notNull()
+		.$defaultFn(() => new Date()),
+});
+
+export const leads = sqliteTable("leads", {
+	id: text("id").primaryKey(),
+	sessionId: text("session_id")
+		.notNull()
+		.references(() => sessions.id),
+	analysisId: text("analysis_id")
+		.notNull()
+		.references(() => analyses.id),
+	email: text("email").notNull(),
 	createdAt: integer("created_at", { mode: "timestamp" })
 		.notNull()
 		.$defaultFn(() => new Date()),

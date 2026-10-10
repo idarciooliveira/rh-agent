@@ -1,11 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { RedlineLogo } from "#/components/RedlineLogo";
-import { ArrowLeftIcon, EyeIcon } from "#/lib/icons";
+import { ArrowLeftIcon, EyeIcon, LockIcon } from "#/lib/icons";
 
 type AnalysisResultsHeaderProps = {
 	firstName: string | null;
 	careerGoal: string;
 	onPreviewClick: () => void;
+	/** When false, the main button jumps to the unlock form instead. */
+	unlocked: boolean;
 };
 
 export function ResultsTopBar() {
@@ -29,6 +31,7 @@ export function AnalysisResultsHeader({
 	firstName,
 	careerGoal,
 	onPreviewClick,
+	unlocked,
 }: AnalysisResultsHeaderProps) {
 	return (
 		<header className="mb-8 flex flex-col gap-6 sm:mb-10 lg:flex-row lg:items-end lg:justify-between">
@@ -50,14 +53,24 @@ export function AnalysisResultsHeader({
 			</div>
 
 			<div className="flex shrink-0 flex-col gap-3 sm:flex-row sm:items-center">
-				<button
-					type="button"
-					onClick={onPreviewClick}
-					className="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
-				>
-					<EyeIcon className="size-4" aria-hidden />
-					See my rewritten profile
-				</button>
+				{unlocked ? (
+					<button
+						type="button"
+						onClick={onPreviewClick}
+						className="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
+					>
+						<EyeIcon className="size-4" aria-hidden />
+						See my rewritten profile
+					</button>
+				) : (
+					<a
+						href="#unlock"
+						className="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
+					>
+						<LockIcon className="size-4" aria-hidden />
+						Unlock my rewrites
+					</a>
+				)}
 				<Link
 					to="/"
 					className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-border-strong bg-surface px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-surface-2 sm:w-auto"

@@ -5,6 +5,7 @@ import { z } from "zod";
 import { db } from "#/db";
 import { analyses, profileSnapshots } from "#/db/schema";
 import {
+	type Recommendations,
 	recommendationsSchema,
 	swotAnalysisSchema,
 } from "#/lib/analysis-schema";
@@ -22,6 +23,13 @@ function loadAnalysisForSession(analysisId: string, sessionId: string) {
 		.where(and(eq(analyses.id, analysisId), eq(analyses.sessionId, sessionId)))
 		.limit(1)
 		.get();
+}
+
+/** Headline, About, each rewritten role, the skills list and the post draft. */
+function countRewrites(recommendations: Recommendations): number {
+	const skills = recommendations.skills.suggested.length > 0 ? 1 : 0;
+	const post = recommendations.suggestedActivityPost.trim() ? 1 : 0;
+	return 2 + recommendations.experiences.length + skills + post;
 }
 
 export const getAnalysis = createServerFn({ method: "GET" })
@@ -53,11 +61,20 @@ export const getAnalysis = createServerFn({ method: "GET" })
 			JSON.parse(analysis.recommendationsJson),
 		);
 
+		const unlocked = analysis.unlockedAt !== null;
+
+		// Rewrites stay on the server until the visitor leaves an email. The
+		// teaser gives the locked panel one real rewrite and an honest count.
 		return {
 			analysisId: data.analysisId,
 			careerGoal: analysis.careerGoal,
 			profile,
 			swotAnalysis,
-			recommendations,
+			unlocked,
+			recommendations: unlocked ? recommendations : null,
+			teaser: {
+				headline: recommendations.headline.improved,
+				rewriteCount: countRewrites(recommendations),
+			},
 		};
 	});

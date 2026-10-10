@@ -10,7 +10,11 @@ import { mockAnalyzeProfile } from "#/lib/ai/mock-analyze-profile";
 import { resolveAiMode } from "#/lib/ai/resolve-ai-mode";
 import { jsonError, jsonOk } from "#/lib/api-error";
 import { parseStoredProfile } from "#/lib/profile-schema";
+import { consumeRateLimit } from "#/lib/rate-limit";
 import { getRequiredSessionId } from "#/server/session-utils";
+
+const RATE_LIMIT = 10;
+const RATE_WINDOW_MS = 60 * 60 * 1000;
 
 const analyzeRequestSchema = z.object({
 	snapshotId: z.string().min(1),
@@ -48,6 +52,26 @@ export const Route = createFileRoute("/api/analyze")({
 					}
 
 					const { snapshotId, careerGoal } = parsed.data;
+
+					const ip = request.headers
+						.get("x-forwarded-for")
+						?.split(",")[0]
+						?.trim();
+					const rateLimitRules = [
+						{ key: `analyze:session:${sessionId}`, limit: RATE_LIMIT },
+					];
+					if (ip) {
+						rateLimitRules.push({
+							key: `analyze:ip:${ip}`,
+							limit: RATE_LIMIT * 4,
+						});
+					}
+					if (consumeRateLimit(rateLimitRules, RATE_WINDOW_MS)) {
+						return jsonError(
+							"Too many reviews. Please try again in an hour.",
+							429,
+						);
+					}
 
 					const snapshot = db
 						.select()
