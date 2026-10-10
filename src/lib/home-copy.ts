@@ -8,6 +8,7 @@ const en = {
 		example: "Example",
 		cta: "Review my profile",
 		languageLabel: "Language",
+		pricing: "Packages",
 	},
 	hero: {
 		eyebrow: "Free LinkedIn score in 30 seconds",
@@ -15,6 +16,8 @@ const en = {
 		titleHighlight: "actually want",
 		subtitle:
 			"Tell us the job you want. In 30 seconds you'll see why recruiters for that job skip your profile, and get the exact text to fix it.",
+		markupOld: "Your headline describes the job you have",
+		markupNew: "Your headline sells the job you want",
 	},
 	form: {
 		mockBanner:
@@ -41,6 +44,10 @@ const en = {
 		trustFree: "Free score",
 		trustNoSignup: "No password",
 		trustTime: "~30 seconds",
+		stepLabel: "Step {n} of 2",
+		next: "Next",
+		edit: "Edit",
+		goalChipsLabel: "Or pick one:",
 		profileNotFound:
 			"We couldn't find that profile. Check the username and make sure your profile is public.",
 		analyzeFailed:
@@ -355,6 +362,7 @@ const pt: HomeCopy = {
 		example: "Exemplo",
 		cta: "Analisar o meu perfil",
 		languageLabel: "Idioma",
+		pricing: "Pacotes",
 	},
 	hero: {
 		eyebrow: "Pontuação do seu LinkedIn em 30 segundos",
@@ -362,6 +370,8 @@ const pt: HomeCopy = {
 		titleHighlight: "realmente quer",
 		subtitle:
 			"Diga-nos o emprego que quer. Em 30 segundos vê porque é que os recrutadores dessa área passam à frente do seu perfil, e recebe o texto exato para corrigir.",
+		markupOld: "O seu título descreve o emprego que tem",
+		markupNew: "O seu título vende o emprego que quer",
 	},
 	form: {
 		mockBanner:
@@ -388,6 +398,10 @@ const pt: HomeCopy = {
 		trustFree: "Pontuação grátis",
 		trustNoSignup: "Sem palavra-passe",
 		trustTime: "~30 segundos",
+		stepLabel: "Passo {n} de 2",
+		next: "Seguinte",
+		edit: "Alterar",
+		goalChipsLabel: "Ou escolha um:",
 		profileNotFound:
 			"Não encontrámos esse perfil. Confirme o nome de utilizador e verifique se o perfil é público.",
 		analyzeFailed:

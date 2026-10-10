@@ -18,7 +18,7 @@ export function StatsBand() {
 								<Icon className="size-5 text-primary" aria-hidden />
 							</span>
 							<div>
-								<p className="font-display text-2xl leading-none font-semibold text-ink sm:text-3xl">
+								<p className="font-display text-2xl leading-none font-extrabold text-ink sm:text-3xl">
 									{stat.value}
 								</p>
 								<p className="mt-1.5 text-sm leading-snug text-muted">

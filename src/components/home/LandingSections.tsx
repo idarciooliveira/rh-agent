@@ -5,6 +5,7 @@ import {
 	AwardIcon,
 	BriefcaseIcon,
 	CheckCircle2Icon,
+	CheckIcon,
 	CrosshairIcon,
 	GaugeIcon,
 	GraduationCapIcon,
@@ -13,6 +14,7 @@ import {
 	PenLineIcon,
 	PlusIcon,
 	ScanSearchIcon,
+	ShieldCheckIcon,
 	ShuffleIcon,
 	SparklesIcon,
 	TagIcon,
@@ -22,7 +24,7 @@ import {
 
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
 	return (
-		<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
+		<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-pen uppercase">
 			{children}
 		</p>
 	);
@@ -54,11 +56,11 @@ export function ProblemSection() {
 					</h2>
 				</div>
 				<div className="space-y-5 text-lg leading-relaxed text-muted">
-					<p>{copy.problem.p1}</p>
+					<p className="font-serif-body">{copy.problem.p1}</p>
 					<p className="font-display text-2xl font-medium text-ink italic">
 						{copy.problem.p2}
 					</p>
-					<p>{copy.problem.p3}</p>
+					<p className="font-serif-body">{copy.problem.p3}</p>
 				</div>
 			</div>
 		</section>
@@ -217,7 +219,7 @@ export function ExampleSection() {
 					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance sm:text-5xl">
 						{copy.example.title}
 					</h2>
-					<p className="mt-5 text-lg leading-relaxed text-night-muted">
+					<p className="font-serif-body mt-5 text-lg leading-relaxed text-night-muted">
 						{copy.example.intro}
 					</p>
 				</div>
@@ -263,6 +265,109 @@ export function ExampleSection() {
 
 				<div className="mt-10">
 					<CtaLink label={copy.example.cta} />
+				</div>
+			</div>
+		</section>
+	);
+}
+
+export function PricingSection() {
+	const { copy } = useLanguage();
+
+	return (
+		<section
+			id="pricing"
+			className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28"
+		>
+			<div className="reveal mb-12 max-w-2xl">
+				<SectionEyebrow>{copy.pricing.eyebrow}</SectionEyebrow>
+				<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
+					{copy.pricing.title}
+				</h2>
+				<p className="mt-5 text-lg leading-relaxed text-muted">
+					{copy.pricing.subtitle}
+				</p>
+			</div>
+			<ul className="grid gap-5 md:grid-cols-3">
+				{copy.pricing.tiers.map((tier) => (
+					<li
+						key={tier.name}
+						className={`reveal relative flex flex-col rounded-lg bg-surface p-6 shadow-card ${
+							tier.highlight ? "border-2 border-ink" : "border border-border"
+						}`}
+					>
+						{tier.highlight ? (
+							<span className="absolute -top-3 left-5 rounded-sm bg-pen px-2 py-1 font-mono text-[11px] text-white uppercase">
+								{copy.pricing.popularLabel}
+							</span>
+						) : null}
+						<p className="font-mono text-xs tracking-widest text-muted uppercase">
+							{tier.name}
+						</p>
+						<div className="mt-4 flex items-baseline gap-2">
+							<p className="font-display text-4xl font-extrabold text-ink">
+								{tier.price}
+							</p>
+							{tier.period ? (
+								<p className="text-sm text-muted">{tier.period}</p>
+							) : null}
+						</div>
+						<p className="mt-3 leading-relaxed text-muted">
+							{tier.description}
+						</p>
+						<ul className="mt-6 space-y-3 border-t border-border pt-6">
+							{tier.features.map((feature) => (
+								<li
+									key={feature}
+									className="flex gap-3 text-[15px] leading-snug text-ink"
+								>
+									<CheckIcon
+										className="mt-0.5 size-4 shrink-0 text-primary"
+										aria-hidden
+									/>
+									{feature}
+								</li>
+							))}
+						</ul>
+						<div className="mt-auto pt-8">
+							{tier.available ? (
+								<a
+									href="#review"
+									className="btn-primary inline-flex w-full items-center justify-center gap-2 px-5 py-3 text-sm font-semibold"
+								>
+									{tier.cta}
+								</a>
+							) : (
+								<span
+									aria-disabled="true"
+									className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-md border border-dashed border-border-strong px-5 py-3 text-sm font-semibold text-muted"
+								>
+									{copy.pricing.soonLabel}
+								</span>
+							)}
+						</div>
+					</li>
+				))}
+			</ul>
+			<p className="mt-6 text-sm text-muted">{copy.pricing.note}</p>
+		</section>
+	);
+}
+
+export function GuaranteeStrip() {
+	const { copy } = useLanguage();
+
+	return (
+		<section className="bg-night text-white">
+			<div className="reveal mx-auto flex max-w-6xl flex-col gap-6 px-4 py-14 sm:flex-row sm:items-center sm:gap-10 sm:px-6 md:py-16">
+				<ShieldCheckIcon className="size-10 shrink-0 text-pen" aria-hidden />
+				<div className="max-w-3xl">
+					<h2 className="font-display text-2xl font-bold text-balance text-white">
+						{copy.guarantee.title}
+					</h2>
+					<p className="mt-3 leading-relaxed text-night-muted">
+						{copy.guarantee.body}
+					</p>
 				</div>
 			</div>
 		</section>

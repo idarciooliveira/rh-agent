@@ -12,7 +12,7 @@ export function RedlineLogo({ className = "" }: RedlineLogoProps) {
 			className={`inline-flex items-center gap-2 font-display text-xl font-semibold text-ink ${className}`}
 			aria-label="Redline home"
 		>
-			<span className="flex size-8 items-center justify-center rounded-sm bg-primary">
+			<span className="flex size-8 items-center justify-center rounded-sm bg-pen">
 				<PenLineIcon className="size-4 text-white" aria-hidden />
 			</span>
 			<span>

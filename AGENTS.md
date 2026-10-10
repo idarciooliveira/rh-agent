@@ -25,7 +25,7 @@ src/
   routes/           # pages + API (file-based)
     index.tsx       # username + career goal form
     results.$analysisId.tsx
-    api/fetch-profile|analyze|profile.ts (upload|parse are legacy PDF routes)
+    api/fetch-profile|analyze|unlock|profile.ts (upload|parse are legacy PDF routes)
   components/       # UI (results/* for dashboard)
   lib/
     ai/             # parse-profile, analyze-profile, mock-* , fixtures/
@@ -33,7 +33,7 @@ src/
     icons.ts        # hydration-safe Lucide icons — use this, not lucide-react directly
     pdf.ts, api-client.ts, api-error.ts
   server/           # createServerFn helpers (session, profile, analysis, ai-mode)
-  db/schema.ts      # sessions, profile_snapshots, analyses
+  db/schema.ts      # sessions, profile_snapshots, analyses, leads
   env.ts            # @t3-oss/env-core — all env access goes here
 ```
 
@@ -46,7 +46,8 @@ Import alias: `#/*` → `./src/*`.
 ```
 POST /api/fetch-profile → Apify fetch + map, structured profile saved, snapshotId
 POST /api/analyze → analysisId
-GET  /results/:analysisId → SWOT dashboard + recommendations modal
+GET  /results/:analysisId → free score + SWOT; rewrites hidden until unlocked
+POST /api/unlock → saves email, unlocks recommendations for that analysis
 ```
 
 Session: anonymous cookie via `ensureSession()` in root loader. All writes scoped to session.
@@ -89,7 +90,8 @@ Env: copy `.env.example` → `.env.local`. Never commit secrets.
 ## Phase 4 backlog (quick wins first)
 
 - [x] Rate limit `/api/fetch-profile` (in-memory, 5/hour per session)
-- [ ] Rate limit `/api/analyze`
+- [x] Rate limit `/api/analyze` (in-memory, 10/hour per session)
+- [x] Email gate: rewrites unlock via `POST /api/unlock` (`leads` table); paid packages shown as "coming soon", payments not built
 - [ ] Route-level error boundaries
 - [ ] Railway Docker deploy (Node runtime for unpdf + SQLite volume)
 - [ ] Full-flow E2E script
