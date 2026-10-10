@@ -6,6 +6,7 @@ const en = {
 	header: {
 		howItWorks: "How it works",
 		example: "Example",
+		pricing: "Packages",
 		cta: "Review my profile",
 		languageLabel: "Language",
 	},
@@ -353,6 +354,7 @@ const pt: HomeCopy = {
 	header: {
 		howItWorks: "Como funciona",
 		example: "Exemplo",
+		pricing: "Pacotes",
 		cta: "Analisar o meu perfil",
 		languageLabel: "Idioma",
 	},

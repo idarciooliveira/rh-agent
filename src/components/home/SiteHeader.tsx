@@ -48,6 +48,12 @@ export function SiteHeader() {
 					>
 						{copy.header.example}
 					</a>
+					<a
+						href="#pricing"
+						className="hidden text-sm font-medium text-muted transition-colors hover:text-ink sm:inline"
+					>
+						{copy.header.pricing}
+					</a>
 					<LanguageToggle />
 					<a
 						href="#review"

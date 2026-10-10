@@ -5,8 +5,10 @@ import {
 	ExampleSection,
 	FaqSection,
 	FinalCtaSection,
+	GuaranteeStrip,
 	HowItWorksSection,
 	PersonasSection,
+	PricingSection,
 	ProblemSection,
 	SiteFooter,
 	ValueStackSection,
@@ -86,6 +88,8 @@ function Home() {
 				<HowItWorksSection />
 				<ValueStackSection />
 				<ExampleSection />
+				<PricingSection />
+				<GuaranteeStrip />
 				{TESTIMONIALS_ARE_SAMPLES ? null : <TestimonialsSection />}
 				<PersonasSection />
 				<FaqSection />

@@ -5,6 +5,7 @@ import {
 	AwardIcon,
 	BriefcaseIcon,
 	CheckCircle2Icon,
+	CheckIcon,
 	CrosshairIcon,
 	GaugeIcon,
 	GraduationCapIcon,
@@ -13,6 +14,7 @@ import {
 	PenLineIcon,
 	PlusIcon,
 	ScanSearchIcon,
+	ShieldCheckIcon,
 	ShuffleIcon,
 	SparklesIcon,
 	TagIcon,
@@ -263,6 +265,111 @@ export function ExampleSection() {
 
 				<div className="mt-10">
 					<CtaLink label={copy.example.cta} />
+				</div>
+			</div>
+		</section>
+	);
+}
+
+export function PricingSection() {
+	const { copy } = useLanguage();
+
+	return (
+		<section
+			id="pricing"
+			className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28"
+		>
+			<div className="reveal mb-12 max-w-2xl">
+				<SectionEyebrow>{copy.pricing.eyebrow}</SectionEyebrow>
+				<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
+					{copy.pricing.title}
+				</h2>
+				<p className="mt-5 text-lg text-muted">{copy.pricing.subtitle}</p>
+			</div>
+			<ul className="grid gap-5 md:grid-cols-3">
+				{copy.pricing.tiers.map((tier) => (
+					<li
+						key={tier.name}
+						className={`reveal relative flex flex-col rounded-lg bg-surface p-6 shadow-card sm:p-8 ${
+							tier.highlight
+								? "border-2 border-primary"
+								: "border border-border"
+						}`}
+					>
+						{tier.highlight ? (
+							<span className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 font-mono text-xs font-semibold tracking-wide text-primary-foreground uppercase">
+								{copy.pricing.popularLabel}
+							</span>
+						) : null}
+						<div className="flex items-start justify-between gap-3">
+							<h3 className="font-display text-2xl font-semibold text-ink">
+								{tier.name}
+							</h3>
+						</div>
+						<p className="mt-5 flex flex-wrap items-baseline gap-x-1.5">
+							<span className="font-display text-4xl font-semibold whitespace-nowrap text-ink lg:text-5xl">
+								{tier.price}
+							</span>
+							{tier.period ? (
+								<span className="text-sm text-muted">/ {tier.period}</span>
+							) : null}
+						</p>
+						<p className="mt-3 leading-relaxed text-muted">
+							{tier.description}
+						</p>
+						<ul className="mt-6 flex-1 space-y-3">
+							{tier.features.map((feature) => (
+								<li
+									key={feature}
+									className="flex gap-3 text-[15px] leading-relaxed text-ink"
+								>
+									<CheckIcon
+										className="mt-1 size-4 shrink-0 text-primary-ink"
+										aria-hidden
+									/>
+									{feature}
+								</li>
+							))}
+						</ul>
+						{tier.available ? (
+							<a
+								href="#review"
+								className="btn-primary mt-8 inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold"
+							>
+								{tier.cta}
+							</a>
+						) : (
+							<span
+								aria-disabled="true"
+								className="mt-8 inline-flex w-full items-center justify-center rounded-md border border-border bg-surface-2 px-5 py-3 text-sm font-semibold text-muted"
+							>
+								{tier.cta}
+							</span>
+						)}
+					</li>
+				))}
+			</ul>
+			<p className="mt-6 text-sm text-muted">{copy.pricing.note}</p>
+		</section>
+	);
+}
+
+export function GuaranteeStrip() {
+	const { copy } = useLanguage();
+
+	return (
+		<section className="border-y border-border bg-surface">
+			<div className="reveal mx-auto flex max-w-6xl flex-col gap-5 px-4 py-10 sm:flex-row sm:items-center sm:gap-8 sm:px-6 md:py-12">
+				<span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent">
+					<ShieldCheckIcon className="size-6 text-primary" aria-hidden />
+				</span>
+				<div>
+					<p className="font-display text-2xl font-semibold text-ink">
+						{copy.guarantee.title}
+					</p>
+					<p className="mt-2 max-w-3xl leading-relaxed text-muted">
+						{copy.guarantee.body}
+					</p>
 				</div>
 			</div>
 		</section>

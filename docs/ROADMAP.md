@@ -118,7 +118,8 @@ The shipped MVP streamlined a few early design choices:
 - [x] Loading states (analysis pipeline UI)
 - [x] Responsive layout pass (homepage + results)
 - [x] Rebrand to Redline: marketing homepage, new palette/type, results restyle (see `docs/brand/`)
-- [ ] Basic rate limiting on API routes
+- [x] Basic rate limiting on API routes (`/api/fetch-profile`, `/api/analyze`, `/api/unlock`)
+- [x] Email gate for rewrites (`leads` table, `/api/unlock`); landing pricing section with paid tiers marked "coming soon" (payments deferred)
 - [ ] Railway Docker deployment (Node.js runtime for `unpdf`, SQLite volume at `/app/data`)
 - [ ] Manual QA with real LinkedIn PDFs
 - [ ] Full-flow E2E proof script (Phase 2/3)
