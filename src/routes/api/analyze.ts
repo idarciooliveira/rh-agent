@@ -22,7 +22,7 @@ export const Route = createFileRoute("/api/analyze")({
 		handlers: {
 			POST: async ({ request }) => {
 				try {
-					const sessionId = getRequiredSessionId();
+					const sessionId = await getRequiredSessionId();
 					const aiMode = resolveAiMode();
 
 					if (aiMode === "unavailable") {
@@ -49,7 +49,7 @@ export const Route = createFileRoute("/api/analyze")({
 
 					const { snapshotId, careerGoal } = parsed.data;
 
-					const snapshot = db
+					const snapshot = await db
 						.select()
 						.from(profileSnapshots)
 						.where(
@@ -81,7 +81,8 @@ export const Route = createFileRoute("/api/analyze")({
 
 					const analysisId = crypto.randomUUID();
 
-					db.insert(analyses)
+					await db
+						.insert(analyses)
 						.values({
 							id: analysisId,
 							sessionId,

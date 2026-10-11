@@ -29,8 +29,8 @@ function loadSnapshotForSession(snapshotId: string, sessionId: string) {
 export const getProfileSnapshot = createServerFn({ method: "GET" })
 	.validator(snapshotIdSchema)
 	.handler(async ({ data }) => {
-		const sessionId = getRequiredSessionId();
-		const snapshot = loadSnapshotForSession(data.snapshotId, sessionId);
+		const sessionId = await getRequiredSessionId();
+		const snapshot = await loadSnapshotForSession(data.snapshotId, sessionId);
 
 		if (!snapshot) {
 			throw new Error("Profile snapshot not found");

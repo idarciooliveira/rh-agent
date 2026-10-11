@@ -7,14 +7,14 @@ import { jsonError } from "#/lib/api-error";
 
 import { SESSION_COOKIE_NAME } from "./session";
 
-export function getRequiredSessionId(): string {
+export async function getRequiredSessionId(): Promise<string> {
 	const sessionId = getCookie(SESSION_COOKIE_NAME);
 
 	if (!sessionId) {
 		throw jsonError("Unauthorized: session cookie missing", 401);
 	}
 
-	const existing = db
+	const existing = await db
 		.select()
 		.from(sessions)
 		.where(eq(sessions.id, sessionId))

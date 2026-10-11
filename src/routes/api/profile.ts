@@ -26,7 +26,7 @@ export const Route = createFileRoute("/api/profile")({
 		handlers: {
 			GET: async ({ request }) => {
 				try {
-					const sessionId = getRequiredSessionId();
+					const sessionId = await getRequiredSessionId();
 
 					const url = new URL(request.url);
 					const snapshotId = url.searchParams.get("snapshotId");
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/api/profile")({
 						return jsonError("Missing snapshotId query parameter", 400);
 					}
 
-					const snapshot = getSnapshotForSession(snapshotId, sessionId);
+					const snapshot = await getSnapshotForSession(snapshotId, sessionId);
 					if (!snapshot) {
 						return jsonError("Profile snapshot not found", 404);
 					}

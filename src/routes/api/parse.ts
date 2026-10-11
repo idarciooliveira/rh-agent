@@ -20,7 +20,7 @@ export const Route = createFileRoute("/api/parse")({
 		handlers: {
 			POST: async ({ request }) => {
 				try {
-					const sessionId = getRequiredSessionId();
+					const sessionId = await getRequiredSessionId();
 					const aiMode = resolveAiMode();
 
 					if (aiMode === "unavailable") {
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/api/parse")({
 
 					const { snapshotId } = parsed.data;
 
-					const snapshot = db
+					const snapshot = await db
 						.select()
 						.from(profileSnapshots)
 						.where(
@@ -73,7 +73,8 @@ export const Route = createFileRoute("/api/parse")({
 
 					const now = new Date();
 
-					db.update(profileSnapshots)
+					await db
+						.update(profileSnapshots)
 						.set({
 							normalizedProfileJson: JSON.stringify(profile),
 							updatedAt: now,

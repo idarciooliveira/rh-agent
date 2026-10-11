@@ -3,7 +3,8 @@ import { z } from "zod";
 
 export const env = createEnv({
 	server: {
-		DATABASE_URL: z.string().default("./data/app.db"),
+		DATABASE_URL: z.string().default("file:./data/app.db"),
+		DATABASE_AUTH_TOKEN: z.string().optional(),
 		AI_GATEWAY_API_KEY: z.string().optional(),
 		APIFY_TOKEN: z.string().optional(),
 		APIFY_LINKEDIN_ACTOR_ID: z
@@ -28,6 +29,7 @@ export const env = createEnv({
 
 	runtimeEnv: {
 		DATABASE_URL: process.env.DATABASE_URL,
+		DATABASE_AUTH_TOKEN: process.env.DATABASE_AUTH_TOKEN,
 		AI_GATEWAY_API_KEY: process.env.AI_GATEWAY_API_KEY,
 		APIFY_TOKEN: process.env.APIFY_TOKEN,
 		APIFY_LINKEDIN_ACTOR_ID: process.env.APIFY_LINKEDIN_ACTOR_ID,

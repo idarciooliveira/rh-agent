@@ -27,7 +27,7 @@ export const Route = createFileRoute("/api/fetch-profile")({
 		handlers: {
 			POST: async ({ request }) => {
 				try {
-					const sessionId = getRequiredSessionId();
+					const sessionId = await getRequiredSessionId();
 					const aiMode = resolveAiMode();
 
 					if (aiMode === "unavailable") {
@@ -92,7 +92,8 @@ export const Route = createFileRoute("/api/fetch-profile")({
 
 					const snapshotId = randomUUID();
 
-					db.insert(profileSnapshots)
+					await db
+						.insert(profileSnapshots)
 						.values({
 							id: snapshotId,
 							sessionId,
