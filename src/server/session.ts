@@ -15,7 +15,7 @@ export const ensureSession = createServerFn({ method: "GET" }).handler(
 		const existingCookie = getCookie(cookieName);
 
 		if (existingCookie) {
-			const existing = db
+			const existing = await db
 				.select()
 				.from(sessions)
 				.where(eq(sessions.id, existingCookie))
@@ -29,7 +29,7 @@ export const ensureSession = createServerFn({ method: "GET" }).handler(
 
 		const sessionId = randomUUID();
 
-		db.insert(sessions).values({ id: sessionId }).run();
+		await db.insert(sessions).values({ id: sessionId }).run();
 
 		setCookie(cookieName, sessionId, {
 			httpOnly: true,

@@ -15,7 +15,7 @@ export const Route = createFileRoute("/api/upload")({
 		handlers: {
 			POST: async ({ request }) => {
 				try {
-					const sessionId = getRequiredSessionId();
+					const sessionId = await getRequiredSessionId();
 
 					const formData = await request.formData();
 					const file = formData.get("file");
@@ -43,7 +43,8 @@ export const Route = createFileRoute("/api/upload")({
 
 					const snapshotId = randomUUID();
 
-					db.insert(profileSnapshots)
+					await db
+						.insert(profileSnapshots)
 						.values({
 							id: snapshotId,
 							sessionId,

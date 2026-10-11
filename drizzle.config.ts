@@ -6,8 +6,9 @@ config({ path: ['.env.local', '.env'] })
 export default defineConfig({
   out: './drizzle',
   schema: './src/db/schema.ts',
-  dialect: 'sqlite',
+  dialect: 'turso',
   dbCredentials: {
-    url: process.env.DATABASE_URL ?? './data/app.db',
+    url: process.env.DATABASE_URL ?? 'file:./data/app.db',
+    authToken: process.env.DATABASE_AUTH_TOKEN,
   },
 })

@@ -27,14 +27,14 @@ function loadAnalysisForSession(analysisId: string, sessionId: string) {
 export const getAnalysis = createServerFn({ method: "GET" })
 	.validator(analysisIdSchema)
 	.handler(async ({ data }) => {
-		const sessionId = getRequiredSessionId();
-		const analysis = loadAnalysisForSession(data.analysisId, sessionId);
+		const sessionId = await getRequiredSessionId();
+		const analysis = await loadAnalysisForSession(data.analysisId, sessionId);
 
 		if (!analysis) {
 			throw new Error("Analysis not found");
 		}
 
-		const snapshot = db
+		const snapshot = await db
 			.select()
 			.from(profileSnapshots)
 			.where(eq(profileSnapshots.id, analysis.profileSnapshotId))
