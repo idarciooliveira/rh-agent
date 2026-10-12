@@ -1,5 +1,5 @@
 import { CheckIcon, PlusIcon, ScanSearchIcon } from "#/lib/icons";
-import { splitKeywordsByPresence } from "#/lib/paywall";
+import { profileToText, splitKeywordsByPresence } from "#/lib/paywall";
 import type { Profile } from "#/lib/profile-schema";
 
 type RecruiterKeywordsProps = {
@@ -13,7 +13,7 @@ export function RecruiterKeywords({
 }: RecruiterKeywordsProps) {
 	const { present, missing } = splitKeywordsByPresence(
 		keywords,
-		JSON.stringify(profile),
+		profileToText(profile),
 	);
 
 	return (

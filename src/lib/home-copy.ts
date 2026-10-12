@@ -176,7 +176,7 @@ const en = {
 			},
 		],
 		banner:
-			"Career coaches and resume writers charge for this kind of review. Here it costs nothing and takes about 30 seconds.",
+			"Career coaches and resume writers charge for this kind of review. Here the score is free and the full review is a one-off payment. The score takes about 30 seconds.",
 		cta: "Review my profile",
 	},
 	example: {
@@ -258,9 +258,7 @@ const en = {
 		perReview: "one-off",
 		perPass: "30 days",
 		addOn: "Add-on",
-		guarantee:
-			"If the review doesn't help, email us within 7 days for a full refund.",
-		methods: "Multicaixa Express, É-kwanza, reference, Pix, MB WAY or card",
+		guarantee: "One-off payment. No subscription and no account.",
 	},
 	teams: {
 		eyebrow: "For universities and companies",
@@ -292,7 +290,7 @@ const en = {
 			},
 			{
 				q: "What do you read, and what do you keep?",
-				a: "Only your public LinkedIn profile: headline, About, experience, education and skills. We never log in as you and can't see messages, connections or anything private. An AI model processes the profile and your goal to write the review. We save the profile data and the review so the results page loads in your browser. There's no account, so nothing ties the review to your name or email.",
+				a: "Only your public LinkedIn profile: headline, About, experience, education and skills. We never log in as you and can't see messages, connections or anything private. An AI model processes the profile and your goal to write the review. We save the profile data and the review so the results page loads in your browser. There's no account. A free review isn't tied to your name or email. If you pay, the review is linked to the email you give at checkout.",
 			},
 			{
 				q: "My profile is private. Will it work?",
@@ -514,7 +512,7 @@ const pt: HomeCopy = {
 			},
 		],
 		banner:
-			"Coaches de carreira e redatores de CV cobram por este tipo de análise. Aqui não custa nada e demora cerca de 30 segundos.",
+			"Coaches de carreira e redatores de CV cobram por este tipo de análise. Aqui a pontuação é grátis e a análise completa é um pagamento único. A pontuação demora cerca de 30 segundos.",
 		cta: "Analisar o meu perfil",
 	},
 	example: {
@@ -596,9 +594,7 @@ const pt: HomeCopy = {
 		perReview: "pagamento único",
 		perPass: "30 dias",
 		addOn: "Extra",
-		guarantee:
-			"Se a análise não ajudar, envie-nos um e-mail em 7 dias e devolvemos o dinheiro.",
-		methods: "Multicaixa Express, É-kwanza, referência, Pix, MB WAY ou cartão",
+		guarantee: "Pagamento único. Sem subscrição e sem conta.",
 	},
 	teams: {
 		eyebrow: "Para universidades e empresas",
@@ -631,7 +627,7 @@ const pt: HomeCopy = {
 			},
 			{
 				q: "O que leem e o que guardam?",
-				a: "Apenas o seu perfil público do LinkedIn: título, Sobre, experiência, formação e competências. Nunca entramos na sua conta e não vemos mensagens, ligações nem nada privado. Um modelo de IA processa o perfil e o seu objetivo para escrever a análise. Guardamos os dados do perfil e a análise para a página de resultados carregar no seu navegador. Não há conta, por isso nada liga a análise ao seu nome ou e-mail.",
+				a: "Apenas o seu perfil público do LinkedIn: título, Sobre, experiência, formação e competências. Nunca entramos na sua conta e não vemos mensagens, ligações nem nada privado. Um modelo de IA processa o perfil e o seu objetivo para escrever a análise. Guardamos os dados do perfil e a análise para a página de resultados carregar no seu navegador. Não há conta. Uma análise grátis não fica ligada ao seu nome nem ao seu e-mail. Se pagar, a análise fica ligada ao e-mail que indicar no pagamento.",
 			},
 			{
 				q: "O meu perfil é privado. Funciona?",

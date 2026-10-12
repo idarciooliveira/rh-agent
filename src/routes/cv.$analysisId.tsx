@@ -67,7 +67,8 @@ function CvPage() {
 	const { analysisId, profile, recommendations } = Route.useLoaderData();
 	const alternate = recommendations.alternateLanguage;
 	const primaryLanguage: CvLanguage =
-		alternate?.language === "pt" ? "en" : "pt";
+		recommendations.primaryLanguage ??
+		(alternate?.language === "pt" ? "en" : "pt");
 	const [language, setLanguage] = useState<CvLanguage>(primaryLanguage);
 	const useAlternate = alternate && language === alternate.language;
 	const headline = useAlternate

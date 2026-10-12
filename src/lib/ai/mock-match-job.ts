@@ -1,6 +1,6 @@
 import { env } from "#/env";
 import type { JobMatch } from "#/lib/analysis-schema";
-import { splitKeywordsByPresence } from "#/lib/paywall";
+import { profileToText, splitKeywordsByPresence } from "#/lib/paywall";
 import type { Profile } from "#/lib/profile-schema";
 
 function delay(ms: number): Promise<void> {
@@ -52,10 +52,9 @@ export async function mockMatchJob(
 ): Promise<JobMatch> {
 	await delay(env.AI_MOCK_DELAY_MS);
 
-	const profileText = JSON.stringify(profile);
 	const { present, missing } = splitKeywordsByPresence(
 		extractKeywords(jobPost),
-		profileText,
+		profileToText(profile),
 	);
 	const total = present.length + missing.length;
 	const fitScore =
@@ -68,11 +67,14 @@ export async function mockMatchJob(
 		summary: `Your profile covers ${present.length} of the ${total} key skills in this post. The biggest gap is ${missing.slice(0, 2).join(" and ") || "how you describe your results"}, which the recruiter will look for first.`,
 		matchedKeywords: present,
 		missingKeywords: missing,
-		tailoredHeadline:
-			`${profile.headline.split("|")[0]?.trim() ?? profile.headline} | ${present.slice(0, 3).join(", ")} | Targeting ${role}`.slice(
-				0,
-				220,
-			),
+		tailoredHeadline: [
+			profile.headline.split("|")[0]?.trim() || profile.headline,
+			present.slice(0, 3).join(", "),
+			`Targeting ${role}`,
+		]
+			.filter(Boolean)
+			.join(" | ")
+			.slice(0, 220),
 		tailoredBullets: [
 			`Delivered production work at ${company} that maps to ${present[0] ?? "the core of this role"}.`,
 			`Worked across teams to ship on time, the same way this role needs ${present[1] ?? "collaboration"}.`,

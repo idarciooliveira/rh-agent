@@ -183,6 +183,7 @@ At ${profile.experiences[0]?.company ?? "my current company"}, I work on backend
 If you're on a similar backend-to-platform path (or hiring for DevOps/SRE), I'd love to exchange notes on what actually moves the needle: pipeline design, monitoring, or certification vs. project proof.
 
 #DevOps #AWS #CICD #Observability #CareerGrowth`,
+			primaryLanguage: "en",
 			alternateLanguage: {
 				language: "pt",
 				headline:
