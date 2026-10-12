@@ -1,4 +1,5 @@
 import { generateStructuredObject } from "#/lib/ai/generate-structured";
+import { buildMatchJobPrompt } from "#/lib/ai/match-job-prompt";
 import { type JobMatch, jobMatchSchema } from "#/lib/analysis-schema";
 import type { Profile } from "#/lib/profile-schema";
 
@@ -28,12 +29,6 @@ export async function matchJob(
 		schemaDescription:
 			"Fit score, keyword gaps, tailored headline, bullets and cover letter for one job post",
 		system: MATCH_PROMPT,
-		prompt: `<job_post>
-${jobPost}
-</job_post>
-
-<profile_json>
-${JSON.stringify(profile, null, 2)}
-</profile_json>`,
+		prompt: buildMatchJobPrompt(profile, jobPost),
 	});
 }
