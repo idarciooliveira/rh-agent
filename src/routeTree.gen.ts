@@ -11,10 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiAnalyzeRouteImport } from './routes/api/analyze'
+import { Route as ApiCheckoutRouteImport } from './routes/api/checkout'
 import { Route as ApiFetchProfileRouteImport } from './routes/api/fetch-profile'
+import { Route as ApiJobMatchRouteImport } from './routes/api/job-match'
 import { Route as ApiParseRouteImport } from './routes/api/parse'
 import { Route as ApiProfileRouteImport } from './routes/api/profile'
 import { Route as ApiUploadRouteImport } from './routes/api/upload'
+import { Route as CvAnalysisIdRouteImport } from './routes/cv.$analysisId'
 import { Route as ResultsAnalysisIdRouteImport } from './routes/results.$analysisId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -27,9 +30,19 @@ const ApiAnalyzeRoute = ApiAnalyzeRouteImport.update({
   path: '/api/analyze',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCheckoutRoute = ApiCheckoutRouteImport.update({
+  id: '/api/checkout',
+  path: '/api/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiFetchProfileRoute = ApiFetchProfileRouteImport.update({
   id: '/api/fetch-profile',
   path: '/api/fetch-profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiJobMatchRoute = ApiJobMatchRouteImport.update({
+  id: '/api/job-match',
+  path: '/api/job-match',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiParseRoute = ApiParseRouteImport.update({
@@ -47,6 +60,11 @@ const ApiUploadRoute = ApiUploadRouteImport.update({
   path: '/api/upload',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CvAnalysisIdRoute = CvAnalysisIdRouteImport.update({
+  id: '/cv/$analysisId',
+  path: '/cv/$analysisId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResultsAnalysisIdRoute = ResultsAnalysisIdRouteImport.update({
   id: '/results/$analysisId',
   path: '/results/$analysisId',
@@ -56,29 +74,38 @@ const ResultsAnalysisIdRoute = ResultsAnalysisIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/analyze': typeof ApiAnalyzeRoute
+  '/api/checkout': typeof ApiCheckoutRoute
   '/api/fetch-profile': typeof ApiFetchProfileRoute
+  '/api/job-match': typeof ApiJobMatchRoute
   '/api/parse': typeof ApiParseRoute
   '/api/profile': typeof ApiProfileRoute
   '/api/upload': typeof ApiUploadRoute
+  '/cv/$analysisId': typeof CvAnalysisIdRoute
   '/results/$analysisId': typeof ResultsAnalysisIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/analyze': typeof ApiAnalyzeRoute
+  '/api/checkout': typeof ApiCheckoutRoute
   '/api/fetch-profile': typeof ApiFetchProfileRoute
+  '/api/job-match': typeof ApiJobMatchRoute
   '/api/parse': typeof ApiParseRoute
   '/api/profile': typeof ApiProfileRoute
   '/api/upload': typeof ApiUploadRoute
+  '/cv/$analysisId': typeof CvAnalysisIdRoute
   '/results/$analysisId': typeof ResultsAnalysisIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/analyze': typeof ApiAnalyzeRoute
+  '/api/checkout': typeof ApiCheckoutRoute
   '/api/fetch-profile': typeof ApiFetchProfileRoute
+  '/api/job-match': typeof ApiJobMatchRoute
   '/api/parse': typeof ApiParseRoute
   '/api/profile': typeof ApiProfileRoute
   '/api/upload': typeof ApiUploadRoute
+  '/cv/$analysisId': typeof CvAnalysisIdRoute
   '/results/$analysisId': typeof ResultsAnalysisIdRoute
 }
 export interface FileRouteTypes {
@@ -86,38 +113,50 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/api/analyze'
+    | '/api/checkout'
     | '/api/fetch-profile'
+    | '/api/job-match'
     | '/api/parse'
     | '/api/profile'
     | '/api/upload'
+    | '/cv/$analysisId'
     | '/results/$analysisId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/api/analyze'
+    | '/api/checkout'
     | '/api/fetch-profile'
+    | '/api/job-match'
     | '/api/parse'
     | '/api/profile'
     | '/api/upload'
+    | '/cv/$analysisId'
     | '/results/$analysisId'
   id:
     | '__root__'
     | '/'
     | '/api/analyze'
+    | '/api/checkout'
     | '/api/fetch-profile'
+    | '/api/job-match'
     | '/api/parse'
     | '/api/profile'
     | '/api/upload'
+    | '/cv/$analysisId'
     | '/results/$analysisId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiAnalyzeRoute: typeof ApiAnalyzeRoute
+  ApiCheckoutRoute: typeof ApiCheckoutRoute
   ApiFetchProfileRoute: typeof ApiFetchProfileRoute
+  ApiJobMatchRoute: typeof ApiJobMatchRoute
   ApiParseRoute: typeof ApiParseRoute
   ApiProfileRoute: typeof ApiProfileRoute
   ApiUploadRoute: typeof ApiUploadRoute
+  CvAnalysisIdRoute: typeof CvAnalysisIdRoute
   ResultsAnalysisIdRoute: typeof ResultsAnalysisIdRoute
 }
 
@@ -137,11 +176,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAnalyzeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/checkout': {
+      id: '/api/checkout'
+      path: '/api/checkout'
+      fullPath: '/api/checkout'
+      preLoaderRoute: typeof ApiCheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/fetch-profile': {
       id: '/api/fetch-profile'
       path: '/api/fetch-profile'
       fullPath: '/api/fetch-profile'
       preLoaderRoute: typeof ApiFetchProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/job-match': {
+      id: '/api/job-match'
+      path: '/api/job-match'
+      fullPath: '/api/job-match'
+      preLoaderRoute: typeof ApiJobMatchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/parse': {
@@ -165,6 +218,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiUploadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cv/$analysisId': {
+      id: '/cv/$analysisId'
+      path: '/cv/$analysisId'
+      fullPath: '/cv/$analysisId'
+      preLoaderRoute: typeof CvAnalysisIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/results/$analysisId': {
       id: '/results/$analysisId'
       path: '/results/$analysisId'
@@ -178,10 +238,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiAnalyzeRoute: ApiAnalyzeRoute,
+  ApiCheckoutRoute: ApiCheckoutRoute,
   ApiFetchProfileRoute: ApiFetchProfileRoute,
+  ApiJobMatchRoute: ApiJobMatchRoute,
   ApiParseRoute: ApiParseRoute,
   ApiProfileRoute: ApiProfileRoute,
   ApiUploadRoute: ApiUploadRoute,
+  CvAnalysisIdRoute: CvAnalysisIdRoute,
   ResultsAnalysisIdRoute: ResultsAnalysisIdRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import type { CSSProperties } from "react";
+import { Blurred, LockedPill } from "#/components/results/Locked";
 import type { SwotItem } from "#/lib/analysis-schema";
 import {
 	AlertTriangleIcon,
@@ -13,6 +14,8 @@ type SwotVariant = "strengths" | "weaknesses" | "opportunities" | "threats";
 type SwotCardProps = {
 	variant: SwotVariant;
 	items: SwotItem[];
+	/** Shows the first title only; the rest is server-redacted placeholder text. */
+	locked?: boolean;
 };
 
 const variantConfig: Record<
@@ -66,7 +69,7 @@ const variantConfig: Record<
 	},
 };
 
-export function SwotCard({ variant, items }: SwotCardProps) {
+export function SwotCard({ variant, items, locked = false }: SwotCardProps) {
 	const config = variantConfig[variant];
 	const Icon = config.icon;
 
@@ -87,7 +90,11 @@ export function SwotCard({ variant, items }: SwotCardProps) {
 						className={`font-display text-xl font-semibold ${config.textClass}`}
 					>
 						{config.title}
+						<span className="ml-1.5 font-mono text-sm font-medium opacity-70">
+							({items.length})
+						</span>
 					</h2>
+					{locked ? <LockedPill /> : null}
 				</div>
 				<p className="relative mt-1 pr-10 text-sm leading-relaxed text-ink/80">
 					{config.descriptor}
@@ -96,7 +103,8 @@ export function SwotCard({ variant, items }: SwotCardProps) {
 			<ul className="space-y-4 px-5 py-5 sm:px-6">
 				{items.map((item, index) => (
 					<li
-						key={item.title}
+						// biome-ignore lint/suspicious/noArrayIndexKey: locked items share the same placeholder text
+						key={`${index}-${item.title}`}
 						className="animate-rise flex gap-3"
 						style={{ "--i": index } as CSSProperties}
 					>
@@ -105,9 +113,15 @@ export function SwotCard({ variant, items }: SwotCardProps) {
 							aria-hidden
 						/>
 						<div className="min-w-0">
-							<p className="text-[15px] font-semibold text-ink">{item.title}</p>
+							<p className="text-[15px] font-semibold text-ink">
+								{locked && index > 0 ? (
+									<Blurred>{item.title}</Blurred>
+								) : (
+									item.title
+								)}
+							</p>
 							<p className="mt-1 text-sm leading-relaxed text-muted">
-								{item.detail}
+								{locked ? <Blurred>{item.detail}</Blurred> : item.detail}
 							</p>
 						</div>
 					</li>

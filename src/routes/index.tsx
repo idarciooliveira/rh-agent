@@ -7,8 +7,10 @@ import {
 	FinalCtaSection,
 	HowItWorksSection,
 	PersonasSection,
+	PricingSection,
 	ProblemSection,
 	SiteFooter,
+	TeamsSection,
 	ValueStackSection,
 } from "#/components/home/LandingSections";
 import { SiteHeader } from "#/components/home/SiteHeader";
@@ -87,6 +89,8 @@ function Home() {
 				<ExampleSection />
 				<TestimonialsSection />
 				<PersonasSection />
+				<PricingSection />
+				<TeamsSection />
 				<FaqSection />
 				<FinalCtaSection />
 			</main>

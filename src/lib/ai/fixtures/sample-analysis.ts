@@ -1,6 +1,15 @@
 import type { FullAnalysis } from "#/lib/analysis-schema";
 import type { Profile } from "#/lib/profile-schema";
 
+/** Varies the mock score by goal so re-scans show progress in mock mode. */
+function mockProfileScore(careerGoal: string): number {
+	let hash = 0;
+	for (const char of careerGoal) {
+		hash = (hash * 31 + char.charCodeAt(0)) % 997;
+	}
+	return 52 + (hash % 35);
+}
+
 export function buildSampleAnalysis(
 	profile: Profile,
 	careerGoal: string,
@@ -13,7 +22,7 @@ export function buildSampleAnalysis(
 
 	return {
 		swotAnalysis: {
-			profileScore: 72,
+			profileScore: mockProfileScore(careerGoal),
 			goalAlignment: {
 				score: 7,
 				maxScore: 10,
@@ -174,6 +183,59 @@ At ${profile.experiences[0]?.company ?? "my current company"}, I work on backend
 If you're on a similar backend-to-platform path (or hiring for DevOps/SRE), I'd love to exchange notes on what actually moves the needle: pipeline design, monitoring, or certification vs. project proof.
 
 #DevOps #AWS #CICD #Observability #CareerGrowth`,
+			alternateLanguage: {
+				language: "pt",
+				headline:
+					"Engenheiro DevOps / Cloud (AWS) | CI/CD, Infraestrutura como Código, Observabilidade | De backend para plataforma",
+				about: `Engenheiro de software em transição para DevOps/Cloud, com mais de 6 anos a construir e pôr sistemas em produção. Transformo experiência de backend em resultados de plataforma: pipelines de CI/CD automatizados, infraestrutura AWS (EC2, IAM, CloudFormation) e práticas de observabilidade que dão mais confiança aos deploys.
+
+Na ${profile.experiences[0]?.company ?? "empresa atual"} trabalho em serviços de backend e melhoro a automação de releases, a monitorização e a fiabilidade operacional, com foco em ${careerGoal}.`,
+			},
+			recruiterKeywords: isDevOps
+				? [
+						"DevOps",
+						"AWS",
+						"CI/CD",
+						"Kubernetes",
+						"Docker",
+						"Terraform",
+						"Linux",
+						"Observability",
+						"SRE",
+						"Infrastructure as Code",
+					]
+				: [
+						"Stakeholder management",
+						"Excel",
+						"Reporting",
+						"Project management",
+						"Power BI",
+						"Budgeting",
+						"English",
+						"Leadership",
+					],
+			contentPlan: [
+				{
+					week: 1,
+					topic: "Why you are moving toward this role",
+					hook: "Six years in, I realised the part of my job I liked most wasn't in my job title.",
+				},
+				{
+					week: 2,
+					topic: "A concrete result from your current job",
+					hook: "We cut deploy time from 40 minutes to 6. Here's the boring change that did it.",
+				},
+				{
+					week: 3,
+					topic: "Something you learned this month",
+					hook: "I spent a weekend breaking a Kubernetes cluster on purpose. Three things I learned.",
+				},
+				{
+					week: 4,
+					topic: "Ask your network for introductions",
+					hook: "I'm looking for my next role in DevOps. If your team is hiring, I'd like to hear about it.",
+				},
+			],
 		},
 	};
 }

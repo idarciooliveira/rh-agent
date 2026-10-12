@@ -44,11 +44,38 @@ export const recommendationsSchema = z.object({
 	experiences: z.array(experienceRecommendationSchema),
 	skills: z.object({ suggested: z.array(z.string()) }),
 	suggestedActivityPost: z.string(),
+	/** Same headline and About in the other language (pt <-> en). */
+	alternateLanguage: z
+		.object({
+			language: z.enum(["pt", "en"]),
+			headline: z.string(),
+			about: z.string(),
+		})
+		.optional(),
+	/** Terms recruiters search for this goal in the user's market. */
+	recruiterKeywords: z.array(z.string()).max(15).optional(),
+	/** Four weekly post ideas for the job hunt pass. */
+	contentPlan: z
+		.array(
+			z.object({ week: z.number().int(), topic: z.string(), hook: z.string() }),
+		)
+		.max(4)
+		.optional(),
 });
 
 export const fullAnalysisSchema = z.object({
 	swotAnalysis: swotAnalysisSchema,
 	recommendations: recommendationsSchema,
+});
+
+export const jobMatchSchema = z.object({
+	fitScore: z.number().min(0).max(100),
+	summary: z.string(),
+	matchedKeywords: z.array(z.string()),
+	missingKeywords: z.array(z.string()),
+	tailoredHeadline: z.string(),
+	tailoredBullets: z.array(z.string()).min(1).max(6),
+	coverLetter: z.string(),
 });
 
 export type SwotItem = z.infer<typeof swotItemSchema>;
@@ -61,3 +88,4 @@ export type ExperienceRecommendation = z.infer<
 >;
 export type Recommendations = z.infer<typeof recommendationsSchema>;
 export type FullAnalysis = z.infer<typeof fullAnalysisSchema>;
+export type JobMatch = z.infer<typeof jobMatchSchema>;

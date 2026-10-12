@@ -14,6 +14,20 @@
 
 ---
 
+## Monetization (mock payments)
+
+Freemium review with one-off unlocks. Payments are mocked in `src/lib/payments/mock-provider.ts`; swap in AppyPay (Multicaixa Express, reference), É-kwanza, Pix and a card merchant of record before taking real money.
+
+- **Free on every review:** profile score, goal alignment, strengths, first item of each other SWOT quadrant, 2 quick wins, share card, score progress.
+- **Paid (`/api/checkout`):** full review 2.900 Kz / $9, 3-review pack 6.900 Kz / $19, 30-day job hunt pass 9.900 Kz / $29, HR consultant call 19.900 Kz / $49 (also an add-on). Prices per region in `src/lib/pricing.ts` (AO, BR, PT, INTL).
+- **Server-side redaction:** `getAnalysis` strips paid text (`redactSwotAnalysis`) and returns `recommendations: null` until unlocked.
+- **Paid features:** CV export (`/cv/:analysisId`, print to PDF, PT/EN), recruiter keywords, PT/EN rewrite toggle, LinkedIn character limits in the preview modal.
+- **Pass features:** job post matching with cover letter (`/api/job-match`), 4-week post plan, auto-unlock of new reviews.
+- **Landing:** pricing section with region switch, universities/companies section.
+- **Not built yet:** profile photo/banner check (needs a vision model), real recruiter search data per country, team dashboard for B2B, refunds flow.
+
+---
+
 ## Implementation notes (vs original plan)
 
 The shipped MVP streamlined a few early design choices:

@@ -6,11 +6,12 @@ const en = {
 	header: {
 		howItWorks: "How it works",
 		example: "Example",
+		pricing: "Pricing",
 		cta: "Review my profile",
 		languageLabel: "Language",
 	},
 	hero: {
-		eyebrow: "Free LinkedIn profile review",
+		eyebrow: "Free LinkedIn profile score",
 		titlePre: "Fix your profile for the job you ",
 		titleHighlight: "actually want",
 		subtitle:
@@ -38,7 +39,7 @@ const en = {
 			"Branch manager at a commercial bank",
 		],
 		submit: "Review my profile",
-		trustFree: "Free",
+		trustFree: "Free score",
 		trustNoSignup: "No signup",
 		trustTime: "~30 seconds",
 		profileNotFound:
@@ -93,7 +94,7 @@ const en = {
 		items: [
 			{ value: "4×", label: "more likely to land a first interview" },
 			{ value: "30s", label: "from username to results" },
-			{ value: "5/hr", label: "free reviews, no signup" },
+			{ value: "0 Kz", label: "to see your score, no signup" },
 		],
 	},
 	problem: {
@@ -235,13 +236,59 @@ const en = {
 			},
 		],
 	},
+	pricing: {
+		eyebrow: "Pricing",
+		titlePre: "Your score is free. ",
+		titleHighlight: "The fixes cost less than a lunch.",
+		subtitle:
+			"Every review shows your score, goal alignment, strengths and two quick wins for free. Pay once to unlock the rest. No subscription.",
+		regionLabel: "Prices for",
+		free: {
+			name: "Free score",
+			price: "0",
+			tagline: "See where you stand.",
+			features: [
+				"Profile score out of 100",
+				"Goal alignment out of 10",
+				"Your strengths and 2 quick wins",
+				"Shareable score card",
+			],
+		},
+		cta: "Start with the free score",
+		perReview: "one-off",
+		perPass: "30 days",
+		addOn: "Add-on",
+		guarantee:
+			"If the review doesn't help, email us within 7 days for a full refund.",
+		methods: "Multicaixa Express, É-kwanza, reference, Pix, MB WAY or card",
+	},
+	teams: {
+		eyebrow: "For universities and companies",
+		title: "Give every finalist or sales rep a profile that gets found.",
+		items: [
+			{
+				title: "Universities and institutes",
+				body: "A yearly licence for your finalists, plus a career week workshop. Track the class's average score before and after.",
+			},
+			{
+				title: "Banks, telecoms and oil services",
+				body: "LinkedIn audits for sales teams, relationship managers and leadership, with a team dashboard and per-seat pricing.",
+			},
+			{
+				title: "Recruiters and outplacement",
+				body: "White-label Redline under your brand and give every candidate a review before you send their profile to a client.",
+			},
+		],
+		cta: "Talk to us",
+		email: "equipas@redline.ao",
+	},
 	faq: {
 		eyebrow: "FAQ",
 		title: "Questions",
 		items: [
 			{
-				q: "Is it really free?",
-				a: "Yes. No trial, no card, no account. You can run 5 reviews an hour.",
+				q: "What's free and what do I pay for?",
+				a: "The score, goal alignment, your strengths and two quick wins are free on every review, no card needed. The rest of the SWOT, the ranked plan, the rewrites and the CV export unlock with a one-off payment. The 30-day pass adds job post matching and cover letters.",
 			},
 			{
 				q: "What do you read, and what do you keep?",
@@ -275,9 +322,9 @@ const en = {
 	},
 	finalCta: {
 		title: "See your profile the way the next recruiter will",
-		body: "One username, one goal, about 30 seconds. Worst case, you spent half a minute and got a free second opinion.",
+		body: "One username, one goal, about 30 seconds. Worst case, you spent half a minute and got a free score.",
 		cta: "Review my profile",
-		footnote: "Free. No signup. Public profile only.",
+		footnote: "Free score. No signup. Public profile only.",
 	},
 	footer: {
 		tagline:
@@ -293,11 +340,12 @@ const pt: HomeCopy = {
 	header: {
 		howItWorks: "Como funciona",
 		example: "Exemplo",
+		pricing: "Preços",
 		cta: "Analisar o meu perfil",
 		languageLabel: "Idioma",
 	},
 	hero: {
-		eyebrow: "Análise gratuita de perfil do LinkedIn",
+		eyebrow: "Pontuação grátis do seu LinkedIn",
 		titlePre: "Corrija o seu perfil para o emprego que ",
 		titleHighlight: "realmente quer",
 		subtitle:
@@ -325,7 +373,7 @@ const pt: HomeCopy = {
 			"Gerente de agência num banco comercial",
 		],
 		submit: "Analisar o meu perfil",
-		trustFree: "Grátis",
+		trustFree: "Pontuação grátis",
 		trustNoSignup: "Sem registo",
 		trustTime: "~30 segundos",
 		profileNotFound:
@@ -384,7 +432,7 @@ const pt: HomeCopy = {
 				label: "mais hipóteses de conseguir uma primeira entrevista",
 			},
 			{ value: "30s", label: "do nome de utilizador aos resultados" },
-			{ value: "5/h", label: "análises grátis, sem registo" },
+			{ value: "0 Kz", label: "para ver a sua pontuação, sem registo" },
 		],
 	},
 	problem: {
@@ -526,13 +574,60 @@ const pt: HomeCopy = {
 			},
 		],
 	},
+	pricing: {
+		eyebrow: "Preços",
+		titlePre: "A pontuação é grátis. ",
+		titleHighlight: "As correções custam menos que um almoço.",
+		subtitle:
+			"Cada análise mostra grátis a pontuação, o alinhamento com o objetivo, os pontos fortes e duas melhorias rápidas. Pague uma vez para desbloquear o resto. Sem assinatura.",
+		regionLabel: "Preços para",
+		free: {
+			name: "Pontuação grátis",
+			price: "0",
+			tagline: "Veja onde está.",
+			features: [
+				"Pontuação do perfil de 0 a 100",
+				"Alinhamento com o objetivo de 0 a 10",
+				"Pontos fortes e 2 melhorias rápidas",
+				"Cartão de pontuação para partilhar",
+			],
+		},
+		cta: "Começar com a pontuação grátis",
+		perReview: "pagamento único",
+		perPass: "30 dias",
+		addOn: "Extra",
+		guarantee:
+			"Se a análise não ajudar, envie-nos um e-mail em 7 dias e devolvemos o dinheiro.",
+		methods: "Multicaixa Express, É-kwanza, referência, Pix, MB WAY ou cartão",
+	},
+	teams: {
+		eyebrow: "Para universidades e empresas",
+		title:
+			"Dê a cada finalista ou comercial um perfil que os recrutadores encontram.",
+		items: [
+			{
+				title: "Universidades e institutos",
+				body: "Licença anual para os finalistas e um workshop na semana da carreira. Acompanhe a pontuação média da turma antes e depois.",
+			},
+			{
+				title: "Bancos, telecomunicações e serviços petrolíferos",
+				body: "Auditoria de LinkedIn para equipas comerciais, gestores de clientes e direção, com painel de equipa e preço por lugar.",
+			},
+			{
+				title: "Recrutadoras e outplacement",
+				body: "Use o Redline com a sua marca e dê a cada candidato uma análise antes de enviar o perfil ao cliente.",
+			},
+		],
+		cta: "Fale connosco",
+		email: "equipas@redline.ao",
+	},
 	faq: {
 		eyebrow: "FAQ",
 		title: "Perguntas",
 		items: [
 			{
-				q: "É mesmo grátis?",
-				a: "Sim. Sem período experimental, sem cartão, sem conta. Pode fazer 5 análises por hora.",
+				q: "O que é grátis e o que pago?",
+				a: "A pontuação, o alinhamento com o objetivo, os pontos fortes e duas melhorias rápidas são grátis em todas as análises, sem cartão. O resto da SWOT, o plano, os textos reescritos e o CV desbloqueiam com um pagamento único. O passe de 30 dias junta comparação com anúncios de emprego e cartas de apresentação.",
 			},
 			{
 				q: "O que leem e o que guardam?",
@@ -566,9 +661,9 @@ const pt: HomeCopy = {
 	},
 	finalCta: {
 		title: "Veja o seu perfil como o próximo recrutador o vai ver",
-		body: "Um nome de utilizador, um objetivo, cerca de 30 segundos. No pior dos casos, perdeu meio minuto e ganhou uma segunda opinião grátis.",
+		body: "Um nome de utilizador, um objetivo, cerca de 30 segundos. No pior dos casos, perdeu meio minuto e ganhou uma pontuação grátis.",
 		cta: "Analisar o meu perfil",
-		footnote: "Grátis. Sem registo. Apenas perfis públicos.",
+		footnote: "Pontuação grátis. Sem registo. Apenas perfis públicos.",
 	},
 	footer: {
 		tagline:

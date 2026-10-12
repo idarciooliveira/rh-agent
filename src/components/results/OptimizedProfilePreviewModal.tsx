@@ -32,7 +32,7 @@ function formatDateRange(start: string | null, end: string | null): string {
 	return [start, end].filter(Boolean).join(" - ");
 }
 
-function CopyButton({ label, text }: { label: string; text: string }) {
+export function CopyButton({ label, text }: { label: string; text: string }) {
 	const [copied, setCopied] = useState(false);
 
 	const handleCopy = useCallback(async () => {
@@ -55,6 +55,25 @@ function CopyButton({ label, text }: { label: string; text: string }) {
 			)}
 			<span aria-live="polite">{copied ? "Copied" : "Copy"}</span>
 		</button>
+	);
+}
+
+/** LinkedIn's own field limits. */
+const HEADLINE_LIMIT = 220;
+const ABOUT_LIMIT = 2600;
+
+function CharCount({ text, limit }: { text: string; limit: number }) {
+	const over = text.length > limit;
+	return (
+		<span
+			className={`font-mono text-xs ${over ? "font-semibold text-threat" : "text-muted"}`}
+			title={
+				over ? "Longer than LinkedIn allows. Trim before pasting." : undefined
+			}
+		>
+			{text.length.toLocaleString("en-US")}/{limit.toLocaleString("en-US")}
+			{over ? " · too long" : ""}
+		</span>
 	);
 }
 
@@ -179,13 +198,16 @@ function IntroCard({
 								? profile.headline || "No headline yet."
 								: improvedHeadline}
 						</p>
-						<div className="mt-2">
+						<div className="mt-2 flex flex-wrap items-center gap-2">
 							<EditControls
 								showOriginal={showOriginal}
 								onToggle={() => setShowOriginal((current) => !current)}
 								copyLabel="headline"
 								copyText={improvedHeadline}
 							/>
+							{showOriginal ? null : (
+								<CharCount text={improvedHeadline} limit={HEADLINE_LIMIT} />
+							)}
 						</div>
 						{profile.location ? (
 							<p className="mt-2 text-sm text-muted">
@@ -247,12 +269,17 @@ function AboutCard({
 		<ProfileCard
 			title="About"
 			actions={
-				<EditControls
-					showOriginal={showOriginal}
-					onToggle={() => setShowOriginal((current) => !current)}
-					copyLabel="About section"
-					copyText={improved}
-				/>
+				<div className="flex flex-wrap items-center gap-2">
+					{showOriginal ? null : (
+						<CharCount text={improved} limit={ABOUT_LIMIT} />
+					)}
+					<EditControls
+						showOriginal={showOriginal}
+						onToggle={() => setShowOriginal((current) => !current)}
+						copyLabel="About section"
+						copyText={improved}
+					/>
+				</div>
 			}
 		>
 			<p
@@ -416,6 +443,16 @@ export function OptimizedProfilePreviewModal({
 	);
 	const initials = getInitials(profile.name);
 	const suggestedSkills = recommendations.skills.suggested;
+	const alternate = recommendations.alternateLanguage;
+	const [useAlternate, setUseAlternate] = useState(false);
+	const headline =
+		useAlternate && alternate
+			? alternate.headline
+			: recommendations.headline.improved;
+	const about =
+		useAlternate && alternate
+			? alternate.about
+			: recommendations.about.improved;
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-end bg-black/60 pt-4 sm:items-start sm:justify-center sm:overflow-y-auto sm:p-8">
@@ -436,6 +473,30 @@ export function OptimizedProfilePreviewModal({
 							and paste it in.
 						</p>
 					</div>
+					{alternate ? (
+						<fieldset className="ml-auto flex shrink-0 items-center rounded-full border border-border bg-surface p-0.5">
+							<legend className="sr-only">Rewrite language</legend>
+							{[false, true].map((isAlternate) => {
+								const otherCode = alternate.language === "pt" ? "en" : "pt";
+								const code = isAlternate ? alternate.language : otherCode;
+								return (
+									<button
+										key={code}
+										type="button"
+										onClick={() => setUseAlternate(isAlternate)}
+										aria-pressed={useAlternate === isAlternate}
+										className={`rounded-full px-2.5 py-1 font-mono text-xs font-semibold uppercase transition-colors ${
+											useAlternate === isAlternate
+												? "bg-primary text-primary-foreground"
+												: "text-muted hover:text-ink"
+										}`}
+									>
+										{code}
+									</button>
+								);
+							})}
+						</fieldset>
+					) : null}
 					<button
 						type="button"
 						onClick={onClose}
@@ -450,18 +511,15 @@ export function OptimizedProfilePreviewModal({
 					<div className="space-y-2 p-2 sm:space-y-3 sm:p-4">
 						<IntroCard
 							profile={profile}
-							improvedHeadline={recommendations.headline.improved}
+							improvedHeadline={headline}
 							initials={initials}
 						/>
 
-						<AboutCard
-							improved={recommendations.about.improved}
-							original={profile.about}
-						/>
+						<AboutCard improved={about} original={profile.about} />
 
 						<ActivityCard
 							name={profile.name}
-							headline={recommendations.headline.improved}
+							headline={headline}
 							initials={initials}
 							post={recommendations.suggestedActivityPost}
 						/>
