@@ -2,9 +2,14 @@ import type { CSSProperties } from "react";
 
 type ProfileScoreGaugeProps = {
 	score: number;
+	/** Score from the last review of the same profile, if any. */
+	previousScore?: number | null;
 };
 
-export function ProfileScoreGauge({ score }: ProfileScoreGaugeProps) {
+export function ProfileScoreGauge({
+	score,
+	previousScore = null,
+}: ProfileScoreGaugeProps) {
 	const radius = 54;
 	const circumference = 2 * Math.PI * radius;
 	const clamped = Math.max(0, Math.min(100, Math.round(score)));
@@ -59,7 +64,38 @@ export function ProfileScoreGauge({ score }: ProfileScoreGaugeProps) {
 				<p className="mt-1 text-sm leading-relaxed text-muted">
 					How strong your profile is for this goal, out of 100.
 				</p>
+				{previousScore !== null ? (
+					<ScoreDelta previous={previousScore} current={clamped} />
+				) : null}
 			</div>
 		</section>
+	);
+}
+
+function ScoreDelta({
+	previous,
+	current,
+}: {
+	previous: number;
+	current: number;
+}) {
+	const delta = current - Math.round(previous);
+	const tone =
+		delta > 0
+			? "border-strength-border bg-strength-tint text-strength"
+			: delta < 0
+				? "border-threat-border bg-threat-tint text-threat"
+				: "border-border bg-surface-2 text-muted";
+
+	return (
+		<p
+			className={`mt-3 inline-flex items-center gap-1.5 rounded-sm border px-2 py-1 font-mono text-xs font-semibold ${tone}`}
+		>
+			{Math.round(previous)} → {current}
+			<span>
+				({delta > 0 ? "+" : ""}
+				{delta} since last review)
+			</span>
+		</p>
 	);
 }

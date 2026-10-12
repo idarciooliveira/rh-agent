@@ -10,6 +10,7 @@ import { mockAnalyzeProfile } from "#/lib/ai/mock-analyze-profile";
 import { resolveAiMode } from "#/lib/ai/resolve-ai-mode";
 import { jsonError, jsonOk } from "#/lib/api-error";
 import { parseStoredProfile } from "#/lib/profile-schema";
+import { autoUnlockNewAnalysis } from "#/server/billing";
 import { getRequiredSessionId } from "#/server/session-utils";
 
 const analyzeRequestSchema = z.object({
@@ -94,7 +95,9 @@ export const Route = createFileRoute("/api/analyze")({
 						})
 						.run();
 
-					return jsonOk({ analysisId });
+					const unlocked = await autoUnlockNewAnalysis(sessionId, analysisId);
+
+					return jsonOk({ analysisId, unlocked });
 				} catch (error) {
 					if (error instanceof Response) {
 						return error;

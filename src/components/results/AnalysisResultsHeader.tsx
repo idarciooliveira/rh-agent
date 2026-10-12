@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { RedlineLogo } from "#/components/RedlineLogo";
-import { ArrowLeftIcon, EyeIcon } from "#/lib/icons";
+import { ArrowLeftIcon, EyeIcon, FileTextIcon, LockIcon } from "#/lib/icons";
 
 type AnalysisResultsHeaderProps = {
+	analysisId: string;
 	firstName: string | null;
 	careerGoal: string;
+	locked: boolean;
 	onPreviewClick: () => void;
 };
 
@@ -26,8 +28,10 @@ export function ResultsTopBar() {
 }
 
 export function AnalysisResultsHeader({
+	analysisId,
 	firstName,
 	careerGoal,
+	locked,
 	onPreviewClick,
 }: AnalysisResultsHeaderProps) {
 	return (
@@ -55,16 +59,31 @@ export function AnalysisResultsHeader({
 					onClick={onPreviewClick}
 					className="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
 				>
-					<EyeIcon className="size-4" aria-hidden />
-					See my rewritten profile
+					{locked ? (
+						<LockIcon className="size-4" aria-hidden />
+					) : (
+						<EyeIcon className="size-4" aria-hidden />
+					)}
+					{locked ? "Unlock my rewritten profile" : "See my rewritten profile"}
 				</button>
-				<Link
-					to="/"
-					className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-border-strong bg-surface px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-surface-2 sm:w-auto"
-				>
-					<ArrowLeftIcon className="size-4" aria-hidden />
-					Start over
-				</Link>
+				{locked ? (
+					<Link
+						to="/"
+						className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-border-strong bg-surface px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-surface-2 sm:w-auto"
+					>
+						<ArrowLeftIcon className="size-4" aria-hidden />
+						Start over
+					</Link>
+				) : (
+					<Link
+						to="/cv/$analysisId"
+						params={{ analysisId }}
+						className="btn-secondary inline-flex w-full items-center justify-center gap-1.5 px-5 py-3 text-sm font-semibold sm:w-auto"
+					>
+						<FileTextIcon className="size-4" aria-hidden />
+						Export CV
+					</Link>
+				)}
 			</div>
 		</header>
 	);

@@ -11,12 +11,16 @@ Produce a comprehensive strategic analysis including:
 4. strategicSuggestions: 3-5 high-impact recommendations with priority (high/medium/low), category (Headline/Summary/Experience/Skills), and timeframe
 5. quickWins: 4-6 short actionable items the user can do immediately
 6. recommendations: improved headline, about, experience bullet points (as arrays), suggested skills to add, and a suggested LinkedIn activity post
+7. recommendations.alternateLanguage: the improved headline and about translated into the other language (Portuguese if the profile is in English, English if it is in Portuguese)
+8. recommendations.recruiterKeywords: 8-12 short terms recruiters in the user's country search for when filling this goal
+9. recommendations.contentPlan: 4 weekly LinkedIn post ideas (week 1-4) with a topic and an opening hook line
 
 Rules:
 - Base analysis on actual profile content — do not invent employers or credentials
 - Recommendations should be concrete rewrites, not vague advice
 - Experience improvedDescription should be action-oriented bullet points reframed toward the career goal
 - suggested skills should only include skills reasonably inferable or commonly needed for the goal
+- The improved headline must be 220 characters or fewer; the improved about must be 2,600 characters or fewer (LinkedIn limits)
 - Keep tone professional and encouraging
 
 Career goal:

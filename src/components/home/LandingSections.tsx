@@ -1,10 +1,13 @@
 import type { LucideIcon } from "lucide-react";
+import { useState } from "react";
 import { useLanguage } from "#/lib/i18n";
 import {
 	ArrowRightIcon,
 	AwardIcon,
 	BriefcaseIcon,
+	Building2Icon,
 	CheckCircle2Icon,
+	CheckIcon,
 	CrosshairIcon,
 	GaugeIcon,
 	GraduationCapIcon,
@@ -13,12 +16,22 @@ import {
 	PenLineIcon,
 	PlusIcon,
 	ScanSearchIcon,
+	ShieldCheckIcon,
 	ShuffleIcon,
 	SparklesIcon,
 	TagIcon,
+	UsersIcon,
 	WandSparklesIcon,
 	ZapIcon,
 } from "#/lib/icons";
+import { planCopy } from "#/lib/plan-copy";
+import {
+	type Plan,
+	priceFor,
+	REGION_CONFIG,
+	REGIONS,
+	type Region,
+} from "#/lib/pricing";
 
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
 	return (
@@ -309,6 +322,212 @@ export function PersonasSection() {
 					);
 				})}
 			</ul>
+		</section>
+	);
+}
+
+type PriceCard = {
+	key: string;
+	name: string;
+	tagline: string;
+	price: string;
+	period: string;
+	features: string[];
+	badge?: string;
+	featured?: boolean;
+};
+
+export function PricingSection() {
+	const { copy, lang } = useLanguage();
+	const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
+	const region = selectedRegion ?? (lang === "pt" ? "AO" : "INTL");
+	const plans = planCopy[lang];
+	const paidCard = (
+		plan: Plan,
+		period: string,
+		featured = false,
+	): PriceCard => ({
+		key: plan,
+		...plans[plan],
+		price: priceFor(region, plan),
+		period,
+		featured,
+	});
+	const cards: PriceCard[] = [
+		{
+			key: "free",
+			...copy.pricing.free,
+			price: priceFor(region, "report").replace(/[\d.,]+/, "0"),
+			period: "",
+		},
+		paidCard("report", copy.pricing.perReview),
+		paidCard("pass30", copy.pricing.perPass, true),
+		paidCard("pack3", copy.pricing.perReview),
+	];
+	const humanReview = plans.human_review;
+
+	return (
+		<section id="pricing" className="scroll-mt-20 border-t border-border">
+			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+				<div className="reveal mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+					<div className="max-w-2xl">
+						<SectionEyebrow>{copy.pricing.eyebrow}</SectionEyebrow>
+						<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
+							{copy.pricing.titlePre}
+							<span className="highlight">{copy.pricing.titleHighlight}</span>
+						</h2>
+						<p className="mt-5 text-lg text-muted">{copy.pricing.subtitle}</p>
+					</div>
+					<fieldset className="flex shrink-0 flex-wrap items-center gap-1 rounded-full border border-border bg-surface p-1">
+						<legend className="sr-only">{copy.pricing.regionLabel}</legend>
+						{REGIONS.map((option) => (
+							<button
+								key={option}
+								type="button"
+								onClick={() => setSelectedRegion(option)}
+								aria-pressed={region === option}
+								className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
+									region === option
+										? "bg-primary text-primary-foreground"
+										: "text-muted hover:text-ink"
+								}`}
+							>
+								{REGION_CONFIG[option].label}
+							</button>
+						))}
+					</fieldset>
+				</div>
+
+				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+					{cards.map((card) => (
+						<div
+							key={card.key}
+							className={`reveal relative flex flex-col rounded-xl border p-6 ${
+								card.featured
+									? "border-primary bg-night text-background shadow-lift"
+									: "border-border bg-surface shadow-card"
+							}`}
+						>
+							{card.badge ? (
+								<span className="absolute -top-3 left-6 rounded-full bg-primary px-2.5 py-0.5 text-xs font-semibold text-white">
+									{card.badge}
+								</span>
+							) : null}
+							<h3
+								className={`text-lg font-semibold ${card.featured ? "text-background" : "text-ink"}`}
+							>
+								{card.name}
+							</h3>
+							<p
+								className={`mt-1 text-sm ${card.featured ? "text-night-muted" : "text-muted"}`}
+							>
+								{card.tagline}
+							</p>
+							<p className="mt-5 font-mono text-3xl font-medium">
+								<span className="whitespace-nowrap">{card.price}</span>
+								{card.period ? (
+									<span
+										className={`ml-1.5 font-sans text-sm font-normal ${card.featured ? "text-night-muted" : "text-muted"}`}
+									>
+										{card.period}
+									</span>
+								) : null}
+							</p>
+							<ul className="mt-5 flex-1 space-y-2">
+								{card.features.map((feature) => (
+									<li key={feature} className="flex items-start gap-2 text-sm">
+										<CheckIcon
+											className={`mt-0.5 size-4 shrink-0 ${card.featured ? "text-accent" : "text-strength"}`}
+											aria-hidden
+										/>
+										{feature}
+									</li>
+								))}
+							</ul>
+						</div>
+					))}
+				</div>
+
+				<div className="reveal mt-4 flex flex-col gap-4 rounded-xl border border-dashed border-border-strong bg-surface-2/60 p-6 sm:flex-row sm:items-center sm:justify-between">
+					<div className="flex items-start gap-3">
+						<UsersIcon
+							className="mt-0.5 size-5 shrink-0 text-primary-ink"
+							aria-hidden
+						/>
+						<div>
+							<p className="font-semibold text-ink">
+								<span className="mr-2 rounded-sm bg-accent px-1.5 py-0.5 font-mono text-xs text-primary-ink uppercase">
+									{copy.pricing.addOn}
+								</span>
+								{humanReview.name}, {priceFor(region, "human_review")}
+							</p>
+							<p className="mt-1 text-sm text-muted">
+								{humanReview.features.join(". ")}.
+							</p>
+						</div>
+					</div>
+					<CtaLink label={copy.pricing.cta} />
+				</div>
+
+				<p className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted">
+					<span className="inline-flex items-center gap-1.5">
+						<ShieldCheckIcon className="size-4 text-strength" aria-hidden />
+						{copy.pricing.guarantee}
+					</span>
+					<span>{copy.pricing.methods}</span>
+				</p>
+			</div>
+		</section>
+	);
+}
+
+const TEAM_ICONS: LucideIcon[] = [
+	GraduationCapIcon,
+	Building2Icon,
+	BriefcaseIcon,
+];
+
+export function TeamsSection() {
+	const { copy } = useLanguage();
+
+	return (
+		<section className="bg-night text-background">
+			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24">
+				<div className="reveal max-w-2xl">
+					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-accent uppercase">
+						{copy.teams.eyebrow}
+					</p>
+					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-background sm:text-5xl">
+						{copy.teams.title}
+					</h2>
+				</div>
+				<div className="mt-10 grid gap-4 md:grid-cols-3">
+					{copy.teams.items.map((item, index) => {
+						const Icon = TEAM_ICONS[index] ?? BriefcaseIcon;
+						return (
+							<div
+								key={item.title}
+								className="reveal rounded-xl border border-white/10 bg-night-2 p-6"
+							>
+								<Icon className="size-6 text-accent" aria-hidden />
+								<h3 className="mt-4 text-lg font-semibold text-background">
+									{item.title}
+								</h3>
+								<p className="mt-2 text-sm leading-relaxed text-night-muted">
+									{item.body}
+								</p>
+							</div>
+						);
+					})}
+				</div>
+				<a
+					href={`mailto:${copy.teams.email}`}
+					className="mt-8 inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-accent"
+				>
+					{copy.teams.cta}
+					<ArrowRightIcon className="size-4" aria-hidden />
+				</a>
+			</div>
 		</section>
 	);
 }
