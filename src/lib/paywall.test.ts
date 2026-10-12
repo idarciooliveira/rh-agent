@@ -3,6 +3,7 @@ import { buildSampleAnalysis } from "#/lib/ai/fixtures/sample-analysis";
 import { sampleProfile } from "#/lib/ai/fixtures/sample-profile";
 import {
 	LOCKED_PLACEHOLDER,
+	profileToText,
 	redactSwotAnalysis,
 	splitKeywordsByPresence,
 } from "#/lib/paywall";
@@ -46,6 +47,42 @@ describe("splitKeywordsByPresence", () => {
 		expect(
 			splitKeywordsByPresence(["AWS", "Terraform"], "Built pipelines on aws"),
 		).toEqual({ present: ["AWS"], missing: ["Terraform"] });
+	});
+});
+
+describe("profileToText", () => {
+	const profile = {
+		name: "Ana Silva",
+		headline: "Backend engineer",
+		location: null,
+		about: "I build APIs.",
+		experiences: [
+			{
+				title: "Engineer",
+				company: "Acme",
+				location: null,
+				startDate: "2020",
+				endDate: "Present",
+				description: null,
+			},
+		],
+		education: [],
+		skills: ["Go", "SQL"],
+		certifications: [],
+	};
+
+	it("keeps text values and drops property names", () => {
+		const text = profileToText(profile);
+		expect(text).toContain("Backend engineer");
+		expect(text).toContain("SQL");
+		expect(text).not.toContain("skills");
+		expect(text).not.toContain("certifications");
+	});
+
+	it("does not match a keyword that only appears as a property name", () => {
+		expect(
+			splitKeywordsByPresence(["Skills", "SQL"], profileToText(profile)),
+		).toEqual({ present: ["SQL"], missing: ["Skills"] });
 	});
 });
 

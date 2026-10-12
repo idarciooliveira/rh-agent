@@ -107,31 +107,43 @@ export const Route = createFileRoute("/api/checkout")({
 					}
 
 					const purchaseId = randomUUID();
-					await db
-						.insert(purchases)
-						.values({
-							id: purchaseId,
-							sessionId,
-							analysisId: analysisId ?? null,
-							plan,
-							region,
-							currency: regionConfig.currency,
-							amount,
-							paymentMethod: method,
-							paymentReference: payment.reference,
-							email,
-							phone: phone ?? null,
-							humanReview,
-							creditsRemaining: plan === "pack3" ? PACK_SIZE - 1 : 0,
-							expiresAt:
-								plan === "pass30"
-									? new Date(Date.now() + PASS_DAYS * 24 * 60 * 60 * 1000)
-									: null,
-						})
-						.run();
+					try {
+						await db.transaction(async (tx) => {
+							await tx
+								.insert(purchases)
+								.values({
+									id: purchaseId,
+									sessionId,
+									analysisId: analysisId ?? null,
+									plan,
+									region,
+									currency: regionConfig.currency,
+									amount,
+									paymentMethod: method,
+									paymentReference: payment.reference,
+									email,
+									phone: phone ?? null,
+									humanReview,
+									creditsRemaining: plan === "pack3" ? PACK_SIZE - 1 : 0,
+									expiresAt:
+										plan === "pass30"
+											? new Date(Date.now() + PASS_DAYS * 24 * 60 * 60 * 1000)
+											: null,
+								})
+								.run();
 
-					if (unlocksAnalysis && analysisId) {
-						await unlockAnalysis(analysisId);
+							if (unlocksAnalysis && analysisId) {
+								await unlockAnalysis(analysisId, tx);
+							}
+						});
+					} catch (error) {
+						// The mock provider moves no money. A real one needs a refund or
+						// void here, so keep the reference for reconciliation.
+						console.error(
+							`checkout: payment ${payment.reference} was not recorded`,
+							error,
+						);
+						throw error;
 					}
 
 					return jsonOk({

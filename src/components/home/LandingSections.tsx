@@ -1,5 +1,4 @@
 import type { LucideIcon } from "lucide-react";
-import { useState } from "react";
 import { useLanguage } from "#/lib/i18n";
 import {
 	ArrowRightIcon,
@@ -26,12 +25,13 @@ import {
 } from "#/lib/icons";
 import { planCopy } from "#/lib/plan-copy";
 import {
+	PAYMENT_METHOD_LABELS,
 	type Plan,
 	priceFor,
 	REGION_CONFIG,
 	REGIONS,
-	type Region,
 } from "#/lib/pricing";
+import { useRegion } from "#/lib/use-region";
 
 function SectionEyebrow({ children }: { children: React.ReactNode }) {
 	return (
@@ -339,8 +339,7 @@ type PriceCard = {
 
 export function PricingSection() {
 	const { copy, lang } = useLanguage();
-	const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
-	const region = selectedRegion ?? (lang === "pt" ? "AO" : "INTL");
+	const [region, setRegion] = useRegion();
 	const plans = planCopy[lang];
 	const paidCard = (
 		plan: Plan,
@@ -384,7 +383,7 @@ export function PricingSection() {
 							<button
 								key={option}
 								type="button"
-								onClick={() => setSelectedRegion(option)}
+								onClick={() => setRegion(option)}
 								aria-pressed={region === option}
 								className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${
 									region === option
@@ -474,7 +473,11 @@ export function PricingSection() {
 						<ShieldCheckIcon className="size-4 text-strength" aria-hidden />
 						{copy.pricing.guarantee}
 					</span>
-					<span>{copy.pricing.methods}</span>
+					<span>
+						{REGION_CONFIG[region].methods
+							.map((method) => PAYMENT_METHOD_LABELS[method])
+							.join(", ")}
+					</span>
 				</p>
 			</div>
 		</section>

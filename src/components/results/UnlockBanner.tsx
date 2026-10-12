@@ -1,6 +1,11 @@
-import { useLanguage } from "#/lib/i18n";
 import { CheckIcon, LockIcon } from "#/lib/icons";
-import { type Plan, priceFor } from "#/lib/pricing";
+import {
+	PAYMENT_METHOD_LABELS,
+	type Plan,
+	priceFor,
+	REGION_CONFIG,
+} from "#/lib/pricing";
+import { useRegion } from "#/lib/use-region";
 
 type UnlockBannerProps = {
 	hiddenCounts: {
@@ -13,8 +18,7 @@ type UnlockBannerProps = {
 };
 
 export function UnlockBanner({ hiddenCounts, onUnlock }: UnlockBannerProps) {
-	const { lang } = useLanguage();
-	const region = lang === "pt" ? "AO" : "INTL";
+	const [region] = useRegion();
 	const items = [
 		`${hiddenCounts.swotItems} more SWOT findings`,
 		`Your ${hiddenCounts.suggestions}-step plan, ranked by impact`,
@@ -66,7 +70,9 @@ export function UnlockBanner({ hiddenCounts, onUnlock }: UnlockBannerProps) {
 						30-day pass, {priceFor(region, "pass30")}
 					</button>
 					<p className="text-center text-xs text-night-muted">
-						Multicaixa Express, É-kwanza, Pix or card
+						{REGION_CONFIG[region].methods
+							.map((method) => PAYMENT_METHOD_LABELS[method])
+							.join(", ")}
 					</p>
 				</div>
 			</div>

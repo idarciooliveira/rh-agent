@@ -8,6 +8,8 @@ const MAX_ATTEMPTS = 2;
 type GenerateStructuredObjectOptions<T extends z.ZodType> = {
 	schema: T;
 	prompt: string;
+	/** Instructions the prompt's untrusted text must not override. */
+	system?: string;
 	schemaName: string;
 	schemaDescription: string;
 };
@@ -15,6 +17,7 @@ type GenerateStructuredObjectOptions<T extends z.ZodType> = {
 export async function generateStructuredObject<T extends z.ZodType>({
 	schema,
 	prompt,
+	system,
 	schemaName,
 	schemaDescription,
 }: GenerateStructuredObjectOptions<T>): Promise<z.infer<T>> {
@@ -29,6 +32,7 @@ export async function generateStructuredObject<T extends z.ZodType>({
 			const { object } = await generateObject({
 				model: AI_MODEL,
 				schema,
+				system,
 				schemaName,
 				schemaDescription,
 				mode: "json",

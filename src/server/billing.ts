@@ -1,4 +1,4 @@
-import { and, desc, eq, gt } from "drizzle-orm";
+import { and, desc, eq, gt, sql } from "drizzle-orm";
 
 import { db } from "#/db";
 import { analyses, purchases } from "#/db/schema";
@@ -56,8 +56,14 @@ export async function getAccess(
 	};
 }
 
-export async function unlockAnalysis(analysisId: string): Promise<void> {
-	await db
+/** The shared db handle or a transaction opened from it. */
+export type DbClient = Pick<typeof db, "update">;
+
+export async function unlockAnalysis(
+	analysisId: string,
+	client: DbClient = db,
+): Promise<void> {
+	await client
 		.update(analyses)
 		.set({ unlockedAt: new Date() })
 		.where(eq(analyses.id, analysisId))
@@ -82,13 +88,21 @@ export async function autoUnlockNewAnalysis(
 		return false;
 	}
 
-	await db
-		.update(purchases)
-		.set({ creditsRemaining: pack.creditsRemaining - 1 })
-		.where(eq(purchases.id, pack.id))
-		.run();
-	await unlockAnalysis(analysisId);
-	return true;
+	// The decrement is conditional and shares a transaction with the unlock, so
+	// two requests can't spend one credit twice and a failed unlock keeps it.
+	return db.transaction(async (tx) => {
+		const spent = await tx
+			.update(purchases)
+			.set({ creditsRemaining: sql`${purchases.creditsRemaining} - 1` })
+			.where(and(eq(purchases.id, pack.id), gt(purchases.creditsRemaining, 0)))
+			.run();
+		if (spent.rowsAffected === 0) {
+			return false;
+		}
+
+		await unlockAnalysis(analysisId, tx);
+		return true;
+	});
 }
 
 export async function hasActivePass(sessionId: string): Promise<boolean> {

@@ -11,7 +11,7 @@ Produce a comprehensive strategic analysis including:
 4. strategicSuggestions: 3-5 high-impact recommendations with priority (high/medium/low), category (Headline/Summary/Experience/Skills), and timeframe
 5. quickWins: 4-6 short actionable items the user can do immediately
 6. recommendations: improved headline, about, experience bullet points (as arrays), suggested skills to add, and a suggested LinkedIn activity post
-7. recommendations.alternateLanguage: the improved headline and about translated into the other language (Portuguese if the profile is in English, English if it is in Portuguese)
+7. recommendations.primaryLanguage: "pt" or "en", the language of the improved headline and about. recommendations.alternateLanguage: the improved headline and about translated into the other language (Portuguese if the profile is in English, English if it is in Portuguese)
 8. recommendations.recruiterKeywords: 8-12 short terms recruiters in the user's country search for when filling this goal
 9. recommendations.contentPlan: 4 weekly LinkedIn post ideas (week 1-4) with a topic and an opening hook line
 

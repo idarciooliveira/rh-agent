@@ -44,6 +44,11 @@ export const recommendationsSchema = z.object({
 	experiences: z.array(experienceRecommendationSchema),
 	skills: z.object({ suggested: z.array(z.string()) }),
 	suggestedActivityPost: z.string(),
+	/**
+	 * Language of the improved headline and About. Optional so reviews saved
+	 * before this field existed still parse; the CV page infers it for those.
+	 */
+	primaryLanguage: z.enum(["pt", "en"]).optional(),
 	/** Same headline and About in the other language (pt <-> en). */
 	alternateLanguage: z
 		.object({

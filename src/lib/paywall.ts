@@ -1,5 +1,6 @@
 import type { SwotAnalysis } from "#/lib/analysis-schema";
 import { FREE_ITEMS_PER_LOCKED_QUADRANT, FREE_QUICK_WINS } from "#/lib/pricing";
+import type { Profile } from "#/lib/profile-schema";
 
 /** Stands in for hidden text so the blurred UI has something to blur. */
 export const LOCKED_PLACEHOLDER =
@@ -33,6 +34,25 @@ export function redactSwotAnalysis(analysis: SwotAnalysis): SwotAnalysis {
 			index < FREE_QUICK_WINS ? win : LOCKED_PLACEHOLDER,
 		),
 	};
+}
+
+/**
+ * Every text value in the profile joined together, without object keys. Keyword
+ * matching runs on this so "Skills" can't match the `skills` property name.
+ */
+export function profileToText(profile: Profile): string {
+	const values: string[] = [];
+	const collect = (value: unknown) => {
+		if (typeof value === "string") {
+			values.push(value);
+		} else if (Array.isArray(value)) {
+			value.forEach(collect);
+		} else if (value !== null && typeof value === "object") {
+			Object.values(value).forEach(collect);
+		}
+	};
+	collect(profile);
+	return values.join("\n");
 }
 
 /** Matches recruiter keywords against everything the profile already says. */

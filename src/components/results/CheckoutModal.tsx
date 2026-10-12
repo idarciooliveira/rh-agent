@@ -1,5 +1,5 @@
 import { useRouter } from "@tanstack/react-router";
-import { type FormEvent, useEffect, useId, useState } from "react";
+import { type FormEvent, useEffect, useId, useRef, useState } from "react";
 import { readApiError } from "#/lib/api-client";
 import { useLanguage } from "#/lib/i18n";
 import {
@@ -22,6 +22,7 @@ import {
 	REGIONS,
 	type Region,
 } from "#/lib/pricing";
+import { defaultRegion, readStoredRegion } from "#/lib/use-region";
 
 type CheckoutModalProps = {
 	analysisId: string;
@@ -36,6 +37,9 @@ type CheckoutResult = {
 
 const UNLOCK_PLANS: Plan[] = ["report", "pack3", "pass30"];
 
+const FOCUSABLE =
+	'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export function CheckoutModal({
 	analysisId,
 	initialPlan,
@@ -45,10 +49,15 @@ export function CheckoutModal({
 	const { lang } = useLanguage();
 	const titleId = useId();
 	const [plan, setPlan] = useState<Plan>(initialPlan);
-	const [region, setRegion] = useState<Region>(lang === "pt" ? "AO" : "INTL");
-	const [method, setMethod] = useState<PaymentMethod>(
-		REGION_CONFIG[lang === "pt" ? "AO" : "INTL"].methods[0],
+	// The modal only mounts after a click, so reading storage here is safe.
+	const [initialRegion] = useState<Region>(
+		() => readStoredRegion() ?? defaultRegion(lang),
 	);
+	const [region, setRegion] = useState<Region>(initialRegion);
+	const [method, setMethod] = useState<PaymentMethod>(
+		REGION_CONFIG[initialRegion].methods[0],
+	);
+	const dialogRef = useRef<HTMLDivElement>(null);
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [humanReview, setHumanReview] = useState(false);
@@ -69,6 +78,46 @@ export function CheckoutModal({
 			window.removeEventListener("keydown", handleKeyDown);
 		};
 	}, [onClose, pending]);
+
+	useEffect(() => {
+		const dialog = dialogRef.current;
+		const opener = document.activeElement;
+		const focusables = () =>
+			Array.from(dialog?.querySelectorAll<HTMLElement>(FOCUSABLE) ?? []);
+
+		focusables()[0]?.focus();
+
+		const trapTab = (event: KeyboardEvent) => {
+			if (event.key !== "Tab") {
+				return;
+			}
+			const items = focusables();
+			const first = items[0];
+			const last = items[items.length - 1];
+			if (!first || !last) {
+				return;
+			}
+			const active = document.activeElement;
+			if (!dialog?.contains(active)) {
+				event.preventDefault();
+				first.focus();
+			} else if (event.shiftKey && active === first) {
+				event.preventDefault();
+				last.focus();
+			} else if (!event.shiftKey && active === last) {
+				event.preventDefault();
+				first.focus();
+			}
+		};
+
+		window.addEventListener("keydown", trapTab);
+		return () => {
+			window.removeEventListener("keydown", trapTab);
+			if (opener instanceof HTMLElement && opener.isConnected) {
+				opener.focus();
+			}
+		};
+	}, []);
 
 	const regionConfig = REGION_CONFIG[region];
 	const isHumanReviewOnly = plan === "human_review";
@@ -128,6 +177,7 @@ export function CheckoutModal({
 	return (
 		<div className="fixed inset-0 z-50 flex items-end bg-black/60 sm:items-start sm:justify-center sm:overflow-y-auto sm:p-8">
 			<div
+				ref={dialogRef}
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby={titleId}
@@ -366,8 +416,7 @@ export function CheckoutModal({
 						</div>
 						<p className="flex items-center gap-1.5 text-xs text-muted">
 							<ShieldCheckIcon className="size-3.5" aria-hidden />
-							Test mode: no real money moves. If the review doesn't help, email
-							us within 7 days for a full refund.
+							Test mode: no real money moves.
 						</p>
 					</form>
 				)}

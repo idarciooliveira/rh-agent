@@ -84,8 +84,19 @@ export function ShareScoreCard({
 	// Set after mount so server and client render the same links.
 	const [origin, setOrigin] = useState("");
 	useEffect(() => setOrigin(window.location.origin), []);
-	const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${origin}`)}`;
-	const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(origin)}`;
+	const [copied, setCopied] = useState(false);
+	const message = `${text} ${origin}`;
+	const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+	// share-offsite only accepts a URL, so it would share the landing page and
+	// drop the score. The post composer takes the text, and we copy it too in
+	// case LinkedIn opens the composer empty.
+	const linkedinUrl = `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(message)}`;
+	const copyMessage = () => {
+		navigator.clipboard
+			?.writeText(message)
+			.then(() => setCopied(true))
+			.catch(() => undefined);
+	};
 
 	return (
 		<section className="rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6">
@@ -125,6 +136,7 @@ export function ShareScoreCard({
 					href={linkedinUrl}
 					target="_blank"
 					rel="noopener noreferrer"
+					onClick={copyMessage}
 					className="btn-secondary inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold"
 				>
 					LinkedIn
@@ -138,6 +150,11 @@ export function ShareScoreCard({
 					Image
 				</button>
 			</div>
+			{copied ? (
+				<output className="mt-3 block text-sm text-muted">
+					Post text copied. Paste it if LinkedIn opens an empty post.
+				</output>
+			) : null}
 		</section>
 	);
 }
