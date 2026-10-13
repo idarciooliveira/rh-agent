@@ -95,7 +95,7 @@ export function TestimonialsSection() {
 			id="testimonials"
 			className="border-y border-border bg-surface-2/60"
 		>
-			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+			<div className="mx-auto max-w-7xl px-4 py-20 sm:px-8 md:py-28">
 				<div className="reveal mb-12 max-w-2xl">
 					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
 						{copy.testimonials.eyebrow}

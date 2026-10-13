@@ -33,9 +33,19 @@ import {
 } from "#/lib/pricing";
 import { useRegion } from "#/lib/use-region";
 
-function SectionEyebrow({ children }: { children: React.ReactNode }) {
+/** Numbered section label on a full-width ink rule, like a report chapter. */
+function SectionEyebrow({
+	children,
+	n,
+}: {
+	children: React.ReactNode;
+	n?: number;
+}) {
 	return (
-		<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
+		<p className="kicker mb-8 flex items-baseline gap-4 border-t border-ink pt-3 text-ink">
+			{n ? (
+				<span className="text-pen">{String(n).padStart(2, "0")}</span>
+			) : null}
 			{children}
 		</p>
 	);
@@ -58,19 +68,29 @@ export function ProblemSection() {
 
 	return (
 		<section className="border-y border-border bg-surface">
-			<div className="reveal mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-[1fr_1.1fr] md:gap-16 md:py-28">
+			<div className="reveal mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-8 md:grid-cols-[1.1fr_1fr] md:gap-20 md:py-32">
 				<div>
-					<SectionEyebrow>{copy.problem.eyebrow}</SectionEyebrow>
-					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
+					<SectionEyebrow n={1}>{copy.problem.eyebrow}</SectionEyebrow>
+					<h2 className="font-display text-4xl leading-[1.05] text-balance text-ink sm:text-6xl">
 						{copy.problem.titlePre}
-						<em className="text-primary-ink">{copy.problem.titleEm}</em>.
+						<em className="text-pen">{copy.problem.titleEm}</em>.
 					</h2>
+					<figure className="mt-10">
+						<img
+							src="/images/editorial-corridor.jpg"
+							alt=""
+							loading="lazy"
+							className="aspect-[4/3] w-full object-cover grayscale"
+						/>
+					</figure>
 				</div>
-				<div className="space-y-5 text-lg leading-relaxed text-muted">
-					<p>{copy.problem.p1}</p>
-					<p className="font-display text-2xl font-medium text-ink italic">
-						{copy.problem.p2}
+				<div className="space-y-6 text-lg leading-relaxed text-muted md:pt-24">
+					<p className="first-letter:float-left first-letter:mr-2 first-letter:font-display first-letter:text-7xl first-letter:leading-[0.8] first-letter:text-ink">
+						{copy.problem.p1}
 					</p>
+					<blockquote className="border-l-2 border-pen py-1 pl-6 font-display text-3xl leading-snug text-ink italic">
+						{copy.problem.p2}
+					</blockquote>
 					<p>{copy.problem.p3}</p>
 				</div>
 			</div>
@@ -86,31 +106,29 @@ export function HowItWorksSection() {
 	return (
 		<section
 			id="how-it-works"
-			className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28"
+			className="mx-auto max-w-7xl px-4 py-20 sm:px-8 md:py-28"
 		>
 			<div className="reveal mb-12 max-w-2xl">
-				<SectionEyebrow>{copy.howItWorks.eyebrow}</SectionEyebrow>
-				<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
+				<SectionEyebrow n={2}>{copy.howItWorks.eyebrow}</SectionEyebrow>
+				<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-6xl">
 					{copy.howItWorks.title}
 				</h2>
 			</div>
-			<ol className="grid gap-5 md:grid-cols-3">
+			<ol className="grid gap-10 md:grid-cols-3 md:gap-12">
 				{copy.howItWorks.steps.map((step, index) => {
 					const Icon = STEP_ICONS[index % STEP_ICONS.length];
 					return (
 						<li
 							key={step.title}
-							className="reveal relative rounded-lg border border-border bg-surface p-6 shadow-card"
+							className="reveal relative border-t border-border-strong pt-6"
 						>
-							<div className="mb-6 flex items-center justify-between">
-								<span className="flex size-11 items-center justify-center rounded-full bg-accent">
-									<Icon className="size-5 text-primary" aria-hidden />
+							<div className="mb-8 flex items-start justify-between">
+								<span className="font-display text-7xl leading-none text-pen">
+									{index + 1}
 								</span>
-								<span className="font-mono text-sm text-muted">
-									0{index + 1}
-								</span>
+								<Icon className="size-5 text-muted" aria-hidden />
 							</div>
-							<h3 className="text-lg leading-snug font-semibold text-ink">
+							<h3 className="font-display text-2xl leading-snug text-ink">
 								{step.title}
 							</h3>
 							<p className="mt-2 leading-relaxed text-muted">{step.body}</p>
@@ -150,17 +168,15 @@ function ValueList({
 	icons: LucideIcon[];
 }) {
 	return (
-		<div className="reveal rounded-lg border border-border bg-surface p-6 shadow-card sm:p-8">
-			<p className="mb-6 font-display text-2xl font-semibold text-ink">
-				{label}
-			</p>
+		<div className="reveal border-t-2 border-ink pt-6">
+			<p className="mb-8 font-display text-3xl text-ink">{label}</p>
 			<ul className="space-y-5">
 				{items.map((item, index) => {
 					const Icon = icons[index % icons.length];
 					return (
 						<li key={item.title} className="flex gap-4">
-							<span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-sm bg-surface-2">
-								<Icon className="size-4 text-primary-ink" aria-hidden />
+							<span className="mt-1 flex size-8 shrink-0 items-center justify-center border border-border-strong">
+								<Icon className="size-4 text-ink" aria-hidden />
 							</span>
 							<div>
 								<p className="font-semibold text-ink">{item.title}</p>
@@ -181,16 +197,16 @@ export function ValueStackSection() {
 
 	return (
 		<section className="border-y border-border bg-surface-2/60">
-			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+			<div className="mx-auto max-w-7xl px-4 py-20 sm:px-8 md:py-28">
 				<div className="reveal mb-12 max-w-2xl">
-					<SectionEyebrow>{copy.valueStack.eyebrow}</SectionEyebrow>
-					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
+					<SectionEyebrow n={3}>{copy.valueStack.eyebrow}</SectionEyebrow>
+					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-6xl">
 						{copy.valueStack.titlePre}
 						<span className="highlight">{copy.valueStack.titleHighlight}</span>
 					</h2>
 					<p className="mt-5 text-lg text-muted">{copy.valueStack.subtitle}</p>
 				</div>
-				<div className="grid gap-5 lg:grid-cols-2">
+				<div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
 					<ValueList
 						label={copy.valueStack.diagnosisLabel}
 						items={copy.valueStack.diagnosis}
@@ -222,12 +238,12 @@ export function ExampleSection() {
 
 	return (
 		<section id="example" className="bg-night text-background">
-			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+			<div className="mx-auto max-w-7xl px-4 py-20 sm:px-8 md:py-28">
 				<div className="reveal mb-12 max-w-2xl">
-					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-[#71b7fb] uppercase">
+					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-[#e2867f] uppercase">
 						{copy.example.eyebrow}
 					</p>
-					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance sm:text-5xl">
+					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance sm:text-6xl">
 						{copy.example.title}
 					</h2>
 					<p className="mt-5 text-lg leading-relaxed text-night-muted">
@@ -293,12 +309,12 @@ export function PersonasSection() {
 	const { copy } = useLanguage();
 
 	return (
-		<section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+		<section className="mx-auto max-w-7xl px-4 py-20 sm:px-8 md:py-28">
 			<div className="reveal mb-12 max-w-2xl">
-				<SectionEyebrow>{copy.personas.eyebrow}</SectionEyebrow>
-				<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
+				<SectionEyebrow n={5}>{copy.personas.eyebrow}</SectionEyebrow>
+				<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-6xl">
 					{copy.personas.titlePre}
-					<em className="text-primary-ink">{copy.personas.titleEm}</em>
+					<em className="text-pen">{copy.personas.titleEm}</em>
 					{copy.personas.titlePost}
 				</h2>
 			</div>
@@ -367,11 +383,11 @@ export function PricingSection() {
 
 	return (
 		<section id="pricing" className="scroll-mt-20 border-t border-border">
-			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+			<div className="mx-auto max-w-7xl px-4 py-20 sm:px-8 md:py-28">
 				<div className="reveal mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
 					<div className="max-w-2xl">
-						<SectionEyebrow>{copy.pricing.eyebrow}</SectionEyebrow>
-						<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
+						<SectionEyebrow n={6}>{copy.pricing.eyebrow}</SectionEyebrow>
+						<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-6xl">
 							{copy.pricing.titlePre}
 							<span className="highlight">{copy.pricing.titleHighlight}</span>
 						</h2>
@@ -495,12 +511,12 @@ export function TeamsSection() {
 
 	return (
 		<section className="bg-night text-background">
-			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24">
+			<div className="mx-auto max-w-7xl px-4 py-20 sm:px-8 md:py-24">
 				<div className="reveal max-w-2xl">
 					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-accent uppercase">
 						{copy.teams.eyebrow}
 					</p>
-					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-background sm:text-5xl">
+					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-background sm:text-6xl">
 						{copy.teams.title}
 					</h2>
 				</div>
@@ -540,10 +556,10 @@ export function FaqSection() {
 
 	return (
 		<section className="border-t border-border bg-surface">
-			<div className="mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 md:grid-cols-[1fr_2fr] md:gap-16 md:py-28">
+			<div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-8 md:grid-cols-[1fr_2fr] md:gap-16 md:py-28">
 				<div className="reveal">
-					<SectionEyebrow>{copy.faq.eyebrow}</SectionEyebrow>
-					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-ink sm:text-5xl">
+					<SectionEyebrow n={7}>{copy.faq.eyebrow}</SectionEyebrow>
+					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-ink sm:text-6xl">
 						{copy.faq.title}
 					</h2>
 				</div>
@@ -570,7 +586,7 @@ export function FinalCtaSection() {
 	const { copy } = useLanguage();
 
 	return (
-		<section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+		<section className="mx-auto max-w-7xl px-4 py-20 sm:px-8 md:py-28">
 			<div className="reveal relative overflow-hidden rounded-xl bg-primary px-6 py-14 text-center text-white shadow-lift sm:px-12 md:py-20">
 				<h2 className="mx-auto max-w-3xl font-display text-4xl leading-[1.05] font-semibold text-balance text-white sm:text-6xl">
 					{copy.finalCta.title}
@@ -599,7 +615,7 @@ export function SiteFooter() {
 
 	return (
 		<footer className="border-t border-border">
-			<div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
+			<div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
 				<p className="font-display text-base font-semibold text-ink">
 					Red<span className="text-primary">line</span>
 				</p>
