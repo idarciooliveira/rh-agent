@@ -46,7 +46,7 @@ export function GoalAlignmentCard({ goalAlignment }: GoalAlignmentCardProps) {
 
 			<div className="mt-3 h-2.5 overflow-hidden rounded-full bg-surface-2">
 				<div
-					className="bar-animate h-full rounded-full bg-primary"
+					className="bar-animate h-full rounded-full bg-primary shadow-[0_0_10px_rgb(110_118_255/0.7)]"
 					style={{ width: `${percentage}%` }}
 				/>
 			</div>

@@ -38,7 +38,7 @@ export function ProfileScoreGauge({
 						cy="60"
 						r={radius}
 						fill="none"
-						className="ring-animate stroke-primary"
+						className="ring-animate stroke-primary [filter:drop-shadow(0_0_6px_rgb(110_118_255/0.7))]"
 						strokeWidth="10"
 						strokeLinecap="round"
 						strokeDasharray={circumference}

@@ -106,7 +106,7 @@ export function ShareScoreCard({
 					Share your score
 				</h2>
 			</div>
-			<div className="mt-4 rounded-lg bg-night p-5 text-background">
+			<div className="mt-4 rounded-lg bg-night p-5 text-ink">
 				<p className="text-sm text-night-muted">
 					{firstName ? `${firstName}'s LinkedIn score` : "LinkedIn score"}
 				</p>
@@ -115,7 +115,7 @@ export function ShareScoreCard({
 					<span className="text-xl text-night-muted">/100</span>
 				</p>
 				{previousScore !== null && previousScore !== rounded ? (
-					<p className="mt-1 font-mono text-sm text-accent">
+					<p className="mt-1 font-mono text-sm text-primary-ink">
 						{previousScore} → {rounded}
 					</p>
 				) : null}

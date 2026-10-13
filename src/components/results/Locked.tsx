@@ -12,7 +12,7 @@ export function Blurred({ children }: { children: ReactNode }) {
 
 export function LockedPill({ label = "Locked" }: { label?: string }) {
 	return (
-		<span className="inline-flex items-center gap-1 rounded-full bg-night px-2 py-0.5 text-xs font-semibold text-background">
+		<span className="inline-flex items-center gap-1 rounded-full bg-night px-2 py-0.5 text-xs font-semibold text-ink">
 			<LockIcon className="size-3" aria-hidden />
 			{label}
 		</span>

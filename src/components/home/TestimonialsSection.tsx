@@ -65,7 +65,7 @@ function TestimonialCard({
 			</div>
 			<blockquote className="relative mt-4 flex-1 text-[15px] leading-relaxed text-ink">
 				<QuoteIcon
-					className="absolute -top-1 -left-1 size-5 text-accent"
+					className="absolute -top-1 -left-1 size-5 text-primary-ink"
 					aria-hidden
 				/>
 				<p className="pl-5">{testimonial.quote}</p>

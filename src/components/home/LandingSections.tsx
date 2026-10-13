@@ -221,7 +221,7 @@ export function ExampleSection() {
 	const { copy } = useLanguage();
 
 	return (
-		<section id="example" className="bg-night text-background">
+		<section id="example" className="border-y border-border bg-night text-ink">
 			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
 				<div className="reveal mb-12 max-w-2xl">
 					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-[#71b7fb] uppercase">
@@ -235,7 +235,7 @@ export function ExampleSection() {
 					</p>
 				</div>
 
-				<div className="reveal rounded-xl bg-background p-5 text-ink sm:p-8">
+				<div className="reveal rounded-xl border border-border bg-surface p-5 text-ink sm:p-8">
 					<div className="grid gap-6 md:grid-cols-2 md:gap-8">
 						<div>
 							<p className="mb-2 font-mono text-xs tracking-wide text-muted uppercase">
@@ -269,7 +269,7 @@ export function ExampleSection() {
 							<p className="mb-2 font-mono text-xs tracking-wide uppercase">
 								{card.label}
 							</p>
-							<p className="leading-relaxed text-background/90">{card.text}</p>
+							<p className="leading-relaxed text-ink/90">{card.text}</p>
 						</li>
 					))}
 				</ul>
@@ -403,7 +403,7 @@ export function PricingSection() {
 							key={card.key}
 							className={`reveal relative flex flex-col rounded-xl border p-6 ${
 								card.featured
-									? "border-primary bg-night text-background shadow-lift"
+									? "border-primary bg-night text-ink shadow-lift"
 									: "border-border bg-surface shadow-card"
 							}`}
 						>
@@ -413,7 +413,7 @@ export function PricingSection() {
 								</span>
 							) : null}
 							<h3
-								className={`text-lg font-semibold ${card.featured ? "text-background" : "text-ink"}`}
+								className={`text-lg font-semibold ${card.featured ? "text-ink" : "text-ink"}`}
 							>
 								{card.name}
 							</h3>
@@ -436,7 +436,7 @@ export function PricingSection() {
 								{card.features.map((feature) => (
 									<li key={feature} className="flex items-start gap-2 text-sm">
 										<CheckIcon
-											className={`mt-0.5 size-4 shrink-0 ${card.featured ? "text-accent" : "text-strength"}`}
+											className={`mt-0.5 size-4 shrink-0 ${card.featured ? "text-primary-ink" : "text-strength"}`}
 											aria-hidden
 										/>
 										{feature}
@@ -494,13 +494,13 @@ export function TeamsSection() {
 	const { copy } = useLanguage();
 
 	return (
-		<section className="bg-night text-background">
+		<section className="border-y border-border bg-night text-ink">
 			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24">
 				<div className="reveal max-w-2xl">
-					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-accent uppercase">
+					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
 						{copy.teams.eyebrow}
 					</p>
-					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-background sm:text-5xl">
+					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
 						{copy.teams.title}
 					</h2>
 				</div>
@@ -512,8 +512,8 @@ export function TeamsSection() {
 								key={item.title}
 								className="reveal rounded-xl border border-white/10 bg-night-2 p-6"
 							>
-								<Icon className="size-6 text-accent" aria-hidden />
-								<h3 className="mt-4 text-lg font-semibold text-background">
+								<Icon className="size-6 text-primary-ink" aria-hidden />
+								<h3 className="mt-4 text-lg font-semibold text-ink">
 									{item.title}
 								</h3>
 								<p className="mt-2 text-sm leading-relaxed text-night-muted">
@@ -525,7 +525,7 @@ export function TeamsSection() {
 				</div>
 				<a
 					href={`mailto:${copy.teams.email}`}
-					className="mt-8 inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-accent"
+					className="mt-8 inline-flex items-center gap-2 btn-primary rounded-full px-6 py-3 text-sm font-semibold"
 				>
 					{copy.teams.cta}
 					<ArrowRightIcon className="size-4" aria-hidden />

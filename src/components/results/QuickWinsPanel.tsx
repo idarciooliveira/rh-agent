@@ -14,11 +14,11 @@ export function QuickWinsPanel({
 	onUnlock,
 }: QuickWinsPanelProps) {
 	return (
-		<section className="rounded-xl bg-night p-5 text-background shadow-lift sm:p-6 lg:sticky lg:top-6">
+		<section className="rounded-xl border border-border-strong bg-night p-5 text-ink shadow-lift sm:p-6 lg:sticky lg:top-6">
 			<div className="mb-5">
 				<div className="flex items-center gap-2">
-					<ZapIcon className="size-5 text-accent" aria-hidden />
-					<h2 className="font-display text-2xl font-semibold text-background">
+					<ZapIcon className="size-5 text-primary-ink" aria-hidden />
+					<h2 className="font-display text-2xl font-semibold text-ink">
 						Quick wins
 					</h2>
 				</div>
@@ -34,10 +34,10 @@ export function QuickWinsPanel({
 						className="flex items-start gap-3 py-3 first:pt-0"
 					>
 						<CheckCircle2Icon
-							className="mt-0.5 size-5 shrink-0 text-accent"
+							className="mt-0.5 size-5 shrink-0 text-primary-ink"
 							aria-hidden
 						/>
-						<p className="text-[15px] leading-relaxed text-background">
+						<p className="text-[15px] leading-relaxed text-ink">
 							{locked && index >= FREE_QUICK_WINS ? (
 								<Blurred>{win}</Blurred>
 							) : (
@@ -51,7 +51,7 @@ export function QuickWinsPanel({
 				<button
 					type="button"
 					onClick={onUnlock}
-					className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-background px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-accent"
+					className="mt-3 inline-flex w-full items-center justify-center gap-2 btn-primary rounded-full px-4 py-2.5 text-sm font-semibold"
 				>
 					<LockIcon className="size-4" aria-hidden />
 					Unlock {quickWins.length - FREE_QUICK_WINS} more quick wins
