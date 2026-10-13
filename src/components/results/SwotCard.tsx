@@ -25,7 +25,6 @@ const variantConfig: Record<
 		descriptor: string;
 		letter: string;
 		icon: LucideIcon;
-		headerClass: string;
 		textClass: string;
 		dotClass: string;
 	}
@@ -35,7 +34,6 @@ const variantConfig: Record<
 		descriptor: "What already works for this goal. Keep it.",
 		letter: "S",
 		icon: TrendingUpIcon,
-		headerClass: "bg-strength-tint border-strength-border",
 		textClass: "text-strength",
 		dotClass: "bg-strength",
 	},
@@ -44,7 +42,6 @@ const variantConfig: Record<
 		descriptor: "What's missing or holding you back.",
 		letter: "W",
 		icon: TrendingDownIcon,
-		headerClass: "bg-weakness-tint border-weakness-border",
 		textClass: "text-weakness",
 		dotClass: "bg-weakness",
 	},
@@ -53,7 +50,6 @@ const variantConfig: Record<
 		descriptor: "Openings you can use with what you already have.",
 		letter: "O",
 		icon: LightbulbIcon,
-		headerClass: "bg-opportunity-tint border-opportunity-border",
 		textClass: "text-opportunity",
 		dotClass: "bg-opportunity",
 	},
@@ -63,7 +59,6 @@ const variantConfig: Record<
 			"What competing candidates or recruiters might hold against you.",
 		letter: "T",
 		icon: AlertTriangleIcon,
-		headerClass: "bg-threat-tint border-threat-border",
 		textClass: "text-threat",
 		dotClass: "bg-threat",
 	},
@@ -74,33 +69,31 @@ export function SwotCard({ variant, items, locked = false }: SwotCardProps) {
 	const Icon = config.icon;
 
 	return (
-		<section className="overflow-hidden rounded-lg border border-border bg-surface shadow-card">
-			<div
-				className={`relative overflow-hidden border-b px-5 py-4 sm:px-6 ${config.headerClass}`}
-			>
+		<section className="bg-surface p-6 sm:p-8">
+			<div className="flex items-start gap-5 border-b border-border pb-5">
 				<span
-					className={`pointer-events-none absolute -top-4 right-3 select-none font-display text-8xl font-semibold leading-none opacity-15 ${config.textClass}`}
+					className={`font-display text-6xl leading-[0.8] italic ${config.textClass}`}
 					aria-hidden
 				>
 					{config.letter}
 				</span>
-				<div className="relative flex items-center gap-2">
-					<Icon className={`size-5 ${config.textClass}`} aria-hidden />
-					<h2
-						className={`font-display text-xl font-semibold ${config.textClass}`}
-					>
-						{config.title}
-						<span className="ml-1.5 font-mono text-sm font-medium opacity-70">
-							({items.length})
-						</span>
-					</h2>
-					{locked ? <LockedPill /> : null}
+				<div className="min-w-0 flex-1">
+					<div className="flex items-center gap-2">
+						<h2 className="kicker text-ink">
+							{config.title}
+							<span className="ml-2 text-muted">
+								{String(items.length).padStart(2, "0")}
+							</span>
+						</h2>
+						<Icon className={`size-3.5 ${config.textClass}`} aria-hidden />
+						{locked ? <LockedPill /> : null}
+					</div>
+					<p className="mt-2 font-display text-lg leading-snug text-ink italic">
+						{config.descriptor}
+					</p>
 				</div>
-				<p className="relative mt-1 pr-10 text-sm leading-relaxed text-ink/80">
-					{config.descriptor}
-				</p>
 			</div>
-			<ul className="space-y-4 px-5 py-5 sm:px-6">
+			<ul className="space-y-5 pt-5">
 				{items.map((item, index) => (
 					<li
 						// biome-ignore lint/suspicious/noArrayIndexKey: locked items share the same placeholder text

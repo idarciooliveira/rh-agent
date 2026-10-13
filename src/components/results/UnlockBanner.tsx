@@ -29,7 +29,7 @@ export function UnlockBanner({ hiddenCounts, onUnlock }: UnlockBannerProps) {
 	];
 
 	return (
-		<section className="reveal mb-8 overflow-hidden rounded-xl bg-night text-background shadow-lift">
+		<section className="reveal mb-16 overflow-hidden rounded-xl bg-night text-background shadow-lift">
 			<div className="grid gap-6 p-6 sm:p-8 md:grid-cols-[1fr_auto] md:items-center">
 				<div>
 					<p className="inline-flex items-center gap-1.5 font-mono text-xs font-medium tracking-[0.14em] text-accent uppercase">

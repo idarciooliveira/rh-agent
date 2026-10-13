@@ -134,7 +134,7 @@ export function HeroPreviewCard() {
 					<img
 						src="/banners/luanda-skyline.jpg"
 						alt=""
-						className="absolute inset-0 size-full object-cover"
+						className="absolute inset-0 size-full object-cover grayscale"
 					/>
 					<span className="absolute top-3 left-3 rounded-full bg-black/55 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white uppercase">
 						{copy.preview.exampleBadge}

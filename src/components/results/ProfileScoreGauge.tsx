@@ -10,64 +10,47 @@ export function ProfileScoreGauge({
 	score,
 	previousScore = null,
 }: ProfileScoreGaugeProps) {
-	const radius = 54;
-	const circumference = 2 * Math.PI * radius;
 	const clamped = Math.max(0, Math.min(100, Math.round(score)));
-	const offset = circumference - (clamped / 100) * circumference;
 
 	return (
-		<section className="flex items-center gap-5 rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6 md:flex-col md:items-start">
-			<div className="relative size-28 shrink-0 sm:size-32">
-				<svg
-					className="size-full -rotate-90"
-					viewBox="0 0 120 120"
-					role="img"
-					aria-label={`Profile score ${clamped} out of 100`}
-					suppressHydrationWarning
-				>
-					<circle
-						cx="60"
-						cy="60"
-						r={radius}
-						fill="none"
-						className="stroke-surface-2"
-						strokeWidth="10"
+		<section className="border-t-2 border-ink pt-4">
+			<p className="kicker text-ink">Profile score</p>
+			<p className="mt-6 font-display text-[6.5rem] leading-[0.8] text-ink">
+				<span
+					className="count-up"
+					style={{ "--target": clamped } as CSSProperties}
+					aria-hidden
+				/>
+				<span className="ml-1 text-3xl text-muted" aria-hidden>
+					/100
+				</span>
+				<span className="sr-only">Profile score {clamped} out of 100</span>
+			</p>
+
+			<div className="mt-8" aria-hidden>
+				<div className="relative h-2 bg-surface-2">
+					<div
+						className="bar-animate absolute inset-y-0 left-0 bg-ink"
+						style={{ width: `${clamped}%` }}
 					/>
-					<circle
-						cx="60"
-						cy="60"
-						r={radius}
-						fill="none"
-						className="ring-animate stroke-primary"
-						strokeWidth="10"
-						strokeLinecap="round"
-						strokeDasharray={circumference}
-						strokeDashoffset={offset}
-						style={{ "--ring-length": circumference } as CSSProperties}
+					<div
+						className="absolute -top-1.5 -bottom-1.5 w-0.5 bg-pen"
+						style={{ left: `calc(${clamped}% - 1px)` }}
 					/>
-				</svg>
-				<div className="absolute inset-0 flex flex-col items-center justify-center">
-					<span
-						className="count-up font-mono text-4xl font-medium text-ink"
-						style={{ "--target": clamped } as CSSProperties}
-						aria-hidden
-					/>
-					<span className="font-mono text-xs text-muted" aria-hidden>
-						/100
-					</span>
+				</div>
+				<div className="mt-2 flex justify-between font-mono text-[10px] text-muted">
+					{[0, 25, 50, 75, 100].map((tick) => (
+						<span key={tick}>{tick}</span>
+					))}
 				</div>
 			</div>
-			<div className="min-w-0">
-				<h2 className="font-display text-xl font-semibold text-ink">
-					Profile score
-				</h2>
-				<p className="mt-1 text-sm leading-relaxed text-muted">
-					How strong your profile is for this goal, out of 100.
-				</p>
-				{previousScore !== null ? (
-					<ScoreDelta previous={previousScore} current={clamped} />
-				) : null}
-			</div>
+
+			<p className="mt-5 text-sm leading-relaxed text-muted">
+				How strong your profile is for this goal, out of 100.
+			</p>
+			{previousScore !== null ? (
+				<ScoreDelta previous={previousScore} current={clamped} />
+			) : null}
 		</section>
 	);
 }

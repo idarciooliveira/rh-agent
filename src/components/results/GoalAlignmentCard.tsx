@@ -17,26 +17,19 @@ export function GoalAlignmentCard({ goalAlignment }: GoalAlignmentCardProps) {
 	const score = Math.round(goalAlignment.score);
 
 	return (
-		<section className="rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6">
+		<section className="border-t-2 border-ink pt-4">
 			<div className="flex items-start justify-between gap-4">
-				<div className="min-w-0">
-					<h2 className="font-display text-xl font-semibold text-ink">
-						Goal alignment
-					</h2>
-					<p className="mt-1 text-sm leading-relaxed text-muted">
-						How close your profile is to the job you described.
-					</p>
-				</div>
-				<TargetIcon className="size-5 shrink-0 text-primary-ink" aria-hidden />
+				<h2 className="kicker text-ink">Goal alignment</h2>
+				<TargetIcon className="size-4 shrink-0 text-pen" aria-hidden />
 			</div>
 
-			<p className="mt-4 font-mono text-4xl font-medium text-ink">
+			<p className="mt-6 font-display text-[6.5rem] leading-[0.8] text-ink">
 				<span
 					className="count-up"
 					style={{ "--target": score } as CSSProperties}
 					aria-hidden
 				/>
-				<span className="text-lg text-muted" aria-hidden>
+				<span className="ml-1 text-3xl text-muted" aria-hidden>
 					/{goalAlignment.maxScore}
 				</span>
 				<span className="sr-only">
@@ -44,14 +37,14 @@ export function GoalAlignmentCard({ goalAlignment }: GoalAlignmentCardProps) {
 				</span>
 			</p>
 
-			<div className="mt-3 h-2.5 overflow-hidden rounded-full bg-surface-2">
+			<div className="mt-8 h-2 bg-surface-2">
 				<div
-					className="bar-animate h-full rounded-full bg-primary"
+					className="bar-animate h-full bg-ink"
 					style={{ width: `${percentage}%` }}
 				/>
 			</div>
 
-			<p className="mt-4 text-[15px] leading-relaxed text-ink">
+			<p className="mt-6 font-display text-xl leading-relaxed text-ink">
 				{goalAlignment.summary}
 			</p>
 		</section>

@@ -89,7 +89,7 @@ function AnalysisResultsPage() {
 		<div className="min-h-screen bg-background">
 			<ResultsTopBar />
 
-			<main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+			<main className="mx-auto max-w-7xl px-4 py-10 sm:px-8 sm:py-14">
 				<AnalysisResultsHeader
 					analysisId={data.analysisId}
 					firstName={firstName}
@@ -117,101 +117,129 @@ function AnalysisResultsPage() {
 					</p>
 				) : null}
 
-				<div className="mb-8 grid gap-4 sm:gap-6 md:grid-cols-[minmax(0,18rem)_1fr]">
-					<ProfileScoreGauge
-						score={data.swotAnalysis.profileScore}
-						previousScore={data.previousScore}
-					/>
-					<GoalAlignmentCard goalAlignment={data.swotAnalysis.goalAlignment} />
-				</div>
-
-				{locked ? (
-					<UnlockBanner hiddenCounts={hiddenCounts} onUnlock={openCheckout} />
-				) : null}
-
-				<div className="mb-12 grid gap-4 sm:gap-6 md:grid-cols-2">
-					<SwotCard variant="strengths" items={swot.strengths} />
-					<SwotCard
-						variant="weaknesses"
-						items={swot.weaknesses}
-						locked={locked}
-					/>
-					<SwotCard
-						variant="opportunities"
-						items={swot.opportunities}
-						locked={locked}
-					/>
-					<SwotCard variant="threats" items={swot.threats} locked={locked} />
-				</div>
-
-				<div className="grid items-start gap-8 lg:grid-cols-3">
-					<div className="lg:col-span-2">
-						{locked ? (
-							<LockedOverlay
-								label="Unlock your ranked plan"
-								onUnlock={() => openCheckout()}
-							>
-								<StrategicSuggestions
-									suggestions={data.swotAnalysis.strategicSuggestions}
+				<div className="lg:grid lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-16">
+					<ReportContents />
+					<div className="min-w-0">
+						<ReportSection id="summary" n={1} title="Summary">
+							<div className="grid gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
+								<ProfileScoreGauge
+									score={data.swotAnalysis.profileScore}
+									previousScore={data.previousScore}
 								/>
-							</LockedOverlay>
-						) : (
-							<StrategicSuggestions
-								suggestions={data.swotAnalysis.strategicSuggestions}
-							/>
-						)}
-					</div>
-					<QuickWinsPanel
-						quickWins={data.swotAnalysis.quickWins}
-						locked={locked}
-						onUnlock={() => openCheckout()}
-					/>
-				</div>
+								<GoalAlignmentCard
+									goalAlignment={data.swotAnalysis.goalAlignment}
+								/>
+							</div>
+						</ReportSection>
 
-				<div className="mt-12 grid items-start gap-6 sm:mt-16 lg:grid-cols-3">
-					<div className="lg:col-span-2">
+						{locked ? (
+							<UnlockBanner
+								hiddenCounts={hiddenCounts}
+								onUnlock={openCheckout}
+							/>
+						) : null}
+
+						<ReportSection
+							id="swot"
+							n={2}
+							title="Strengths, weaknesses, opportunities, threats"
+						>
+							<div className="grid gap-px border border-ink bg-ink md:grid-cols-2">
+								<SwotCard variant="strengths" items={swot.strengths} />
+								<SwotCard
+									variant="weaknesses"
+									items={swot.weaknesses}
+									locked={locked}
+								/>
+								<SwotCard
+									variant="opportunities"
+									items={swot.opportunities}
+									locked={locked}
+								/>
+								<SwotCard
+									variant="threats"
+									items={swot.threats}
+									locked={locked}
+								/>
+							</div>
+						</ReportSection>
+
+						<ReportSection id="plan" n={3} title="Plan and quick wins">
+							<div className="grid items-start gap-8 lg:grid-cols-3">
+								<div className="lg:col-span-2">
+									{locked ? (
+										<LockedOverlay
+											label="Unlock your ranked plan"
+											onUnlock={() => openCheckout()}
+										>
+											<StrategicSuggestions
+												suggestions={data.swotAnalysis.strategicSuggestions}
+											/>
+										</LockedOverlay>
+									) : (
+										<StrategicSuggestions
+											suggestions={data.swotAnalysis.strategicSuggestions}
+										/>
+									)}
+								</div>
+								<QuickWinsPanel
+									quickWins={data.swotAnalysis.quickWins}
+									locked={locked}
+									onUnlock={() => openCheckout()}
+								/>
+							</div>
+						</ReportSection>
+
+						<ReportSection id="keywords" n={4} title="Keywords and sharing">
+							<div className="grid items-start gap-6 lg:grid-cols-3">
+								<div className="lg:col-span-2">
+									{recommendations?.recruiterKeywords?.length ? (
+										<RecruiterKeywords
+											keywords={recommendations.recruiterKeywords}
+											profile={data.profile}
+										/>
+									) : (
+										<HumanReviewCard
+											onBook={() => openCheckout("human_review")}
+										/>
+									)}
+								</div>
+								<ShareScoreCard
+									score={data.swotAnalysis.profileScore}
+									previousScore={data.previousScore}
+									firstName={firstName}
+								/>
+							</div>
+						</ReportSection>
+
+						<JobHuntToolkit
+							analysisId={data.analysisId}
+							hasPass={hasPass}
+							contentPlan={recommendations?.contentPlan}
+							onGetPass={() => openCheckout("pass30")}
+						/>
+
 						{recommendations?.recruiterKeywords?.length ? (
-							<RecruiterKeywords
-								keywords={recommendations.recruiterKeywords}
-								profile={data.profile}
-							/>
-						) : (
-							<HumanReviewCard onBook={() => openCheckout("human_review")} />
-						)}
+							<div className="mt-6">
+								<HumanReviewCard onBook={() => openCheckout("human_review")} />
+							</div>
+						) : null}
+
+						<section className="reveal mt-16 flex flex-col gap-5 border-y-2 border-ink py-8 sm:flex-row sm:items-center sm:justify-between">
+							<p className="max-w-xl font-display text-2xl leading-snug text-ink sm:text-3xl">
+								Made your edits? Run a new review to see your score move, or try
+								a different goal and compare.
+							</p>
+							<Link
+								to="/"
+								className="btn-primary inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
+							>
+								Run another review
+								<ArrowRightIcon className="size-4" aria-hidden />
+							</Link>
+						</section>
 					</div>
-					<ShareScoreCard
-						score={data.swotAnalysis.profileScore}
-						previousScore={data.previousScore}
-						firstName={firstName}
-					/>
 				</div>
-
-				<JobHuntToolkit
-					analysisId={data.analysisId}
-					hasPass={hasPass}
-					contentPlan={recommendations?.contentPlan}
-					onGetPass={() => openCheckout("pass30")}
-				/>
-
-				{recommendations?.recruiterKeywords?.length ? (
-					<div className="mt-6">
-						<HumanReviewCard onBook={() => openCheckout("human_review")} />
-					</div>
-				) : null}
-
-				<section className="reveal mt-12 flex flex-col gap-5 rounded-xl border border-border bg-surface-2 p-6 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-					<p className="max-w-xl font-display text-xl font-semibold leading-snug text-ink sm:text-2xl">
-						Made your edits? Run a new review to see your score move, or try a
-						different goal and compare.
-					</p>
-					<Link
-						to="/"
-						className="btn-primary inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
-					>
-						Run another review
-						<ArrowRightIcon className="size-4" aria-hidden />
-					</Link>
-				</section>
 			</main>
 
 			{previewOpen && recommendations ? (
@@ -230,6 +258,66 @@ function AnalysisResultsPage() {
 				/>
 			) : null}
 		</div>
+	);
+}
+
+const CONTENTS = [
+	{ id: "summary", label: "Summary" },
+	{ id: "swot", label: "SWOT" },
+	{ id: "plan", label: "Plan and quick wins" },
+	{ id: "keywords", label: "Keywords and sharing" },
+	{ id: "toolkit", label: "Job hunt toolkit" },
+];
+
+/** Sticky table of contents, like the front page of an audit report. */
+function ReportContents() {
+	return (
+		<nav aria-label="Report contents" className="hidden lg:block">
+			<div className="sticky top-8 border-t-2 border-ink pt-4">
+				<p className="kicker text-ink">Contents</p>
+				<ol className="mt-4 space-y-3">
+					{CONTENTS.map((item, index) => (
+						<li key={item.id}>
+							<a
+								href={`#${item.id}`}
+								className="group flex gap-3 text-sm text-muted transition-colors hover:text-ink"
+							>
+								<span className="font-mono text-xs text-pen">
+									{String(index + 1).padStart(2, "0")}
+								</span>
+								<span className="group-hover:underline group-hover:decoration-pen group-hover:underline-offset-4">
+									{item.label}
+								</span>
+							</a>
+						</li>
+					))}
+				</ol>
+			</div>
+		</nav>
+	);
+}
+
+function ReportSection({
+	id,
+	n,
+	title,
+	children,
+}: {
+	id: string;
+	n: number;
+	title: string;
+	children: React.ReactNode;
+}) {
+	return (
+		<section id={id} className="mb-16 scroll-mt-8">
+			<h2 className="mb-8 flex items-baseline gap-4 font-display text-3xl text-ink sm:text-4xl">
+				<span className="font-mono text-sm text-pen">
+					{String(n).padStart(2, "0")}
+				</span>
+				{title}
+			</h2>
+			{children}
+		</section>
 	);
 }
 
