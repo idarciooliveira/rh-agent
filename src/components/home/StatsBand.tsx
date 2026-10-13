@@ -9,7 +9,7 @@ export function StatsBand() {
 
 	return (
 		<section className="border-y border-border bg-surface">
-			<ul className="mx-auto grid max-w-6xl gap-6 px-4 py-8 sm:grid-cols-3 sm:gap-8 sm:px-6 sm:py-10">
+			<ul className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:grid-cols-3 sm:gap-8 sm:px-8 sm:py-10">
 				{copy.stats.items.map((stat, index) => {
 					const Icon = STAT_ICONS[index % STAT_ICONS.length];
 					return (

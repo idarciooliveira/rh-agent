@@ -16,7 +16,7 @@ export function ProfileScoreGauge({
 	const offset = circumference - (clamped / 100) * circumference;
 
 	return (
-		<section className="flex items-center gap-5 rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6 md:flex-col md:items-start">
+		<section className="flex items-center gap-5 rounded-3xl border border-border bg-surface p-6 shadow-card sm:p-7 md:flex-col md:items-start">
 			<div className="relative size-28 shrink-0 sm:size-32">
 				<svg
 					className="size-full -rotate-90"
@@ -38,7 +38,7 @@ export function ProfileScoreGauge({
 						cy="60"
 						r={radius}
 						fill="none"
-						className="ring-animate stroke-primary"
+						className="ring-animate stroke-open"
 						strokeWidth="10"
 						strokeLinecap="round"
 						strokeDasharray={circumference}
