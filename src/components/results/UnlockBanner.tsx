@@ -29,14 +29,14 @@ export function UnlockBanner({ hiddenCounts, onUnlock }: UnlockBannerProps) {
 	];
 
 	return (
-		<section className="reveal mb-8 overflow-hidden rounded-xl bg-night text-background shadow-lift">
+		<section className="ring-gradient reveal mb-8 overflow-hidden rounded-xl bg-night text-ink shadow-lift">
 			<div className="grid gap-6 p-6 sm:p-8 md:grid-cols-[1fr_auto] md:items-center">
 				<div>
-					<p className="inline-flex items-center gap-1.5 font-mono text-xs font-medium tracking-[0.14em] text-accent uppercase">
+					<p className="inline-flex items-center gap-1.5 font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
 						<LockIcon className="size-3.5" aria-hidden />
 						Your full review is ready
 					</p>
-					<h2 className="mt-2 font-display text-3xl font-semibold leading-tight text-background">
+					<h2 className="mt-2 font-display text-3xl font-semibold leading-tight text-ink">
 						You've seen the score. The fixes are one step away.
 					</h2>
 					<ul className="mt-4 grid gap-1.5 sm:grid-cols-2">
@@ -46,7 +46,7 @@ export function UnlockBanner({ hiddenCounts, onUnlock }: UnlockBannerProps) {
 								className="flex items-start gap-2 text-sm text-night-muted"
 							>
 								<CheckIcon
-									className="mt-0.5 size-4 shrink-0 text-accent"
+									className="mt-0.5 size-4 shrink-0 text-primary-ink"
 									aria-hidden
 								/>
 								{item}
@@ -58,14 +58,14 @@ export function UnlockBanner({ hiddenCounts, onUnlock }: UnlockBannerProps) {
 					<button
 						type="button"
 						onClick={() => onUnlock("report")}
-						className="inline-flex items-center justify-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-accent"
+						className="inline-flex items-center justify-center gap-2 btn-primary rounded-full px-5 py-3 text-sm font-semibold"
 					>
 						Unlock for {priceFor(region, "report")}
 					</button>
 					<button
 						type="button"
 						onClick={() => onUnlock("pass30")}
-						className="rounded-full border border-white/30 px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:bg-white/10"
+						className="rounded-full border border-white/30 px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-white/10"
 					>
 						30-day pass, {priceFor(region, "pass30")}
 					</button>

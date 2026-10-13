@@ -21,6 +21,7 @@ import {
 	Gauge,
 	Globe,
 	GraduationCap,
+	LayoutGrid,
 	Lightbulb,
 	ListChecks,
 	Lock,
@@ -75,6 +76,7 @@ export const FileTextIcon = safeIcon(FileText);
 export const GaugeIcon = safeIcon(Gauge);
 export const GlobeIcon = safeIcon(Globe);
 export const GraduationCapIcon = safeIcon(GraduationCap);
+export const LayoutGridIcon = safeIcon(LayoutGrid);
 export const LightbulbIcon = safeIcon(Lightbulb);
 export const ListChecksIcon = safeIcon(ListChecks);
 export const LockIcon = safeIcon(Lock);

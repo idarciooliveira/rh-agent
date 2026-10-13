@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HomeAnalysisForm } from "#/components/HomeAnalysisForm";
-import { HeroPreviewCard } from "#/components/home/HeroPreviewCard";
+import { HeroAppPreview } from "#/components/home/HeroAppPreview";
 import {
 	ExampleSection,
 	FaqSection,
@@ -35,49 +35,45 @@ function Home() {
 			<SiteHeader />
 
 			<main>
-				<section className="paper-grid relative">
-					<div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] items-start gap-12 px-4 pt-10 pb-20 sm:px-6 sm:pt-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-16 lg:pt-16 lg:pb-24">
-						<div>
-							<p
-								className="animate-rise mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs font-medium tracking-wide text-muted uppercase"
-								style={{ "--i": 0 } as React.CSSProperties}
-							>
-								<span
-									className="size-1.5 rounded-full bg-primary"
-									aria-hidden
-								/>
-								{copy.hero.eyebrow}
-							</p>
-							<h1
-								className="animate-rise font-display text-[2.5rem] leading-[1.02] font-semibold text-balance text-ink sm:text-6xl lg:text-[3.9rem]"
-								style={{ "--i": 1 } as React.CSSProperties}
-							>
-								{copy.hero.titlePre}
-								<span className="highlight highlight-animate italic">
-									{copy.hero.titleHighlight}
-								</span>
-							</h1>
-							<p
-								className="animate-rise mt-5 max-w-xl text-lg leading-relaxed text-muted sm:text-xl"
-								style={{ "--i": 2 } as React.CSSProperties}
-							>
-								{copy.hero.subtitle}
-							</p>
+				<section className="relative overflow-hidden">
+					<div className="paper-grid absolute inset-0" aria-hidden />
+					<div className="relative mx-auto max-w-6xl px-4 pt-16 pb-24 text-center sm:px-6 sm:pt-24 lg:pb-32">
+						<p
+							className="animate-rise inline-flex items-center gap-2 rounded-full border border-border-strong bg-surface/80 py-1 pr-3 pl-1 text-xs text-muted backdrop-blur"
+							style={{ "--i": 0 } as React.CSSProperties}
+						>
+							<span className="rounded-full bg-accent px-2 py-0.5 font-mono text-[10px] font-medium text-primary-ink uppercase">
+								{copy.form.trustNoSignup}
+							</span>
+							{copy.hero.eyebrow}
+						</p>
+						<h1
+							className="animate-rise text-gradient mx-auto mt-7 max-w-4xl font-display text-[2.75rem] leading-[1.02] font-semibold text-balance sm:text-6xl lg:text-[4.75rem]"
+							style={{ "--i": 1 } as React.CSSProperties}
+						>
+							{copy.hero.titlePre}
+							<span className="highlight">{copy.hero.titleHighlight}</span>
+						</h1>
+						<p
+							className="animate-rise mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted"
+							style={{ "--i": 2 } as React.CSSProperties}
+						>
+							{copy.hero.subtitle}
+						</p>
 
-							<div
-								id="review"
-								className="animate-rise mt-8 rounded-xl border border-border bg-surface p-5 shadow-card sm:p-7"
-								style={{ "--i": 3 } as React.CSSProperties}
-							>
-								<HomeAnalysisForm aiMode={aiMode} />
-							</div>
+						<div
+							id="review"
+							className="animate-rise ring-gradient mx-auto mt-10 max-w-2xl rounded-xl bg-surface/90 p-5 text-left shadow-lift backdrop-blur sm:p-6"
+							style={{ "--i": 3 } as React.CSSProperties}
+						>
+							<HomeAnalysisForm aiMode={aiMode} />
 						</div>
 
 						<div
-							className="animate-rise lg:sticky lg:top-28 lg:mt-14"
+							className="animate-rise mt-20 sm:mt-24"
 							style={{ "--i": 4 } as React.CSSProperties}
 						>
-							<HeroPreviewCard />
+							<HeroAppPreview />
 						</div>
 					</div>
 				</section>

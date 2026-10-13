@@ -17,7 +17,14 @@ import { ShareScoreCard } from "#/components/results/ShareScoreCard";
 import { StrategicSuggestions } from "#/components/results/StrategicSuggestions";
 import { SwotCard } from "#/components/results/SwotCard";
 import { UnlockBanner } from "#/components/results/UnlockBanner";
-import { ArrowRightIcon } from "#/lib/icons";
+import {
+	ArrowRightIcon,
+	BriefcaseIcon,
+	GaugeIcon,
+	LayoutGridIcon,
+	ListChecksIcon,
+	ScanSearchIcon,
+} from "#/lib/icons";
 import {
 	FREE_ITEMS_PER_LOCKED_QUADRANT,
 	FREE_QUICK_WINS,
@@ -89,130 +96,151 @@ function AnalysisResultsPage() {
 		<div className="min-h-screen bg-background">
 			<ResultsTopBar />
 
-			<main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-				<AnalysisResultsHeader
-					analysisId={data.analysisId}
-					firstName={firstName}
+			<div className="flex">
+				<ResultsSidebar
+					name={data.profile.name}
 					careerGoal={data.careerGoal}
 					locked={locked}
-					onPreviewClick={() =>
-						locked ? openCheckout() : setPreviewOpen(true)
-					}
 				/>
-
-				{access.passExpiresAt ? (
-					<p className="mb-6 rounded-md border border-strength-border bg-strength-tint px-4 py-2.5 text-sm text-strength">
-						Job hunt pass active until{" "}
-						{new Date(access.passExpiresAt).toLocaleDateString("en-GB", {
-							day: "numeric",
-							month: "long",
-						})}
-						. Every new review unlocks on its own.
-					</p>
-				) : access.creditsRemaining > 0 ? (
-					<p className="mb-6 rounded-md border border-strength-border bg-strength-tint px-4 py-2.5 text-sm text-strength">
-						{access.creditsRemaining} review
-						{access.creditsRemaining === 1 ? "" : "s"} left in your pack. The
-						next review you run unlocks on its own.
-					</p>
-				) : null}
-
-				<div className="mb-8 grid gap-4 sm:gap-6 md:grid-cols-[minmax(0,18rem)_1fr]">
-					<ProfileScoreGauge
-						score={data.swotAnalysis.profileScore}
-						previousScore={data.previousScore}
-					/>
-					<GoalAlignmentCard goalAlignment={data.swotAnalysis.goalAlignment} />
-				</div>
-
-				{locked ? (
-					<UnlockBanner hiddenCounts={hiddenCounts} onUnlock={openCheckout} />
-				) : null}
-
-				<div className="mb-12 grid gap-4 sm:gap-6 md:grid-cols-2">
-					<SwotCard variant="strengths" items={swot.strengths} />
-					<SwotCard
-						variant="weaknesses"
-						items={swot.weaknesses}
+				<main className="mx-auto min-w-0 max-w-6xl flex-1 px-4 py-8 sm:px-8 sm:py-10">
+					<AnalysisResultsHeader
+						analysisId={data.analysisId}
+						firstName={firstName}
+						careerGoal={data.careerGoal}
 						locked={locked}
+						onPreviewClick={() =>
+							locked ? openCheckout() : setPreviewOpen(true)
+						}
 					/>
-					<SwotCard
-						variant="opportunities"
-						items={swot.opportunities}
-						locked={locked}
-					/>
-					<SwotCard variant="threats" items={swot.threats} locked={locked} />
-				</div>
 
-				<div className="grid items-start gap-8 lg:grid-cols-3">
-					<div className="lg:col-span-2">
-						{locked ? (
-							<LockedOverlay
-								label="Unlock your ranked plan"
-								onUnlock={() => openCheckout()}
-							>
+					{access.passExpiresAt ? (
+						<p className="mb-6 rounded-md border border-strength-border bg-strength-tint px-4 py-2.5 text-sm text-strength">
+							Job hunt pass active until{" "}
+							{new Date(access.passExpiresAt).toLocaleDateString("en-GB", {
+								day: "numeric",
+								month: "long",
+							})}
+							. Every new review unlocks on its own.
+						</p>
+					) : access.creditsRemaining > 0 ? (
+						<p className="mb-6 rounded-md border border-strength-border bg-strength-tint px-4 py-2.5 text-sm text-strength">
+							{access.creditsRemaining} review
+							{access.creditsRemaining === 1 ? "" : "s"} left in your pack. The
+							next review you run unlocks on its own.
+						</p>
+					) : null}
+
+					<div
+						id="overview"
+						className="mb-8 grid scroll-mt-16 gap-4 md:grid-cols-[minmax(0,18rem)_1fr]"
+					>
+						<ProfileScoreGauge
+							score={data.swotAnalysis.profileScore}
+							previousScore={data.previousScore}
+						/>
+						<GoalAlignmentCard
+							goalAlignment={data.swotAnalysis.goalAlignment}
+						/>
+					</div>
+
+					{locked ? (
+						<UnlockBanner hiddenCounts={hiddenCounts} onUnlock={openCheckout} />
+					) : null}
+
+					<div
+						id="swot"
+						className="mb-12 grid scroll-mt-16 gap-4 md:grid-cols-2"
+					>
+						<SwotCard variant="strengths" items={swot.strengths} />
+						<SwotCard
+							variant="weaknesses"
+							items={swot.weaknesses}
+							locked={locked}
+						/>
+						<SwotCard
+							variant="opportunities"
+							items={swot.opportunities}
+							locked={locked}
+						/>
+						<SwotCard variant="threats" items={swot.threats} locked={locked} />
+					</div>
+
+					<div
+						id="plan"
+						className="grid scroll-mt-16 items-start gap-6 lg:grid-cols-3"
+					>
+						<div className="lg:col-span-2">
+							{locked ? (
+								<LockedOverlay
+									label="Unlock your ranked plan"
+									onUnlock={() => openCheckout()}
+								>
+									<StrategicSuggestions
+										suggestions={data.swotAnalysis.strategicSuggestions}
+									/>
+								</LockedOverlay>
+							) : (
 								<StrategicSuggestions
 									suggestions={data.swotAnalysis.strategicSuggestions}
 								/>
-							</LockedOverlay>
-						) : (
-							<StrategicSuggestions
-								suggestions={data.swotAnalysis.strategicSuggestions}
-							/>
-						)}
+							)}
+						</div>
+						<QuickWinsPanel
+							quickWins={data.swotAnalysis.quickWins}
+							locked={locked}
+							onUnlock={() => openCheckout()}
+						/>
 					</div>
-					<QuickWinsPanel
-						quickWins={data.swotAnalysis.quickWins}
-						locked={locked}
-						onUnlock={() => openCheckout()}
-					/>
-				</div>
 
-				<div className="mt-12 grid items-start gap-6 sm:mt-16 lg:grid-cols-3">
-					<div className="lg:col-span-2">
-						{recommendations?.recruiterKeywords?.length ? (
-							<RecruiterKeywords
-								keywords={recommendations.recruiterKeywords}
-								profile={data.profile}
-							/>
-						) : (
-							<HumanReviewCard onBook={() => openCheckout("human_review")} />
-						)}
-					</div>
-					<ShareScoreCard
-						score={data.swotAnalysis.profileScore}
-						previousScore={data.previousScore}
-						firstName={firstName}
-					/>
-				</div>
-
-				<JobHuntToolkit
-					analysisId={data.analysisId}
-					hasPass={hasPass}
-					contentPlan={recommendations?.contentPlan}
-					onGetPass={() => openCheckout("pass30")}
-				/>
-
-				{recommendations?.recruiterKeywords?.length ? (
-					<div className="mt-6">
-						<HumanReviewCard onBook={() => openCheckout("human_review")} />
-					</div>
-				) : null}
-
-				<section className="reveal mt-12 flex flex-col gap-5 rounded-xl border border-border bg-surface-2 p-6 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-					<p className="max-w-xl font-display text-xl font-semibold leading-snug text-ink sm:text-2xl">
-						Made your edits? Run a new review to see your score move, or try a
-						different goal and compare.
-					</p>
-					<Link
-						to="/"
-						className="btn-primary inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
+					<div
+						id="keywords"
+						className="mt-12 grid scroll-mt-16 items-start gap-6 sm:mt-16 lg:grid-cols-3"
 					>
-						Run another review
-						<ArrowRightIcon className="size-4" aria-hidden />
-					</Link>
-				</section>
-			</main>
+						<div className="lg:col-span-2">
+							{recommendations?.recruiterKeywords?.length ? (
+								<RecruiterKeywords
+									keywords={recommendations.recruiterKeywords}
+									profile={data.profile}
+								/>
+							) : (
+								<HumanReviewCard onBook={() => openCheckout("human_review")} />
+							)}
+						</div>
+						<ShareScoreCard
+							score={data.swotAnalysis.profileScore}
+							previousScore={data.previousScore}
+							firstName={firstName}
+						/>
+					</div>
+
+					<JobHuntToolkit
+						analysisId={data.analysisId}
+						hasPass={hasPass}
+						contentPlan={recommendations?.contentPlan}
+						onGetPass={() => openCheckout("pass30")}
+					/>
+
+					{recommendations?.recruiterKeywords?.length ? (
+						<div className="mt-6">
+							<HumanReviewCard onBook={() => openCheckout("human_review")} />
+						</div>
+					) : null}
+
+					<section className="reveal mt-12 flex flex-col gap-5 ring-gradient rounded-xl bg-surface p-6 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+						<p className="max-w-xl font-display text-xl font-semibold leading-snug text-ink sm:text-2xl">
+							Made your edits? Run a new review to see your score move, or try a
+							different goal and compare.
+						</p>
+						<Link
+							to="/"
+							className="btn-primary inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
+						>
+							Run another review
+							<ArrowRightIcon className="size-4" aria-hidden />
+						</Link>
+					</section>
+				</main>
+			</div>
 
 			{previewOpen && recommendations ? (
 				<OptimizedProfilePreviewModal
@@ -230,6 +258,64 @@ function AnalysisResultsPage() {
 				/>
 			) : null}
 		</div>
+	);
+}
+
+const SIDEBAR_LINKS = [
+	{ href: "#overview", label: "Overview", icon: GaugeIcon },
+	{ href: "#swot", label: "SWOT", icon: LayoutGridIcon },
+	{ href: "#plan", label: "Plan", icon: ListChecksIcon },
+	{ href: "#keywords", label: "Keywords", icon: ScanSearchIcon },
+	{ href: "#toolkit", label: "Job hunt toolkit", icon: BriefcaseIcon },
+];
+
+/** App-style navigation for the review, like a workspace sidebar. */
+function ResultsSidebar({
+	name,
+	careerGoal,
+	locked,
+}: {
+	name: string;
+	careerGoal: string;
+	locked: boolean;
+}) {
+	return (
+		<aside className="sticky top-12 hidden h-[calc(100vh-3rem)] w-60 shrink-0 flex-col border-r border-border bg-[#0b0c0d] p-3 lg:flex">
+			<div className="flex items-center gap-2.5 rounded-md px-2 py-2">
+				<span className="flex size-7 items-center justify-center rounded-md bg-accent font-mono text-xs text-primary-ink">
+					{name.trim().charAt(0).toUpperCase() || "?"}
+				</span>
+				<div className="min-w-0">
+					<p className="truncate text-[13px] font-medium text-ink">{name}</p>
+					<p className="font-mono text-[10px] text-muted uppercase">
+						{locked ? "Free plan" : "Full review"}
+					</p>
+				</div>
+			</div>
+			<p className="mt-5 px-2 font-mono text-[10px] text-muted uppercase">
+				Review
+			</p>
+			<nav className="mt-1.5 space-y-0.5">
+				{SIDEBAR_LINKS.map((link) => (
+					<a
+						key={link.href}
+						href={link.href}
+						className="flex items-center gap-2.5 rounded-md px-2 py-1.5 text-[13px] text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+					>
+						<link.icon className="size-4" aria-hidden />
+						{link.label}
+					</a>
+				))}
+			</nav>
+			<div className="mt-auto rounded-lg border border-border bg-surface p-3">
+				<p className="font-mono text-[10px] text-muted uppercase">
+					Target role
+				</p>
+				<p className="mt-1.5 line-clamp-3 text-xs leading-relaxed text-ink">
+					{careerGoal}
+				</p>
+			</div>
+		</aside>
 	);
 }
 

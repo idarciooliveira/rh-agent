@@ -12,9 +12,15 @@ type AnalysisResultsHeaderProps = {
 
 export function ResultsTopBar() {
 	return (
-		<div className="border-b border-border bg-background">
-			<div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
-				<RedlineLogo />
+		<div className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-xl">
+			<div className="flex h-12 items-center justify-between px-4 sm:px-5">
+				<div className="flex items-center gap-3 text-[13px]">
+					<RedlineLogo />
+					<span className="text-border-strong" aria-hidden>
+						/
+					</span>
+					<span className="text-muted">Reviews</span>
+				</div>
 				<Link
 					to="/"
 					className="inline-flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-surface-2 hover:text-ink"
@@ -35,21 +41,20 @@ export function AnalysisResultsHeader({
 	onPreviewClick,
 }: AnalysisResultsHeaderProps) {
 	return (
-		<header className="mb-8 flex flex-col gap-6 sm:mb-10 lg:flex-row lg:items-end lg:justify-between">
+		<header className="mb-8 flex flex-col gap-6 border-b border-border pb-8 lg:flex-row lg:items-end lg:justify-between">
 			<div className="min-w-0">
-				<h1 className="font-display text-4xl font-semibold leading-[1.05] text-ink sm:text-5xl">
-					{firstName ? (
-						<>
-							Your review,{" "}
-							<span className="highlight highlight-animate">{firstName}</span>
-						</>
-					) : (
-						"Your profile review"
-					)}
+				<p className="flex items-center gap-2 font-mono text-[11px] text-muted uppercase">
+					<span className="size-1.5 rounded-full bg-open shadow-[0_0_8px_var(--color-open)]" />
+					Review complete · {analysisId.slice(0, 8)}
+				</p>
+				<h1 className="mt-3 font-display text-3xl font-semibold text-ink sm:text-4xl">
+					{firstName ? `${firstName}'s profile review` : "Your profile review"}
 				</h1>
-				<p className="mt-3 max-w-2xl text-base leading-relaxed text-muted break-words">
-					Graded against your goal:{" "}
-					<span className="font-medium text-ink">"{careerGoal}"</span>
+				<p className="mt-3 flex max-w-2xl items-start gap-2 text-sm leading-relaxed break-words text-muted">
+					<span className="mt-0.5 shrink-0 rounded-sm border border-border-strong bg-surface-2 px-1.5 py-px font-mono text-[10px] text-ink uppercase">
+						Goal
+					</span>
+					{careerGoal}
 				</p>
 			</div>
 
@@ -57,7 +62,7 @@ export function AnalysisResultsHeader({
 				<button
 					type="button"
 					onClick={onPreviewClick}
-					className="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
+					className="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-md px-4 py-2 text-[13px] font-medium sm:w-auto"
 				>
 					{locked ? (
 						<LockIcon className="size-4" aria-hidden />
@@ -69,7 +74,7 @@ export function AnalysisResultsHeader({
 				{locked ? (
 					<Link
 						to="/"
-						className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-border-strong bg-surface px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-surface-2 sm:w-auto"
+						className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-border-strong bg-surface px-4 py-2 text-[13px] font-medium text-ink transition-colors hover:bg-surface-2 sm:w-auto"
 					>
 						<ArrowLeftIcon className="size-4" aria-hidden />
 						Start over
@@ -78,7 +83,7 @@ export function AnalysisResultsHeader({
 					<Link
 						to="/cv/$analysisId"
 						params={{ analysisId }}
-						className="btn-secondary inline-flex w-full items-center justify-center gap-1.5 px-5 py-3 text-sm font-semibold sm:w-auto"
+						className="btn-secondary inline-flex w-full items-center justify-center gap-1.5 px-4 py-2 text-[13px] font-medium sm:w-auto"
 					>
 						<FileTextIcon className="size-4" aria-hidden />
 						Export CV

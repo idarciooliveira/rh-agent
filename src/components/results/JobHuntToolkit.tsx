@@ -21,7 +21,7 @@ export function JobHuntToolkit({
 	onGetPass,
 }: JobHuntToolkitProps) {
 	return (
-		<section className="mt-12 sm:mt-16">
+		<section id="toolkit" className="mt-12 scroll-mt-16 sm:mt-16">
 			<div className="mb-5">
 				<p className="font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
 					Job hunt pass
