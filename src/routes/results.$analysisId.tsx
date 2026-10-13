@@ -5,7 +5,6 @@ import {
 	ResultsTopBar,
 } from "#/components/results/AnalysisResultsHeader";
 import { CheckoutModal } from "#/components/results/CheckoutModal";
-import { GoalAlignmentCard } from "#/components/results/GoalAlignmentCard";
 import { HumanReviewCard } from "#/components/results/HumanReviewCard";
 import { JobHuntToolkit } from "#/components/results/JobHuntToolkit";
 import { LockedOverlay } from "#/components/results/Locked";
@@ -13,6 +12,7 @@ import { OptimizedProfilePreviewModal } from "#/components/results/OptimizedProf
 import { ProfileScoreGauge } from "#/components/results/ProfileScoreGauge";
 import { QuickWinsPanel } from "#/components/results/QuickWinsPanel";
 import { RecruiterKeywords } from "#/components/results/RecruiterKeywords";
+import { ScorecardPanel } from "#/components/results/ScorecardPanel";
 import { ShareScoreCard } from "#/components/results/ShareScoreCard";
 import { StrategicSuggestions } from "#/components/results/StrategicSuggestions";
 import { SwotCard } from "#/components/results/SwotCard";
@@ -89,10 +89,12 @@ function AnalysisResultsPage() {
 		<div className="min-h-screen bg-background">
 			<ResultsTopBar />
 
-			<main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+			<main className="mx-auto max-w-7xl px-4 py-8 sm:px-8 sm:py-10">
 				<AnalysisResultsHeader
 					analysisId={data.analysisId}
 					firstName={firstName}
+					name={data.profile.name}
+					headline={data.profile.headline}
 					careerGoal={data.careerGoal}
 					locked={locked}
 					onPreviewClick={() =>
@@ -122,7 +124,10 @@ function AnalysisResultsPage() {
 						score={data.swotAnalysis.profileScore}
 						previousScore={data.previousScore}
 					/>
-					<GoalAlignmentCard goalAlignment={data.swotAnalysis.goalAlignment} />
+					<ScorecardPanel
+						goalAlignment={data.swotAnalysis.goalAlignment}
+						swot={swot}
+					/>
 				</div>
 
 				{locked ? (
@@ -199,14 +204,14 @@ function AnalysisResultsPage() {
 					</div>
 				) : null}
 
-				<section className="reveal mt-12 flex flex-col gap-5 rounded-xl border border-border bg-surface-2 p-6 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-					<p className="max-w-xl font-display text-xl font-semibold leading-snug text-ink sm:text-2xl">
+				<section className="reveal mt-12 flex flex-col gap-5 rounded-3xl bg-night p-6 text-white sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+					<p className="max-w-xl font-display text-xl font-bold leading-snug text-white sm:text-2xl">
 						Made your edits? Run a new review to see your score move, or try a
 						different goal and compare.
 					</p>
 					<Link
 						to="/"
-						className="btn-primary inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold sm:w-auto"
+						className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-primary transition-colors hover:bg-accent sm:w-auto"
 					>
 						Run another review
 						<ArrowRightIcon className="size-4" aria-hidden />

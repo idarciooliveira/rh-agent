@@ -74,7 +74,7 @@ export function SwotCard({ variant, items, locked = false }: SwotCardProps) {
 	const Icon = config.icon;
 
 	return (
-		<section className="overflow-hidden rounded-lg border border-border bg-surface shadow-card">
+		<section className="overflow-hidden rounded-3xl border border-border bg-surface shadow-card">
 			<div
 				className={`relative overflow-hidden border-b px-5 py-4 sm:px-6 ${config.headerClass}`}
 			>
