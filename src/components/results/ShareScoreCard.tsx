@@ -12,7 +12,7 @@ function shareText(score: number, previousScore: number | null): string {
 		previousScore !== null && previousScore < score
 			? `went from ${previousScore} to ${score}`
 			: `scored ${score}/100`;
-	return `My LinkedIn profile ${progress} on Redline. Check yours in 30 seconds:`;
+	return `My LinkedIn profile ${progress} on RHAI. Check yours in 30 seconds:`;
 }
 
 /** Draws the card on a canvas so people can post it as an image. */
@@ -61,15 +61,12 @@ function downloadCard(
 		);
 	}
 
-	ctx.fillStyle = "#ffffff";
-	ctx.font = "700 48px system-ui, sans-serif";
-	ctx.fillText("Red", 90, 570);
-	const redWidth = ctx.measureText("Red").width;
 	ctx.fillStyle = "#4c9be8";
-	ctx.fillText("line", 90 + redWidth, 570);
+	ctx.font = "700 48px system-ui, sans-serif";
+	ctx.fillText("RHAI", 90, 570);
 
 	const link = document.createElement("a");
-	link.download = "redline-score.png";
+	link.download = "rhai-score.png";
 	link.href = canvas.toDataURL("image/png");
 	link.click();
 }
@@ -99,12 +96,10 @@ export function ShareScoreCard({
 	};
 
 	return (
-		<section className="rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6">
+		<section className="rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-6">
 			<div className="flex items-center gap-2">
 				<Share2Icon className="size-5 text-primary-ink" aria-hidden />
-				<h2 className="font-display text-xl font-semibold text-ink">
-					Share your score
-				</h2>
+				<h2 className="font-display text-xl text-ink">Share your score</h2>
 			</div>
 			<div className="mt-4 rounded-lg bg-night p-5 text-background">
 				<p className="text-sm text-night-muted">
@@ -119,9 +114,7 @@ export function ShareScoreCard({
 						{previousScore} → {rounded}
 					</p>
 				) : null}
-				<p className="mt-3 font-display text-lg font-semibold">
-					Red<span className="text-[#4c9be8]">line</span>
-				</p>
+				<p className="mt-3 text-lg font-bold text-[#4c9be8]">RHAI</p>
 			</div>
 			<div className="mt-4 flex flex-wrap gap-2">
 				<a

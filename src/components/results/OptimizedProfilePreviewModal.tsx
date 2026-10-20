@@ -96,7 +96,7 @@ function OriginalToggle({
 	);
 }
 
-/** Marks text Redline rewrote, in the spot where LinkedIn shows its edit pencil. */
+/** Marks text RHAI rewrote, in the spot where LinkedIn shows its edit pencil. */
 function EditBadge({ showOriginal }: { showOriginal: boolean }) {
 	return showOriginal ? (
 		<span className="text-xs font-semibold tracking-wide text-muted uppercase">
@@ -105,7 +105,7 @@ function EditBadge({ showOriginal }: { showOriginal: boolean }) {
 	) : (
 		<span className="inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-xs font-semibold text-primary-ink">
 			<PenLineIcon className="size-3" aria-hidden />
-			Redline edit
+			RHAI edit
 		</span>
 	);
 }
@@ -241,10 +241,10 @@ function IntroCard({
 				</div>
 
 				<div className="mt-4 flex flex-wrap gap-2" aria-hidden>
-					<span className="btn-primary px-4 py-1.5 text-sm font-semibold">
+					<span className="li-btn-primary px-4 py-1.5 text-sm font-semibold">
 						Open to
 					</span>
-					<span className="btn-secondary px-4 py-1.5 text-sm font-semibold">
+					<span className="li-btn-secondary px-4 py-1.5 text-sm font-semibold">
 						Add profile section
 					</span>
 					<span className="rounded-full border border-border-strong px-4 py-1.5 text-sm font-semibold text-muted">

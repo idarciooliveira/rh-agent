@@ -3,7 +3,7 @@ import { z } from "zod";
 export const REGIONS = ["AO", "BR", "PT", "INTL"] as const;
 export type Region = (typeof REGIONS)[number];
 
-export const PLANS = ["report", "pack3", "pass30", "human_review"] as const;
+export const PLANS = ["report", "pass30"] as const;
 export type Plan = (typeof PLANS)[number];
 
 export const PAYMENT_METHODS = [
@@ -30,8 +30,10 @@ type RegionConfig = {
 };
 
 /**
- * Regional price points. Angola is priced for an impulse Multicaixa Express
- * payment; the rest sit just under the English-language competitors.
+ * Two paid plans: one full review, or a 30-day pass. Angola is priced for an
+ * impulse Multicaixa Express payment; the rest sit just under the
+ * English-language competitors. The pass costs about two reviews, so anyone
+ * planning a second review is better off with it.
  */
 export const REGION_CONFIG: Record<Region, RegionConfig> = {
 	AO: {
@@ -39,28 +41,28 @@ export const REGION_CONFIG: Record<Region, RegionConfig> = {
 		currency: "AOA",
 		locale: "pt-AO",
 		methods: ["multicaixa_express", "ekwanza", "reference"],
-		prices: { report: 2900, pack3: 6900, pass30: 9900, human_review: 19900 },
+		prices: { report: 2900, pass30: 6900 },
 	},
 	BR: {
 		label: "Brasil",
 		currency: "BRL",
 		locale: "pt-BR",
 		methods: ["pix", "card"],
-		prices: { report: 29, pack3: 59, pass30: 79, human_review: 149 },
+		prices: { report: 29, pass30: 59 },
 	},
 	PT: {
 		label: "Portugal",
 		currency: "EUR",
 		locale: "pt-PT",
 		methods: ["mbway", "card"],
-		prices: { report: 9, pack3: 19, pass30: 29, human_review: 49 },
+		prices: { report: 9, pass30: 19 },
 	},
 	INTL: {
 		label: "International",
 		currency: "USD",
 		locale: "en-US",
 		methods: ["card"],
-		prices: { report: 9, pack3: 19, pass30: 29, human_review: 49 },
+		prices: { report: 9, pass30: 19 },
 	},
 };
 
@@ -81,7 +83,6 @@ export const PHONE_METHODS: PaymentMethod[] = [
 ];
 
 export const PASS_DAYS = 30;
-export const PACK_SIZE = 3;
 
 export function formatPrice(region: Region, amount: number): string {
 	const { currency, locale } = REGION_CONFIG[region];

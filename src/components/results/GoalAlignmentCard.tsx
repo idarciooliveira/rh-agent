@@ -17,12 +17,10 @@ export function GoalAlignmentCard({ goalAlignment }: GoalAlignmentCardProps) {
 	const score = Math.round(goalAlignment.score);
 
 	return (
-		<section className="rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6">
+		<section className="rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-6">
 			<div className="flex items-start justify-between gap-4">
 				<div className="min-w-0">
-					<h2 className="font-display text-xl font-semibold text-ink">
-						Goal alignment
-					</h2>
+					<h2 className="font-display text-xl text-ink">Goal alignment</h2>
 					<p className="mt-1 text-sm leading-relaxed text-muted">
 						How close your profile is to the job you described.
 					</p>

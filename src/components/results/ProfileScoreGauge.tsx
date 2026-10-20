@@ -16,7 +16,7 @@ export function ProfileScoreGauge({
 	const offset = circumference - (clamped / 100) * circumference;
 
 	return (
-		<section className="flex items-center gap-5 rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6 md:flex-col md:items-start">
+		<section className="flex items-center gap-5 rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-6 md:flex-col md:items-start">
 			<div className="relative size-28 shrink-0 sm:size-32">
 				<svg
 					className="size-full -rotate-90"
@@ -58,9 +58,7 @@ export function ProfileScoreGauge({
 				</div>
 			</div>
 			<div className="min-w-0">
-				<h2 className="font-display text-xl font-semibold text-ink">
-					Profile score
-				</h2>
+				<h2 className="font-display text-xl text-ink">Profile score</h2>
 				<p className="mt-1 text-sm leading-relaxed text-muted">
 					How strong your profile is for this goal, out of 100.
 				</p>

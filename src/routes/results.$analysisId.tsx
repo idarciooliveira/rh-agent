@@ -6,7 +6,6 @@ import {
 } from "#/components/results/AnalysisResultsHeader";
 import { CheckoutModal } from "#/components/results/CheckoutModal";
 import { GoalAlignmentCard } from "#/components/results/GoalAlignmentCard";
-import { HumanReviewCard } from "#/components/results/HumanReviewCard";
 import { JobHuntToolkit } from "#/components/results/JobHuntToolkit";
 import { LockedOverlay } from "#/components/results/Locked";
 import { OptimizedProfilePreviewModal } from "#/components/results/OptimizedProfilePreviewModal";
@@ -41,11 +40,11 @@ export const Route = createFileRoute("/results/$analysisId")({
 	},
 	head: () => ({
 		meta: [
-			{ title: "Your profile review | Redline" },
+			{ title: "Your profile review | RHAI" },
 			{
 				name: "description",
 				content:
-					"Your profile score, goal alignment, SWOT and rewritten profile sections from Redline.",
+					"Your profile score, goal alignment, SWOT and rewritten profile sections from RHAI.",
 			},
 			{ name: "robots", content: "noindex" },
 		],
@@ -53,6 +52,16 @@ export const Route = createFileRoute("/results/$analysisId")({
 	component: AnalysisResultsPage,
 	notFoundComponent: AnalysisNotFound,
 });
+
+/** Stand-in terms blurred behind the lock. The real ones never reach the client. */
+const PLACEHOLDER_KEYWORDS = [
+	"Target role title",
+	"Core skill",
+	"Industry term",
+	"Tool or platform",
+	"Certification",
+	"Leadership signal",
+];
 
 function getFirstName(name: string): string | null {
 	const first = name.trim().split(/\s+/)[0];
@@ -102,7 +111,7 @@ function AnalysisResultsPage() {
 
 				{access.passExpiresAt ? (
 					<p className="mb-6 rounded-md border border-strength-border bg-strength-tint px-4 py-2.5 text-sm text-strength">
-						Job hunt pass active until{" "}
+						Career pass active until{" "}
 						{new Date(access.passExpiresAt).toLocaleDateString("en-GB", {
 							day: "numeric",
 							month: "long",
@@ -176,7 +185,15 @@ function AnalysisResultsPage() {
 								profile={data.profile}
 							/>
 						) : (
-							<HumanReviewCard onBook={() => openCheckout("human_review")} />
+							<LockedOverlay
+								label="Unlock recruiter keywords"
+								onUnlock={() => openCheckout()}
+							>
+								<RecruiterKeywords
+									keywords={PLACEHOLDER_KEYWORDS}
+									profile={data.profile}
+								/>
+							</LockedOverlay>
 						)}
 					</div>
 					<ShareScoreCard
@@ -193,14 +210,8 @@ function AnalysisResultsPage() {
 					onGetPass={() => openCheckout("pass30")}
 				/>
 
-				{recommendations?.recruiterKeywords?.length ? (
-					<div className="mt-6">
-						<HumanReviewCard onBook={() => openCheckout("human_review")} />
-					</div>
-				) : null}
-
-				<section className="reveal mt-12 flex flex-col gap-5 rounded-xl border border-border bg-surface-2 p-6 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-					<p className="max-w-xl font-display text-xl font-semibold leading-snug text-ink sm:text-2xl">
+				<section className="reveal mt-12 flex flex-col gap-5 rounded-2xl border border-border bg-surface-2 p-6 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+					<p className="max-w-xl font-display text-xl leading-snug text-ink sm:text-2xl">
 						Made your edits? Run a new review to see your score move, or try a
 						different goal and compare.
 					</p>
@@ -238,8 +249,8 @@ function AnalysisNotFound() {
 		<div className="min-h-screen bg-background">
 			<ResultsTopBar />
 			<main className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-20">
-				<section className="mx-auto max-w-xl rounded-lg border border-border bg-surface p-6 shadow-card sm:p-8">
-					<h1 className="font-display text-3xl font-semibold text-ink">
+				<section className="mx-auto max-w-xl rounded-2xl border border-border bg-surface p-6 shadow-card sm:p-8">
+					<h1 className="font-display text-3xl text-ink">
 						This review isn't here
 					</h1>
 					<p className="mt-3 text-base leading-relaxed text-muted">

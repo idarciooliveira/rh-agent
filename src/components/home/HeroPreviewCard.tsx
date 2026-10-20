@@ -25,7 +25,7 @@ function ScoreCard() {
 	const { copy } = useLanguage();
 
 	return (
-		<div className="h-full rounded-lg bg-surface p-3.5 shadow-lift">
+		<div className="h-full rounded-xl bg-surface p-3.5 font-linkedin shadow-lift">
 			<div className="flex items-center gap-3">
 				<div className="relative size-14 shrink-0">
 					<svg
@@ -103,7 +103,7 @@ function SkillsCard() {
 	const { copy } = useLanguage();
 
 	return (
-		<div className="h-full rounded-lg bg-surface p-3.5 shadow-lift">
+		<div className="h-full rounded-xl bg-surface p-3.5 font-linkedin shadow-lift">
 			<p className="mb-2 text-xs font-semibold text-ink">
 				{copy.preview.skillsTitle}
 			</p>
@@ -128,7 +128,7 @@ export function HeroPreviewCard() {
 
 	return (
 		<div className="relative mx-auto w-full max-w-md sm:max-w-lg lg:max-w-none">
-			<figure className="overflow-hidden rounded-lg bg-surface shadow-lift">
+			<figure className="overflow-hidden rounded-2xl bg-surface font-linkedin shadow-lift">
 				<figcaption className="sr-only">{copy.preview.figcaption}</figcaption>
 				<div className="li-banner relative h-20 sm:h-24" aria-hidden>
 					<img
@@ -174,10 +174,10 @@ export function HeroPreviewCard() {
 					</p>
 
 					<div className="mt-3 flex gap-1.5" aria-hidden>
-						<span className="btn-primary px-3 py-1 text-xs font-semibold">
+						<span className="li-btn-primary px-3 py-1 text-xs font-semibold">
 							{copy.preview.openTo}
 						</span>
-						<span className="btn-secondary px-3 py-1 text-xs font-semibold">
+						<span className="li-btn-secondary px-3 py-1 text-xs font-semibold">
 							{copy.preview.addSection}
 						</span>
 					</div>

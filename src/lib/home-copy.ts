@@ -5,17 +5,23 @@
 const en = {
 	header: {
 		howItWorks: "How it works",
-		example: "Example",
+		example: "Sample review",
 		pricing: "Pricing",
-		cta: "Review my profile",
+		faq: "FAQ",
+		cta: "Get my free score",
 		languageLabel: "Language",
 	},
 	hero: {
-		eyebrow: "Free LinkedIn profile score",
-		titlePre: "Fix your profile for the job you ",
-		titleHighlight: "actually want",
+		eyebrow: "AI career review for LinkedIn",
+		titlePre: "Your LinkedIn, reviewed for the job you ",
+		titleEm: "want next",
 		subtitle:
-			"Enter your LinkedIn username and the role you're after. In about 30 seconds you get a score, a SWOT built around that goal, and rewrites you can paste in.",
+			"RHAI reads your public profile the way a recruiter does, scores it against the role you're aiming for and rewrites the sections holding you back. Results in about 30 seconds.",
+		trust: [
+			"Public profile only",
+			"We never log in to your account",
+			"Portuguese and English",
+		],
 	},
 	form: {
 		mockBanner:
@@ -38,7 +44,7 @@ const en = {
 			"First audit role after graduating",
 			"Branch manager at a commercial bank",
 		],
-		submit: "Review my profile",
+		submit: "Get my free score",
 		trustFree: "Free score",
 		trustNoSignup: "No signup",
 		trustTime: "~30 seconds",
@@ -53,7 +59,7 @@ const en = {
 			"Going through your experience, one role at a time…",
 			"Checking it against the job you want…",
 			"Sorting strengths from gaps…",
-			"Rewriting your headline. This is the fun part.",
+			"Rewriting your headline…",
 			"Almost there. Putting the plan in order…",
 		],
 		loadingNotePre: "This takes about ",
@@ -72,7 +78,7 @@ const en = {
 		openTo: "Open to",
 		addSection: "Add section",
 		about: "About",
-		editTag: "Redline edit",
+		editTag: "RHAI edit",
 		aboutPre: "I turn month-end numbers into decisions. At Banco Kianda I ",
 		aboutHighlight: "cut the monthly close from 9 days to 5",
 		aboutPost:
@@ -92,96 +98,96 @@ const en = {
 	},
 	stats: {
 		items: [
-			{ value: "4×", label: "more likely to land a first interview" },
-			{ value: "30s", label: "from username to results" },
-			{ value: "0 Kz", label: "to see your score, no signup" },
+			{ value: "30s", label: "from username to a full review" },
+			{ value: "0–100", label: "profile score, with the reason behind it" },
+			{ value: "4", label: "sections rewritten for your target role" },
+			{ value: "Free", label: "to see your score. No signup, no card" },
 		],
 	},
 	problem: {
-		eyebrow: "The problem",
-		titlePre: "Your profile was written for the job you ",
-		titleEm: "have",
-		p1: "You've applied to 30 roles and heard back from two. You rewrote your headline three times and it still sounds like everyone else's. Every LinkedIn tip you find is the same list: add a photo, use keywords, be authentic.",
-		p2: "None of it says which keywords, or for which job.",
-		p3: "Recruiters search for the role they're filling. If your headline, About section and bullets describe your last job, you don't show up for the next one. You can't see the gap from the inside.",
+		eyebrow: "Why good profiles get skipped",
+		titlePre: "Most profiles are written for the job people ",
+		titleEm: "already have",
+		p1: "Recruiters search LinkedIn for the role they're filling: the title, the skills, the industry. If your headline and experience describe your current job, you don't show up for the next one.",
+		p2: "Generic advice says “add keywords”. It never says which ones, or for which role.",
+		p3: "RHAI starts from the job you want and works backwards: what a recruiter for that role looks for, what your profile already proves, and what's missing.",
 	},
 	howItWorks: {
 		eyebrow: "How it works",
-		title: "Username in, rewrites out.",
+		title: "Three steps. About thirty seconds.",
 		steps: [
 			{
-				title: "Tell us who you are and where you're going.",
-				body: "Your LinkedIn username, plus the role you want in a sentence or two.",
+				title: "Share your profile and your goal",
+				body: "Your LinkedIn username and the role you want, in a sentence or two. No account, no upload.",
 			},
 			{
-				title: "We read your public profile and grade it against that goal.",
-				body: "Headline, About, experience, education and skills, all checked against what that role needs.",
+				title: "We review it like a recruiter would",
+				body: "Headline, About, experience, education and skills, each checked against what that role asks for.",
 			},
 			{
-				title: "You get the review and the rewrites.",
-				body: "A score, a SWOT, a prioritized plan, and new text for each section, in a LinkedIn-style preview with copy buttons.",
+				title: "Get the diagnosis and the rewrites",
+				body: "A score, a SWOT, a ranked plan and new text for each section, in a LinkedIn-style preview with copy buttons.",
 			},
 		],
 	},
 	valueStack: {
 		eyebrow: "What you get",
-		titlePre: "What you get in ",
-		titleHighlight: "one review",
+		title: "A complete career review, not a checklist",
 		subtitle:
-			"Every item is written for the goal you typed. Change the goal and you get a different review.",
+			"Every line is written for the goal you set. Change the goal and the review changes with it.",
 		diagnosisLabel: "The diagnosis",
 		rewritesLabel: "The rewrites",
 		diagnosis: [
 			{
-				title: "Know where you stand",
-				body: "A profile score from 0 to 100, so you see the starting point before you change anything.",
+				title: "Profile score",
+				body: "A score from 0 to 100, so you know your starting point before you change anything.",
 			},
 			{
-				title: "See how far you are from the goal",
-				body: "A goal alignment score out of 10 with a short explanation of what's missing.",
+				title: "Goal alignment",
+				body: "How close your profile is to the target role, out of 10, and what's missing.",
 			},
 			{
-				title: "Know what to keep and what to fix",
-				body: "A SWOT with up to 5 strengths, weaknesses, opportunities and threats, each with a reason.",
+				title: "SWOT analysis",
+				body: "Up to five strengths, weaknesses, opportunities and threats, each with a reason.",
 			},
 			{
-				title: "Know what to do first",
-				body: 'Suggestions tagged high, medium or low priority, with a timeframe like "This week".',
+				title: "Ranked action plan",
+				body: 'Every suggestion tagged by priority, with a timeframe like "This week".',
 			},
 			{
-				title: "Get something done in 10 minutes",
-				body: "A short checklist of quick wins you can finish today.",
+				title: "Quick wins",
+				body: "A short checklist you can finish in ten minutes today.",
 			},
 		],
 		rewrites: [
 			{
-				title: "A headline recruiters can find",
-				body: "Rewritten around the keywords for your target role.",
+				title: "Headline",
+				body: "Rebuilt around the words recruiters search for your target role.",
 			},
 			{
-				title: "An About section that tells the right story",
-				body: "Connects what you've done to what you want next.",
+				title: "About section",
+				body: "Connects what you've done to what you want to do next.",
 			},
 			{
-				title: "Bullets that sound like the new job",
-				body: "Your experience rewritten around outcomes that matter for the goal.",
+				title: "Experience",
+				body: "Your roles rewritten around outcomes that matter for the goal.",
 			},
 			{
-				title: "Skills worth adding",
-				body: "Skills your profile supports or the target role commonly needs.",
+				title: "Skills and keywords",
+				body: "Skills your profile supports and terms the role commonly needs.",
 			},
 			{
-				title: "A first post to publish",
-				body: "A draft LinkedIn post that signals your direction to your network.",
+				title: "A first post",
+				body: "A draft LinkedIn post that tells your network where you're heading.",
 			},
 		],
 		banner:
-			"Career coaches and resume writers charge for this kind of review. Here the score is free and the full review is a one-off payment. The score takes about 30 seconds.",
-		cta: "Review my profile",
+			"Career coaches charge by the hour for this kind of review. With RHAI the score is free and the full review is a single payment.",
+		cta: "Get my free score",
 	},
 	example: {
-		eyebrow: "Example. Ana is a fictional profile.",
-		title: "What a review looks like",
+		eyebrow: "Sample review · fictional profile",
+		title: "Same experience. A profile that reads like the next job.",
 		intro:
 			'Ana Domingos is a senior accountant at a commercial bank. Her goal: "Move into a financial planning and analysis (FP&A) role at an oil and gas operator."',
 		before: "Before",
@@ -190,7 +196,7 @@ const en = {
 		afterText:
 			"Senior accountant moving into FP&A for oil and gas | Built the cost forecast behind a $40M budget | IFRS, financial modeling, Power BI",
 		explanation:
-			"Same person, same experience. The rewrite pulls the forecast model and the faster close out of her experience section and puts them where an oil and gas finance recruiter looks first.",
+			"Nothing invented. The rewrite pulls the forecast model and the faster close out of her experience section and puts them where an oil and gas finance recruiter looks first.",
 		cards: [
 			{
 				label: "Goal alignment",
@@ -205,17 +211,17 @@ const en = {
 				text: "Put the forecast model first, with the budget size and who uses it.",
 			},
 		],
-		cta: "Run yours",
+		cta: "Run my review",
 	},
 	testimonials: {
-		eyebrow: "From people who ran it",
+		eyebrow: "Early users",
 		title: "What changed after the review",
 		ratingLabel: "Rated 5 out of 5",
 	},
 	personas: {
 		eyebrow: "Who it's for",
-		titlePre: "Built for people with a ",
-		titleEm: "next step",
+		titlePre: "For professionals with a ",
+		titleEm: "next move",
 		titlePost: " in mind",
 		items: [
 			{
@@ -227,7 +233,7 @@ const en = {
 				body: "Turn experience from your old field into proof for the new one.",
 			},
 			{
-				title: "Recent grads",
+				title: "Recent graduates",
 				body: 'Get a headline and About section that say more than "student at...".',
 			},
 			{
@@ -238,35 +244,32 @@ const en = {
 	},
 	pricing: {
 		eyebrow: "Pricing",
-		titlePre: "Your score is free. ",
-		titleHighlight: "The fixes cost less than a lunch.",
+		titlePre: "Start free. ",
+		titleEm: "Pay only for the fixes.",
 		subtitle:
-			"Every review shows your score, goal alignment, strengths and two quick wins for free. Pay once to unlock the rest. No subscription.",
+			"Every review shows your score, goal alignment, strengths and two quick wins at no cost. Unlock the rest with one of two plans.",
 		regionLabel: "Prices for",
 		free: {
-			name: "Free score",
-			price: "0",
-			tagline: "See where you stand.",
+			name: "Always free",
+			tagline: "Included with every review.",
 			features: [
 				"Profile score out of 100",
 				"Goal alignment out of 10",
 				"Your strengths and 2 quick wins",
-				"Shareable score card",
+				"A shareable score card",
 			],
 		},
-		cta: "Start with the free score",
-		perReview: "one-off",
-		perPass: "30 days",
-		addOn: "Add-on",
-		guarantee: "One-off payment. No subscription and no account.",
+		cta: "Start with a free review",
+		note: "You choose a plan after you see your free score.",
+		guarantee: "One-off payments. No subscription, no account.",
 	},
 	teams: {
-		eyebrow: "For universities and companies",
-		title: "Give every finalist or sales rep a profile that gets found.",
+		eyebrow: "For universities and employers",
+		title: "Bring RHAI to your graduates or your team.",
 		items: [
 			{
 				title: "Universities and institutes",
-				body: "A yearly licence for your finalists, plus a career week workshop. Track the class's average score before and after.",
+				body: "A yearly licence for your final-year students, plus a career week workshop. Track the class's average score before and after.",
 			},
 			{
 				title: "Banks, telecoms and oil services",
@@ -274,7 +277,7 @@ const en = {
 			},
 			{
 				title: "Recruiters and outplacement",
-				body: "White-label Redline under your brand and give every candidate a review before you send their profile to a client.",
+				body: "Offer RHAI under your brand and give every candidate a review before their profile goes to a client.",
 			},
 		],
 		cta: "Talk to us",
@@ -282,11 +285,15 @@ const en = {
 	},
 	faq: {
 		eyebrow: "FAQ",
-		title: "Questions",
+		title: "Questions, answered",
 		items: [
 			{
 				q: "What's free and what do I pay for?",
-				a: "The score, goal alignment, your strengths and two quick wins are free on every review, no card needed. The rest of the SWOT, the ranked plan, the rewrites and the CV export unlock with a one-off payment. The 30-day pass adds job post matching and cover letters.",
+				a: "The score, goal alignment, your strengths and two quick wins are free on every review, no card needed. The full review unlocks the rest of the SWOT, the ranked plan, the rewrites, recruiter keywords and the CV export for one profile and one goal. The Career pass does the same for every review you run in 30 days and adds job ad matching, cover letters and a post plan.",
+			},
+			{
+				q: "Which plan should I pick?",
+				a: "If you want one review for one goal, take the full review. If you plan to edit your profile and check the score again, compare two goals, or apply to several jobs this month, the Career pass costs about the same as two reviews and covers all of it.",
 			},
 			{
 				q: "What do you read, and what do you keep?",
@@ -298,35 +305,30 @@ const en = {
 			},
 			{
 				q: "How accurate is it?",
-				a: "It's an AI review, so treat it as a strong first draft, not a verdict. The model works from what's on your profile and is told not to invent employers or credentials. Still, read every line before you paste it, especially numbers and skills. If the review says you did something you didn't, delete it.",
+				a: "It's an AI review, so treat it as a strong first draft, not a verdict. The model works from what's on your profile and is told not to invent employers or credentials. Still, read every line before you paste it, especially numbers and skills.",
 			},
 			{
 				q: "Will the rewrites sound like me?",
-				a: "Not exactly. They're written in a clear professional tone. Most people keep the structure and keywords and change a few words to sound like themselves.",
-			},
-			{
-				q: "How long does it take?",
-				a: "About 30 seconds from clicking the button to seeing your results.",
+				a: "They're written in a clear, professional tone. Most people keep the structure and keywords and change a few words to sound like themselves.",
 			},
 			{
 				q: "Does it change my LinkedIn profile?",
 				a: "No. We never touch your account. You copy what you like and paste it in yourself.",
 			},
-			{
-				q: "Can I try a different goal?",
-				a: "Yes. Start over and type a new goal. Comparing two reviews is a quick way to see which direction your profile already supports.",
-			},
 		],
 	},
 	finalCta: {
-		title: "See your profile the way the next recruiter will",
-		body: "One username, one goal, about 30 seconds. Worst case, you spent half a minute and got a free score.",
-		cta: "Review my profile",
+		title: "See your profile the way the next recruiter will.",
+		body: "One username, one goal, about 30 seconds. The score is on us.",
+		cta: "Get my free score",
 		footnote: "Free score. No signup. Public profile only.",
 	},
 	footer: {
 		tagline:
-			"Redline reviews public LinkedIn profiles against your career goal. Not affiliated with or endorsed by LinkedIn.",
+			"RHAI reviews public LinkedIn profiles against your career goal. Not affiliated with or endorsed by LinkedIn.",
+		product: "Product",
+		contact: "Contact",
+		rights: "All rights reserved.",
 		photoCreditPre: "Example banner photo: ",
 		photoCreditPost: ", cropped.",
 	},
@@ -339,15 +341,21 @@ const pt: HomeCopy = {
 		howItWorks: "Como funciona",
 		example: "Exemplo",
 		pricing: "Preços",
-		cta: "Analisar o meu perfil",
+		faq: "Perguntas",
+		cta: "Ver a minha pontuação",
 		languageLabel: "Idioma",
 	},
 	hero: {
-		eyebrow: "Pontuação grátis do seu LinkedIn",
-		titlePre: "Corrija o seu perfil para o emprego que ",
-		titleHighlight: "realmente quer",
+		eyebrow: "Análise de carreira com IA para o LinkedIn",
+		titlePre: "O seu LinkedIn, revisto para o emprego que ",
+		titleEm: "quer a seguir",
 		subtitle:
-			"Introduza o seu nome de utilizador do LinkedIn e o cargo que procura. Em cerca de 30 segundos recebe uma pontuação, uma análise SWOT feita para esse objetivo e textos prontos a copiar.",
+			"O RHAI lê o seu perfil público como um recrutador, avalia-o face ao cargo que procura e reescreve as secções que o estão a travar. Resultados em cerca de 30 segundos.",
+		trust: [
+			"Apenas perfis públicos",
+			"Nunca entramos na sua conta",
+			"Português e inglês",
+		],
 	},
 	form: {
 		mockBanner:
@@ -370,7 +378,7 @@ const pt: HomeCopy = {
 			"Primeiro emprego em auditoria depois do curso",
 			"Gerente de agência num banco comercial",
 		],
-		submit: "Analisar o meu perfil",
+		submit: "Ver a minha pontuação grátis",
 		trustFree: "Pontuação grátis",
 		trustNoSignup: "Sem registo",
 		trustTime: "~30 segundos",
@@ -386,7 +394,7 @@ const pt: HomeCopy = {
 			"A analisar a sua experiência, cargo a cargo…",
 			"A comparar com o emprego que quer…",
 			"A separar pontos fortes de lacunas…",
-			"A reescrever o seu título. Esta é a parte divertida.",
+			"A reescrever o seu título…",
 			"Quase pronto. A organizar o plano…",
 		],
 		loadingNotePre: "Demora cerca de ",
@@ -405,7 +413,7 @@ const pt: HomeCopy = {
 		openTo: "Disponível",
 		addSection: "Adicionar secção",
 		about: "Sobre",
-		editTag: "Edição Redline",
+		editTag: "Edição RHAI",
 		aboutPre: "Transformo os números do fecho em decisões. No Banco Kianda ",
 		aboutHighlight: "reduzi o fecho mensal de 9 para 5 dias",
 		aboutPost:
@@ -418,106 +426,106 @@ const pt: HomeCopy = {
 		profileScore: "Pontuação do perfil",
 		goalAlignment: "Alinhamento com o objetivo",
 		swotFound: "encontrados",
-		quickWinLabel: "Vitória rápida, 10 min.",
+		quickWinLabel: "Melhoria rápida, 10 min.",
 		quickWinBody: "Ponha o modelo de previsão no topo da experiência.",
 		skillsTitle: "Competências a adicionar",
 		skills: ["Modelação financeira", "Análise de CAPEX/OPEX", "Orçamentação"],
 	},
 	stats: {
 		items: [
+			{ value: "30s", label: "do nome de utilizador à análise completa" },
 			{
-				value: "4×",
-				label: "mais hipóteses de conseguir uma primeira entrevista",
+				value: "0–100",
+				label: "pontuação do perfil, com o motivo de cada nota",
 			},
-			{ value: "30s", label: "do nome de utilizador aos resultados" },
-			{ value: "0 Kz", label: "para ver a sua pontuação, sem registo" },
+			{ value: "4", label: "secções reescritas para o cargo que quer" },
+			{ value: "0 Kz", label: "para ver a pontuação. Sem registo, sem cartão" },
 		],
 	},
 	problem: {
-		eyebrow: "O problema",
-		titlePre: "O seu perfil foi escrito para o emprego que ",
-		titleEm: "tem",
-		p1: "Candidatou-se a 30 vagas e teve resposta de duas. Reescreveu o título três vezes e continua igual ao de toda a gente. Todas as dicas de LinkedIn que encontra são a mesma lista: ponha uma foto, use palavras-chave, seja autêntico.",
-		p2: "Nenhuma diz quais palavras-chave, nem para que emprego.",
-		p3: "Os recrutadores pesquisam pelo cargo que querem preencher. Se o seu título, a secção Sobre e os seus pontos descrevem o emprego anterior, não aparece para o próximo. Do interior, essa lacuna não se vê.",
+		eyebrow: "Porque é que bons perfis passam despercebidos",
+		titlePre: "A maioria dos perfis foi escrita para o emprego que ",
+		titleEm: "já tem",
+		p1: "Os recrutadores pesquisam no LinkedIn pelo cargo que querem preencher: o título, as competências, o setor. Se o seu título e a sua experiência descrevem o emprego atual, não aparece para o próximo.",
+		p2: "Os conselhos genéricos dizem «use palavras-chave». Nunca dizem quais, nem para que cargo.",
+		p3: "O RHAI parte do emprego que quer e trabalha ao contrário: o que um recrutador desse cargo procura, o que o seu perfil já comprova e o que falta.",
 	},
 	howItWorks: {
 		eyebrow: "Como funciona",
-		title: "Entra o nome de utilizador, saem textos novos.",
+		title: "Três passos. Cerca de trinta segundos.",
 		steps: [
 			{
-				title: "Diga-nos quem é e para onde quer ir.",
-				body: "O seu nome de utilizador do LinkedIn e o cargo que quer, numa frase ou duas.",
+				title: "Partilhe o perfil e o objetivo",
+				body: "O seu nome de utilizador do LinkedIn e o cargo que quer, numa frase ou duas. Sem conta, sem ficheiros.",
 			},
 			{
-				title: "Lemos o seu perfil público e avaliamo-lo face a esse objetivo.",
+				title: "Analisamos como um recrutador",
 				body: "Título, Sobre, experiência, formação e competências, tudo comparado com o que esse cargo pede.",
 			},
 			{
-				title: "Recebe a análise e os textos novos.",
+				title: "Receba o diagnóstico e os textos novos",
 				body: "Uma pontuação, uma SWOT, um plano por prioridades e texto novo para cada secção, numa pré-visualização estilo LinkedIn com botões de copiar.",
 			},
 		],
 	},
 	valueStack: {
 		eyebrow: "O que recebe",
-		titlePre: "O que recebe numa ",
-		titleHighlight: "única análise",
+		title: "Uma análise de carreira completa, não uma lista de dicas",
 		subtitle:
-			"Cada item é escrito para o objetivo que indicou. Mude o objetivo e recebe uma análise diferente.",
+			"Cada linha é escrita para o objetivo que indicou. Mude o objetivo e a análise muda com ele.",
 		diagnosisLabel: "O diagnóstico",
 		rewritesLabel: "Os textos novos",
 		diagnosis: [
 			{
-				title: "Saiba onde está",
-				body: "Uma pontuação de 0 a 100, para ver o ponto de partida antes de mudar o que quer que seja.",
+				title: "Pontuação do perfil",
+				body: "Uma nota de 0 a 100, para saber o ponto de partida antes de mudar o que quer que seja.",
 			},
 			{
-				title: "Veja a distância até ao objetivo",
-				body: "Uma pontuação de alinhamento até 10, com uma explicação curta do que falta.",
+				title: "Alinhamento com o objetivo",
+				body: "A distância entre o seu perfil e o cargo que quer, de 0 a 10, e o que falta.",
 			},
 			{
-				title: "Saiba o que manter e o que corrigir",
-				body: "Uma SWOT com até 5 pontos fortes, pontos fracos, oportunidades e ameaças, cada um com um motivo.",
+				title: "Análise SWOT",
+				body: "Até cinco pontos fortes, pontos fracos, oportunidades e ameaças, cada um com um motivo.",
 			},
 			{
-				title: "Saiba o que fazer primeiro",
-				body: "Sugestões marcadas como prioridade alta, média ou baixa, com um prazo como «Esta semana».",
+				title: "Plano de ação por prioridades",
+				body: "Cada sugestão marcada por prioridade, com um prazo como «Esta semana».",
 			},
 			{
-				title: "Faça algo em 10 minutos",
-				body: "Uma lista curta de vitórias rápidas que consegue terminar hoje.",
+				title: "Melhorias rápidas",
+				body: "Uma lista curta que consegue terminar hoje em dez minutos.",
 			},
 		],
 		rewrites: [
 			{
-				title: "Um título que os recrutadores encontram",
-				body: "Reescrito com as palavras-chave do cargo que quer.",
+				title: "Título",
+				body: "Reconstruído com as palavras que os recrutadores pesquisam para esse cargo.",
 			},
 			{
-				title: "Uma secção Sobre com a história certa",
+				title: "Secção Sobre",
 				body: "Liga o que já fez ao que quer fazer a seguir.",
 			},
 			{
-				title: "Pontos que soam ao emprego novo",
-				body: "A sua experiência reescrita à volta de resultados que interessam ao objetivo.",
+				title: "Experiência",
+				body: "Os seus cargos reescritos à volta de resultados que interessam ao objetivo.",
 			},
 			{
-				title: "Competências que vale a pena adicionar",
-				body: "Competências que o seu perfil comprova ou que o cargo costuma pedir.",
+				title: "Competências e palavras-chave",
+				body: "Competências que o perfil comprova e termos que o cargo costuma pedir.",
 			},
 			{
-				title: "Um primeiro post para publicar",
-				body: "Um rascunho de post para o LinkedIn que mostra à sua rede para onde vai.",
+				title: "Um primeiro post",
+				body: "Um rascunho de post que mostra à sua rede para onde vai.",
 			},
 		],
 		banner:
-			"Coaches de carreira e redatores de CV cobram por este tipo de análise. Aqui a pontuação é grátis e a análise completa é um pagamento único. A pontuação demora cerca de 30 segundos.",
-		cta: "Analisar o meu perfil",
+			"Um coach de carreira cobra à hora por este tipo de análise. Com o RHAI a pontuação é grátis e a análise completa é um pagamento único.",
+		cta: "Ver a minha pontuação grátis",
 	},
 	example: {
-		eyebrow: "Exemplo. A Ana é um perfil fictício.",
-		title: "Como é uma análise",
+		eyebrow: "Exemplo de análise · perfil fictício",
+		title: "A mesma experiência. Um perfil que já soa ao próximo emprego.",
 		intro:
 			"A Ana Domingos é contabilista sénior num banco comercial. O objetivo dela: «Passar para uma função de planeamento e análise financeira (FP&A) numa operadora de petróleo e gás.»",
 		before: "Antes",
@@ -526,7 +534,7 @@ const pt: HomeCopy = {
 		afterText:
 			"Contabilista sénior a caminho de FP&A em petróleo e gás | Criei a previsão de custos de um orçamento de 40 M USD | IFRS, modelação financeira, Power BI",
 		explanation:
-			"A mesma pessoa, a mesma experiência. A nova versão tira o modelo de previsão e o fecho mais rápido da secção de experiência e coloca-os onde um recrutador de finanças do setor petrolífero olha primeiro.",
+			"Nada inventado. A nova versão tira o modelo de previsão e o fecho mais rápido da secção de experiência e coloca-os onde um recrutador de finanças do setor petrolífero olha primeiro.",
 		cards: [
 			{
 				label: "Alinhamento com o objetivo",
@@ -537,20 +545,20 @@ const pt: HomeCopy = {
 				text: "Os pontos descrevem tarefas de contabilidade, não as decisões que os números dela apoiaram nem o dinheiro que movimentaram.",
 			},
 			{
-				label: "Vitória rápida",
+				label: "Melhoria rápida",
 				text: "Pôr o modelo de previsão em primeiro lugar, com o valor do orçamento e quem o usa.",
 			},
 		],
 		cta: "Analisar o meu perfil",
 	},
 	testimonials: {
-		eyebrow: "De quem já experimentou",
+		eyebrow: "Primeiros utilizadores",
 		title: "O que mudou depois da análise",
 		ratingLabel: "Avaliação de 5 em 5",
 	},
 	personas: {
 		eyebrow: "Para quem é",
-		titlePre: "Feito para quem tem um ",
+		titlePre: "Para profissionais com o ",
 		titleEm: "próximo passo",
 		titlePost: " em mente",
 		items: [
@@ -574,15 +582,14 @@ const pt: HomeCopy = {
 	},
 	pricing: {
 		eyebrow: "Preços",
-		titlePre: "A pontuação é grátis. ",
-		titleHighlight: "As correções custam menos que um almoço.",
+		titlePre: "Comece grátis. ",
+		titleEm: "Pague só pelas correções.",
 		subtitle:
-			"Cada análise mostra grátis a pontuação, o alinhamento com o objetivo, os pontos fortes e duas melhorias rápidas. Pague uma vez para desbloquear o resto. Sem assinatura.",
+			"Cada análise mostra grátis a pontuação, o alinhamento com o objetivo, os pontos fortes e duas melhorias rápidas. Desbloqueie o resto com um de dois planos.",
 		regionLabel: "Preços para",
 		free: {
-			name: "Pontuação grátis",
-			price: "0",
-			tagline: "Veja onde está.",
+			name: "Sempre grátis",
+			tagline: "Incluído em todas as análises.",
 			features: [
 				"Pontuação do perfil de 0 a 100",
 				"Alinhamento com o objetivo de 0 a 10",
@@ -590,16 +597,13 @@ const pt: HomeCopy = {
 				"Cartão de pontuação para partilhar",
 			],
 		},
-		cta: "Começar com a pontuação grátis",
-		perReview: "pagamento único",
-		perPass: "30 dias",
-		addOn: "Extra",
-		guarantee: "Pagamento único. Sem subscrição e sem conta.",
+		cta: "Começar com uma análise grátis",
+		note: "Escolhe o plano depois de ver a sua pontuação grátis.",
+		guarantee: "Pagamentos únicos. Sem subscrição, sem conta.",
 	},
 	teams: {
 		eyebrow: "Para universidades e empresas",
-		title:
-			"Dê a cada finalista ou comercial um perfil que os recrutadores encontram.",
+		title: "Leve o RHAI aos seus finalistas ou à sua equipa.",
 		items: [
 			{
 				title: "Universidades e institutos",
@@ -611,19 +615,23 @@ const pt: HomeCopy = {
 			},
 			{
 				title: "Recrutadoras e outplacement",
-				body: "Use o Redline com a sua marca e dê a cada candidato uma análise antes de enviar o perfil ao cliente.",
+				body: "Ofereça o RHAI com a sua marca e dê a cada candidato uma análise antes de o perfil seguir para o cliente.",
 			},
 		],
 		cta: "Fale connosco",
 		email: "equipas@redline.ao",
 	},
 	faq: {
-		eyebrow: "FAQ",
-		title: "Perguntas",
+		eyebrow: "Perguntas",
+		title: "Perguntas frequentes",
 		items: [
 			{
 				q: "O que é grátis e o que pago?",
-				a: "A pontuação, o alinhamento com o objetivo, os pontos fortes e duas melhorias rápidas são grátis em todas as análises, sem cartão. O resto da SWOT, o plano, os textos reescritos e o CV desbloqueiam com um pagamento único. O passe de 30 dias junta comparação com anúncios de emprego e cartas de apresentação.",
+				a: "A pontuação, o alinhamento com o objetivo, os pontos fortes e duas melhorias rápidas são grátis em todas as análises, sem cartão. A análise completa desbloqueia o resto da SWOT, o plano, os textos reescritos, as palavras-chave e o CV para um perfil e um objetivo. O Passe Carreira faz o mesmo em todas as análises durante 30 dias e junta comparação com anúncios de emprego, cartas de apresentação e um plano de publicações.",
+			},
+			{
+				q: "Que plano devo escolher?",
+				a: "Se quer uma análise para um objetivo, escolha a análise completa. Se vai editar o perfil e voltar a medir a pontuação, comparar dois objetivos ou candidatar-se a várias vagas este mês, o Passe Carreira custa cerca de duas análises e cobre tudo isso.",
 			},
 			{
 				q: "O que leem e o que guardam?",
@@ -635,35 +643,30 @@ const pt: HomeCopy = {
 			},
 			{
 				q: "Qual é a precisão?",
-				a: "É uma análise de IA, por isso trate-a como um bom primeiro rascunho, não como um veredito. O modelo trabalha com o que está no perfil e tem instruções para não inventar empregadores nem credenciais. Ainda assim, leia cada linha antes de a colar, sobretudo números e competências. Se a análise disser que fez algo que não fez, apague.",
+				a: "É uma análise de IA, por isso trate-a como um bom primeiro rascunho, não como um veredito. O modelo trabalha com o que está no perfil e tem instruções para não inventar empregadores nem credenciais. Ainda assim, leia cada linha antes de a colar, sobretudo números e competências.",
 			},
 			{
 				q: "Os textos novos vão soar a mim?",
-				a: "Não exatamente. São escritos num tom profissional e claro. A maioria das pessoas mantém a estrutura e as palavras-chave e muda algumas palavras para soar a si.",
-			},
-			{
-				q: "Quanto tempo demora?",
-				a: "Cerca de 30 segundos entre clicar no botão e ver os resultados.",
+				a: "São escritos num tom claro e profissional. A maioria das pessoas mantém a estrutura e as palavras-chave e muda algumas palavras para soar a si.",
 			},
 			{
 				q: "Isto muda o meu perfil do LinkedIn?",
 				a: "Não. Nunca mexemos na sua conta. Copia o que quiser e cola você mesmo.",
 			},
-			{
-				q: "Posso tentar outro objetivo?",
-				a: "Pode. Recomece e escreva um objetivo novo. Comparar duas análises é uma forma rápida de ver que direção o seu perfil já suporta.",
-			},
 		],
 	},
 	finalCta: {
-		title: "Veja o seu perfil como o próximo recrutador o vai ver",
-		body: "Um nome de utilizador, um objetivo, cerca de 30 segundos. No pior dos casos, perdeu meio minuto e ganhou uma pontuação grátis.",
-		cta: "Analisar o meu perfil",
+		title: "Veja o seu perfil como o próximo recrutador o vai ver.",
+		body: "Um nome de utilizador, um objetivo, cerca de 30 segundos. A pontuação é por nossa conta.",
+		cta: "Ver a minha pontuação grátis",
 		footnote: "Pontuação grátis. Sem registo. Apenas perfis públicos.",
 	},
 	footer: {
 		tagline:
-			"O Redline analisa perfis públicos do LinkedIn face ao seu objetivo de carreira. Não é afiliado nem apoiado pelo LinkedIn.",
+			"O RHAI analisa perfis públicos do LinkedIn face ao seu objetivo de carreira. Não é afiliado nem apoiado pelo LinkedIn.",
+		product: "Produto",
+		contact: "Contacto",
+		rights: "Todos os direitos reservados.",
 		photoCreditPre: "Foto do banner de exemplo: ",
 		photoCreditPost: ", recortada.",
 	},

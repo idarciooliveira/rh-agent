@@ -19,10 +19,10 @@
 Freemium review with one-off unlocks. Payments are mocked in `src/lib/payments/mock-provider.ts`; swap in AppyPay (Multicaixa Express, reference), É-kwanza, Pix and a card merchant of record before taking real money.
 
 - **Free on every review:** profile score, goal alignment, strengths, first item of each other SWOT quadrant, 2 quick wins, share card, score progress.
-- **Paid (`/api/checkout`):** full review 2.900 Kz / $9, 3-review pack 6.900 Kz / $19, 30-day job hunt pass 9.900 Kz / $29, HR consultant call 19.900 Kz / $49 (also an add-on). Prices per region in `src/lib/pricing.ts` (AO, BR, PT, INTL).
+- **Paid (`/api/checkout`), two plans only:** Full review 2.900 Kz / R$29 / €9 / $9 (one review, one-off) and Career pass 6.900 Kz / R$59 / €19 / $19 (unlimited reviews and job tools for 30 days). Prices per region in `src/lib/pricing.ts` (AO, BR, PT, INTL). The 3-review pack and the HR consultant call were retired on 2026-10-20; the pass took the pack's price point. Packs bought before then still spend their credits (`autoUnlockNewAnalysis`).
 - **Server-side redaction:** `getAnalysis` strips paid text (`redactSwotAnalysis`) and returns `recommendations: null` until unlocked.
 - **Paid features:** CV export (`/cv/:analysisId`, print to PDF, PT/EN), recruiter keywords, PT/EN rewrite toggle, LinkedIn character limits in the preview modal.
-- **Pass features:** job post matching with cover letter (`/api/job-match`), 4-week post plan, auto-unlock of new reviews.
+- **Career pass features:** job post matching with cover letter (`/api/job-match`), 4-week post plan, auto-unlock of new reviews.
 - **Landing:** pricing section with region switch, universities/companies section.
 - **Not built yet:** profile photo/banner check (needs a vision model), real recruiter search data per country, team dashboard for B2B, refunds flow (the 7-day refund promise is off the site until this exists), payment reconciliation before a real provider replaces the mock.
 
@@ -132,6 +132,7 @@ The shipped MVP streamlined a few early design choices:
 - [x] Loading states (analysis pipeline UI)
 - [x] Responsive layout pass (homepage + results)
 - [x] Rebrand to Redline: marketing homepage, new palette/type, results restyle (see `docs/brand/`)
+- [x] Rebrand to RHAI: logo, ivory/ink palette with LinkedIn blue, Source Serif 4 + Inter, landing copy rewrite (references: Anthropic, ElevenLabs, LinkedIn Learning)
 - [ ] Basic rate limiting on API routes
 - [ ] Railway Docker deployment (Node.js runtime for `unpdf`, SQLite volume at `/app/data`)
 - [ ] Manual QA with real LinkedIn PDFs
