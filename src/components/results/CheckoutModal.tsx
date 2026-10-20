@@ -16,6 +16,7 @@ import {
 	PAYMENT_METHOD_LABELS,
 	type PaymentMethod,
 	PHONE_METHODS,
+	PLANS,
 	type Plan,
 	priceFor,
 	REGION_CONFIG,
@@ -34,8 +35,6 @@ type CheckoutResult = {
 	reference: string;
 	amount: number;
 };
-
-const UNLOCK_PLANS: Plan[] = ["report", "pack3", "pass30"];
 
 const FOCUSABLE =
 	'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -60,7 +59,6 @@ export function CheckoutModal({
 	const dialogRef = useRef<HTMLDivElement>(null);
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
-	const [humanReview, setHumanReview] = useState(false);
 	const [pending, setPending] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [result, setResult] = useState<CheckoutResult | null>(null);
@@ -120,10 +118,7 @@ export function CheckoutModal({
 	}, []);
 
 	const regionConfig = REGION_CONFIG[region];
-	const isHumanReviewOnly = plan === "human_review";
-	const addOn = humanReview && !isHumanReviewOnly;
-	const total =
-		regionConfig.prices[plan] + (addOn ? regionConfig.prices.human_review : 0);
+	const total = regionConfig.prices[plan];
 	const needsPhone = PHONE_METHODS.includes(method);
 
 	const changeRegion = (next: Region) => {
@@ -147,7 +142,6 @@ export function CheckoutModal({
 					method,
 					email,
 					phone: needsPhone ? phone : undefined,
-					humanReview: addOn,
 				}),
 			});
 
@@ -185,14 +179,11 @@ export function CheckoutModal({
 			>
 				<div className="flex items-start justify-between gap-3 border-b border-border px-5 py-4 sm:px-6">
 					<div>
-						<h2
-							id={titleId}
-							className="font-display text-2xl font-semibold text-ink"
-						>
+						<h2 id={titleId} className="font-display text-2xl text-ink">
 							{result ? "Payment confirmed" : "Unlock your full review"}
 						</h2>
 						<p className="mt-0.5 text-sm text-muted">
-							One-off payment. No subscription, no account.
+							Two plans. One-off payment, no subscription, no account.
 						</p>
 					</div>
 					<button
@@ -212,7 +203,6 @@ export function CheckoutModal({
 						region={region}
 						method={method}
 						email={email}
-						humanReview={humanReview || isHumanReviewOnly}
 						onContinue={() => void finish()}
 					/>
 				) : (
@@ -220,66 +210,69 @@ export function CheckoutModal({
 						onSubmit={(event) => void handleSubmit(event)}
 						className="space-y-6 p-5 sm:p-6"
 					>
-						{isHumanReviewOnly ? null : (
-							<fieldset>
-								<legend className="mb-2 text-sm font-semibold text-ink">
-									Choose a plan
-								</legend>
-								<div className="grid gap-2 sm:grid-cols-3">
-									{UNLOCK_PLANS.map((option) => {
-										const copy = planCopy.en[option];
-										const selected = plan === option;
-										return (
-											<label
-												key={option}
-												className={`relative flex cursor-pointer flex-col rounded-lg border p-3 transition-colors ${
-													selected
-														? "border-primary bg-accent/50 shadow-[inset_0_0_0_1px_var(--color-primary)]"
-														: "border-border hover:border-border-strong"
-												}`}
-											>
-												<input
-													type="radio"
-													name="plan"
-													value={option}
-													checked={selected}
-													onChange={() => setPlan(option)}
-													className="sr-only"
-												/>
-												{copy.badge ? (
-													<span className="absolute -top-2.5 right-2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white uppercase">
-														{copy.badge}
-													</span>
-												) : null}
-												<span className="text-sm font-semibold text-ink">
-													{copy.name}
+						<fieldset>
+							<legend className="mb-2 text-sm font-semibold text-ink">
+								Choose a plan
+							</legend>
+							<div className="grid gap-3 sm:grid-cols-2">
+								{PLANS.map((option) => {
+									const copy = planCopy.en[option];
+									const selected = plan === option;
+									return (
+										<label
+											key={option}
+											className={`relative flex cursor-pointer flex-col rounded-xl border p-4 transition-colors ${
+												selected
+													? "border-primary bg-accent/50 shadow-[inset_0_0_0_1px_var(--color-primary)]"
+													: "border-border hover:border-border-strong"
+											}`}
+										>
+											<input
+												type="radio"
+												name="plan"
+												value={option}
+												checked={selected}
+												onChange={() => setPlan(option)}
+												className="sr-only"
+											/>
+											{copy.badge ? (
+												<span className="absolute -top-2.5 right-2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white uppercase">
+													{copy.badge}
 												</span>
-												<span className="mt-1 font-mono text-lg font-medium text-ink">
+											) : null}
+											<span className="text-sm font-semibold text-ink">
+												{copy.name}
+											</span>
+											<span className="mt-2 flex items-baseline gap-1.5">
+												<span className="font-display text-3xl leading-none text-ink">
 													{priceFor(region, option)}
 												</span>
-												<span className="mt-1 text-xs leading-snug text-muted">
-													{copy.tagline}
+												<span className="text-xs text-muted">
+													{copy.period}
 												</span>
-											</label>
-										);
-									})}
-								</div>
-								<ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
-									{planCopy.en[plan].features.map((feature) => (
-										<li
-											key={feature}
-											className="flex items-start gap-2 text-sm text-ink"
-										>
-											<CheckIcon
-												className="mt-0.5 size-4 shrink-0 text-strength"
-												aria-hidden
-											/>
-											{feature}
-										</li>
-									))}
-								</ul>
-							</fieldset>
-						)}
+											</span>
+											<span className="mt-1 text-xs leading-snug text-muted">
+												{copy.tagline}
+											</span>
+										</label>
+									);
+								})}
+							</div>
+							<ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
+								{planCopy.en[plan].features.map((feature) => (
+									<li
+										key={feature}
+										className="flex items-start gap-2 text-sm text-ink"
+									>
+										<CheckIcon
+											className="mt-0.5 size-4 shrink-0 text-strength"
+											aria-hidden
+										/>
+										{feature}
+									</li>
+								))}
+							</ul>
+						</fieldset>
 
 						<div className="grid gap-4 sm:grid-cols-2">
 							<label className="block">
@@ -366,27 +359,6 @@ export function CheckoutModal({
 							) : null}
 						</fieldset>
 
-						{isHumanReviewOnly ? null : (
-							<label className="flex cursor-pointer items-start gap-3 rounded-lg border border-dashed border-border-strong p-3">
-								<input
-									type="checkbox"
-									checked={humanReview}
-									onChange={(event) => setHumanReview(event.target.checked)}
-									className="mt-1 size-4 accent-[var(--color-primary)]"
-								/>
-								<span className="text-sm">
-									<span className="font-semibold text-ink">
-										Add a 30-minute call with an HR consultant (+
-										{priceFor(region, "human_review")})
-									</span>
-									<span className="block text-muted">
-										A recruiter walks through your review with you. We book it
-										by WhatsApp within 48 hours.
-									</span>
-								</span>
-							</label>
-						)}
-
 						{error ? (
 							<p
 								role="alert"
@@ -399,7 +371,7 @@ export function CheckoutModal({
 						<div className="flex flex-col gap-3 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
 							<p className="text-sm text-muted">
 								Total{" "}
-								<span className="ml-1 font-mono text-2xl font-medium text-ink">
+								<span className="ml-1 font-display text-3xl text-ink">
 									{formatPrice(region, total)}
 								</span>
 							</p>
@@ -430,14 +402,12 @@ function CheckoutSuccess({
 	region,
 	method,
 	email,
-	humanReview,
 	onContinue,
 }: {
 	result: CheckoutResult;
 	region: Region;
 	method: PaymentMethod;
 	email: string;
-	humanReview: boolean;
 	onContinue: () => void;
 }) {
 	return (
@@ -458,12 +428,6 @@ function CheckoutSuccess({
 					</p>
 				</div>
 			</div>
-			{humanReview ? (
-				<p className="rounded-lg border border-border bg-surface-2 p-4 text-sm text-ink">
-					A consultant will message you on WhatsApp within 48 hours to book your
-					call.
-				</p>
-			) : null}
 			<button
 				type="button"
 				onClick={onContinue}

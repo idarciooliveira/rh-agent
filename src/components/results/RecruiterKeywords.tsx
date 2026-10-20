@@ -17,12 +17,10 @@ export function RecruiterKeywords({
 	);
 
 	return (
-		<section className="rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6">
+		<section className="rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-6">
 			<div className="flex items-center gap-2">
 				<ScanSearchIcon className="size-5 text-primary-ink" aria-hidden />
-				<h2 className="font-display text-2xl font-semibold text-ink">
-					Recruiter keywords
-				</h2>
+				<h2 className="font-display text-2xl text-ink">Recruiter keywords</h2>
 			</div>
 			<p className="mt-1 text-sm leading-relaxed text-muted">
 				Terms recruiters search for this goal. Your profile has{" "}

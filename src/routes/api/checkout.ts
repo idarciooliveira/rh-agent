@@ -8,7 +8,6 @@ import { analyses, purchases } from "#/db/schema";
 import { jsonError, jsonOk } from "#/lib/api-error";
 import { chargeMockPayment } from "#/lib/payments/mock-provider";
 import {
-	PACK_SIZE,
 	PASS_DAYS,
 	paymentMethodSchema,
 	planSchema,
@@ -19,7 +18,7 @@ import { unlockAnalysis } from "#/server/billing";
 import { getRequiredSessionId } from "#/server/session-utils";
 
 const checkoutRequestSchema = z.object({
-	analysisId: z.string().min(1).optional(),
+	analysisId: z.string().min(1),
 	plan: planSchema,
 	region: regionSchema,
 	method: paymentMethodSchema,
@@ -29,7 +28,6 @@ const checkoutRequestSchema = z.object({
 		.trim()
 		.regex(/^\+?[0-9 ]{9,15}$/)
 		.optional(),
-	humanReview: z.boolean().default(false),
 });
 
 export const Route = createFileRoute("/api/checkout")({
@@ -65,35 +63,22 @@ export const Route = createFileRoute("/api/checkout")({
 						);
 					}
 
-					const unlocksAnalysis = plan !== "human_review";
-					if (unlocksAnalysis && !analysisId) {
-						return jsonError("analysisId is required for this plan", 400);
+					const owned = await db
+						.select({ id: analyses.id })
+						.from(analyses)
+						.where(
+							and(
+								eq(analyses.id, analysisId),
+								eq(analyses.sessionId, sessionId),
+							),
+						)
+						.limit(1)
+						.get();
+					if (!owned) {
+						return jsonError("Analysis not found", 404);
 					}
 
-					if (analysisId) {
-						const owned = await db
-							.select({ id: analyses.id })
-							.from(analyses)
-							.where(
-								and(
-									eq(analyses.id, analysisId),
-									eq(analyses.sessionId, sessionId),
-								),
-							)
-							.limit(1)
-							.get();
-						if (!owned) {
-							return jsonError("Analysis not found", 404);
-						}
-					}
-
-					const humanReview =
-						plan === "human_review" || parsed.data.humanReview;
-					const amount =
-						regionConfig.prices[plan] +
-						(humanReview && plan !== "human_review"
-							? regionConfig.prices.human_review
-							: 0);
+					const amount = regionConfig.prices[plan];
 
 					const payment = await chargeMockPayment({
 						method,
@@ -114,7 +99,7 @@ export const Route = createFileRoute("/api/checkout")({
 								.values({
 									id: purchaseId,
 									sessionId,
-									analysisId: analysisId ?? null,
+									analysisId,
 									plan,
 									region,
 									currency: regionConfig.currency,
@@ -123,8 +108,6 @@ export const Route = createFileRoute("/api/checkout")({
 									paymentReference: payment.reference,
 									email,
 									phone: phone ?? null,
-									humanReview,
-									creditsRemaining: plan === "pack3" ? PACK_SIZE - 1 : 0,
 									expiresAt:
 										plan === "pass30"
 											? new Date(Date.now() + PASS_DAYS * 24 * 60 * 60 * 1000)
@@ -132,9 +115,7 @@ export const Route = createFileRoute("/api/checkout")({
 								})
 								.run();
 
-							if (unlocksAnalysis && analysisId) {
-								await unlockAnalysis(analysisId, tx);
-							}
+							await unlockAnalysis(analysisId, tx);
 						});
 					} catch (error) {
 						// The mock provider moves no money. A real one needs a refund or

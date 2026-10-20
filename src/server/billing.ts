@@ -25,6 +25,7 @@ async function getActivePass(sessionId: string) {
 		.get();
 }
 
+/** Only 3-review packs sold before the two-plan pricing carry credits. */
 async function getPackWithCredits(sessionId: string) {
 	return db
 		.select()

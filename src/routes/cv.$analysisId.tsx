@@ -5,7 +5,7 @@ import {
 	redirect,
 } from "@tanstack/react-router";
 import { useState } from "react";
-import { RedlineLogo } from "#/components/RedlineLogo";
+import { RhaiLogo } from "#/components/RhaiLogo";
 import { ArrowLeftIcon, PrinterIcon } from "#/lib/icons";
 import { getCvData } from "#/server/analysis";
 
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/cv/$analysisId")({
 		}
 	},
 	head: () => ({
-		meta: [{ title: "CV | Redline" }, { name: "robots", content: "noindex" }],
+		meta: [{ title: "CV | RHAI" }, { name: "robots", content: "noindex" }],
 	}),
 	component: CvPage,
 });
@@ -90,7 +90,7 @@ function CvPage() {
 		<div className="min-h-screen bg-background print:bg-white">
 			<div className="border-b border-border bg-background print:hidden">
 				<div className="mx-auto flex h-14 max-w-4xl items-center justify-between gap-3 px-4 sm:px-6">
-					<RedlineLogo />
+					<RhaiLogo />
 					<div className="flex items-center gap-2">
 						{alternate ? (
 							<fieldset className="flex items-center rounded-full border border-border bg-surface p-0.5">

@@ -31,9 +31,7 @@ export function StrategicSuggestions({
 			<div className="mb-5">
 				<div className="flex items-center gap-2">
 					<ListChecksIcon className="size-5 text-primary-ink" aria-hidden />
-					<h2 className="font-display text-2xl font-semibold text-ink">
-						Your plan
-					</h2>
+					<h2 className="font-display text-2xl text-ink">Your plan</h2>
 				</div>
 				<p className="mt-1 text-sm leading-relaxed text-muted">
 					Ranked by impact. Start at the top.
@@ -45,7 +43,7 @@ export function StrategicSuggestions({
 					return (
 						<li
 							key={`${suggestion.category}-${suggestion.text.slice(0, 40)}`}
-							className="flex gap-4 rounded-lg border border-border bg-surface p-4 shadow-card sm:p-5"
+							className="flex gap-4 rounded-2xl border border-border bg-surface p-4 shadow-card sm:p-5"
 						>
 							<span
 								className="font-mono text-lg font-medium leading-6 text-primary-ink"

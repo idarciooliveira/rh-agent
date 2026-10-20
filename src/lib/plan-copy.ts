@@ -4,6 +4,8 @@ import type { Plan } from "#/lib/pricing";
 type PlanCopy = {
 	name: string;
 	tagline: string;
+	bestFor: string;
+	period: string;
 	features: string[];
 	badge?: string;
 };
@@ -12,87 +14,66 @@ type PlanCopy = {
 export const planCopy: Record<Language, Record<Plan, PlanCopy>> = {
 	en: {
 		report: {
-			name: "Full review",
-			tagline: "One profile, one goal.",
+			name: "Profile Makeover",
+			tagline: "Every fix for one goal. We write it, you paste it.",
+			bestFor:
+				"Best if you have one target role and want your profile ready today.",
+			period: "one-off",
 			features: [
-				"Full SWOT and ranked action plan",
-				"Rewritten headline, About and experience",
-				"Recruiter keywords for your goal",
+				"Your complete SWOT, with the reason behind every point",
+				"A step-by-step plan, ranked by impact",
+				"New headline, About and experience, ready to paste",
+				"The keywords recruiters search for your role",
 				"Portuguese and English versions",
-				"CV export (PDF)",
-			],
-		},
-		pack3: {
-			name: "3-review pack",
-			tagline: "Compare goals, re-check after edits.",
-			badge: "Best value",
-			features: [
-				"Everything in the full review",
-				"3 reviews to use any time",
-				"Score progress between reviews",
+				"Your CV as a PDF, built from the new profile",
 			],
 		},
 		pass30: {
-			name: "Job hunt pass",
-			tagline: "30 days. No subscription.",
-			badge: "Most popular",
+			name: "Job Search Pass",
+			tagline: "30 days of makeovers and application tools.",
+			bestFor: "Best if you're applying this month. Two makeovers cost more.",
+			period: "30 days",
+			badge: "Best value",
 			features: [
-				"Unlimited reviews for 30 days",
-				"Job post matching with fit score",
-				"Tailored cover letter per job",
-				"4-week LinkedIn post plan",
-			],
-		},
-		human_review: {
-			name: "HR consultant call",
-			tagline: "30 minutes with a recruiter.",
-			features: [
-				"A local recruiter walks through your review",
-				"Interview and salary questions answered",
-				"Booked by WhatsApp within 48 hours",
+				"Unlimited Profile Makeovers for 30 days",
+				"Re-score after every edit and watch the number move",
+				"Paste any job ad, get your fit score and missing keywords",
+				"A cover letter written for each job you apply to",
+				"A 4-week LinkedIn post plan so recruiters see you're active",
+				"Try a second goal and compare, at no extra cost",
 			],
 		},
 	},
 	pt: {
 		report: {
-			name: "Análise completa",
-			tagline: "Um perfil, um objetivo.",
+			name: "Renovação do Perfil",
+			tagline:
+				"Todas as correções para um objetivo. Nós escrevemos, você cola.",
+			bestFor: "Ideal se tem um cargo em vista e quer o perfil pronto hoje.",
+			period: "pagamento único",
 			features: [
-				"SWOT completa e plano de ação",
-				"Título, Sobre e experiência reescritos",
-				"Palavras-chave que os recrutadores procuram",
+				"A SWOT completa, com o motivo de cada ponto",
+				"Plano passo a passo, ordenado por impacto",
+				"Título, Sobre e experiência novos, prontos a colar",
+				"As palavras-chave que os recrutadores pesquisam para o seu cargo",
 				"Versões em português e inglês",
-				"Exportar CV (PDF)",
-			],
-		},
-		pack3: {
-			name: "Pacote de 3",
-			tagline: "Compare objetivos, reveja depois de editar.",
-			badge: "Melhor preço",
-			features: [
-				"Tudo da análise completa",
-				"3 análises para usar quando quiser",
-				"Evolução da pontuação entre análises",
+				"O seu CV em PDF, feito a partir do perfil novo",
 			],
 		},
 		pass30: {
-			name: "Passe procura de emprego",
-			tagline: "30 dias. Sem assinatura.",
-			badge: "Mais escolhido",
+			name: "Passe Emprego",
+			tagline: "30 dias de renovações e ferramentas de candidatura.",
+			bestFor:
+				"Ideal se se está a candidatar este mês. Duas renovações custam mais.",
+			period: "30 dias",
+			badge: "Melhor valor",
 			features: [
-				"Análises ilimitadas durante 30 dias",
-				"Comparação com anúncios de emprego",
-				"Carta de apresentação para cada vaga",
-				"Plano de publicações para 4 semanas",
-			],
-		},
-		human_review: {
-			name: "Sessão com consultor de RH",
-			tagline: "30 minutos com um recrutador.",
-			features: [
-				"Um recrutador local explica a sua análise",
-				"Perguntas sobre entrevista e salário",
-				"Marcação por WhatsApp em 48 horas",
+				"Renovações do Perfil ilimitadas durante 30 dias",
+				"Nova pontuação depois de cada edição, para ver o número subir",
+				"Cole qualquer anúncio e veja a adequação e as palavras em falta",
+				"Uma carta de apresentação escrita para cada vaga",
+				"Plano de publicações para 4 semanas, para os recrutadores o verem ativo",
+				"Experimente um segundo objetivo e compare, sem custo extra",
 			],
 		},
 	},

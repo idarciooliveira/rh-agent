@@ -29,7 +29,7 @@ export const TESTIMONIALS: Record<Language, Testimonial[]> = {
 			role: "Analista de Crédito Sénior · Banca · Luanda",
 			avatar: "/avatars/nzola-kitumba.jpg",
 			quote:
-				"O meu título dizia só «Analista de Crédito», igual a centenas de pessoas na banca. Troquei-o pela sugestão do Redline e na mesma semana recebi 3 mensagens de recrutadores.",
+				"O meu título dizia só «Analista de Crédito», igual a centenas de pessoas na banca. Troquei-o pela sugestão do RHAI e na mesma semana recebi 3 mensagens de recrutadores.",
 			result: "3 mensagens de recrutadores na primeira semana",
 			date: "Setembro 2026",
 		},
@@ -67,7 +67,7 @@ export const TESTIMONIALS: Record<Language, Testimonial[]> = {
 			role: "Senior Credit Analyst · Banking · Luanda",
 			avatar: "/avatars/nzola-kitumba.jpg",
 			quote:
-				'My headline just said "Credit Analyst", like hundreds of people in banking. I swapped in Redline\'s rewrite and got 3 recruiter messages that same week.',
+				'My headline just said "Credit Analyst", like hundreds of people in banking. I swapped in RHAI\'s rewrite and got 3 recruiter messages that same week.',
 			result: "3 recruiter messages in the first week",
 			date: "September 2026",
 		},
