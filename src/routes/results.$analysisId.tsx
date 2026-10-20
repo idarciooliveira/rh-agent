@@ -111,7 +111,7 @@ function AnalysisResultsPage() {
 
 				{access.passExpiresAt ? (
 					<p className="mb-6 rounded-md border border-strength-border bg-strength-tint px-4 py-2.5 text-sm text-strength">
-						Career pass active until{" "}
+						Job Search Pass active until{" "}
 						{new Date(access.passExpiresAt).toLocaleDateString("en-GB", {
 							day: "numeric",
 							month: "long",

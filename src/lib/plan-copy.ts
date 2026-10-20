@@ -4,6 +4,7 @@ import type { Plan } from "#/lib/pricing";
 type PlanCopy = {
 	name: string;
 	tagline: string;
+	bestFor: string;
 	period: string;
 	features: string[];
 	badge?: string;
@@ -13,59 +14,66 @@ type PlanCopy = {
 export const planCopy: Record<Language, Record<Plan, PlanCopy>> = {
 	en: {
 		report: {
-			name: "Full review",
-			tagline: "One profile, one goal, every fix.",
+			name: "Profile Makeover",
+			tagline: "Every fix for one goal. We write it, you paste it.",
+			bestFor:
+				"Best if you have one target role and want your profile ready today.",
 			period: "one-off",
 			features: [
-				"The complete SWOT, with a reason for every point",
-				"An action plan ranked by impact",
+				"Your complete SWOT, with the reason behind every point",
+				"A step-by-step plan, ranked by impact",
 				"New headline, About and experience, ready to paste",
-				"Recruiter keywords for your target role",
+				"The keywords recruiters search for your role",
 				"Portuguese and English versions",
-				"CV export to PDF",
+				"Your CV as a PDF, built from the new profile",
 			],
 		},
 		pass30: {
-			name: "Career pass",
-			tagline: "30 days of reviews and job tools.",
+			name: "Job Search Pass",
+			tagline: "30 days of makeovers and application tools.",
+			bestFor: "Best if you're applying this month. Two makeovers cost more.",
 			period: "30 days",
 			badge: "Best value",
 			features: [
-				"Everything in the full review, on every review",
-				"Unlimited reviews for 30 days",
-				"Score progress after each round of edits",
-				"Job ad matching with a fit score",
-				"A tailored cover letter for each job",
-				"A 4-week LinkedIn post plan",
+				"Unlimited Profile Makeovers for 30 days",
+				"Re-score after every edit and watch the number move",
+				"Paste any job ad, get your fit score and missing keywords",
+				"A cover letter written for each job you apply to",
+				"A 4-week LinkedIn post plan so recruiters see you're active",
+				"Try a second goal and compare, at no extra cost",
 			],
 		},
 	},
 	pt: {
 		report: {
-			name: "Análise completa",
-			tagline: "Um perfil, um objetivo, todas as correções.",
+			name: "Renovação do Perfil",
+			tagline:
+				"Todas as correções para um objetivo. Nós escrevemos, você cola.",
+			bestFor: "Ideal se tem um cargo em vista e quer o perfil pronto hoje.",
 			period: "pagamento único",
 			features: [
 				"A SWOT completa, com o motivo de cada ponto",
-				"Plano de ação ordenado por impacto",
+				"Plano passo a passo, ordenado por impacto",
 				"Título, Sobre e experiência novos, prontos a colar",
-				"Palavras-chave que os recrutadores procuram",
+				"As palavras-chave que os recrutadores pesquisam para o seu cargo",
 				"Versões em português e inglês",
-				"Exportar CV em PDF",
+				"O seu CV em PDF, feito a partir do perfil novo",
 			],
 		},
 		pass30: {
-			name: "Passe Carreira",
-			tagline: "30 dias de análises e ferramentas de candidatura.",
+			name: "Passe Emprego",
+			tagline: "30 dias de renovações e ferramentas de candidatura.",
+			bestFor:
+				"Ideal se se está a candidatar este mês. Duas renovações custam mais.",
 			period: "30 dias",
 			badge: "Melhor valor",
 			features: [
-				"Tudo da análise completa, em todas as análises",
-				"Análises ilimitadas durante 30 dias",
-				"Evolução da pontuação depois de cada ronda de edições",
-				"Comparação com anúncios de emprego e grau de adequação",
-				"Carta de apresentação para cada vaga",
-				"Plano de publicações no LinkedIn para 4 semanas",
+				"Renovações do Perfil ilimitadas durante 30 dias",
+				"Nova pontuação depois de cada edição, para ver o número subir",
+				"Cole qualquer anúncio e veja a adequação e as palavras em falta",
+				"Uma carta de apresentação escrita para cada vaga",
+				"Plano de publicações para 4 semanas, para os recrutadores o verem ativo",
+				"Experimente um segundo objetivo e compare, sem custo extra",
 			],
 		},
 	},

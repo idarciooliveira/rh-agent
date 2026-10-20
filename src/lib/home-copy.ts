@@ -8,19 +8,19 @@ const en = {
 		example: "Sample review",
 		pricing: "Pricing",
 		faq: "FAQ",
-		cta: "Get my free score",
+		cta: "Score my profile free",
 		languageLabel: "Language",
 	},
 	hero: {
-		eyebrow: "AI career review for LinkedIn",
-		titlePre: "Your LinkedIn, reviewed for the job you ",
-		titleEm: "want next",
+		eyebrow: "LinkedIn review, graded the way recruiters search",
+		titlePre: "Show up when recruiters search for ",
+		titleEm: "the job you want",
 		subtitle:
-			"RHAI reads your public profile the way a recruiter does, scores it against the role you're aiming for and rewrites the sections holding you back. Results in about 30 seconds.",
+			"RHAI checks your profile against the role you want, then rewrites your headline, About and experience around what recruiters for that role search for. We write it. You paste it. Your score is free and takes 30 seconds.",
 		trust: [
-			"Public profile only",
+			"Free score, no signup",
+			"See what's locked before you pay",
 			"We never log in to your account",
-			"Portuguese and English",
 		],
 	},
 	form: {
@@ -44,7 +44,7 @@ const en = {
 			"First audit role after graduating",
 			"Branch manager at a commercial bank",
 		],
-		submit: "Get my free score",
+		submit: "Score my profile free",
 		trustFree: "Free score",
 		trustNoSignup: "No signup",
 		trustTime: "~30 seconds",
@@ -105,16 +105,16 @@ const en = {
 		],
 	},
 	problem: {
-		eyebrow: "Why good profiles get skipped",
-		titlePre: "Most profiles are written for the job people ",
+		eyebrow: "Applying and hearing nothing?",
+		titlePre: "Your profile is written for the job you ",
 		titleEm: "already have",
-		p1: "Recruiters search LinkedIn for the role they're filling: the title, the skills, the industry. If your headline and experience describe your current job, you don't show up for the next one.",
+		p1: "You've applied to 30 roles and heard back from two. That's rarely about your experience. Recruiters search LinkedIn for the role they're filling: the title, the skills, the industry. If your headline and experience describe your current job, you don't show up for the next one.",
 		p2: "Generic advice says “add keywords”. It never says which ones, or for which role.",
 		p3: "RHAI starts from the job you want and works backwards: what a recruiter for that role looks for, what your profile already proves, and what's missing.",
 	},
 	howItWorks: {
 		eyebrow: "How it works",
-		title: "Three steps. About thirty seconds.",
+		title: "Score in 30 seconds. Fixes live in 10 minutes.",
 		steps: [
 			{
 				title: "Share your profile and your goal",
@@ -125,8 +125,8 @@ const en = {
 				body: "Headline, About, experience, education and skills, each checked against what that role asks for.",
 			},
 			{
-				title: "Get the diagnosis and the rewrites",
-				body: "A score, a SWOT, a ranked plan and new text for each section, in a LinkedIn-style preview with copy buttons.",
+				title: "Paste the fixes",
+				body: "Copy the new headline, About and experience straight into LinkedIn. Start with the 10-minute quick wins and your profile is better today.",
 			},
 		],
 	},
@@ -182,8 +182,8 @@ const en = {
 			},
 		],
 		banner:
-			"Career coaches charge by the hour for this kind of review. With RHAI the score is free and the full review is a single payment.",
-		cta: "Get my free score",
+			"An hour with a career coach usually costs more than either plan, and you'd still write the text yourself. Here the score is free and the rewrites are done for you.",
+		cta: "Score my profile free",
 	},
 	example: {
 		eyebrow: "Sample review · fictional profile",
@@ -245,9 +245,11 @@ const en = {
 	pricing: {
 		eyebrow: "Pricing",
 		titlePre: "Start free. ",
-		titleEm: "Pay only for the fixes.",
+		titleEm: "Pay once for the fixes.",
 		subtitle:
-			"Every review shows your score, goal alignment, strengths and two quick wins at no cost. Unlock the rest with one of two plans.",
+			"Every review shows your score, goal alignment, strengths and two quick wins at no cost, plus exactly what's locked. If the rest is worth it to you, unlock it with one payment.",
+		anchor:
+			"An hour with a career coach usually costs more than either plan, and you'd still write the text yourself.",
 		regionLabel: "Prices for",
 		free: {
 			name: "Always free",
@@ -259,9 +261,9 @@ const en = {
 				"A shareable score card",
 			],
 		},
-		cta: "Start with a free review",
-		note: "You choose a plan after you see your free score.",
-		guarantee: "One-off payments. No subscription, no account.",
+		cta: "Start with a free score",
+		note: "You see your score and everything that's locked before you pay.",
+		guarantee: "One-off payment. No subscription, no account.",
 	},
 	teams: {
 		eyebrow: "For universities and employers",
@@ -289,11 +291,27 @@ const en = {
 		items: [
 			{
 				q: "What's free and what do I pay for?",
-				a: "The score, goal alignment, your strengths and two quick wins are free on every review, no card needed. The full review unlocks the rest of the SWOT, the ranked plan, the rewrites, recruiter keywords and the CV export for one profile and one goal. The Career pass does the same for every review you run in 30 days and adds job ad matching, cover letters and a post plan.",
+				a: "The score, goal alignment, your strengths and two quick wins are free on every review, no card needed. You also see exactly how many findings, plan steps and rewrites are locked. The Profile Makeover unlocks all of it for one profile and one goal: the full SWOT, the ranked plan, the rewrites, recruiter keywords and a CV export. The Job Search Pass does that for every review you run in 30 days and adds job ad matching, cover letters and a post plan.",
 			},
 			{
 				q: "Which plan should I pick?",
-				a: "If you want one review for one goal, take the full review. If you plan to edit your profile and check the score again, compare two goals, or apply to several jobs this month, the Career pass costs about the same as two reviews and covers all of it.",
+				a: "One target role and you want your profile ready today: the Profile Makeover. Applying to several jobs this month, re-scoring after edits or comparing two goals: the Job Search Pass. It costs less than two makeovers.",
+			},
+			{
+				q: "Is this just ChatGPT with a nice page?",
+				a: "It uses an AI model, but the work is in what we ask it. Every review starts from your target role and checks your profile the way a recruiter searches: title, skills, industry and results. It's told not to invent employers, numbers or credentials. A blank chat window doesn't know any of that unless you write the brief yourself.",
+			},
+			{
+				q: "Can't I write this myself?",
+				a: "You can. Most people don't, because it's hard to see your own profile from the outside and harder to know which words recruiters for a new role search for. RHAI gives you the gaps and the finished text. You decide what to keep.",
+			},
+			{
+				q: "Will it work in my field?",
+				a: "It works for any role a recruiter fills through LinkedIn search: finance, oil and gas, banking, telecoms, HR, tech, sales, public sector. The more specific your goal, the sharper the review. Your free score tells you before you pay anything.",
+			},
+			{
+				q: "I'm not actively looking. Is it worth it?",
+				a: "Recruiters search for people who aren't looking, too. If your profile describes your next role, you get found for it whether you're applying or not. Run the free score and decide.",
 			},
 			{
 				q: "What do you read, and what do you keep?",
@@ -305,11 +323,7 @@ const en = {
 			},
 			{
 				q: "How accurate is it?",
-				a: "It's an AI review, so treat it as a strong first draft, not a verdict. The model works from what's on your profile and is told not to invent employers or credentials. Still, read every line before you paste it, especially numbers and skills.",
-			},
-			{
-				q: "Will the rewrites sound like me?",
-				a: "They're written in a clear, professional tone. Most people keep the structure and keywords and change a few words to sound like themselves.",
+				a: "Treat it as a strong first draft, not a verdict. Read every line before you paste it, especially numbers and skills. If it says you did something you didn't, delete it.",
 			},
 			{
 				q: "Does it change my LinkedIn profile?",
@@ -318,9 +332,9 @@ const en = {
 		],
 	},
 	finalCta: {
-		title: "See your profile the way the next recruiter will.",
-		body: "One username, one goal, about 30 seconds. The score is on us.",
-		cta: "Get my free score",
+		title: "Recruiters are searching today. Make sure they find you.",
+		body: "One username, one goal, 30 seconds. The score is free, and you see what's locked before you pay.",
+		cta: "Score my profile free",
 		footnote: "Free score. No signup. Public profile only.",
 	},
 	footer: {
@@ -342,19 +356,19 @@ const pt: HomeCopy = {
 		example: "Exemplo",
 		pricing: "Preços",
 		faq: "Perguntas",
-		cta: "Ver a minha pontuação",
+		cta: "Pontuar o meu perfil grátis",
 		languageLabel: "Idioma",
 	},
 	hero: {
-		eyebrow: "Análise de carreira com IA para o LinkedIn",
-		titlePre: "O seu LinkedIn, revisto para o emprego que ",
-		titleEm: "quer a seguir",
+		eyebrow: "Análise de LinkedIn feita como os recrutadores pesquisam",
+		titlePre: "Apareça quando os recrutadores procuram ",
+		titleEm: "o emprego que quer",
 		subtitle:
-			"O RHAI lê o seu perfil público como um recrutador, avalia-o face ao cargo que procura e reescreve as secções que o estão a travar. Resultados em cerca de 30 segundos.",
+			"O RHAI compara o seu perfil com o cargo que quer e reescreve o título, o Sobre e a experiência à volta do que os recrutadores desse cargo pesquisam. Nós escrevemos, você cola. A pontuação é grátis e demora 30 segundos.",
 		trust: [
-			"Apenas perfis públicos",
+			"Pontuação grátis, sem registo",
+			"Veja o que está bloqueado antes de pagar",
 			"Nunca entramos na sua conta",
-			"Português e inglês",
 		],
 	},
 	form: {
@@ -378,7 +392,7 @@ const pt: HomeCopy = {
 			"Primeiro emprego em auditoria depois do curso",
 			"Gerente de agência num banco comercial",
 		],
-		submit: "Ver a minha pontuação grátis",
+		submit: "Pontuar o meu perfil grátis",
 		trustFree: "Pontuação grátis",
 		trustNoSignup: "Sem registo",
 		trustTime: "~30 segundos",
@@ -443,16 +457,16 @@ const pt: HomeCopy = {
 		],
 	},
 	problem: {
-		eyebrow: "Porque é que bons perfis passam despercebidos",
-		titlePre: "A maioria dos perfis foi escrita para o emprego que ",
+		eyebrow: "Candidata-se e não tem resposta?",
+		titlePre: "O seu perfil foi escrito para o emprego que ",
 		titleEm: "já tem",
-		p1: "Os recrutadores pesquisam no LinkedIn pelo cargo que querem preencher: o título, as competências, o setor. Se o seu título e a sua experiência descrevem o emprego atual, não aparece para o próximo.",
+		p1: "Candidatou-se a 30 vagas e teve resposta de duas. Raramente é por causa da sua experiência. Os recrutadores pesquisam no LinkedIn pelo cargo que querem preencher: o título, as competências, o setor. Se o seu título e a sua experiência descrevem o emprego atual, não aparece para o próximo.",
 		p2: "Os conselhos genéricos dizem «use palavras-chave». Nunca dizem quais, nem para que cargo.",
 		p3: "O RHAI parte do emprego que quer e trabalha ao contrário: o que um recrutador desse cargo procura, o que o seu perfil já comprova e o que falta.",
 	},
 	howItWorks: {
 		eyebrow: "Como funciona",
-		title: "Três passos. Cerca de trinta segundos.",
+		title: "Pontuação em 30 segundos. Correções no ar em 10 minutos.",
 		steps: [
 			{
 				title: "Partilhe o perfil e o objetivo",
@@ -463,8 +477,8 @@ const pt: HomeCopy = {
 				body: "Título, Sobre, experiência, formação e competências, tudo comparado com o que esse cargo pede.",
 			},
 			{
-				title: "Receba o diagnóstico e os textos novos",
-				body: "Uma pontuação, uma SWOT, um plano por prioridades e texto novo para cada secção, numa pré-visualização estilo LinkedIn com botões de copiar.",
+				title: "Cole as correções",
+				body: "Copie o título, o Sobre e a experiência novos diretamente para o LinkedIn. Comece pelas melhorias de 10 minutos e o seu perfil fica melhor hoje.",
 			},
 		],
 	},
@@ -520,8 +534,8 @@ const pt: HomeCopy = {
 			},
 		],
 		banner:
-			"Um coach de carreira cobra à hora por este tipo de análise. Com o RHAI a pontuação é grátis e a análise completa é um pagamento único.",
-		cta: "Ver a minha pontuação grátis",
+			"Uma hora com um coach de carreira custa normalmente mais do que qualquer um dos planos, e ainda teria de escrever o texto sozinho. Aqui a pontuação é grátis e os textos novos são escritos por nós.",
+		cta: "Pontuar o meu perfil grátis",
 	},
 	example: {
 		eyebrow: "Exemplo de análise · perfil fictício",
@@ -583,9 +597,11 @@ const pt: HomeCopy = {
 	pricing: {
 		eyebrow: "Preços",
 		titlePre: "Comece grátis. ",
-		titleEm: "Pague só pelas correções.",
+		titleEm: "Pague uma vez pelas correções.",
 		subtitle:
-			"Cada análise mostra grátis a pontuação, o alinhamento com o objetivo, os pontos fortes e duas melhorias rápidas. Desbloqueie o resto com um de dois planos.",
+			"Cada análise mostra grátis a pontuação, o alinhamento com o objetivo, os pontos fortes e duas melhorias rápidas, e ainda exatamente o que está bloqueado. Se o resto valer a pena, desbloqueie com um só pagamento.",
+		anchor:
+			"Uma hora com um coach de carreira custa normalmente mais do que qualquer um dos planos, e ainda teria de escrever o texto sozinho.",
 		regionLabel: "Preços para",
 		free: {
 			name: "Sempre grátis",
@@ -597,9 +613,9 @@ const pt: HomeCopy = {
 				"Cartão de pontuação para partilhar",
 			],
 		},
-		cta: "Começar com uma análise grátis",
-		note: "Escolhe o plano depois de ver a sua pontuação grátis.",
-		guarantee: "Pagamentos únicos. Sem subscrição, sem conta.",
+		cta: "Começar com a pontuação grátis",
+		note: "Vê a pontuação e tudo o que está bloqueado antes de pagar.",
+		guarantee: "Pagamento único. Sem subscrição, sem conta.",
 	},
 	teams: {
 		eyebrow: "Para universidades e empresas",
@@ -627,11 +643,27 @@ const pt: HomeCopy = {
 		items: [
 			{
 				q: "O que é grátis e o que pago?",
-				a: "A pontuação, o alinhamento com o objetivo, os pontos fortes e duas melhorias rápidas são grátis em todas as análises, sem cartão. A análise completa desbloqueia o resto da SWOT, o plano, os textos reescritos, as palavras-chave e o CV para um perfil e um objetivo. O Passe Carreira faz o mesmo em todas as análises durante 30 dias e junta comparação com anúncios de emprego, cartas de apresentação e um plano de publicações.",
+				a: "A pontuação, o alinhamento com o objetivo, os pontos fortes e duas melhorias rápidas são grátis em todas as análises, sem cartão. Também vê exatamente quantos pontos, passos do plano e textos novos estão bloqueados. A Renovação do Perfil desbloqueia tudo para um perfil e um objetivo: a SWOT completa, o plano, os textos reescritos, as palavras-chave e o CV. O Passe Emprego faz o mesmo em todas as análises durante 30 dias e junta comparação com anúncios, cartas de apresentação e um plano de publicações.",
 			},
 			{
 				q: "Que plano devo escolher?",
-				a: "Se quer uma análise para um objetivo, escolha a análise completa. Se vai editar o perfil e voltar a medir a pontuação, comparar dois objetivos ou candidatar-se a várias vagas este mês, o Passe Carreira custa cerca de duas análises e cobre tudo isso.",
+				a: "Um cargo em vista e quer o perfil pronto hoje: a Renovação do Perfil. Candidaturas a várias vagas este mês, voltar a pontuar depois de editar ou comparar dois objetivos: o Passe Emprego. Custa menos do que duas renovações.",
+			},
+			{
+				q: "Isto não é só o ChatGPT com uma página bonita?",
+				a: "Usa um modelo de IA, mas o trabalho está no que lhe pedimos. Cada análise parte do cargo que quer e verifica o perfil como um recrutador pesquisa: título, competências, setor e resultados. Tem instruções para não inventar empregadores, números nem credenciais. Uma janela de chat em branco não sabe nada disso, a menos que escreva as instruções você mesmo.",
+			},
+			{
+				q: "Não consigo fazer isto sozinho?",
+				a: "Consegue. A maioria não o faz, porque é difícil ver o próprio perfil de fora e mais difícil ainda saber que palavras os recrutadores de um cargo novo pesquisam. O RHAI dá-lhe as lacunas e o texto pronto. Você decide o que fica.",
+			},
+			{
+				q: "Funciona na minha área?",
+				a: "Funciona para qualquer cargo que um recrutador preenche através da pesquisa do LinkedIn: finanças, petróleo e gás, banca, telecomunicações, RH, tecnologia, vendas, setor público. Quanto mais específico o objetivo, mais certeira a análise. A pontuação grátis diz-lhe isso antes de pagar.",
+			},
+			{
+				q: "Não estou à procura de emprego. Vale a pena?",
+				a: "Os recrutadores também procuram quem não está à procura. Se o seu perfil descreve o próximo cargo, é encontrado para ele, quer se candidate quer não. Veja a pontuação grátis e decida.",
 			},
 			{
 				q: "O que leem e o que guardam?",
@@ -643,11 +675,7 @@ const pt: HomeCopy = {
 			},
 			{
 				q: "Qual é a precisão?",
-				a: "É uma análise de IA, por isso trate-a como um bom primeiro rascunho, não como um veredito. O modelo trabalha com o que está no perfil e tem instruções para não inventar empregadores nem credenciais. Ainda assim, leia cada linha antes de a colar, sobretudo números e competências.",
-			},
-			{
-				q: "Os textos novos vão soar a mim?",
-				a: "São escritos num tom claro e profissional. A maioria das pessoas mantém a estrutura e as palavras-chave e muda algumas palavras para soar a si.",
+				a: "Trate-a como um bom primeiro rascunho, não como um veredito. Leia cada linha antes de a colar, sobretudo números e competências. Se a análise disser que fez algo que não fez, apague.",
 			},
 			{
 				q: "Isto muda o meu perfil do LinkedIn?",
@@ -656,9 +684,9 @@ const pt: HomeCopy = {
 		],
 	},
 	finalCta: {
-		title: "Veja o seu perfil como o próximo recrutador o vai ver.",
-		body: "Um nome de utilizador, um objetivo, cerca de 30 segundos. A pontuação é por nossa conta.",
-		cta: "Ver a minha pontuação grátis",
+		title: "Os recrutadores estão a pesquisar hoje. Garanta que o encontram.",
+		body: "Um nome de utilizador, um objetivo, 30 segundos. A pontuação é grátis e vê o que está bloqueado antes de pagar.",
+		cta: "Pontuar o meu perfil grátis",
 		footnote: "Pontuação grátis. Sem registo. Apenas perfis públicos.",
 	},
 	footer: {

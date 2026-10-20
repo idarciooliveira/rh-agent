@@ -24,7 +24,7 @@ export function JobHuntToolkit({
 		<section className="mt-12 sm:mt-16">
 			<div className="mb-5">
 				<p className="font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
-					Career pass
+					Job Search Pass
 				</p>
 				<h2 className="mt-1 font-display text-3xl text-ink">
 					Tailor your profile to each job
@@ -38,7 +38,7 @@ export function JobHuntToolkit({
 				{hasPass ? (
 					<JobMatchForm analysisId={analysisId} />
 				) : (
-					<LockedOverlay label="Get the Career pass" onUnlock={onGetPass}>
+					<LockedOverlay label="Get the Job Search Pass" onUnlock={onGetPass}>
 						<JobMatchPreview />
 					</LockedOverlay>
 				)}

@@ -338,6 +338,9 @@ export function PricingSection() {
 							<em className="text-primary">{copy.pricing.titleEm}</em>
 						</h2>
 						<p className="mt-5 text-lg text-muted">{copy.pricing.subtitle}</p>
+						<p className="mt-4 border-l-2 border-primary pl-4 font-display text-xl leading-snug text-ink italic">
+							{copy.pricing.anchor}
+						</p>
 					</div>
 					<fieldset className="flex shrink-0 flex-wrap items-center gap-0.5 self-start rounded-full bg-surface-2 p-1 md:self-auto">
 						<legend className="sr-only">{copy.pricing.regionLabel}</legend>
@@ -429,8 +432,13 @@ export function PricingSection() {
 										{card.period}
 									</span>
 								</p>
+								<p
+									className={`mt-5 rounded-lg px-3 py-2 text-sm ${featured ? "bg-white/10 text-white" : "bg-accent/60 text-primary-ink"}`}
+								>
+									{card.bestFor}
+								</p>
 								<ul
-									className={`mt-7 flex-1 space-y-3 border-t pt-6 ${featured ? "border-white/10" : "border-border"}`}
+									className={`mt-6 flex-1 space-y-3 border-t pt-6 ${featured ? "border-white/10" : "border-border"}`}
 								>
 									{card.features.map((feature) => (
 										<li
