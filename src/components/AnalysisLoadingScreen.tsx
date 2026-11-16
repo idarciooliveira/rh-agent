@@ -1,4 +1,5 @@
 import { createPortal } from "react-dom";
+import { RhaiMark } from "#/components/RhaiLogo";
 import { useLanguage } from "#/lib/i18n";
 import { PenLineIcon } from "#/lib/icons";
 
@@ -23,11 +24,9 @@ export function AnalysisLoadingScreen({
 			aria-live="polite"
 		>
 			<div className="flex w-full max-w-md flex-col items-center text-center">
-				<p className="font-display text-2xl font-semibold text-ink">
-					Red<span className="text-primary-ink">line</span>
-				</p>
+				<RhaiMark className="size-10" />
 
-				<div className="relative mt-8 w-full overflow-hidden rounded-lg border border-border bg-surface p-5 text-left shadow-lift">
+				<div className="relative mt-8 w-full overflow-hidden rounded-2xl border border-border bg-surface p-5 text-left shadow-lift">
 					<div className="flex items-center gap-3">
 						<div className="size-12 shrink-0 rounded-full bg-surface-2" />
 						<div className="flex-1 space-y-2">

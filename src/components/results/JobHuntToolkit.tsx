@@ -24,9 +24,9 @@ export function JobHuntToolkit({
 		<section className="mt-12 sm:mt-16">
 			<div className="mb-5">
 				<p className="font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
-					Job hunt pass
+					Job Search Pass
 				</p>
-				<h2 className="mt-1 font-display text-3xl font-semibold text-ink">
+				<h2 className="mt-1 font-display text-3xl text-ink">
 					Tailor your profile to each job
 				</h2>
 				<p className="mt-1 text-sm text-muted">
@@ -38,7 +38,7 @@ export function JobHuntToolkit({
 				{hasPass ? (
 					<JobMatchForm analysisId={analysisId} />
 				) : (
-					<LockedOverlay label="Get the 30-day pass" onUnlock={onGetPass}>
+					<LockedOverlay label="Get the Job Search Pass" onUnlock={onGetPass}>
 						<JobMatchPreview />
 					</LockedOverlay>
 				)}
@@ -62,7 +62,7 @@ const PLACEHOLDER_PLAN = [1, 2, 3, 4].map((week) => ({
 
 function JobMatchPreview() {
 	return (
-		<div className="rounded-lg border border-border bg-surface p-5 shadow-card">
+		<div className="rounded-2xl border border-border bg-surface p-5 shadow-card">
 			<p className="font-mono text-4xl text-ink">78/100</p>
 			<p className="mt-2 text-sm text-muted">
 				Your profile covers 9 of 12 key terms in this post.
@@ -114,7 +114,7 @@ function JobMatchForm({ analysisId }: { analysisId: string }) {
 	};
 
 	return (
-		<div className="rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6">
+		<div className="rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-6">
 			<form onSubmit={(event) => void handleSubmit(event)}>
 				<label className="block">
 					<span className="mb-1.5 flex items-center gap-2 text-sm font-semibold text-ink">
@@ -219,12 +219,10 @@ function ContentPlan({
 	plan: NonNullable<Recommendations["contentPlan"]>;
 }) {
 	return (
-		<div className="rounded-lg border border-border bg-surface p-5 shadow-card sm:p-6">
+		<div className="rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-6">
 			<div className="flex items-center gap-2">
 				<PenLineIcon className="size-5 text-primary-ink" aria-hidden />
-				<h3 className="font-display text-xl font-semibold text-ink">
-					4-week post plan
-				</h3>
+				<h3 className="font-display text-xl text-ink">4-week post plan</h3>
 			</div>
 			<ol className="mt-4 space-y-4">
 				{plan.map((post) => (

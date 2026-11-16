@@ -18,20 +18,20 @@ export const Route = createRootRoute({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title:
-					"Redline: análise gratuita de perfil do LinkedIn para o seu próximo emprego",
+				title: "RHAI: análise de perfil do LinkedIn para o seu próximo emprego",
 			},
 			{
 				name: "description",
 				content:
-					"Introduza o seu nome de utilizador do LinkedIn e o cargo que quer. Receba uma pontuação, uma SWOT feita para esse objetivo e um novo título, Sobre e pontos de experiência em cerca de 30 segundos. Grátis, sem registo.",
+					"Indique o seu perfil do LinkedIn e o cargo que quer. Em cerca de 30 segundos recebe uma pontuação, uma SWOT feita para esse objetivo e um título, Sobre e experiência reescritos. Pontuação grátis, sem registo.",
 			},
 			{
 				name: "theme-color",
-				content: "#f4f2ee",
+				content: "#faf9f5",
 			},
 		],
 		links: [
+			{ rel: "icon", type: "image/svg+xml", href: "/rhai-icon-brand.svg" },
 			{
 				rel: "stylesheet",
 				href: appCss,

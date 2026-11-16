@@ -32,7 +32,7 @@ function TestimonialCard({
 	);
 
 	return (
-		<li className="reveal flex flex-col rounded-lg bg-surface p-5 shadow-card">
+		<li className="reveal flex flex-col rounded-2xl bg-surface p-6 shadow-card">
 			<div className="mb-4 flex gap-0.5" role="img" aria-label={ratingLabel}>
 				{[1, 2, 3, 4, 5].map((star) => (
 					<StarIcon
@@ -91,20 +91,18 @@ export function TestimonialsSection() {
 	}
 
 	return (
-		<section
-			id="testimonials"
-			className="border-y border-border bg-surface-2/60"
-		>
-			<div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-				<div className="reveal mb-12 max-w-2xl">
-					<p className="mb-4 font-mono text-xs font-medium tracking-[0.14em] text-primary-ink uppercase">
+		<section id="testimonials">
+			<div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 md:py-32">
+				<div className="reveal mb-14 max-w-2xl">
+					<p className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-muted">
+						<span className="size-1.5 rounded-full bg-primary" aria-hidden />
 						{copy.testimonials.eyebrow}
 					</p>
-					<h2 className="font-display text-4xl leading-[1.05] font-semibold text-balance text-ink sm:text-5xl">
+					<h2 className="font-display text-4xl leading-[1.06] font-normal text-balance text-ink sm:text-5xl">
 						{copy.testimonials.title}
 					</h2>
 				</div>
-				<ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+				<ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
 					{testimonials.map((testimonial) => (
 						<TestimonialCard
 							key={`${testimonial.name}-${testimonial.date}`}

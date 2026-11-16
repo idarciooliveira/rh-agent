@@ -14,13 +14,11 @@ export function QuickWinsPanel({
 	onUnlock,
 }: QuickWinsPanelProps) {
 	return (
-		<section className="rounded-xl bg-night p-5 text-background shadow-lift sm:p-6 lg:sticky lg:top-6">
+		<section className="rounded-2xl bg-night p-5 text-background shadow-lift sm:p-6 lg:sticky lg:top-6">
 			<div className="mb-5">
 				<div className="flex items-center gap-2">
 					<ZapIcon className="size-5 text-accent" aria-hidden />
-					<h2 className="font-display text-2xl font-semibold text-background">
-						Quick wins
-					</h2>
+					<h2 className="font-display text-2xl text-background">Quick wins</h2>
 				</div>
 				<p className="mt-1 text-sm leading-relaxed text-night-muted">
 					Small fixes you can make today.

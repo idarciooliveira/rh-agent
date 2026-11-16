@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { RedlineLogo } from "#/components/RedlineLogo";
+import { RhaiLogo } from "#/components/RhaiLogo";
 import { ArrowLeftIcon, EyeIcon, FileTextIcon, LockIcon } from "#/lib/icons";
 
 type AnalysisResultsHeaderProps = {
@@ -14,7 +14,7 @@ export function ResultsTopBar() {
 	return (
 		<div className="border-b border-border bg-background">
 			<div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
-				<RedlineLogo />
+				<RhaiLogo />
 				<Link
 					to="/"
 					className="inline-flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-surface-2 hover:text-ink"
@@ -37,11 +37,10 @@ export function AnalysisResultsHeader({
 	return (
 		<header className="mb-8 flex flex-col gap-6 sm:mb-10 lg:flex-row lg:items-end lg:justify-between">
 			<div className="min-w-0">
-				<h1 className="font-display text-4xl font-semibold leading-[1.05] text-ink sm:text-5xl">
+				<h1 className="font-display text-4xl leading-[1.05] text-ink sm:text-5xl">
 					{firstName ? (
 						<>
-							Your review,{" "}
-							<span className="highlight highlight-animate">{firstName}</span>
+							Your review, <em className="text-primary">{firstName}</em>
 						</>
 					) : (
 						"Your profile review"

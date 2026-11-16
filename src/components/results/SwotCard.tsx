@@ -74,21 +74,19 @@ export function SwotCard({ variant, items, locked = false }: SwotCardProps) {
 	const Icon = config.icon;
 
 	return (
-		<section className="overflow-hidden rounded-lg border border-border bg-surface shadow-card">
+		<section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
 			<div
 				className={`relative overflow-hidden border-b px-5 py-4 sm:px-6 ${config.headerClass}`}
 			>
 				<span
-					className={`pointer-events-none absolute -top-4 right-3 select-none font-display text-8xl font-semibold leading-none opacity-15 ${config.textClass}`}
+					className={`pointer-events-none absolute -top-4 right-3 select-none font-display text-8xl leading-none opacity-15 ${config.textClass}`}
 					aria-hidden
 				>
 					{config.letter}
 				</span>
 				<div className="relative flex items-center gap-2">
 					<Icon className={`size-5 ${config.textClass}`} aria-hidden />
-					<h2
-						className={`font-display text-xl font-semibold ${config.textClass}`}
-					>
+					<h2 className={`font-display text-xl ${config.textClass}`}>
 						{config.title}
 						<span className="ml-1.5 font-mono text-sm font-medium opacity-70">
 							({items.length})
