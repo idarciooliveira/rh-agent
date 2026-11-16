@@ -73,7 +73,7 @@ export function UnlockBanner({ hiddenCounts, onUnlock }: UnlockBannerProps) {
 						onClick={() => onUnlock("pass30")}
 						className="rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
 					>
-						{pass.name}, {priceFor(region, "pass30")} / 30 days
+						{pass.name}, {priceFor(region, "pass30")} / {pass.period}
 					</button>
 					<p className="mt-1 text-center text-xs text-night-muted">
 						{REGION_CONFIG[region].methods

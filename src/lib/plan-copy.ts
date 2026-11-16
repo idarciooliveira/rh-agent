@@ -31,7 +31,7 @@ export const planCopy: Record<Language, Record<Plan, PlanCopy>> = {
 		pass30: {
 			name: "Job Search Pass",
 			tagline: "30 days of makeovers and application tools.",
-			bestFor: "Best if you're applying this month. Two makeovers cost more.",
+			bestFor: "Best if you're applying this month. Three makeovers cost more.",
 			period: "30 days",
 			badge: "Best value",
 			features: [
@@ -64,7 +64,7 @@ export const planCopy: Record<Language, Record<Plan, PlanCopy>> = {
 			name: "Passe Emprego",
 			tagline: "30 dias de renovações e ferramentas de candidatura.",
 			bestFor:
-				"Ideal se se está a candidatar este mês. Duas renovações custam mais.",
+				"Ideal se se está a candidatar este mês. Três renovações custam mais.",
 			period: "30 dias",
 			badge: "Melhor valor",
 			features: [

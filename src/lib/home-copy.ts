@@ -295,7 +295,7 @@ const en = {
 			},
 			{
 				q: "Which plan should I pick?",
-				a: "One target role and you want your profile ready today: the Profile Makeover. Applying to several jobs this month, re-scoring after edits or comparing two goals: the Job Search Pass. It costs less than two makeovers.",
+				a: "One target role and you want your profile ready today: the Profile Makeover. Applying to several jobs this month, re-scoring after edits or comparing two goals: the Job Search Pass. From the third review on, it costs less than buying makeovers.",
 			},
 			{
 				q: "Is this just ChatGPT with a nice page?",
@@ -453,7 +453,10 @@ const pt: HomeCopy = {
 				label: "pontuação do perfil, com o motivo de cada nota",
 			},
 			{ value: "4", label: "secções reescritas para o cargo que quer" },
-			{ value: "0 Kz", label: "para ver a pontuação. Sem registo, sem cartão" },
+			{
+				value: "Grátis",
+				label: "para ver a pontuação. Sem registo, sem cartão",
+			},
 		],
 	},
 	problem: {
@@ -647,7 +650,7 @@ const pt: HomeCopy = {
 			},
 			{
 				q: "Que plano devo escolher?",
-				a: "Um cargo em vista e quer o perfil pronto hoje: a Renovação do Perfil. Candidaturas a várias vagas este mês, voltar a pontuar depois de editar ou comparar dois objetivos: o Passe Emprego. Custa menos do que duas renovações.",
+				a: "Um cargo em vista e quer o perfil pronto hoje: a Renovação do Perfil. Candidaturas a várias vagas este mês, voltar a pontuar depois de editar ou comparar dois objetivos: o Passe Emprego. A partir da terceira análise, sai mais barato do que comprar renovações.",
 			},
 			{
 				q: "Isto não é só o ChatGPT com uma página bonita?",

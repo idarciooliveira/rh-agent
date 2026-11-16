@@ -1,4 +1,9 @@
 @import "tailwindcss";
+/* Self-hosted variable fonts, so no visitor request goes to a font CDN. */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/source-serif-4/opsz.css";
+@import "@fontsource-variable/source-serif-4/opsz-italic.css";
 
 /* RHAI tokens. Warm ivory canvas, near-black ink and LinkedIn blue from the logo.
    Direction: Anthropic (ivory + serif), ElevenLabs (black pills, stone cards),
@@ -39,12 +44,12 @@
 	--color-text-muted: #5e5d59;
 	--color-card: #ffffff;
 
-	/* Serif for headlines and scores, Inter for UI. Both load in __root.tsx. */
-	--font-display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+	/* Serif for headlines and scores, Inter for UI. Self-hosted, imported above. */
+	--font-display: "Source Serif 4 Variable", "Iowan Old Style", Georgia, serif;
 	--font-sans:
-		"Inter", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
+		"Inter Variable", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
 		Arial, sans-serif;
-	--font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+	--font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Consolas,
 		monospace;
 	/* LinkedIn's own UI font, so the profile mock-ups read like LinkedIn. */
 	--font-linkedin:

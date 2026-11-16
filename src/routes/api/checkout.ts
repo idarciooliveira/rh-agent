@@ -64,7 +64,7 @@ export const Route = createFileRoute("/api/checkout")({
 					}
 
 					const owned = await db
-						.select({ id: analyses.id })
+						.select({ id: analyses.id, unlockedAt: analyses.unlockedAt })
 						.from(analyses)
 						.where(
 							and(
@@ -76,6 +76,10 @@ export const Route = createFileRoute("/api/checkout")({
 						.get();
 					if (!owned) {
 						return jsonError("Analysis not found", 404);
+					}
+
+					if (plan === "report" && owned.unlockedAt) {
+						return jsonError("Analysis already unlocked", 409);
 					}
 
 					const amount = regionConfig.prices[plan];

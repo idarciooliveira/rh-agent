@@ -32,8 +32,8 @@ type RegionConfig = {
 /**
  * Two paid plans: one full review, or a 30-day pass. Angola is priced for an
  * impulse Multicaixa Express payment; the rest sit just under the
- * English-language competitors. The pass costs about two reviews, so anyone
- * planning a second review is better off with it.
+ * English-language competitors. The pass costs a little more than two reviews,
+ * so anyone planning a third review is better off with it.
  */
 export const REGION_CONFIG: Record<Region, RegionConfig> = {
 	AO: {

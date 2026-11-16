@@ -179,12 +179,7 @@ function AnalysisResultsPage() {
 
 				<div className="mt-12 grid items-start gap-6 sm:mt-16 lg:grid-cols-3">
 					<div className="lg:col-span-2">
-						{recommendations?.recruiterKeywords?.length ? (
-							<RecruiterKeywords
-								keywords={recommendations.recruiterKeywords}
-								profile={data.profile}
-							/>
-						) : (
+						{locked ? (
 							<LockedOverlay
 								label="Unlock recruiter keywords"
 								onUnlock={() => openCheckout()}
@@ -194,7 +189,12 @@ function AnalysisResultsPage() {
 									profile={data.profile}
 								/>
 							</LockedOverlay>
-						)}
+						) : recommendations?.recruiterKeywords?.length ? (
+							<RecruiterKeywords
+								keywords={recommendations.recruiterKeywords}
+								profile={data.profile}
+							/>
+						) : null}
 					</div>
 					<ShareScoreCard
 						score={data.swotAnalysis.profileScore}

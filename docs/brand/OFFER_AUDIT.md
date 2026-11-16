@@ -63,7 +63,7 @@ Constraint for every fix: no claim we can't back. We have no real testimonials, 
 
 ## 7. Pricing
 - **Issues:** prices are fine for the market (an impulse Multicaixa payment), but there's no anchor on the cards and no math on the pass.
-- **Fixes:** anchor against an hour with a career coach directly above the cards. On the pass: "Two reviews cost more than the pass." No invented "value" figures.
+- **Fixes:** anchor against an hour with a career coach directly above the cards. On the pass: "Three reviews cost more than the pass." No invented "value" figures.
 
 ## 8. Messaging
 - **Issues:** hero, problem and pricing headlines are clean but soft. Hooks don't name the pain the buyer feels ("applying and hearing nothing").

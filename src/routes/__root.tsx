@@ -32,16 +32,6 @@ export const Route = createRootRoute({
 		],
 		links: [
 			{ rel: "icon", type: "image/svg+xml", href: "/rhai-icon-brand.svg" },
-			{ rel: "preconnect", href: "https://fonts.googleapis.com" },
-			{
-				rel: "preconnect",
-				href: "https://fonts.gstatic.com",
-				crossOrigin: "anonymous",
-			},
-			{
-				rel: "stylesheet",
-				href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&display=swap",
-			},
 			{
 				rel: "stylesheet",
 				href: appCss,
